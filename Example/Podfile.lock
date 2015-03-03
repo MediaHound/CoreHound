@@ -1,0 +1,20 @@
+PODS:
+  - CoreHound (0.1.0)
+  - Expecta (0.3.2)
+  - Specta (0.3.2)
+
+DEPENDENCIES:
+  - CoreHound (from `../`)
+  - Expecta
+  - Specta
+
+EXTERNAL SOURCES:
+  CoreHound:
+    :path: ../
+
+SPEC CHECKSUMS:
+  CoreHound: 71cc77690b87a5c46c6f2eb5e224163498ffd90f
+  Expecta: ee641011fe10aa1855d487b40e4976dac50ec342
+  Specta: 698a58ffa5ec948327d3b92eab50ca58d7f4fbe8
+
+COCOAPODS: 0.36.0.rc.1
