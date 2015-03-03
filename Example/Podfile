@@ -1,6 +1,8 @@
 source 'https://github.com/CocoaPods/Specs.git'
 
 target 'CoreHound', :exclusive => true do
+  pod "AtSugar", :git => "https://github.com/MediaHound/AtSugar.git"
+  pod "Avenue", :git => "https://github.com/MediaHound/Avenue.git"
   pod "CoreHound", :path => "../"
 end
 
