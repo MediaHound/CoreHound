@@ -19,14 +19,14 @@ Run `pod install`, and you can now use CoreHound by importing it:
 ```
 
 ## The World of Media Content
-The entertainment graph contains many types of objects-- movies, books, people, traits, etc. To uniquely 
+The entertainment graph contains many types of objects— movies, books, people, traits, etc. To uniquely 
 identify 
 
 The MediaHound Entertainment Graph contains a series of objects representing media content, users, collections, etc and the connections between those objects. These objects and connections form a graph of media content. Social interactions live on top of that content graph. 
 
-Every object in the Entertainment Graph is uniquely identified by an identifier-- its `mhid`. For example, the movie *Saving Private Ryan* has an `mhid` of *mhmov1todo*.
+Every object in the Entertainment Graph is uniquely identified by an identifier— its `mhid`. For example, the movie *Saving Private Ryan* has an `mhid` of *mhmov1todo*.
 
-Every object in the Entertainment Graph has type-- Movie, Book, Contributor, etc. There is a well defined type hierarchy, so you can work easily with objects of varying types. 
+Every object in the Entertainment Graph has a type— Movie, Book, Contributor, etc. There is a well defined type hierarchy, so you can work easily with objects of varying types. 
 
 *Saving Private Ryan* is an `MHMovie`, and *Catch 22* is an `MHBook`. Both `MHMovie` and `MHBook` inherit from `MHMedia`. This lets us work with entertainment  across different content types easily, view it as an `MHMedia`. If we ever need to specifically work with books, we can work with it as an `MHBook`.
 
