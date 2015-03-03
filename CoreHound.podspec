@@ -17,9 +17,7 @@ Pod::Spec.new do |s|
 
   s.dependency 'AtSugar'
   s.dependency 'Avenue'
-  s.dependency 'castaway'
   s.dependency 'JSONModel'
-  s.dependency 'KVOController'
   s.dependency 'PromiseKit'
   s.dependency 'UICKeyChainStore'
   s.dependency 'Underscore.m'

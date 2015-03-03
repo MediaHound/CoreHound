@@ -11,7 +11,7 @@ To run the example project, clone the repo, and run `pod install` from the Examp
 CoreHound is available through [CocoaPods](http://cocoapods.org). To install
 it, simply add the following line to your Podfile:
 
-    pod "CoreHound",  :git => "https://github.com/MediaHound/CoreHound.git"
+    pod "CoreHound", :git => "https://github.com/MediaHound/CoreHound.git"
 
 ## Author
 
