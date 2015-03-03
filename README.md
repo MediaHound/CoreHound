@@ -18,7 +18,7 @@ Run `pod install`, and you can now use CoreHound by importing it:
 #import <CoreHound/MHApi.h>
 ```
 
-## The World of Media Content
+## The world of media content
 The entertainment graph contains many types of objects— movies, books, people, traits, etc. To uniquely 
 identify 
 
@@ -39,7 +39,7 @@ All objects in the entertainment graph inherit from the `MHObject` class. This c
 
 Some content types have more metadata properties. For example all `MHMedia` objects have an `MHMediaMetadata` which extends `MHMetadata` adding a `releaseDate` property.
 
-Most `MHObject`s also have a primary image. The primary image is the main visual representation for the object. An `MHImage` provides image metadata as well as URLs to the image at varying sizes.
+Most `MHObjects` also have a primary image. The primary image is the main visual representation for the object. An `MHImage` provides image metadata as well as URLs to the image at varying sizes.
 
 `MHObjects` have relations to other `MHObjects`. For example, given an `MHMovie`, we can query for the people who have contributed to the movie (actors, director, composer, etc) like this:
 
@@ -47,7 +47,7 @@ Most `MHObject`s also have a primary image. The primary image is the main visual
 [movie fetchContributors]; 
 ```
 
-This gives you list of `MHContributor`s who are related to that movie.
+This gives you list of `MHContributors` who are related to that movie.
 
 ## CoreHound is highly **Asynchronous**
 Almost all interaction you have with the CoreHound SDK is through asynchronous APIs. CoreHound uses *promises* as its asynchronous pattern. As a simple example, to find the release date of *The Usual Suspects*, you would write:
@@ -125,7 +125,7 @@ To capture this additional information, we use an `MHContext` object. Each entry
 });
 ```
 
-## Consuming Media Content
+## Consuming media content
 - TODO: Discuss Sources
 
 ## CoreHound uses **flexible networking**
