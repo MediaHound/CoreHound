@@ -121,7 +121,7 @@
  * Fetches an MHObject by its mhid.
  * MHObjects are cached, so a request for an already fetched mhid will not require a network request.
  * @param mhid The identifier for the MHObject
- * @param priority The network request priority
+ * @param priority The network request priority.
  * @param networkToken The token for the network request, allowing cancelation and re-prioritization.
  * @return A promise which resolves with the MHObject.
  */
@@ -158,7 +158,7 @@
 /**
  * Fetches the activity feed for the receiver.
  * @param forced Whether to use a cached response. If NO, a network request will occur.
- * @param priority The network request priority
+ * @param priority The network request priority.
  * @param networkToken The token for the network request, allowing cancelation and re-prioritization.
  * @return A promise which resolves with an MHPagedResponse.
  */
@@ -175,7 +175,7 @@
 /**
  * Fetches all collections that contain the receiver.
  * @param forced Whether to use a cached response. If NO, a network request will occur.
- * @param priority The network request priority
+ * @param priority The network request priority.
  * @param networkToken The token for the network request, allowing cancelation and re-prioritization.
  * @return A promise which resolves with an MHPagedResponse.
  */
