@@ -41,7 +41,7 @@ static MHPagedResponse* s_allSources = nil;
 - (PMKPromise*)connect
 {
     return [self takeAction:@"connect"
-                 parameters:nil
+                 parameters:@{} // TODO: This is ugly. we shouldn't have to pass {}
        predictedSocialBlock:^MHSocial* (MHSocial* oldSocial, NSDictionary* parameters) {
            MHSocial* newSocial = oldSocial.copy;
            newSocial.userConnected = @YES;
@@ -82,7 +82,7 @@ static MHPagedResponse* s_allSources = nil;
 - (PMKPromise*)disconnect
 {
     return [self takeAction:@"disconnect"
-                 parameters:nil
+                 parameters:@{} // TODO: This is ugly. we shouldn't have to pass {}
        predictedSocialBlock:^MHSocial* (MHSocial* oldSocial, NSDictionary* parameters) {
            MHSocial* newSocial = oldSocial.copy;
            newSocial.userConnected = @NO;
