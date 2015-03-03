@@ -85,6 +85,7 @@ DEPENDENCIES:
   - Avenue (from `https://github.com/MediaHound/Avenue.git`)
   - CoreHound (from `../`)
   - Expecta
+  - KVOController (from `https://github.com/facebook/KVOController.git`)
   - Specta
 
 EXTERNAL SOURCES:
@@ -94,14 +95,19 @@ EXTERNAL SOURCES:
     :git: https://github.com/MediaHound/Avenue.git
   CoreHound:
     :path: ../
+  KVOController:
+    :git: https://github.com/facebook/KVOController.git
 
 CHECKOUT OPTIONS:
   AtSugar:
-    :commit: 6e6d8186d75aa6f059745fa7cfaab4e6ae944a2c
+    :commit: 9e90840d335615aeacad8ac07008fbb7aacd6264
     :git: https://github.com/MediaHound/AtSugar.git
   Avenue:
-    :commit: 0189d15221fa94db82fb189b8654f0c02cef3b0d
+    :commit: ffa8a7e219db655b8cf1a6a091b4e599813a5ebd
     :git: https://github.com/MediaHound/Avenue.git
+  KVOController:
+    :commit: 18c283769babbab43b32a105280527881d06850a
+    :git: https://github.com/facebook/KVOController.git
 
 SPEC CHECKSUMS:
   AFNetworking: 8bee59492a6ff15d69130efa4d0dc67e0094a52a
@@ -110,7 +116,7 @@ SPEC CHECKSUMS:
   CoreHound: 0abab7eaba1bee2f21e178a111b21e6d60f8f150
   Expecta: ee641011fe10aa1855d487b40e4976dac50ec342
   JSONModel: cbdef0fdff1cc70e913a860861d3072860efd3a1
-  KVOController: b1139ef1fc373b6757e4b69493fedd7b56eb1272
+  KVOController: dfb2f4a6703b75be99849e8ad65bfb7e5190cffe
   OMGHTTPURLRQ: f8c515dfd2f57a5d74c710978f600231f52afec5
   PromiseKit: 4844db4448b4e387845e702b738cd87433fc02fd
   Specta: 698a58ffa5ec948327d3b92eab50ca58d7f4fbe8

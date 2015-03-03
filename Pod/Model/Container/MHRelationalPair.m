@@ -39,7 +39,7 @@
         return [m.type isEqualToString:type];
     });
     
-    return [[MHSimpleProxy alloc] initWithObject:object context:self];
+    return (MHSourceMedium*)[[MHSimpleProxy alloc] initWithObject:object context:self];
 }
 
 - (NSArray*)allMediums

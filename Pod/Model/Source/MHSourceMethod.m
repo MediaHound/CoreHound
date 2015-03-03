@@ -47,18 +47,18 @@ NSString* const MHSourceMethodTypeAdSupported = @"adSupported";
     id object = _.find(self.formats, ^BOOL(MHSourceFormat* f) {
         return [f.type isEqualToString:type];
     });
-    return [[MHSimpleProxy alloc] initWithObject:object context:self.medium.context];
+    return (MHSourceFormat*)[[MHSimpleProxy alloc] initWithObject:object context:self.medium.context];
 }
 
 - (MHSourceFormat*)defaultFormat
 {
-    return [[MHSimpleProxy alloc] initWithObject:self.formats.firstObject context:self.medium.context];
+    return (MHSourceFormat*)[[MHSimpleProxy alloc] initWithObject:self.formats.firstObject context:self.medium.context];
 }
 
 - (NSArray*)allFormats
 {
     return _.arrayMap(self.formats, ^(MHSourceFormat* f) {
-        return [[MHSimpleProxy alloc] initWithObject:f context:self];
+        return [[MHSimpleProxy alloc] initWithObject:f context:self.medium.context];
     });
 }
 

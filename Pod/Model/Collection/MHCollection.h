@@ -14,21 +14,11 @@
 
 @interface MHCollection : MHObject
 
-@property (strong, nonatomic) MHCollectionMetadata* metadata;
+@property (strong, atomic) MHCollectionMetadata* metadata;
 
 @property (strong, atomic) MHUser<Optional>* primaryOwner;
 
 @property (strong, atomic) MHImage<Optional>* firstContentImage;
-
-- (PMKPromise*)fetchPrimaryOwner;
-- (PMKPromise*)fetchPrimaryOwnerForced:(BOOL)forced
-                              priority:(AVENetworkPriority*)priority
-                          networkToken:(AVENetworkToken*)networkToken;
-
-- (PMKPromise*)fetchFirstContentImage;
-- (PMKPromise*)fetchFirstContentImageForced:(BOOL)forced
-                                   priority:(AVENetworkPriority*)priority
-                               networkToken:(AVENetworkToken*)networkToken;
 
 - (PMKPromise*)addContent:(MHObject*)content;
 
@@ -53,6 +43,16 @@
 
 @interface MHCollection (Fetching)
 
+- (PMKPromise*)fetchPrimaryOwner;
+- (PMKPromise*)fetchPrimaryOwnerForced:(BOOL)forced
+                              priority:(AVENetworkPriority*)priority
+                          networkToken:(AVENetworkToken*)networkToken;
+
+- (PMKPromise*)fetchFirstContentImage;
+- (PMKPromise*)fetchFirstContentImageForced:(BOOL)forced
+                                   priority:(AVENetworkPriority*)priority
+                               networkToken:(AVENetworkToken*)networkToken;
+
 - (PMKPromise*)fetchOwners;
 
 - (PMKPromise*)fetchOwnersForced:(BOOL)forced
@@ -70,7 +70,5 @@
 - (PMKPromise*)fetchMixListForced:(BOOL)forced
                          priority:(AVENetworkPriority*)priority
                      networkToken:(AVENetworkToken*)networkToken;
-
-+ (PMKPromise*)fetchFeaturedCollections;
 
 @end

@@ -19,7 +19,7 @@
  */
 @property (strong, nonatomic) NSString* mhid;
 @property (strong, nonatomic) NSString<Optional>* name;
-@property (strong, nonatomic) NSString<Optional>* description;
+@property (strong, nonatomic) NSString<Optional>* objectDescription;
 @property (nonatomic, strong) NSDate<Optional>* createdDate;
 
 @end

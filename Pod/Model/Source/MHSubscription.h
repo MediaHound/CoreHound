@@ -17,7 +17,7 @@
 
 @interface MHSubscription : MHObject
 
-@property (strong, nonatomic) MHSubscriptionMetadata* metadata;
+@property (strong, atomic) MHSubscriptionMetadata* metadata;
 
 - (NSString*)displayPrice;
 

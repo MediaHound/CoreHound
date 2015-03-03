@@ -17,7 +17,7 @@
  */
 @interface MHMedia : MHObject
 
-@property (strong, nonatomic) MHMediaMetadata* metadata;
+@property (strong, atomic) MHMediaMetadata* metadata;
 
 @property (strong, nonatomic) NSArray<MHRelationalPair, Optional>* keyContributors;
 

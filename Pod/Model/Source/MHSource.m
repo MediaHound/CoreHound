@@ -13,7 +13,7 @@
 #import "MHObject+Internal.h"
 #import "MHLoginSession.h"
 
-#import <AgnosticLogger/AgnosticLogger.h>
+//#import <AgnosticLogger/AgnosticLogger.h>
 
 
 NSString* const iTunesSourceName = @"iTunes";
@@ -120,7 +120,6 @@ static MHPagedResponse* s_allSources = nil;
 
 + (void)userDidLogout:(NSNotification*)notification
 {
-    AGLLogInfo(@"[MHAPI] Clearing s_allSources");
     s_allSources = nil;
 }
 

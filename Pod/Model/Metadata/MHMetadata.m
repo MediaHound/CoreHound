@@ -11,6 +11,13 @@
 
 @implementation MHMetadata
 
++ (JSONKeyMapper*)keyMapper
+{
+    return [[JSONKeyMapper alloc] initWithDictionary:@{
+                                                       @"objectDescription": @"description",
+                                                       }];
+}
+
 - (BOOL)isEqual:(id)object
 {
     if (self == object) {
@@ -28,7 +35,7 @@
 {
     return ((!self.mhid && !metadata.mhid) || ([self.mhid isEqual:metadata.mhid]))
     && ((!self.name && !metadata.name) || ([self.name isEqual:metadata.name]))
-    && ((!self.description && !metadata.description) || ([self.description isEqual:metadata.description]))
+    && ((!self.objectDescription && !metadata.objectDescription) || ([self.objectDescription isEqual:metadata.objectDescription]))
     && ((!self.createdDate && !metadata.createdDate) || ([self.createdDate isEqual:metadata.createdDate]));
 }
 
@@ -36,7 +43,7 @@
 {
     return self.mhid.hash
     ^ self.name.hash
-    ^ self.description.hash
+    ^ self.objectDescription.hash
     ^ self.createdDate.hash;
 }
 

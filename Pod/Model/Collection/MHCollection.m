@@ -263,23 +263,4 @@ static NSString* const kMixlistSubendpoint = @"mixlist";
                                next:nil];
 }
 
-+ (PMKPromise*)fetchFeaturedCollections
-{
-    // TODO:
-//    static MHIdCollection* s_featuredCollections = nil;
-//    
-//    if (s_featuredCollections) {
-//        return [PMKPromise promiseWithValue:s_featuredCollections];
-//    }
-//    
-//    NSString* path = [NSString stringWithFormat:@"%@/featured", [self rootEndpoint]];
-//    return [[MHFetcher sharedFetcher] fetchIdsAtPath:path
-//                                          parameters:nil
-//                                            priority:[AVENetworkPriority priorityWithLevel:AVENetworkPriorityLevelHigh]
-//                                        networkToken:nil].thenInBackground(^(MHIdCollection* featuredCollections) {
-//        s_featuredCollections = featuredCollections;
-//        return featuredCollections;
-//    });
-}
-
 @end

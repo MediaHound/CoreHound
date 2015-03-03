@@ -13,11 +13,29 @@
 
 @class MHPagingInfo;
 
+typedef NS_ENUM(NSInteger, MHSearchScope) {
+    MHSearchScopeAll,
+    MHSearchScopeMovie,
+    MHSearchScopeSong,
+    MHSearchScopeAlbum,
+    MHSearchScopeTvSeries,
+    MHSearchScopeTvSeason,
+    MHSearchScopeTvEpisode,
+    MHSearchScopeBook,
+    MHSearchScopeGame,
+    MHSearchScopeCollection,
+    MHSearchScopeUser,
+    MHSearchScopeContributor
+};
+
 
 @interface MHSearch : NSObject
 
 + (PMKPromise*)fetchResultsForSearchTerm:(NSString*)search
-                                   scope:(NSString*)scope
+                                   scope:(MHSearchScope)scope;
+
++ (PMKPromise*)fetchResultsForSearchTerm:(NSString*)search
+                                   scope:(MHSearchScope)scope
                                 priority:(AVENetworkPriority*)priority
                             networkToken:(AVENetworkToken*)networkToken;
 

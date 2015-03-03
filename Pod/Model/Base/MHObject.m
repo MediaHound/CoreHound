@@ -21,7 +21,7 @@
 #import "MHPagedResponse+Internal.h"
 
 #import <Avenue/AVENetworkManager.h>
-#import <AgnosticLogger/AgnosticLogger.h>
+//#import <AgnosticLogger/AgnosticLogger.h>
 
 const NSInteger MHInternal_DefaultPageSize = 12;
 
@@ -134,13 +134,13 @@ static NSString* const kCollectionsSubendpoint = @"collections";
             id tableValueAgain = [mhidTable objectForKey:mhid];
             
             if (tableValueAgain) {
-                AGLLogInfo(@"[MHObject] Finished initializing an MHObject, but one was already created in the mhid-table in the meantime. mhid: %@", self.metadata.mhid);
+//                AGLLogInfo(@"[MHObject] Finished initializing an MHObject, but one was already created in the mhid-table in the meantime. mhid: %@", self.metadata.mhid);
                 [tableLock unlock];
                 self = nil;
                 return tableValueAgain;
             }
             else {
-                AGLLogInfo(@"[MHObject] Inserting mhid:%@ into table", mhid);
+//                AGLLogInfo(@"[MHObject] Inserting mhid:%@ into table", mhid);
                 [mhidTable setObject:self forKey:mhid];
                 [tableLock unlock];
                 return self;
@@ -159,13 +159,6 @@ static NSString* const kCollectionsSubendpoint = @"collections";
             return [[class alloc] initWithDictionary:dict error:err];
         }
     }
-}
-
-+ (NSString*)mhidPrefix
-{
-    // Subclasses should override
-    NSAssert(NO, @"Class: `%@` did not override +mhidPrefix", self);
-    return nil;
 }
 
 + (Class)classForMhid:(NSString*)mhid
@@ -213,40 +206,6 @@ static NSString* const kCollectionsSubendpoint = @"collections";
 - (BOOL)hasMhid:(NSString*)mhid
 {
     return ([self.metadata.mhid isEqualToString:mhid]);
-}
-
-- (PMKPromise*)takeAction:(NSString*)action
-               parameters:(NSDictionary*)parameters
-     predictedSocialBlock:(MHSocial*(^)(MHSocial*, NSDictionary*))predictedSocialBlock
-{
-    // Hop off the main thread right away
-    return dispatch_promise(^id {
-        // We'll store the request Id, so that only the most recent request
-        // actually updates self.social, which triggers KVO.
-        NSInteger requestId = arc4random();
-        self.mostRecentSocialRequestId = @(requestId);
-        
-        AGLLogInfo(@"[MHObject] Take action `%@` on mhid `%@` with params `%@`", action, self.metadata.mhid, parameters);
-        
-        // Instantly update social values with our best guess of what will happen.
-        if (self.social) {
-            // Note: If social has not been fetched, then this won't be executed and we'll have
-            //       to wait until the social action request has returned
-            self.social = predictedSocialBlock(self.social, parameters);
-        }
-        
-        return [[MHFetcher sharedFetcher] putAndFetchModel:MHSocial.class
-                                                      path:[self subendpoint:action]
-                                                   keyPath:@"social"
-                                                parameters:parameters].thenInBackground(^(MHSocial* social) {
-            if (requestId == self.mostRecentSocialRequestId.integerValue) {
-                if (![self.social isEqualToSocial:social]) {
-                    self.social = social;
-                }
-            }
-            return self.social;
-        });
-    });
 }
 
 - (PMKPromise*)like
@@ -467,6 +426,48 @@ static NSString* const kCollectionsSubendpoint = @"collections";
 
 
 @implementation MHObject (Internal)
+
++ (NSString*)mhidPrefix
+{
+    // Subclasses should override
+    NSAssert(NO, @"Class: `%@` did not override +mhidPrefix", self);
+    return nil;
+}
+
+- (PMKPromise*)takeAction:(NSString*)action
+               parameters:(NSDictionary*)parameters
+     predictedSocialBlock:(MHSocial*(^)(MHSocial*, NSDictionary*))predictedSocialBlock
+{
+    // Hop off the main thread right away
+    return dispatch_promise(^id {
+        // We'll store the request Id, so that only the most recent request
+        // actually updates self.social, which triggers KVO.
+        NSInteger requestId = arc4random();
+        self.mostRecentSocialRequestId = @(requestId);
+        
+        //        AGLLogInfo(@"[MHObject] Take action `%@` on mhid `%@` with params `%@`", action, self.metadata.mhid, parameters);
+        
+        // Instantly update social values with our best guess of what will happen.
+        if (self.social) {
+            // Note: If social has not been fetched, then this won't be executed and we'll have
+            //       to wait until the social action request has returned
+            self.social = predictedSocialBlock(self.social, parameters);
+        }
+        
+        return [[MHFetcher sharedFetcher] putAndFetchModel:MHSocial.class
+                                                      path:[self subendpoint:action]
+                                                   keyPath:@"social"
+                                                parameters:parameters].thenInBackground(^(MHSocial* social) {
+            if (requestId == self.mostRecentSocialRequestId.integerValue) {
+                if (![self.social isEqualToSocial:social]) {
+                    self.social = social;
+                }
+            }
+            return self.social;
+        });
+    });
+}
+
 
 #pragma mark - Fetching
 

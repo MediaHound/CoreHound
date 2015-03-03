@@ -32,7 +32,16 @@ NSString* NSStringByAddingExtendedPercentEscapes(NSString* str)
 @implementation MHSearch
 
 + (PMKPromise*)fetchResultsForSearchTerm:(NSString*)search
-                                   scope:(NSString*)scope
+                                   scope:(MHSearchScope)scope
+{
+    return [self fetchResultsForSearchTerm:search
+                                     scope:scope
+                                  priority:[AVENetworkPriority priorityWithLevel:AVENetworkPriorityLevelHigh]
+                              networkToken:nil];
+}
+
++ (PMKPromise*)fetchResultsForSearchTerm:(NSString*)search
+                                   scope:(MHSearchScope)scope
                                 priority:(AVENetworkPriority*)priority
                             networkToken:(AVENetworkToken*)networkToken
 {
@@ -44,7 +53,7 @@ NSString* NSStringByAddingExtendedPercentEscapes(NSString* str)
 }
 
 + (PMKPromise*)fetchResultsForSearchTerm:(NSString*)search
-                                   scope:(NSString*)scope
+                                   scope:(MHSearchScope)scope
                                 priority:(AVENetworkPriority*)priority
                             networkToken:(AVENetworkToken*)networkToken
                                     next:(NSString*)next
@@ -53,7 +62,8 @@ NSString* NSStringByAddingExtendedPercentEscapes(NSString* str)
         MHPagedSearchResponse* response = [[MHPagedSearchResponse alloc] initWithDictionary:@{@"content":@[], @"number": @0, @"totalPages": @0} error:nil];
         return [PMKPromise promiseWithValue:response];
     }
-    NSString* path = [NSString stringWithFormat:@"search/%@/%@", NSStringByAddingExtendedPercentEscapes(scope), NSStringByAddingExtendedPercentEscapes(search)];
+    NSString* scopeString = [self scopeStringForScope:scope];
+    NSString* path = [NSString stringWithFormat:@"search/%@/%@", NSStringByAddingExtendedPercentEscapes(scopeString), NSStringByAddingExtendedPercentEscapes(search)];
     
     NSMutableDictionary* parameters = [NSMutableDictionary dictionary];
     parameters[@"page.size"] = @(MHInternal_DefaultPageSize);
@@ -82,6 +92,25 @@ NSString* NSStringByAddingExtendedPercentEscapes(NSString* str)
         }
         return pagedResponse;
     });
+}
+
++ (NSString*)scopeStringForScope:(MHSearchScope)scope
+{
+    NSDictionary* scopeString = @{
+                                  @(MHSearchScopeAll): @"all",
+                                  @(MHSearchScopeMovie): @"movie",
+                                  @(MHSearchScopeSong): @"song",
+                                  @(MHSearchScopeAlbum): @"album",
+                                  @(MHSearchScopeTvSeries): @"tvseries",
+                                  @(MHSearchScopeTvSeason): @"tvseason",
+                                  @(MHSearchScopeTvEpisode): @"tvepisode",
+                                  @(MHSearchScopeBook): @"book",
+                                  @(MHSearchScopeGame): @"game",
+                                  @(MHSearchScopeCollection): @"collection",
+                                  @(MHSearchScopeUser): @"user",
+                                  @(MHSearchScopeContributor): @"person"
+                                  };
+    return scopeString[@(scope)];
 }
 
 @end

@@ -70,7 +70,7 @@
                                next:nil
                           afterEach:^(MHPagedResponse* response) {
                               for (MHRelationalPair* pair in response.content) {
-                                  MHSource* source = pair.object;
+                                  MHSource* source = (MHSource*)pair.object;
                                   for (MHSourceMedium* medium in pair.context.allMediums) {
                                       medium.source = source;
                                       medium.content = self;

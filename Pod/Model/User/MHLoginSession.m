@@ -13,7 +13,7 @@
 #import "MHError+Internal.h"
 
 #import <Avenue/AVENetworkManager.h>
-#import <AgnosticLogger/AgnosticLogger.h>
+//#import <AgnosticLogger/AgnosticLogger.h>
 #import <UICKeyChainStore/UICKeyChainStore.h>
 #import <AtSugar/AtSugar.h>
 
@@ -67,7 +67,7 @@ static MHLoginSession* s_currentSession = nil;
 + (PMKPromise*)loginWithUsername:(NSString*)username
                      password:(NSString*)password
 {
-    AGLLogVerbose(@"[MHLoginSession] Attempting Login");
+//    AGLLogVerbose(@"[MHLoginSession] Attempting Login");
     
     return [[AVENetworkManager sharedManager] POST:[MHUser rootSubendpoint:@"login"]
                                         parameters:@{
@@ -80,12 +80,12 @@ static MHLoginSession* s_currentSession = nil;
 
                                            builder:[MHFetcher sharedFetcher].builder].thenInBackground(^id(NSDictionary* responseObject) {
         if ([responseObject[@"Error"] isEqualToString:@"Invalid Credentials"]) {
-            AGLLogInfo(@"[MHLoginSession] Login had invalid credentials");
+//            AGLLogInfo(@"[MHLoginSession] Login had invalid credentials");
             
             return MHErrorMake(MHLoginSessionInvalidCredentialsError, @{});
         }
         else {
-            AGLLogInfo(@"[MHLoginSession] Login request succesful. Now fetching user by mhid.");
+//            AGLLogInfo(@"[MHLoginSession] Login request succesful. Now fetching user by mhid.");
             return [[MHFetcher sharedFetcher] fetchModel:MHLoginSession.class
                                                     path:[MHUser rootSubendpoint:@"validateSession"]
                                                  keyPath:nil
@@ -99,7 +99,7 @@ static MHLoginSession* s_currentSession = nil;
                 
                 [self saveCredentialsWithUsername:username password:password];
                 
-                AGLLogInfo(@"[MHLoginSession] Succesful login completed");
+//                AGLLogInfo(@"[MHLoginSession] Succesful login completed");
                 
                 dispatch_async(dispatch_get_main_queue(), ^{
                     [[NSNotificationCenter defaultCenter] postNotificationName:MHLoginSessionUserDidLoginNotification
@@ -110,7 +110,7 @@ static MHLoginSession* s_currentSession = nil;
             });
         }
     }).catch(^(NSError* error) {
-        AGLLogError(@"[MHLoginSession] Failure to login: %@", error);
+//        AGLLogError(@"[MHLoginSession] Failure to login: %@", error);
         return error;
     });
 }

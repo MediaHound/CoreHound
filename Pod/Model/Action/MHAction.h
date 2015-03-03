@@ -17,7 +17,7 @@
  */
 @interface MHAction : MHObject
 
-@property (strong, nonatomic) MHActionMetadata* metadata;
+@property (strong, atomic) MHActionMetadata* metadata;
 
 @property (strong, atomic) MHObject<Optional>* primaryMention;
 @property (strong, atomic) MHUser<Optional>* primaryOwner;

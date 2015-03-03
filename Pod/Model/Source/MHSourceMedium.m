@@ -49,13 +49,13 @@ NSString* const MHSourceMediumTypeAttend = @"attend";
     id object = _.find(self.methods, ^BOOL(MHSourceMethod* m) {
         return [m.type isEqualToString:type];
     });
-    return [[MHSimpleProxy alloc] initWithObject:object context:self.context];
+    return (MHSourceMethod*)[[MHSimpleProxy alloc] initWithObject:object context:self.context];
 }
 
 - (NSArray*)allMethods
 {
     return _.arrayMap(self.methods, ^(MHSourceMethod* m) {
-        return [[MHSimpleProxy alloc] initWithObject:m context:self];
+        return [[MHSimpleProxy alloc] initWithObject:m context:self.context];
     });
 }
 

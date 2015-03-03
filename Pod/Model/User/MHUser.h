@@ -18,7 +18,7 @@
 
 @interface MHUser : MHObject
 
-@property (strong, nonatomic) MHUserMetadata* metadata;
+@property (strong, atomic) MHUserMetadata* metadata;
 
 - (PMKPromise*)setProfileImage:(UIImage*)image;
 

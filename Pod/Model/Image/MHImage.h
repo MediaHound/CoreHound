@@ -14,7 +14,7 @@
 
 @interface MHImage : MHObject
 
-@property (strong, nonatomic) MHImageMetadata* metadata;
+@property (strong, atomic) MHImageMetadata* metadata;
 
 @property (strong, nonatomic) MHImageData<Optional>* original;
 
