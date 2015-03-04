@@ -8,7 +8,6 @@
 
 #import "MHMedia.h"
 
-@class MHCollectionMetadata;
 @class MHUser;
 
 

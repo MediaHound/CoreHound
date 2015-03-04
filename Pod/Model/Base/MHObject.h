@@ -9,9 +9,9 @@
 #import <JSONModel/JSONModel.h>
 #import <Avenue/Avenue.h>
 #import <PromiseKit/PromiseKit.h>
+#import "MHMetadata.h"
 
 @class MHImage;
-@class MHMetadata;
 @class MHSocial;
 @class MHRelationalPair;
 

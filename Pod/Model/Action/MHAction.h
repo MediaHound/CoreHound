@@ -9,7 +9,6 @@
 #import "MHObject.h"
 
 @class MHUser;
-@class MHActionMetadata;
 
 
 /**

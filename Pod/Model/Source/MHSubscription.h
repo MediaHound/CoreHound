@@ -7,7 +7,6 @@
 //
 
 #import "MHObject.h"
-#import "MHMetadata.h"
 
 
 @protocol MHSubscription <NSObject>

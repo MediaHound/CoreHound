@@ -8,7 +8,6 @@
 
 #import "MHObject.h"
 
-@class MHImageMetadata;
 @class MHImageData;
 
 

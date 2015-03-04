@@ -9,7 +9,6 @@
 #import "MHObject.h"
 #import "MHRelationalPair.h"
 
-@class MHMediaMetadata;
 
 
 /**

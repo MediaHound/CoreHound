@@ -8,8 +8,6 @@
 
 #import "MHObject.h"
 
-@class MHUserMetadata;
-
 
 @protocol MHUser <NSObject>
 

@@ -7,7 +7,6 @@
 //
 
 #import "MHObject.h"
-#import "MHMetadata.h"
 #import "MHSubscription.h"
 #import "MHSourcePreference.h"
 
