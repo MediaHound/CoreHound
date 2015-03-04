@@ -12,9 +12,6 @@
 #import "MHSourceMedium.h"
 #import "MHSimpleProxy.h"
 
-#import <Underscore.m/Underscore.h>
-@compatibility_alias _ Underscore;
-
 NSString* const MHSourceMethodTypePurchase = @"purchase";
 NSString* const MHSourceMethodTypeRental = @"rental";
 NSString* const MHSourceMethodTypeSubscription = @"subscription";
@@ -44,10 +41,20 @@ NSString* const MHSourceMethodTypeAdSupported = @"adSupported";
 
 - (MHSourceFormat*)formatForType:(NSString*)type
 {
-    id object = _.find(self.formats, ^BOOL(MHSourceFormat* f) {
-        return [f.type isEqualToString:type];
-    });
-    return (MHSourceFormat*)[[MHSimpleProxy alloc] initWithObject:object context:self.medium.context];
+    id object = nil;
+    for (MHSourceFormat* format in self.formats) {
+        if ([format.type isEqualToString:type]) {
+            object = format;
+            break;
+        }
+    }
+    
+    if (object) {
+        return (MHSourceFormat*)[[MHSimpleProxy alloc] initWithObject:object context:self.medium.context];
+    }
+    else {
+        return nil;
+    }
 }
 
 - (MHSourceFormat*)defaultFormat
@@ -57,9 +64,14 @@ NSString* const MHSourceMethodTypeAdSupported = @"adSupported";
 
 - (NSArray*)allFormats
 {
-    return _.arrayMap(self.formats, ^(MHSourceFormat* f) {
-        return [[MHSimpleProxy alloc] initWithObject:f context:self.medium.context];
-    });
+    NSMutableArray* proxiedFormats = [NSMutableArray array];
+    
+    for (MHSourceFormat* format in self.formats) {
+        MHSimpleProxy* proxiedFormat = [[MHSimpleProxy alloc] initWithObject:format
+                                                                     context:self.medium.context];
+        [proxiedFormats addObject:proxiedFormat];
+    }
+    return proxiedFormats;
 }
 
 - (NSString*)displayName

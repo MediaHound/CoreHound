@@ -10,9 +10,6 @@
 #import "MHSimpleProxy.h"
 #import "MHSourceMedium+Internal.h"
 
-#import <Underscore.m/Underscore.h>
-@compatibility_alias _ Underscore;
-
 
 @interface MHContext ()
 
@@ -35,18 +32,32 @@
 
 - (MHSourceMedium*)mediumForType:(NSString*)type
 {
-    id object = _.find(self.mediums, ^BOOL(MHSourceMedium* m) {
-        return [m.type isEqualToString:type];
-    });
+    id object = nil;
+    for (MHSourceMedium* medium in self.mediums) {
+        if ([medium.type isEqualToString:type]) {
+            object = medium;
+            break;
+        }
+    }
     
-    return (MHSourceMedium*)[[MHSimpleProxy alloc] initWithObject:object context:self];
+    if (object) {
+        return (MHSourceMedium*)[[MHSimpleProxy alloc] initWithObject:object context:self];
+    }
+    else {
+        return nil;
+    }
 }
 
 - (NSArray*)allMediums
 {
-    return _.arrayMap(self.mediums, ^(MHSourceMedium* m) {
-        return [[MHSimpleProxy alloc] initWithObject:m context:self];
-    });
+    NSMutableArray* proxiedMediums = [NSMutableArray array];
+    
+    for (MHSourceMedium* medium in self.mediums) {
+        MHSimpleProxy* proxiedMedium = [[MHSimpleProxy alloc] initWithObject:medium
+                                                                     context:self];
+        [proxiedMediums addObject:proxiedMedium];
+    }
+    return proxiedMediums;
 }
 
 @end

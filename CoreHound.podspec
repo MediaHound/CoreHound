@@ -20,5 +20,4 @@ Pod::Spec.new do |s|
   s.dependency 'JSONModel'
   s.dependency 'PromiseKit'
   s.dependency 'UICKeyChainStore'
-  s.dependency 'Underscore.m'
 end

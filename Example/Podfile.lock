@@ -31,7 +31,6 @@ PODS:
     - JSONModel
     - PromiseKit
     - UICKeyChainStore
-    - Underscore.m
   - Expecta (0.3.2)
   - JSONModel (1.0.2)
   - KVOController (1.0.3)
@@ -78,7 +77,6 @@ PODS:
     - PromiseKit/Promise
   - Specta (0.3.2)
   - UICKeyChainStore (2.0.4)
-  - Underscore.m (0.2.1)
 
 DEPENDENCIES:
   - AtSugar (from `https://github.com/MediaHound/AtSugar.git`)
@@ -113,7 +111,7 @@ SPEC CHECKSUMS:
   AFNetworking: 8bee59492a6ff15d69130efa4d0dc67e0094a52a
   AtSugar: 9edc386fe4060f77eb93dfe9e258981e90a5abcf
   Avenue: 1cb3a57623b37f4c7058c97110ead65192c79a21
-  CoreHound: 0abab7eaba1bee2f21e178a111b21e6d60f8f150
+  CoreHound: 933f75e6257a85be6b1c4ba62013f2fb50df4931
   Expecta: ee641011fe10aa1855d487b40e4976dac50ec342
   JSONModel: cbdef0fdff1cc70e913a860861d3072860efd3a1
   KVOController: dfb2f4a6703b75be99849e8ad65bfb7e5190cffe
@@ -121,6 +119,5 @@ SPEC CHECKSUMS:
   PromiseKit: 4844db4448b4e387845e702b738cd87433fc02fd
   Specta: 698a58ffa5ec948327d3b92eab50ca58d7f4fbe8
   UICKeyChainStore: 2399076d0950e20fe859b8f817548cf6ca542dd7
-  Underscore.m: f99c166a9fdccfb5069085b6b4263c04b817fc9f
 
 COCOAPODS: 0.36.0.rc.1

@@ -11,9 +11,6 @@
 #import "MHSourceMethod+Internal.h"
 #import "MHSimpleProxy.h"
 
-#import <Underscore.m/Underscore.h>
-@compatibility_alias _ Underscore;
-
 NSString* const MHSourceMediumTypeStream = @"stream";
 NSString* const MHSourceMediumTypeDownload = @"download";
 NSString* const MHSourceMediumTypeDeliver = @"deliver";
@@ -46,17 +43,32 @@ NSString* const MHSourceMediumTypeAttend = @"attend";
 
 - (MHSourceMethod*)methodForType:(NSString*)type
 {
-    id object = _.find(self.methods, ^BOOL(MHSourceMethod* m) {
-        return [m.type isEqualToString:type];
-    });
-    return (MHSourceMethod*)[[MHSimpleProxy alloc] initWithObject:object context:self.context];
+    id object = nil;
+    for (MHSourceMethod* method in self.methods) {
+        if ([method.type isEqualToString:type]) {
+            object = method;
+            break;
+        }
+    }
+    
+    if (object) {
+        return (MHSourceMethod*)[[MHSimpleProxy alloc] initWithObject:object context:self.context];
+    }
+    else {
+        return nil;
+    }
 }
 
 - (NSArray*)allMethods
 {
-    return _.arrayMap(self.methods, ^(MHSourceMethod* m) {
-        return [[MHSimpleProxy alloc] initWithObject:m context:self.context];
-    });
+    NSMutableArray* proxiedMethods = [NSMutableArray array];
+    
+    for (MHSourceMethod* method in self.methods) {
+        MHSimpleProxy* proxiedMethod = [[MHSimpleProxy alloc] initWithObject:method
+                                                                     context:self.context];
+        [proxiedMethods addObject:proxiedMethod];
+    }
+    return proxiedMethods;
 }
 
 @end
