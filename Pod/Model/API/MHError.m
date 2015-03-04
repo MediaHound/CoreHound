@@ -2,8 +2,7 @@
 //  MHError.m
 //  CoreHound
 //
-//  Created by Dustin Bachrach on 2/9/15.
-//
+//  Copyright (c) 2015 Media Hound. All rights reserved.
 //
 
 #import "MHError.h"

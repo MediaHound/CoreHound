@@ -1,9 +1,8 @@
 //
-//  Album.m
-//  MediaHound
+//  MHAlbum.m
+//  CoreHound
 //
-//  Created by Andrew O'Toole on 9/06/13.
-//  Copyright (c) 2013 Media Hound. All rights reserved.
+//  Copyright (c) 2015 Media Hound. All rights reserved.
 //
 
 #import "MHAlbum.h"

@@ -2,8 +2,7 @@
 //  MHSimpleProxy.h
 //  CoreHound
 //
-//  Created by Dustin Bachrach on 1/22/15.
-//
+//  Copyright (c) 2015 Media Hound. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>

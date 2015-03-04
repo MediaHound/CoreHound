@@ -2,8 +2,7 @@
 //  MHImageData.h
 //  CoreHound
 //
-//  Created by Dustin Bachrach on 12/22/14.
-//
+//  Copyright (c) 2015 Media Hound. All rights reserved.
 //
 
 #import <JSONModel/JSONModel.h>

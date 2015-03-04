@@ -2,8 +2,7 @@
 //  MHSourcePreference.h
 //  CoreHound
 //
-//  Created by Dustin Bachrach on 1/30/15.
-//
+//  Copyright (c) 2015 Media Hound. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>

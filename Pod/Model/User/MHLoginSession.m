@@ -1,9 +1,8 @@
 //
-//  LoginSession.m
-//  mediaHound
+//  MHLoginSession.m
+//  CoreHound
 //
-//  Created by Dustin Bachrach on 4/3/14.
-//  Copyright (c) 2014 Media Hound. All rights reserved.
+//  Copyright (c) 2015 Media Hound. All rights reserved.
 //
 
 #import "MHLoginSession.h"
