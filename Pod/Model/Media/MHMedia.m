@@ -8,7 +8,6 @@
 
 #import "MHMedia.h"
 #import "MHSource.h"
-#import "MHVideoModel.h"
 #import "MHContributor.h"
 #import "MHFetcher.h"
 #import "MHRelationalPair.h"

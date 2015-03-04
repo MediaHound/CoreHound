@@ -104,10 +104,6 @@
 #import "MHSourceFormat.h"
 
 
-// Video
-#import "MHVideoModel.h"
-
-
 // Metadata
 #import "MHMetadata.h"
 
