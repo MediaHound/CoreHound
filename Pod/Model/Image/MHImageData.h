@@ -1,12 +1,12 @@
 //
 //  MHImageData.h
-//  Pods
+//  CoreHound
 //
 //  Created by Dustin Bachrach on 12/22/14.
 //
 //
 
-#import "JSONModel.h"
+#import <JSONModel/JSONModel.h>
 
 
 @interface MHImageData : JSONModel

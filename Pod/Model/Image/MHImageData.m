@@ -1,6 +1,6 @@
 //
 //  MHImageData.m
-//  Pods
+//  CoreHound
 //
 //  Created by Dustin Bachrach on 12/22/14.
 //

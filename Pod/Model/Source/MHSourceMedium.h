@@ -1,12 +1,12 @@
 //
 //  MHSourceMedium.h
-//  Pods
+//  CoreHound
 //
 //  Created by Dustin Bachrach on 1/21/15.
 //
 //
 
-#import "JSONModel.h"
+#import <JSONModel/JSONModel.h>
 #import "MHSourceMethod.h"
 
 @class MHSource;

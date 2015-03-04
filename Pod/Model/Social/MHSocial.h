@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 Media Hound. All rights reserved.
 //
 
-#import "JSONModel.h"
+#import <JSONModel/JSONModel.h>
 #import "MHSourcePreference.h"
 
 // TODO: Deprecate this and get rid of it

@@ -1,12 +1,12 @@
 //
 //  MHMetadata.h
-//  Pods
+//  CoreHound
 //
 //  Created by Dustin Bachrach on 12/11/14.
 //
 //
 
-#import "JSONModel.h"
+#import <JSONModel/JSONModel.h>
 
 
 /**

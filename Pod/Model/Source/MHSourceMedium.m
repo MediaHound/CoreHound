@@ -1,6 +1,6 @@
 //
 //  MHSourceMedium.m
-//  Pods
+//  CoreHound
 //
 //  Created by Dustin Bachrach on 1/21/15.
 //

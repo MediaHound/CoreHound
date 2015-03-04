@@ -6,7 +6,7 @@
 //
 //
 
-#import "JSONModel.h"
+#import <JSONModel/JSONModel.h>
 #import "MHSourceFormat.h"
 
 @class MHSourceMedium;

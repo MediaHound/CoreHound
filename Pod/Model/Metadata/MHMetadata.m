@@ -1,6 +1,6 @@
 //
 //  MHMetadata.m
-//  Pods
+//  CoreHound
 //
 //  Created by Dustin Bachrach on 12/11/14.
 //
