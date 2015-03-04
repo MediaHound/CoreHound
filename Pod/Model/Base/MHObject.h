@@ -31,7 +31,7 @@
 
 /**
  * The primary image is the receiver's primary visual representation
- * This property may be unrealized.
+ * This property may be unrealized. You should rarely access it directly.
  * You need to call -fetchPrimaryImage to ensure it has been loaded.
  * This property is KVO compliant.
  */
@@ -39,7 +39,7 @@
 
 /**
  * The secondary image is the receiver's secondary visual representation
- * This property may be unrealized.
+ * This property may be unrealized. You should rarely access it directly.
  * You need to call -fetchSecondaryImage to ensure it has been loaded.
  * This property is KVO compliant.
  */
@@ -47,13 +47,11 @@
 
 /**
  * Social metrics and user-specific information about the receiver
- * This property may be unrealized.
+ * This property may be unrealized. You should rarely access it directly.
  * You need to call -fetchSocial to ensure it has been loaded.
  * This property is KVO compliant.
  */
 @property (strong, nonatomic) MHSocial<Optional>* social;
-
-@property (strong, nonatomic) MHRelationalPair<Optional>* primaryGroup;
 
 /**
  * @param mhid The mhid to check for
@@ -129,7 +127,23 @@
                   priority:(AVENetworkPriority*)priority
               networkToken:(AVENetworkToken*)networkToken;
 
+/**
+ * Fetches the receiver's social metrics.
+ * You should never read the `social` property directly from an MHObject. Instead, always access social metrics via
+ * the `fetchSocial` promise. The `social` property can be used for observing KVO changes to social metrics.
+ * @return A promise whcih resolves with an MHSocial.
+ */
 - (PMKPromise*)fetchSocial;
+
+/**
+ * Fetches the receiver's social metrics.
+ * You should never read the `social` property directly from an MHObject. Instead, always access social metrics via
+ * the `fetchSocial` promise. The `social` property can be used for observing KVO changes to social metrics.
+ * @param forced Whether to use a cached response. If NO, a network request will occur.
+ * @param priority The network request priority.
+ * @param networkToken The token for the network request, allowing cancelation and re-prioritization.
+ * @return A promise whcih resolves with an MHSocial.
+ */
 - (PMKPromise*)fetchSocialForced:(BOOL)forced
                         priority:(AVENetworkPriority*)priority
                     networkToken:(AVENetworkToken*)networkToken;
@@ -143,11 +157,6 @@
 - (PMKPromise*)fetchSecondaryImageForced:(BOOL)forced
                                 priority:(AVENetworkPriority*)priority
                             networkToken:(AVENetworkToken*)networkToken;
-
-- (PMKPromise*)fetchPrimaryGroup;
-- (PMKPromise*)fetchPrimaryGroupForced:(BOOL)forced
-                              priority:(AVENetworkPriority*)priority
-                          networkToken:(AVENetworkToken*)networkToken;
 
 /**
  * Fetches the activity feed for the receiver.

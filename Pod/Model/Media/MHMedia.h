@@ -20,12 +20,25 @@
 
 @property (strong, nonatomic) NSArray<MHRelationalPair, Optional>* keyContributors;
 
+/**
+ * A relational pair to the MHObject the receiver belongs to.
+ * For example, an MHSong's `primaryGroup` will be the primary MHAlbum its on.
+ * This property exists on MHSong, MHTvSeason, MHTvEpisode.
+ * This property may be unrealized. You should rarely access it directly.
+ * You need to call -fetchSocial to ensure it has been loaded.
+ * This property is KVO compliant.
+ */
 @property (strong, nonatomic) MHRelationalPair<Optional>* primaryGroup;
 
 @end
 
 
 @interface MHMedia (Fetching)
+
+- (PMKPromise*)fetchPrimaryGroup;
+- (PMKPromise*)fetchPrimaryGroupForced:(BOOL)forced
+                              priority:(AVENetworkPriority*)priority
+                          networkToken:(AVENetworkToken*)networkToken;
 
 - (PMKPromise*)fetchKeyContributors;
 - (PMKPromise*)fetchKeyContributorsForced:(BOOL)forced

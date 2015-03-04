@@ -352,23 +352,6 @@ static NSString* const kCollectionsSubendpoint = @"collections";
                   networkToken:networkToken];
 }
 
-- (PMKPromise*)fetchPrimaryGroup
-{
-    return [self fetchPrimaryGroupForced:NO
-                                priority:[AVENetworkPriority priorityWithLevel:AVENetworkPriorityLevelHigh]
-                            networkToken:nil];
-}
-
-- (PMKPromise*)fetchPrimaryGroupForced:(BOOL)forced
-                              priority:(AVENetworkPriority*)priority
-                          networkToken:(AVENetworkToken*)networkToken
-{
-    return [self fetchProperty:@"primaryGroup"
-                        forced:forced
-                      priority:priority
-                  networkToken:networkToken];
-}
-
 - (PMKPromise*)fetchSecondaryImage
 {
     return [self fetchSecondaryImageForced:NO
