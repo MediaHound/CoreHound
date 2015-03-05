@@ -12,7 +12,6 @@
 
 @class MHImage;
 @class MHSocial;
-@class MHRelationalPair;
 
 
 /**
@@ -69,6 +68,11 @@
  * @return Whether the receiver has the given mhid.
  */
 - (BOOL)hasMhid:(NSString*)mhid;
+
+@end
+
+
+@interface MHObject (Actions)
 
 /**
  * Mark the receiver as `liked` by the current user.
@@ -147,12 +151,44 @@
                         priority:(AVENetworkPriority*)priority
                     networkToken:(AVENetworkToken*)networkToken;
 
+/**
+ * Fetches the receiver's primary image.
+ * You should never read the `primaryImage` property directly from an MHObject. Instead, always access the image via
+ * the `fetchPrimaryImage` promise. The `primaryImage` property can be used for observing KVO changes to social metrics.
+ * @return A promise which resolves with an MHImage.
+ */
 - (PMKPromise*)fetchPrimaryImage;
+
+/**
+ * Fetches the receiver's primary image.
+ * You should never read the `primaryImage` property directly from an MHObject. Instead, always access the image via
+ * the `fetchPrimaryImage` promise. The `primaryImage` property can be used for observing KVO changes to social metrics.
+ * @param forced Whether to use a cached response. If NO, a network request will occur.
+ * @param priority The network request priority.
+ * @param networkToken The token for the network request, allowing cancelation and re-prioritization.
+ * @return A promise which resolves with an MHImage.
+ */
 - (PMKPromise*)fetchPrimaryImageForced:(BOOL)forced
                               priority:(AVENetworkPriority*)priority
                           networkToken:(AVENetworkToken*)networkToken;
 
+/**
+ * Fetches the receiver's secondary image.
+ * You should never read the `secondaryImage` property directly from an MHObject. Instead, always access the image via
+ * the `fetchSecondaryImage` promise. The `secondaryImage` property can be used for observing KVO changes to social metrics.
+ * @return A promise which resolves with an MHImage.
+ */
 - (PMKPromise*)fetchSecondaryImage;
+
+/**
+ * Fetches the receiver's secondary image.
+ * You should never read the `secondaryImage` property directly from an MHObject. Instead, always access the image via
+ * the `fetchSecondaryImage` promise. The `secondaryImage` property can be used for observing KVO changes to social metrics.
+ * @param forced Whether to use a cached response. If NO, a network request will occur.
+ * @param priority The network request priority.
+ * @param networkToken The token for the network request, allowing cancelation and re-prioritization.
+ * @return A promise which resolves with an MHImage.
+ */
 - (PMKPromise*)fetchSecondaryImageForced:(BOOL)forced
                                 priority:(AVENetworkPriority*)priority
                             networkToken:(AVENetworkToken*)networkToken;

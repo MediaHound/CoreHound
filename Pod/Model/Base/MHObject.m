@@ -207,6 +207,11 @@ static NSString* const kCollectionsSubendpoint = @"collections";
     return ([self.metadata.mhid isEqualToString:mhid]);
 }
 
+@end
+
+
+@implementation MHObject (Actions)
+
 - (PMKPromise*)like
 {
     return [self takeAction:@"like"
@@ -295,8 +300,8 @@ static NSString* const kCollectionsSubendpoint = @"collections";
         else {
             // Nothing found in the cache, go fetch the mhid
             return [self fetchFullViewForMhid:mhid
-                                                    priority:priority
-                                                networkToken:networkToken];
+                                     priority:priority
+                                 networkToken:networkToken];
         }
     });
 }
