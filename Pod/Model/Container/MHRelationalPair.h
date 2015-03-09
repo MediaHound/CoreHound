@@ -1,9 +1,8 @@
 //
 //  MHRelationalPair.h
-//  mediaHound
+//  CoreHound
 //
-//  Created by Dustin Bachrach on 6/23/14.
-//  Copyright (c) 2014 Media Hound. All rights reserved.
+//  Copyright (c) 2015 Media Hound. All rights reserved.
 //
 
 #import <JSONModel/JSONModel.h>

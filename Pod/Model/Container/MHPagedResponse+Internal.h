@@ -2,8 +2,7 @@
 //  MHPagedResponse+Internal.h
 //  CoreHound
 //
-//  Created by Dustin Bachrach on 12/30/14.
-//
+//  Copyright (c) 2015 Media Hound. All rights reserved.
 //
 
 #import "MHPagedResponse.h"

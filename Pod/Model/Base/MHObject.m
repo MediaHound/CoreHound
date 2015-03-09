@@ -1,9 +1,8 @@
 //
 //  MHObject.m
-//  MediaHound
+//  CoreHound
 //
-//  Created by Tai Bo on 11/29/13.
-//  Copyright (c) 2013 Media Hound. All rights reserved.
+//  Copyright (c) 2015 Media Hound. All rights reserved.
 //
 
 #import "MHObject.h"
@@ -208,6 +207,11 @@ static NSString* const kCollectionsSubendpoint = @"collections";
     return ([self.metadata.mhid isEqualToString:mhid]);
 }
 
+@end
+
+
+@implementation MHObject (Actions)
+
 - (PMKPromise*)like
 {
     return [self takeAction:@"like"
@@ -296,8 +300,8 @@ static NSString* const kCollectionsSubendpoint = @"collections";
         else {
             // Nothing found in the cache, go fetch the mhid
             return [self fetchFullViewForMhid:mhid
-                                                    priority:priority
-                                                networkToken:networkToken];
+                                     priority:priority
+                                 networkToken:networkToken];
         }
     });
 }
@@ -347,23 +351,6 @@ static NSString* const kCollectionsSubendpoint = @"collections";
                           networkToken:(AVENetworkToken*)networkToken
 {
     return [self fetchProperty:@"primaryImage"
-                        forced:forced
-                      priority:priority
-                  networkToken:networkToken];
-}
-
-- (PMKPromise*)fetchPrimaryGroup
-{
-    return [self fetchPrimaryGroupForced:NO
-                                priority:[AVENetworkPriority priorityWithLevel:AVENetworkPriorityLevelHigh]
-                            networkToken:nil];
-}
-
-- (PMKPromise*)fetchPrimaryGroupForced:(BOOL)forced
-                              priority:(AVENetworkPriority*)priority
-                          networkToken:(AVENetworkToken*)networkToken
-{
-    return [self fetchProperty:@"primaryGroup"
                         forced:forced
                       priority:priority
                   networkToken:networkToken];

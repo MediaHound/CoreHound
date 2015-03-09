@@ -1,9 +1,8 @@
 //
 //  MHFetcher.m
-//  mediaHound
+//  CoreHound
 //
-//  Created by Dustin Bachrach on 3/13/14.
-//  Copyright (c) 2014 Media Hound. All rights reserved.
+//  Copyright (c) 2015 Media Hound. All rights reserved.
 //
 
 #import "MHFetcher.h"

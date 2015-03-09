@@ -1,9 +1,8 @@
 //
-//  Source.h
-//  MediaHound
+//  MHSource.h
+//  CoreHound
 //
-//  Created by Tai Bo on 10/2/13.
-//  Copyright (c) 2013 Media Hound. All rights reserved.
+//  Copyright (c) 2015 Media Hound. All rights reserved.
 //
 
 #import "MHObject.h"

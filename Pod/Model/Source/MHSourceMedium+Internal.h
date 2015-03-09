@@ -2,8 +2,7 @@
 //  MHSourceMedium+Internal.h
 //  CoreHound
 //
-//  Created by Dustin Bachrach on 1/21/15.
-//
+//  Copyright (c) 2015 Media Hound. All rights reserved.
 //
 
 #import "MHSourceMedium.h"

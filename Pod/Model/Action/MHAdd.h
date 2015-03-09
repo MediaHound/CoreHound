@@ -1,9 +1,8 @@
 //
-//  MHAdd.h
-//  mediaHound
+//  MHAdd.m
+//  CoreHound
 //
-//  Created by Dustin Bachrach on 6/10/14.
-//  Copyright (c) 2014 Media Hound. All rights reserved.
+//  Copyright (c) 2015 Media Hound. All rights reserved.
 //
 
 #import "MHAction.h"

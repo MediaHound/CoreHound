@@ -1,9 +1,8 @@
 //
-//  Post.h
-//  MediaHound
+//  MHAction.h
+//  CoreHound
 //
-//  Created by Tai Bo on 11/20/13.
-//  Copyright (c) 2013 Media Hound. All rights reserved.
+//  Copyright (c) 2015 Media Hound. All rights reserved.
 //
 
 #import "MHObject.h"

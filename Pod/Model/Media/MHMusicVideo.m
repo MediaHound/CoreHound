@@ -1,9 +1,8 @@
 //
 //  MHMusicVideo.m
-//  mediaHound
+//  CoreHound
 //
-//  Created by Dustin Bachrach on 9/2/14.
-//  Copyright (c) 2014 Media Hound. All rights reserved.
+//  Copyright (c) 2015 Media Hound. All rights reserved.
 //
 
 #import "MHMusicVideo.h"
