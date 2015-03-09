@@ -10,4 +10,8 @@
 
 @interface MHViewController : UIViewController
 
+@property (weak, nonatomic) IBOutlet UISearchBar* MHSDKSearch;
+
+
+
 @end

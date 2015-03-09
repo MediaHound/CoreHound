@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5023" systemVersion="13A603" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="vXZ-lx-hvc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="vXZ-lx-hvc">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--class Prefix:identifier View Controller-->
+        <!--View Controller-->
         <scene sceneID="ufC-wZ-h7g">
             <objects>
                 <viewController id="vXZ-lx-hvc" customClass="MHViewController" sceneMemberID="viewController">
@@ -15,13 +17,74 @@
                     <view key="view" contentMode="scaleToFill" id="kh9-bI-dsS">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <subviews>
+                            <searchBar alpha="0.84999999999999987" contentMode="redraw" backgroundImage="Screen Shot 2015-03-04 at 4.19.49 PM" translatesAutoresizingMaskIntoConstraints="NO" id="svu-GF-0mo">
+                                <rect key="frame" x="0.0" y="19" width="320" height="44"/>
+                                <color key="barTintColor" red="0.94107431173324585" green="0.94123542308807373" blue="0.94106405973434448" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="vXZ-lx-hvc" id="MJ7-qv-95f"/>
+                                </connections>
+                            </searchBar>
+                            <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mediaHoundDog" translatesAutoresizingMaskIntoConstraints="NO" id="nCl-Zp-x4w">
+                                <rect key="frame" x="40" y="69" width="240" height="47"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="top" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="mediaHoundText" translatesAutoresizingMaskIntoConstraints="NO" id="wx3-Eg-S7k">
+                                <rect key="frame" x="40" y="131" width="240" height="36"/>
+                            </imageView>
+                            <view alpha="0.10000000000000001" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OEd-jx-Pgg">
+                                <rect key="frame" x="0.0" y="216" width="320" height="352"/>
+                                <subviews>
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="64" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="BEu-uA-1Iu">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="352"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="separatorColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <prototypes>
+                                            <tableViewCell alpha="0.10000000000000001" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Main_Search_Cell" id="pfE-zx-HcZ">
+                                                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                                <autoresizingMask key="autoresizingMask"/>
+                                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="pfE-zx-HcZ" id="QK1-JU-cKL">
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </tableViewCellContentView>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                            </tableViewCell>
+                                        </prototypes>
+                                        <connections>
+                                            <outlet property="dataSource" destination="vXZ-lx-hvc" id="JXV-NJ-9Hg"/>
+                                            <outlet property="delegate" destination="vXZ-lx-hvc" id="V4o-8u-HNj"/>
+                                        </connections>
+                                    </tableView>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" red="0.19710683822631836" green="0.53713852167129517" blue="0.89003568887710571" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="nCl-Zp-x4w" firstAttribute="centerX" secondItem="svu-GF-0mo" secondAttribute="centerX" id="D6r-fb-bpN"/>
+                            <constraint firstItem="nCl-Zp-x4w" firstAttribute="top" secondItem="svu-GF-0mo" secondAttribute="bottom" constant="6" id="GCC-pP-3GN"/>
+                            <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="nCl-Zp-x4w" secondAttribute="bottom" constant="452" id="XpN-IO-wmE"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="nCl-Zp-x4w" secondAttribute="trailing" constant="24" id="jvm-6e-ah1"/>
+                            <constraint firstItem="svu-GF-0mo" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="u7E-6U-V24"/>
+                            <constraint firstItem="nCl-Zp-x4w" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="24" id="yHS-EM-e07"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="MHSDKSearch" destination="svu-GF-0mo" id="lSd-oK-5kL"/>
+                        <outlet property="TableView" destination="BEu-uA-1Iu" id="Lyy-tq-FjE"/>
+                        <outlet property="searchBar" destination="svu-GF-0mo" id="faG-S1-xCC"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="595" y="408"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="Screen Shot 2015-03-04 at 4.19.49 PM" width="19" height="19"/>
+        <image name="mediaHoundDog" width="67" height="47"/>
+        <image name="mediaHoundText" width="227" height="32"/>
+    </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

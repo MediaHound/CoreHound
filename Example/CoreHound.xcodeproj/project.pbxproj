@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3A3388981AAE2B7F003FA12C /* MHTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A3388971AAE2B7F003FA12C /* MHTableView.m */; };
 		3B0BAF7A4B6F44B04FF5BFB0 /* libPods-Tests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A4739EB423DFE5B54A3BA533 /* libPods-Tests.a */; };
 		6003F58E195388D20070C39A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58D195388D20070C39A /* Foundation.framework */; };
 		6003F590195388D20070C39A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58F195388D20070C39A /* CoreGraphics.framework */; };
@@ -38,6 +39,8 @@
 
 /* Begin PBXFileReference section */
 		2CD5159029C86FD8187E5813 /* CoreHound.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = CoreHound.podspec; path = ../CoreHound.podspec; sourceTree = "<group>"; };
+		3A3388961AAE2B7F003FA12C /* MHTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MHTableView.h; sourceTree = "<group>"; };
+		3A3388971AAE2B7F003FA12C /* MHTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MHTableView.m; sourceTree = "<group>"; };
 		6003F58A195388D20070C39A /* CoreHound.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CoreHound.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6003F58D195388D20070C39A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		6003F58F195388D20070C39A /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -140,6 +143,8 @@
 				6003F5A6195388D20070C39A /* MHViewController.m */,
 				6003F5A8195388D20070C39A /* Images.xcassets */,
 				6003F594195388D20070C39A /* Supporting Files */,
+				3A3388961AAE2B7F003FA12C /* MHTableView.h */,
+				3A3388971AAE2B7F003FA12C /* MHTableView.m */,
 			);
 			path = CoreHound;
 			sourceTree = "<group>";
@@ -361,6 +366,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3A3388981AAE2B7F003FA12C /* MHTableView.m in Sources */,
 				6003F59E195388D20070C39A /* MHAppDelegate.m in Sources */,
 				6003F5A7195388D20070C39A /* MHViewController.m in Sources */,
 				6003F59A195388D20070C39A /* main.m in Sources */,
