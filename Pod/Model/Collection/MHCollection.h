@@ -5,11 +5,16 @@
 //  Copyright (c) 2015 Media Hound. All rights reserved.
 //
 
-#import "MHMedia.h"
+#import "MHObject.h"
 
 @class MHUser;
 
 
+/**
+ * A collection is a user-created grouping of MHObjects.
+ * Collections can contain multiple content types, so users can collect movies, songs, and books
+ * all into one collection.
+ */
 @interface MHCollection : MHObject
 
 @property (strong, atomic) MHCollectionMetadata* metadata;
