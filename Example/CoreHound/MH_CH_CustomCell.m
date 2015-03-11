@@ -1,16 +1,14 @@
 //
-//  MHTableView.h
+//  MH_CH_CustomCell.m
 //  CoreHound
 //
 //  Created by Dustin Mote on 3/9/15.
 //  Copyright (c) 2015 Dustin Bachrach. All rights reserved.
 //
 
-//#import <Cocoa/Cocoa.h>
-#import "MHAppDelegate.h"
+#import "MH_CH_CustomCell.h"
 
-
-@interface MHTableView : UIViewController
+@implementation MH_CH_CustomCell
 
 
 

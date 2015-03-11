@@ -8,6 +8,7 @@
 
 #import "MHViewController.h"
 #import <CoreHound/MHApi.h>
+#import "MH_CH_CustomCell.h"
 
 
 @interface MHViewController () <UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
@@ -27,7 +28,13 @@
     textDidChange:(NSString *)searchText {
     
     
-    // Fetching results for terms typed in to the search bar with an all scope
+    /* 
+     
+     Use the PromiseKit built into MHSearch to take in the entered text across all scopes. 
+     When the  results return, they will come in Paged in sets of 12.
+     
+     */
+    
     [MHSearch fetchResultsForSearchTerm:searchText scope:MHSearchScopeAll].then(^(MHPagedSearchResponse* response) {
         
         
@@ -39,8 +46,6 @@
     });
     
   
-    
-    
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -51,10 +56,40 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    UITableViewCell* cell = [self.TableView dequeueReusableCellWithIdentifier:@"Main_Search_Cell"];
+    /* 
+     
+     The API contains an AutoCompleteResults class. Use this class to handle your returned results.
+    
+     */
+     
+     MH_CH_CustomCell* cell = [self.TableView dequeueReusableCellWithIdentifier:@"Main_Search_Cell"];
+    
         AutocompleteResult* result = self.searchResults[indexPath.row];
     
-    cell.textLabel.text = result.name;
+    
+    /*
+     
+     The initial results returned will contain a URL for the primary images.
+    
+     */
+
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        
+        
+        NSData* data= [NSData dataWithContentsOfURL:result.primaryImageUrl];
+        
+        UIImage* img = [UIImage imageWithData:data];
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if ([cell.searchedName.text isEqualToString:result.name]) {
+                cell.searchedImg.image = img;
+            }
+        });
+        
+    });
+    
+    cell.searchedName.text = result.name;
+    cell.searchedImg.image = nil;
     
     return cell;
     
@@ -67,7 +102,9 @@
 {
     [super viewDidLoad];
     
-	// Do any additional setup after loading the view, typically from a nib.
+    _searchBar.placeholder = @"Search the Graph";
+
+
 }
 
 - (void)didReceiveMemoryWarning
