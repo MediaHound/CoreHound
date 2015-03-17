@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3AADF3451AB8D7E400B5CBBA /* MHidViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AADF3441AB8D7E400B5CBBA /* MHidViewController.m */; };
+		3AE250BE1AAE6089000AEEC0 /* MH_CH_CustomCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AE250BD1AAE6089000AEEC0 /* MH_CH_CustomCell.m */; };
 		3B0BAF7A4B6F44B04FF5BFB0 /* libPods-Tests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A4739EB423DFE5B54A3BA533 /* libPods-Tests.a */; };
 		6003F58E195388D20070C39A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58D195388D20070C39A /* Foundation.framework */; };
 		6003F590195388D20070C39A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58F195388D20070C39A /* CoreGraphics.framework */; };
@@ -38,6 +40,10 @@
 
 /* Begin PBXFileReference section */
 		2CD5159029C86FD8187E5813 /* CoreHound.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = CoreHound.podspec; path = ../CoreHound.podspec; sourceTree = "<group>"; };
+		3AADF3431AB8D7E400B5CBBA /* MHidViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MHidViewController.h; sourceTree = "<group>"; };
+		3AADF3441AB8D7E400B5CBBA /* MHidViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MHidViewController.m; sourceTree = "<group>"; };
+		3AE250BC1AAE6089000AEEC0 /* MH_CH_CustomCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MH_CH_CustomCell.h; sourceTree = "<group>"; };
+		3AE250BD1AAE6089000AEEC0 /* MH_CH_CustomCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MH_CH_CustomCell.m; sourceTree = "<group>"; };
 		6003F58A195388D20070C39A /* CoreHound.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CoreHound.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6003F58D195388D20070C39A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		6003F58F195388D20070C39A /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -140,6 +146,10 @@
 				6003F5A6195388D20070C39A /* MHViewController.m */,
 				6003F5A8195388D20070C39A /* Images.xcassets */,
 				6003F594195388D20070C39A /* Supporting Files */,
+				3AE250BC1AAE6089000AEEC0 /* MH_CH_CustomCell.h */,
+				3AE250BD1AAE6089000AEEC0 /* MH_CH_CustomCell.m */,
+				3AADF3431AB8D7E400B5CBBA /* MHidViewController.h */,
+				3AADF3441AB8D7E400B5CBBA /* MHidViewController.m */,
 			);
 			path = CoreHound;
 			sourceTree = "<group>";
@@ -363,6 +373,8 @@
 			files = (
 				6003F59E195388D20070C39A /* MHAppDelegate.m in Sources */,
 				6003F5A7195388D20070C39A /* MHViewController.m in Sources */,
+				3AE250BE1AAE6089000AEEC0 /* MH_CH_CustomCell.m in Sources */,
+				3AADF3451AB8D7E400B5CBBA /* MHidViewController.m in Sources */,
 				6003F59A195388D20070C39A /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
