@@ -6,10 +6,9 @@
 //  Copyright (c) 2015 Dustin Bachrach. All rights reserved.
 //
 
-#import "MH_CH_CustomCell.h"
+#import "MH_CH_SearchCell.h"
 
-@implementation MH_CH_CustomCell
-
+@implementation MH_CH_SearchCell
 
 
 @end
