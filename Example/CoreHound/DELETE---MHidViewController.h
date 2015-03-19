@@ -8,14 +8,14 @@
 
 #import <UIKit/UIKit.h>
 #import <CoreHound/MHApi.h>
-#import "MH_CH_CustomCell.h"
+#import "MH_CH_SearchCell.h"
 
 @interface MHidViewController : UITableViewController
 
 
-@property (nonatomic) MHPagedSearchResponse* currentMHid;
+@property (nonatomic) NSString* currentMHid;
 @property (nonatomic) NSArray* searchIDResult;
-@property (nonatomic) UIImage* mhPrimaryImg;
+@property (nonatomic) NSURL* mhPrimaryImg;
 @property (nonatomic) NSString* mhName;
 
 @end

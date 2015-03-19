@@ -8,8 +8,8 @@
 
 #import "MHViewController.h"
 #import <CoreHound/MHApi.h>
-#import "MH_CH_CustomCell.h"
-#import "MHidViewController.h"
+#import "MH_CH_Cells.h"
+#import "MH_CH_mhid_vc.h"
 
 
 @interface MHViewController () <UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
@@ -38,10 +38,12 @@
 {
     [super viewDidLoad];
     
-    _searchBar.placeholder = @"Search the Graph";
+    self.navigationController.navigationBar.hidden = YES;
+  
+    self.searchBar.placeholder = @"Search the Graph";
     self.additionalSearchPages = NO;
 
-    [_searchBar becomeFirstResponder];
+    [self.searchBar becomeFirstResponder];
     
 }
 
@@ -52,6 +54,11 @@
 }
 
 
+-(void)viewWillAppear:(BOOL)animated {
+    
+    self.navigationController.navigationBar.hidden = YES;
+    
+}
 
 #pragma mark - UITableView Management
 
@@ -59,7 +66,7 @@
  numberOfRowsInSection:(NSInteger)section
 {
     
-    if (self.additionalSearchPages == NO) {
+    if (!self.additionalSearchPages) {
         
         return self.allSearchResults.count;
         
@@ -97,7 +104,7 @@
          
          */
         
-        MH_CH_CustomCell* cell = [self.TableView dequeueReusableCellWithIdentifier: searchCellIdentifier];
+        MH_CH_SearchCell* cell = [self.TableView dequeueReusableCellWithIdentifier: searchCellIdentifier];
         
         AutocompleteResult* result = self.allSearchResults[indexPath.row];
         
@@ -127,7 +134,8 @@
         cell.searchedName.text = result.name;
         cell.searchedImg.image = nil;
         
-//        
+//        Cell selection color
+        UIView *bgColorView = [[UIView alloc] init];
         bgColorView.backgroundColor = [UIColor colorWithRed:0.7f green:0.7f blue:0.7f alpha:0.4];
         [cell setSelectedBackgroundView:bgColorView];
         
@@ -137,6 +145,11 @@
     }
     
 }
+
+
+
+
+#pragma mark - Navigation
 
 
 - (void)tableView:(UITableView *)tableView
@@ -164,12 +177,11 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath
                  sender:(id)sender {
     
     
-    MHidViewController* mhidVC = [segue destinationViewController];
-    NSIndexPath* path =  [self.TableView indexPathsForSelectedRows];
-    MHPagedSearchResponse* responsePath = _response.content[path.row];
-    [mhidVC setCurrentMHid:responsePath];
+    MH_CH_mhid_vc* mhidVC = [segue destinationViewController];
+    NSIndexPath* path =  [self.TableView indexPathForSelectedRow];
+    AutocompleteResult* responsePath = self.response.content[path.row];
     
-    
+    [mhidVC setCurrentMHid          :responsePath.mhid];
 }
 
 
@@ -224,6 +236,9 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 
 - (void)searchBarTextDidEndEditing:(UISearchBar *)searchBar
 {
+ 
+//    if (self.searchBar.text.length == 0)
+    // TODO: crete separate function to hamdle whitespaces
     
     if ([self.searchBar.text isEqual: @""]) {
         
@@ -243,9 +258,9 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
 {
     
-    [self.allSearchResults arrayByAddingObjectsFromArray:_allSearchResults];
+    [self.allSearchResults arrayByAddingObjectsFromArray:self.allSearchResults];
     [self.TableView reloadData];
-    [_searchBar resignFirstResponder];
+    [self.searchBar resignFirstResponder];
     
 }
 
