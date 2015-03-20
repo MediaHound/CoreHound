@@ -84,7 +84,7 @@
     
     NSString* lastCellIdentifier = @"Load_More_Cell";
     NSString* searchCellIdentifier = @"Main_Search_Cell";
-    UIView *bgColorView = [[UIView alloc] init];
+//    UIView *bgColorView = [[UIView alloc] init];
     
     short int lastCellRow = self.allSearchResults.count;
     
@@ -181,7 +181,8 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath
     NSIndexPath* path =  [self.TableView indexPathForSelectedRow];
     AutocompleteResult* responsePath = self.response.content[path.row];
     
-    [mhidVC setCurrentMHid          :responsePath.mhid];
+    [mhidVC setCurrentMHid  :responsePath.mhid];
+    [mhidVC setMhName       :responsePath.name];
 }
 
 

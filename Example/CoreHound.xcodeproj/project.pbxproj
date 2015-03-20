@@ -11,7 +11,6 @@
 		3A62CB311AB9F8B50071AAC7 /* MH_CH_PrimaryImgCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A62CB301AB9F8B50071AAC7 /* MH_CH_PrimaryImgCell.m */; };
 		3A62CB341AB9F9AD0071AAC7 /* MH_CH_ContributorCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A62CB331AB9F9AD0071AAC7 /* MH_CH_ContributorCell.m */; };
 		3A86E1281AB9ED0100C5F4AB /* MH_CH_mhid_vc.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A86E1271AB9ED0100C5F4AB /* MH_CH_mhid_vc.m */; };
-		3AADF3451AB8D7E400B5CBBA /* DELETE---MHidViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AADF3441AB8D7E400B5CBBA /* DELETE---MHidViewController.m */; };
 		3AE250BE1AAE6089000AEEC0 /* MH_CH_SearchCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AE250BD1AAE6089000AEEC0 /* MH_CH_SearchCell.m */; };
 		3B0BAF7A4B6F44B04FF5BFB0 /* libPods-Tests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A4739EB423DFE5B54A3BA533 /* libPods-Tests.a */; };
 		6003F58E195388D20070C39A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58D195388D20070C39A /* Foundation.framework */; };
@@ -51,8 +50,6 @@
 		3A62CB351AB9FEA90071AAC7 /* MH_CH_Cells.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MH_CH_Cells.h; sourceTree = "<group>"; };
 		3A86E1261AB9ED0100C5F4AB /* MH_CH_mhid_vc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MH_CH_mhid_vc.h; sourceTree = "<group>"; };
 		3A86E1271AB9ED0100C5F4AB /* MH_CH_mhid_vc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MH_CH_mhid_vc.m; sourceTree = "<group>"; };
-		3AADF3431AB8D7E400B5CBBA /* DELETE---MHidViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "DELETE---MHidViewController.h"; sourceTree = "<group>"; };
-		3AADF3441AB8D7E400B5CBBA /* DELETE---MHidViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "DELETE---MHidViewController.m"; sourceTree = "<group>"; };
 		3AE250BC1AAE6089000AEEC0 /* MH_CH_SearchCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MH_CH_SearchCell.h; sourceTree = "<group>"; };
 		3AE250BD1AAE6089000AEEC0 /* MH_CH_SearchCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MH_CH_SearchCell.m; sourceTree = "<group>"; };
 		6003F58A195388D20070C39A /* CoreHound.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CoreHound.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -130,8 +127,6 @@
 			children = (
 				6003F5A5195388D20070C39A /* MHViewController.h */,
 				6003F5A6195388D20070C39A /* MHViewController.m */,
-				3AADF3431AB8D7E400B5CBBA /* DELETE---MHidViewController.h */,
-				3AADF3441AB8D7E400B5CBBA /* DELETE---MHidViewController.m */,
 				3A86E1261AB9ED0100C5F4AB /* MH_CH_mhid_vc.h */,
 				3A86E1271AB9ED0100C5F4AB /* MH_CH_mhid_vc.m */,
 			);
@@ -425,7 +420,6 @@
 				3A62CB311AB9F8B50071AAC7 /* MH_CH_PrimaryImgCell.m in Sources */,
 				3A62CB341AB9F9AD0071AAC7 /* MH_CH_ContributorCell.m in Sources */,
 				3AE250BE1AAE6089000AEEC0 /* MH_CH_SearchCell.m in Sources */,
-				3AADF3451AB8D7E400B5CBBA /* DELETE---MHidViewController.m in Sources */,
 				3A86E1281AB9ED0100C5F4AB /* MH_CH_mhid_vc.m in Sources */,
 				6003F59A195388D20070C39A /* main.m in Sources */,
 			);

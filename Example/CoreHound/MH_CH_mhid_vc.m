@@ -12,21 +12,32 @@
 
 @interface MH_CH_mhid_vc () <UITableViewDataSource, UITableViewDelegate>
 @property (strong, nonatomic) UIImage* primaryImage;
+@property (strong, nonatomic) NSArray* returnedContent;
+@property (weak, nonatomic) NSArray* returnedContentFirst;
+@property (weak, nonatomic) NSArray* returnedContentLast;
+@property (weak, nonatomic) NSArray* returnedContentSoloName;
+
 @end
 
 
 @implementation MH_CH_mhid_vc 
 #pragma mark - View Controller Events
 
+
 - (void)viewDidLoad {
     
     [super viewDidLoad];
+    
+    self.title = self.mhName;
     self.navigationController.navigationBar.hidden = NO;
+  
 
     [MHLoginSession loginWithUsername:@"db" password:@"p"].then(^() {
+        PMKPromise* promise = [MHObject fetchByMhid:self.currentMHid];
         
-        [MHObject fetchByMhid:self.currentMHid].then(^(MHObject* obj){
+        promise.then(^(MHObject* obj){
             
+//            self.returnedContent = obj.metadata;
             return [obj fetchPrimaryImage];
             
         }).thenInBackground(^(MHImage* primaryImage) {
@@ -38,11 +49,44 @@
             NSData* data= [NSData dataWithContentsOfURL:fetchedUrl];
             
             UIImage* img = [UIImage imageWithData:data];
+            
             self.primaryImage = img;
             
+
+        }).finally(^{
             
-        });;
+            [self.mhidTableView reloadData];
+            
+        });
+        
+        promise.then(^(MHMedia* obj){
+            
+            return [obj fetchKeyContributors];
+            
+        }).then(^(NSArray* contributor){
+            
+            self.returnedContent = contributor;
+            self.returnedContentFirst = contributor.firstObject;
+            self.returnedContentLast = contributor.lastObject;
+
+            NSLog(@" First return %@", self.returnedContent.description);
+            NSLog(@" Second Return %@", self.returnedContentFirst.description);
+            NSLog(@" Third Return %@", self.returnedContentLast.description);
+            
+            
+//            self.mhContributorNames = self.returnedContent.;
+            
+            [self.mhidTableView reloadData];
+            
+        });
+        
+        
     });
+
+
+
+
+
 }
 
 
@@ -77,7 +121,8 @@
 - (NSInteger)tableView:(UITableView *)tableView
  numberOfRowsInSection:(NSInteger)section {
  
-    return 2;
+    return self.returnedContent.count + 1;
+    
 
 }
 
@@ -99,7 +144,7 @@
         
         return mainImageCell;
         
-    } else if (indexPath.row >= 1) {
+    } else if (indexPath.row > 0) {
         
         MH_CH_ContributorCell* contributorCell = [tableView dequeueReusableCellWithIdentifier:@"Contributor_Cell" forIndexPath:indexPath];
         
@@ -121,7 +166,14 @@
             
         });
         
-        contributorCell.mhid_Contributor_Name.text = @"Contributor Name";
+        
+        contributorCell.mhid_Contributor_Name.text = self.returnedContentFirst.description;
+        contributorCell.mhid_Contributor_Role.text = self.returnedContentLast.description;
+        
+        UIView *bgColorView = [[UIView alloc] init];
+        bgColorView.backgroundColor = [UIColor colorWithRed:0.7f green:0.7f blue:0.7f alpha:0.4];
+        [contributorCell setSelectedBackgroundView:bgColorView];
+        
         return contributorCell;
         
     } else {

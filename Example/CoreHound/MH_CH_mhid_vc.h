@@ -21,5 +21,6 @@
 @property (nonatomic) NSArray* mhContentImages;
 @property (nonatomic) NSString* mhIDName;
 
+@property (weak, nonatomic) IBOutlet UITableView *mhidTableView;
 
 @end
