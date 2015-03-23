@@ -11,16 +11,20 @@
 
 
 @interface MH_CH_mhid_vc () <UITableViewDataSource, UITableViewDelegate>
+
 @property (strong, nonatomic) UIImage* primaryImage;
-@property (strong, nonatomic) NSArray* returnedContent;
-@property (weak, nonatomic) NSArray* returnedContentFirst;
-@property (weak, nonatomic) NSArray* returnedContentLast;
-@property (weak, nonatomic) NSArray* returnedContentSoloName;
+@property (strong, nonatomic) NSMutableArray* mediaMhidPrep;
+@property (strong, nonatomic) NSMutableArray* mediaNamePrep;
+@property (strong, nonatomic) NSMutableArray* mediaContributorsName;
+@property (strong, nonatomic) NSMutableArray* mediaContributorsRole;
+@property (strong, nonatomic) NSMutableArray* mediaContributorsImageURLs;
+
 
 @end
 
 
-@implementation MH_CH_mhid_vc 
+@implementation MH_CH_mhid_vc
+
 #pragma mark - View Controller Events
 
 
@@ -30,14 +34,19 @@
     
     self.title = self.mhName;
     self.navigationController.navigationBar.hidden = NO;
-  
+    self.mediaContributorsName = [[NSMutableArray alloc]init];
+    self.mediaContributorsRole = [[NSMutableArray alloc]init];
+    self.mediaContributorsImageURLs = [[NSMutableArray alloc]init];
+    self.mediaMhidPrep = [[NSMutableArray alloc]init];
+    self.mediaNamePrep = [[NSMutableArray alloc]init];
 
     [MHLoginSession loginWithUsername:@"db" password:@"p"].then(^() {
         PMKPromise* promise = [MHObject fetchByMhid:self.currentMHid];
         
         promise.then(^(MHObject* obj){
             
-//            self.returnedContent = obj.metadata;
+           
+            
             return [obj fetchPrimaryImage];
             
         }).thenInBackground(^(MHImage* primaryImage) {
@@ -53,36 +62,90 @@
             self.primaryImage = img;
             
 
-        }).finally(^{
-            
-            [self.mhidTableView reloadData];
-            
-        });
-        
-        promise.then(^(MHMedia* obj){
-            
-            return [obj fetchKeyContributors];
-            
-        }).then(^(NSArray* contributor){
-            
-            self.returnedContent = contributor;
-            self.returnedContentFirst = contributor.firstObject;
-            self.returnedContentLast = contributor.lastObject;
-
-            NSLog(@" First return %@", self.returnedContent.description);
-            NSLog(@" Second Return %@", self.returnedContentFirst.description);
-            NSLog(@" Third Return %@", self.returnedContentLast.description);
-            
-            
-//            self.mhContributorNames = self.returnedContent.;
+        }).then(^{
             
             [self.mhidTableView reloadData];
             
         });
         
         
-    });
+//        if (self.isMedia) {
+        
+            promise.then(^(MHMedia* obj){
+                
+                if ([obj isKindOfClass:MHContributor.class]) {
+                    
+                    return [(MHContributor*)obj fetchMedia];
+                    
+                } else {
+                    
+                    return [obj fetchContributors];
+                    
+                }
+                
+                
+            }).then(^(MHPagedResponse* response){
+                
+                for (MHRelationalPair* pair in response.content){
+                    
+                    MHObject* obj = pair.object;
+                    MHMetadata* meta = obj.metadata;
+                    NSString* mhid = meta.mhid;
+                    NSString* name = meta.name;
+                    
+                    [self.mediaNamePrep addObject:name];
+                    [self.mediaMhidPrep addObject:mhid];
+                    [self.mediaContributorsName addObject:name];
+                    
+                    
+                    MHContext* ctxt = pair.context;
+                    NSArray* relationships = ctxt.relationships;
+                    NSDictionary* contr = relationships.lastObject;
+                    NSString* contribution = [contr valueForKey:@"contribution"];
+                    if (contribution) {
+                        [self.mediaContributorsRole addObject:contribution];
+                    }
+                    else {
+                        [self.mediaContributorsRole addObject:[NSNull null]];
+                    }
+                    
+                    // TODO: call primary image through promise
+                    
 
+                    MHImage* metaImg = obj.primaryImage;
+                    MHImageData* metaImgOrig = metaImg.original;
+                    NSString* metaImgURL = metaImgOrig.url;
+                    [self.mediaContributorsImageURLs addObject:metaImgURL];
+                    
+                    
+                    
+                }
+                
+                [self.mhidTableView reloadData];
+                
+            });
+            
+//        } else {
+//            
+//            promise.then(^(MHContributor* obj){
+//                
+//                return [obj fetchMedia];
+//                
+//            }).then(^(NSArray* media){
+
+//                for (MHRelationalPair* pair in media) {
+//                    
+//                    
+//                    
+//                    
+//                }
+                
+                
+            });
+            
+//        }
+    
+//    });
 
 
 
@@ -110,6 +173,25 @@
 }
 
 
+- (void)prepareForSegue:(UIStoryboardSegue *)segue
+                 sender:(id)sender {
+    
+//    NSIndexPath* path = [self.mhidTableView indexPathForSelectedRow];
+    
+    MH_CH_mhid_vc* mhidVC = [segue destinationViewController];
+    NSIndexPath* path =  [self.mhidTableView indexPathForSelectedRow];
+  
+    [mhidVC setCurrentMHid  :self.mediaMhidPrep[path.row - 1]];
+    [mhidVC setMhName       :self.mediaNamePrep[path.row - 1]];
+
+}
+
+
+- (void)viewDidDisappear:(BOOL)animated {
+    
+//    [self.mediaMhidPrep removeAllObjects];
+    
+}
 #pragma mark - Table View Management
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -121,7 +203,7 @@
 - (NSInteger)tableView:(UITableView *)tableView
  numberOfRowsInSection:(NSInteger)section {
  
-    return self.returnedContent.count + 1;
+    return self.mediaContributorsName.count + 1;
     
 
 }
@@ -144,45 +226,49 @@
         
         return mainImageCell;
         
-    } else if (indexPath.row > 0) {
+    } else {
         
         MH_CH_ContributorCell* contributorCell = [tableView dequeueReusableCellWithIdentifier:@"Contributor_Cell" forIndexPath:indexPath];
         
         
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             
-            NSData* data= [NSData dataWithContentsOfURL:self.mhPrimaryImg];
+            NSURL* url = [NSURL URLWithString:self.mediaContributorsImageURLs[indexPath.row - 1]];
+            
+            NSData* data= [NSData dataWithContentsOfURL:url];
             
             UIImage* img = [UIImage imageWithData:data];
             
             dispatch_async(dispatch_get_main_queue(), ^{
                 
-                
-                // TODO: how to handle the array of promis returns of the individual MHID
-                contributorCell.mhid_Contributor_Image.image = img;
-                
+               contributorCell.mhid_Contributor_Image.image = img;
+               
+               
+
             });
             
             
         });
         
+        NSString* contrName = self.mediaContributorsName[indexPath.row - 1];
+        if ([contrName isEqual:[NSNull null]]) {
+            contrName = @" ";
+        }
+        contributorCell.mhid_Contributor_Name.text = contrName;
         
-        contributorCell.mhid_Contributor_Name.text = self.returnedContentFirst.description;
-        contributorCell.mhid_Contributor_Role.text = self.returnedContentLast.description;
+        NSString* contrRole = self.mediaContributorsRole[indexPath.row - 1];
+        if ([contrRole isEqual:[NSNull null]]) {
+            contrRole = @" ";
+        }
+        contributorCell.mhid_Contributor_Role.text = contrRole;
         
         UIView *bgColorView = [[UIView alloc] init];
         bgColorView.backgroundColor = [UIColor colorWithRed:0.7f green:0.7f blue:0.7f alpha:0.4];
         [contributorCell setSelectedBackgroundView:bgColorView];
         
+       
+        
         return contributorCell;
-        
-    } else {
-        
-        UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
-        
-        // Return an empty green cell indidcating an error occured
-        
-        return cell;
         
     }
     
