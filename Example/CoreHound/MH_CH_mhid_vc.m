@@ -25,20 +25,31 @@
 
 @implementation MH_CH_mhid_vc
 
-#pragma mark - View Controller Events
 
+#pragma mark - View Controller Events
 
 - (void)viewDidLoad {
     
     [super viewDidLoad];
     
     self.title = self.mhName;
+    
+    
     self.navigationController.navigationBar.hidden = NO;
+    
+    if (self.navigationController.viewControllers.count >= 24) {
+        self.mhidTableView.userInteractionEnabled = NO;
+    }
+    
+    
     self.mediaContributorsName = [[NSMutableArray alloc]init];
     self.mediaContributorsRole = [[NSMutableArray alloc]init];
     self.mediaContributorsImageURLs = [[NSMutableArray alloc]init];
     self.mediaMhidPrep = [[NSMutableArray alloc]init];
     self.mediaNamePrep = [[NSMutableArray alloc]init];
+    
+    
+    
 
     [MHLoginSession loginWithUsername:@"db" password:@"p"].then(^() {
         PMKPromise* promise = [MHObject fetchByMhid:self.currentMHid];
@@ -69,8 +80,6 @@
         });
         
         
-//        if (self.isMedia) {
-        
             promise.then(^(MHMedia* obj){
                 
                 if ([obj isKindOfClass:MHContributor.class]) {
@@ -86,6 +95,9 @@
                 
             }).then(^(MHPagedResponse* response){
                 
+                NSMutableArray* promiseArray = [NSMutableArray array];
+                
+                NSInteger i = 0;
                 for (MHRelationalPair* pair in response.content){
                     
                     MHObject* obj = pair.object;
@@ -93,15 +105,18 @@
                     NSString* mhid = meta.mhid;
                     NSString* name = meta.name;
                     
+                    [self.mediaContributorsName addObject:name];
+                    [self.mediaContributorsImageURLs addObject:[NSNull null]];
+                    
                     [self.mediaNamePrep addObject:name];
                     [self.mediaMhidPrep addObject:mhid];
-                    [self.mediaContributorsName addObject:name];
                     
                     
                     MHContext* ctxt = pair.context;
                     NSArray* relationships = ctxt.relationships;
                     NSDictionary* contr = relationships.lastObject;
                     NSString* contribution = [contr valueForKey:@"contribution"];
+                    
                     if (contribution) {
                         [self.mediaContributorsRole addObject:contribution];
                     }
@@ -109,46 +124,34 @@
                         [self.mediaContributorsRole addObject:[NSNull null]];
                     }
                     
-                    // TODO: call primary image through promise
-                    
-
-                    MHImage* metaImg = obj.primaryImage;
-                    MHImageData* metaImgOrig = metaImg.original;
-                    NSString* metaImgURL = metaImgOrig.url;
-                    [self.mediaContributorsImageURLs addObject:metaImgURL];
                     
                     
+                    PMKPromise* p = [obj fetchPrimaryImage].then(^(MHImage* metaImg) {
                     
+                        
+                        MHImageData* metaImgOrig = metaImg.original;
+                        NSString* metaImgURL = metaImgOrig.url;
+                        self.mediaContributorsImageURLs[i] = metaImgURL;
+                        
+                    });
+                    
+                    
+                    // Adding to the array for when the promise of fetching the image data set info finishes
+                    [promiseArray addObject:p];
+                    
+                    i++;
                 }
                 
-                [self.mhidTableView reloadData];
                 
-            });
-            
-//        } else {
-//            
-//            promise.then(^(MHContributor* obj){
-//                
-//                return [obj fetchMedia];
-//                
-//            }).then(^(NSArray* media){
-
-//                for (MHRelationalPair* pair in media) {
-//                    
-//                    
-//                    
-//                    
-//                }
+                [PMKPromise when:promiseArray].then(^{
+                    [self.mhidTableView reloadData];
+                });
                 
                 
             });
-            
-//        }
-    
-//    });
+        
 
-
-
+    });
 
 }
 
@@ -159,7 +162,8 @@
     
 }
 
--(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+- (CGFloat)   tableView:(UITableView *)tableView
+heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     if (indexPath.row == 0) {
         
@@ -176,8 +180,6 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue
                  sender:(id)sender {
     
-//    NSIndexPath* path = [self.mhidTableView indexPathForSelectedRow];
-    
     MH_CH_mhid_vc* mhidVC = [segue destinationViewController];
     NSIndexPath* path =  [self.mhidTableView indexPathForSelectedRow];
   
@@ -187,11 +189,12 @@
 }
 
 
-- (void)viewDidDisappear:(BOOL)animated {
+-(void)didReceiveMemoryWarning {
     
-//    [self.mediaMhidPrep removeAllObjects];
+    self.mhidTableView.userInteractionEnabled = NO;
     
 }
+
 #pragma mark - Table View Management
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -212,6 +215,8 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView
          cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
+
+    
     
     if (indexPath.row == 0) {
         
@@ -230,25 +235,29 @@
         
         MH_CH_ContributorCell* contributorCell = [tableView dequeueReusableCellWithIdentifier:@"Contributor_Cell" forIndexPath:indexPath];
         
-        
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-            
-            NSURL* url = [NSURL URLWithString:self.mediaContributorsImageURLs[indexPath.row - 1]];
-            
-            NSData* data= [NSData dataWithContentsOfURL:url];
-            
-            UIImage* img = [UIImage imageWithData:data];
-            
-            dispatch_async(dispatch_get_main_queue(), ^{
+   
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
                 
-               contributorCell.mhid_Contributor_Image.image = img;
-               
-               
-
+                
+                
+                NSURL* url = [NSURL URLWithString:self.mediaContributorsImageURLs[indexPath.row - 1]];
+                
+                NSData* data= [NSData dataWithContentsOfURL:url];
+                
+                UIImage* img = [UIImage imageWithData:data];
+                
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    
+                    if ([contributorCell.mhid_Contributor_Name.text isEqualToString:self.mediaContributorsName[indexPath.row - 1]]) {
+                        
+                        contributorCell.mhid_Contributor_Image.image = img;
+                     
+                    }
+                    
+                });
+                
             });
-            
-            
-        });
+        
         
         NSString* contrName = self.mediaContributorsName[indexPath.row - 1];
         if ([contrName isEqual:[NSNull null]]) {
@@ -266,13 +275,26 @@
         bgColorView.backgroundColor = [UIColor colorWithRed:0.7f green:0.7f blue:0.7f alpha:0.4];
         [contributorCell setSelectedBackgroundView:bgColorView];
         
-       
-        
         return contributorCell;
         
     }
     
     
 }
+
+#pragma mark - Navigation
+
+
+
+
+- (IBAction)searchBarButtonPressed:(UIBarButtonItem *)sender {
+
+    [self.navigationController popToRootViewControllerAnimated:YES]; 
+ 
+    
+    
+}
+
+
 
 @end

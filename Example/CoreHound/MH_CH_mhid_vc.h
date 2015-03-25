@@ -14,12 +14,8 @@
 
 
 @property (nonatomic) NSString* currentMHid;
-@property (nonatomic) NSArray* searchIDResult;
-@property (nonatomic) NSURL* mhPrimaryImg;
 @property (nonatomic) NSString* mhName;
-@property (nonatomic) NSArray* mhContributorNames;
-@property (nonatomic) NSArray* mhContentImages;
-@property (nonatomic) NSString* mhIDName;
+
 
 @property (weak, nonatomic) IBOutlet UITableView *mhidTableView;
 

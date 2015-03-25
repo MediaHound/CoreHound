@@ -11,6 +11,7 @@
 		3A62CB311AB9F8B50071AAC7 /* MH_CH_PrimaryImgCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A62CB301AB9F8B50071AAC7 /* MH_CH_PrimaryImgCell.m */; };
 		3A62CB341AB9F9AD0071AAC7 /* MH_CH_ContributorCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A62CB331AB9F9AD0071AAC7 /* MH_CH_ContributorCell.m */; };
 		3A86E1281AB9ED0100C5F4AB /* MH_CH_mhid_vc.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A86E1271AB9ED0100C5F4AB /* MH_CH_mhid_vc.m */; };
+		3AD64BF61AC08418009B7DA2 /* MH_CH_store.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AD64BF51AC08418009B7DA2 /* MH_CH_store.m */; };
 		3AE250BE1AAE6089000AEEC0 /* MH_CH_SearchCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AE250BD1AAE6089000AEEC0 /* MH_CH_SearchCell.m */; };
 		3B0BAF7A4B6F44B04FF5BFB0 /* libPods-Tests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A4739EB423DFE5B54A3BA533 /* libPods-Tests.a */; };
 		6003F58E195388D20070C39A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58D195388D20070C39A /* Foundation.framework */; };
@@ -50,6 +51,8 @@
 		3A62CB351AB9FEA90071AAC7 /* MH_CH_Cells.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MH_CH_Cells.h; sourceTree = "<group>"; };
 		3A86E1261AB9ED0100C5F4AB /* MH_CH_mhid_vc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MH_CH_mhid_vc.h; sourceTree = "<group>"; };
 		3A86E1271AB9ED0100C5F4AB /* MH_CH_mhid_vc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MH_CH_mhid_vc.m; sourceTree = "<group>"; };
+		3AD64BF41AC08418009B7DA2 /* MH_CH_store.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MH_CH_store.h; sourceTree = "<group>"; };
+		3AD64BF51AC08418009B7DA2 /* MH_CH_store.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MH_CH_store.m; sourceTree = "<group>"; };
 		3AE250BC1AAE6089000AEEC0 /* MH_CH_SearchCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MH_CH_SearchCell.h; sourceTree = "<group>"; };
 		3AE250BD1AAE6089000AEEC0 /* MH_CH_SearchCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MH_CH_SearchCell.m; sourceTree = "<group>"; };
 		6003F58A195388D20070C39A /* CoreHound.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CoreHound.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -151,6 +154,15 @@
 			name = Delegates;
 			sourceTree = "<group>";
 		};
+		3AD64BF31AC083CD009B7DA2 /* Store */ = {
+			isa = PBXGroup;
+			children = (
+				3AD64BF41AC08418009B7DA2 /* MH_CH_store.h */,
+				3AD64BF51AC08418009B7DA2 /* MH_CH_store.m */,
+			);
+			name = Store;
+			sourceTree = "<group>";
+		};
 		6003F581195388D10070C39A = {
 			isa = PBXGroup;
 			children = (
@@ -188,6 +200,7 @@
 		6003F593195388D20070C39A /* CoreHound */ = {
 			isa = PBXGroup;
 			children = (
+				3AD64BF31AC083CD009B7DA2 /* Store */,
 				3A62CB2E1AB9F73D0071AAC7 /* Delegates */,
 				3A62CB291AB9F6A30071AAC7 /* Cells */,
 				3A62CB2C1AB9F7180071AAC7 /* Views */,
@@ -418,6 +431,7 @@
 				6003F59E195388D20070C39A /* MHAppDelegate.m in Sources */,
 				6003F5A7195388D20070C39A /* MHViewController.m in Sources */,
 				3A62CB311AB9F8B50071AAC7 /* MH_CH_PrimaryImgCell.m in Sources */,
+				3AD64BF61AC08418009B7DA2 /* MH_CH_store.m in Sources */,
 				3A62CB341AB9F9AD0071AAC7 /* MH_CH_ContributorCell.m in Sources */,
 				3AE250BE1AAE6089000AEEC0 /* MH_CH_SearchCell.m in Sources */,
 				3A86E1281AB9ED0100C5F4AB /* MH_CH_mhid_vc.m in Sources */,

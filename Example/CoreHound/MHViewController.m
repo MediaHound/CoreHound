@@ -38,11 +38,34 @@
 {
     [super viewDidLoad];
     
-    self.navigationController.navigationBar.hidden = YES;
+    self.navigationController.navigationBar.hidden = NO;
+    
+    
+//     UIViewController *root = self.navigationController.viewControllers[0];
   
     self.searchBar.placeholder = @"Search the Graph";
     self.additionalSearchPages = NO;
 
+    
+    if ([[UIScreen mainScreen]bounds].size.height <= 498) {
+        
+        self.title = @"MediaHound";
+        self.mediaHoundLogo.hidden = YES;
+        self.mediaHoundTitle.hidden = YES;
+        self.searchLiteLabel.hidden = YES;
+        
+    } else {
+        
+        self.title = @"MediaHound Search Lite";
+        self.mediaHoundLogo.hidden = NO;
+        self.mediaHoundTitle.hidden = NO;
+        self.searchLiteLabel.hidden = NO;
+        
+        
+    }
+        
+    
+    
     [self.searchBar becomeFirstResponder];
     
 }
@@ -54,11 +77,6 @@
 }
 
 
--(void)viewWillAppear:(BOOL)animated {
-    
-    self.navigationController.navigationBar.hidden = YES;
-    
-}
 
 #pragma mark - UITableView Management
 
@@ -84,7 +102,6 @@
     
     NSString* lastCellIdentifier = @"Load_More_Cell";
     NSString* searchCellIdentifier = @"Main_Search_Cell";
-//    UIView *bgColorView = [[UIView alloc] init];
     
     short int lastCellRow = self.allSearchResults.count;
     
@@ -134,7 +151,7 @@
         cell.searchedName.text = result.name;
         cell.searchedImg.image = nil;
         
-//        Cell selection color
+
         UIView *bgColorView = [[UIView alloc] init];
         bgColorView.backgroundColor = [UIColor colorWithRed:0.7f green:0.7f blue:0.7f alpha:0.4];
         [cell setSelectedBackgroundView:bgColorView];
@@ -153,6 +170,7 @@
 
 
 
+
 - (void)tableView:(UITableView *)tableView
 didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -160,6 +178,15 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath
         short int lastCellRow = self.allSearchResults.count;
     
         if (indexPath.row == lastCellRow) {
+            
+            
+          /*
+             
+             
+             Since the Search results come back as paged reponses use the fetchNext method to retreive the next set of results from the search. You will receive another array of AutoCompleteResults.
+           
+             
+             */
             
             [self.response fetchNext].then(^(MHPagedSearchResponse* responded) {
 
@@ -180,7 +207,8 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath
     
     MH_CH_mhid_vc* mhidVC = [segue destinationViewController];
     NSIndexPath* path =  [self.TableView indexPathForSelectedRow];
-    AutocompleteResult* responsePath = self.response.content[path.row];
+    AutocompleteResult* responsePath = self.allSearchResults[path.row];
+
     
     [mhidVC setCurrentMHid  :responsePath.mhid];
     [mhidVC setMhName       :responsePath.name];
@@ -203,7 +231,8 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath
         /*
          
          Use the PromiseKit built into MHSearch to take in the entered text across all scopes.
-         When the  results return, they will come in Paged in sets of 12.
+         When the  results return, they will come in Paged in sets of 12 (result page set number could change in the future).
+
          
          */
         
@@ -239,8 +268,7 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 - (void)searchBarTextDidEndEditing:(UISearchBar *)searchBar
 {
  
-//    if (self.searchBar.text.length == 0)
-    // TODO: crete separate function to hamdle whitespaces
+       // TODO: crete separate function to hamdle whitespaces
     
     if ([self.searchBar.text isEqual: @""]) {
         

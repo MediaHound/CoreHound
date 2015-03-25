@@ -12,6 +12,10 @@
 
 @property (weak, nonatomic) IBOutlet UISearchBar* MHSDKSearch;
 
+@property (weak, nonatomic) IBOutlet UIImageView *mediaHoundLogo;
 
+@property (weak, nonatomic) IBOutlet UIImageView *mediaHoundTitle;
+
+@property (weak, nonatomic) IBOutlet UILabel *searchLiteLabel;
 
 @end
