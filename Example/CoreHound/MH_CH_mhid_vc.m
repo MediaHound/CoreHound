@@ -34,45 +34,62 @@
     
     self.title = self.mhName;
     
-    
-    self.navigationController.navigationBar.hidden = NO;
-    
     if (self.navigationController.viewControllers.count >= 24) {
         self.mhidTableView.userInteractionEnabled = NO;
     }
     
-    
-    self.mediaContributorsName = [[NSMutableArray alloc]init];
-    self.mediaContributorsRole = [[NSMutableArray alloc]init];
+    self.mediaContributorsName      = [[NSMutableArray alloc]init];
+    self.mediaContributorsRole      = [[NSMutableArray alloc]init];
     self.mediaContributorsImageURLs = [[NSMutableArray alloc]init];
-    self.mediaMhidPrep = [[NSMutableArray alloc]init];
-    self.mediaNamePrep = [[NSMutableArray alloc]init];
+    self.mediaMhidPrep              = [[NSMutableArray alloc]init];
+    self.mediaNamePrep              = [[NSMutableArray alloc]init];
     
     
+    /*
+     
+     
+     The PromiseKit pod is one if the dependencies of CoreHound. Use promises to request the MHObjects from the entertainment graph. Once the mhid is acquired from the search, then use the 'fetchByMhid' method to get the specific MHObject. MHObjects are cached, so a request for an already fetched mhid will not require a network request. See Documentation for for the properties via JSON for an MHObject.
+     
+     
+     */
     
-
+// TODO: handle login session scenarios, we don't want to distribute with login credentials present
+    
     [MHLoginSession loginWithUsername:@"db" password:@"p"].then(^() {
         PMKPromise* promise = [MHObject fetchByMhid:self.currentMHid];
         
         promise.then(^(MHObject* obj){
             
-           
-            
+         /**
+             * The primary image property may be unrealized. You should not access it directly.
+             * You need to call (fetchPrimaryImage) to ensure it has been loaded.
+             * This property is KVO compliant.
+             */
             return [obj fetchPrimaryImage];
+            
+            /*
+             
+                Update UI elements on the main thread. Use (.thenInBackground) method or a dispatch queue to forcibly download the data on a background thread.
+             
+                */
+            
             
         }).thenInBackground(^(MHImage* primaryImage) {
             
             NSString* url = primaryImage.original.url;
-            // Download image at `url`.
             NSURL* fetchedUrl = [[NSURL alloc]initWithString:url];
-            
             NSData* data= [NSData dataWithContentsOfURL:fetchedUrl];
-            
             UIImage* img = [UIImage imageWithData:data];
             
             self.primaryImage = img;
+        
             
-
+            /*
+             
+                Use a standard (.then) method to run the block back on the main thread.
+             
+                */
+        
         }).then(^{
             
             [self.mhidTableView reloadData];
@@ -96,6 +113,14 @@
             }).then(^(MHPagedResponse* response){
                 
                 NSMutableArray* promiseArray = [NSMutableArray array];
+                
+                /*
+                 
+                     The paged response that returns from fetching from the entertainment graph contains sets of Relational pairs. In this example the response is looped through to extract individual properties which are then added to arrays declared in the header. The arrays are being used for the index of the Table View Data Source. Since it is possible for the parameter to comback as nil, a null object gets added in its place.
+                 
+                     Each relational pair contains an object and a context.
+                 
+                     */
                 
                 NSInteger i = 0;
                 for (MHRelationalPair* pair in response.content){
@@ -126,6 +151,12 @@
                     
                     
                     
+                    /*
+                     
+                            Fetching the primary image inside of a promise is preferred instead of accessing the URL directly in the parsing of the content. This is due to variances in image sizes and network conditions.
+                     
+                         */
+                    
                     PMKPromise* p = [obj fetchPrimaryImage].then(^(MHImage* metaImg) {
                     
                         
@@ -136,12 +167,23 @@
                     });
                     
                     
-                    // Adding to the array for when the promise of fetching the image data set info finishes
+                    /*
+                            
+                            The promise then gets added to an array of promises for when the fetching the image data finishes to ensure that the reloading of table data has complete and ordered information.
+                    
+                          */
+                    
                     [promiseArray addObject:p];
                     
                     i++;
                 }
                 
+                
+                /*
+                 
+                     You can use a 'Promise when:' to hold off on running the next block until after all of the data has been collected.
+                 
+                     */
                 
                 [PMKPromise when:promiseArray].then(^{
                     [self.mhidTableView reloadData];
@@ -155,12 +197,6 @@
 
 }
 
-
-- (void)viewWillAppear:(BOOL)animated {
-    
-    self.navigationController.navigationBar.hidden = NO;
-    
-}
 
 - (CGFloat)   tableView:(UITableView *)tableView
 heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -236,9 +272,10 @@ heightForRowAtIndexPath:(NSIndexPath *)indexPath {
         MH_CH_ContributorCell* contributorCell = [tableView dequeueReusableCellWithIdentifier:@"Contributor_Cell" forIndexPath:indexPath];
         
    
+        contributorCell.mhid_Contributor_Image.image = nil;
+        
+        
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-                
-                
                 
                 NSURL* url = [NSURL URLWithString:self.mediaContributorsImageURLs[indexPath.row - 1]];
                 
@@ -246,30 +283,31 @@ heightForRowAtIndexPath:(NSIndexPath *)indexPath {
                 
                 UIImage* img = [UIImage imageWithData:data];
                 
-                dispatch_async(dispatch_get_main_queue(), ^{
+                if ([contributorCell.mhid_Contributor_Name.text isEqualToString:self.mediaContributorsName[indexPath.row - 1]]) {
                     
-                    if ([contributorCell.mhid_Contributor_Name.text isEqualToString:self.mediaContributorsName[indexPath.row - 1]]) {
+                    dispatch_async(dispatch_get_main_queue(), ^{
                         
                         contributorCell.mhid_Contributor_Image.image = img;
-                     
-                    }
+                        
+                    });
                     
-                });
-                
+                }
             });
         
         
-        NSString* contrName = self.mediaContributorsName[indexPath.row - 1];
-        if ([contrName isEqual:[NSNull null]]) {
-            contrName = @" ";
+        NSString* contributorName = self.mediaContributorsName[indexPath.row - 1];
+        if ([contributorName isEqual:[NSNull null]]) {
+            contributorName = @" ";
         }
-        contributorCell.mhid_Contributor_Name.text = contrName;
+        contributorCell.mhid_Contributor_Name.text = contributorName;
         
-        NSString* contrRole = self.mediaContributorsRole[indexPath.row - 1];
-        if ([contrRole isEqual:[NSNull null]]) {
-            contrRole = @" ";
+        
+        NSString* contributorRole = self.mediaContributorsRole[indexPath.row - 1];
+        if ([contributorRole isEqual:[NSNull null]]) {
+            contributorRole = @" ";
         }
-        contributorCell.mhid_Contributor_Role.text = contrRole;
+        contributorCell.mhid_Contributor_Role.text = contributorRole;
+        
         
         UIView *bgColorView = [[UIView alloc] init];
         bgColorView.backgroundColor = [UIColor colorWithRed:0.7f green:0.7f blue:0.7f alpha:0.4];
@@ -282,19 +320,13 @@ heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     
 }
 
+
 #pragma mark - Navigation
-
-
-
 
 - (IBAction)searchBarButtonPressed:(UIBarButtonItem *)sender {
 
     [self.navigationController popToRootViewControllerAnimated:YES]; 
  
-    
-    
 }
-
-
 
 @end

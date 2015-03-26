@@ -31,11 +31,11 @@
                                 <rect key="frame" x="0.0" y="193" width="320" height="375"/>
                                 <subviews>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="64" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="BEu-uA-1Iu">
-                                        <rect key="frame" x="0.0" y="2" width="320" height="388"/>
+                                        <rect key="frame" x="0.0" y="2" width="320" height="373"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="320" id="CxF-KV-0Pu"/>
-                                            <constraint firstAttribute="height" constant="388" id="ZWV-Qh-0vm"/>
+                                            <constraint firstAttribute="height" constant="373" id="ZWV-Qh-0vm"/>
                                         </constraints>
                                         <color key="separatorColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <prototypes>
@@ -112,6 +112,7 @@
                                     <constraint firstAttribute="height" constant="375" id="0rE-I6-Xpn"/>
                                     <constraint firstItem="BEu-uA-1Iu" firstAttribute="top" secondItem="OEd-jx-Pgg" secondAttribute="top" constant="2" id="EQ3-LS-WXV"/>
                                     <constraint firstAttribute="width" constant="320" id="UZ7-cm-3oY"/>
+                                    <constraint firstAttribute="bottom" secondItem="BEu-uA-1Iu" secondAttribute="bottom" id="go4-Vn-5ND"/>
                                     <constraint firstItem="BEu-uA-1Iu" firstAttribute="leading" secondItem="OEd-jx-Pgg" secondAttribute="leading" id="kIo-mY-qQk"/>
                                 </constraints>
                             </view>
@@ -188,7 +189,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="64" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="EOD-1x-cvO">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="64" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="EOD-1x-cvO">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
                                 <color key="backgroundColor" red="0.28236183524131775" green="0.6137843132019043" blue="0.96104425191879272" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="separatorColor" red="0.28236183524131775" green="0.6137843132019043" blue="0.96104425191879272" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -276,6 +277,12 @@
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" red="0.34258103370666504" green="0.44450545310974121" blue="0.91332954168319702" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="EOD-1x-cvO" secondAttribute="trailing" id="AIr-2J-s5h"/>
+                            <constraint firstItem="EOD-1x-cvO" firstAttribute="leading" secondItem="Oqp-kr-rjb" secondAttribute="leading" id="cdA-F2-EIG"/>
+                            <constraint firstItem="L7u-p3-PE8" firstAttribute="top" secondItem="EOD-1x-cvO" secondAttribute="bottom" id="rJu-oY-FTW"/>
+                            <constraint firstItem="EOD-1x-cvO" firstAttribute="top" secondItem="KeC-iI-5Gs" secondAttribute="bottom" id="wre-vK-R8p"/>
+                        </constraints>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
                     <navigationItem key="navigationItem" id="nIt-YV-lIZ">
