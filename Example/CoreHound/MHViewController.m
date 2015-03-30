@@ -98,7 +98,7 @@
     NSString* lastCell = @"Load_More_Cell";
     NSString* searchResultCell = @"Main_Search_Cell";
     
-    short int lastCellRow = self.allSearchResults.count;
+    NSUInteger lastCellRow = self.allSearchResults.count;
     
     
     if (self.additionalSearchPages && indexPath.row == lastCellRow)
@@ -213,10 +213,8 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 
     /*
      
-     One of the primary reasons for searching is to discover a particular mhid. The AutoCompleteResult class will deliver the mhid that can then be fetched independently as seen in the MediaHound-CoreHound-mhid-ViewController (MH_CH_mhid_vc). Searching for result is a separate process then directly getting information from the entertainment graph. Queries into the graph are accomplished through specific mhid's.
-     
-     TODO: verify that the assertion is correct
-     
+     One of the primary reasons for searching is to discover a particular mhid. The AutoCompleteResult class will deliver the mhid that can then be fetched independently as seen in the MediaHound-CoreHound-mhid-ViewController (MH_CH_mhid_vc). Searching for results is a separate process than directly getting information from the entertainment graph. Queries into the graph are accomplished through fetching by mhid.
+    
      */
      
     [mhidVC setCurrentMHid  :responsePath.mhid];

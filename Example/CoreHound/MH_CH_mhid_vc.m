@@ -8,6 +8,7 @@
 
 #import "MH_CH_mhid_vc.h"
 #import "MH_CH_Cells.h"
+#import <QuartzCore/QuartzCore.h>
 
 
 @interface MH_CH_mhid_vc () <UITableViewDataSource, UITableViewDelegate>
@@ -292,6 +293,9 @@ heightForRowAtIndexPath:(NSIndexPath *)indexPath {
         
         mainImageCell.mhid_Primary_Image.image = self.primaryImage;
         
+        mainImageCell.mhid_Primary_Image.layer.cornerRadius = 10.0f;
+        mainImageCell.mhid_Primary_Image.layer.masksToBounds = YES;
+        
         [mainImageCell.mhid_Primary_Image.layer addAnimation:cellAnimate forKey:@"animateOpacity"];
         
         
@@ -342,20 +346,26 @@ heightForRowAtIndexPath:(NSIndexPath *)indexPath {
                         if (self.isMedia) {
                          //
                             //TODO: handle animation redrawing which scales it to square instead of a rectangle
-                            UIGraphicsBeginImageContextWithOptions(contributorCell.mhid_Contributor_Image.bounds.size, NO, 8.0);
-                            [[UIBezierPath bezierPathWithRoundedRect:contributorCell.mhid_Contributor_Image.bounds cornerRadius:4.0] addClip];
+//                            UIGraphicsBeginImageContextWithOptions(contributorCell.mhid_Contributor_Image.bounds.size, NO, 8.0);
+//                            [[UIBezierPath bezierPathWithRoundedRect:contributorCell.mhid_Contributor_Image.bounds cornerRadius:4.0] addClip];
+
+                            contributorCell.mhid_Contributor_Image.layer.cornerRadius = 4.0f;
+                            contributorCell.mhid_Contributor_Image.layer.masksToBounds = YES;
                             
                             
                         } else {
                             
                             //TODO: handle animation redrawing which scales it to square instead of a rectangle
-                            UIGraphicsBeginImageContextWithOptions(contributorCell.mhid_Contributor_Image.bounds.size, NO, 6.0);
-                            [[UIBezierPath bezierPathWithRoundedRect:contributorCell.mhid_Contributor_Image.bounds cornerRadius:40.0] addClip];
+//                            UIGraphicsBeginImageContextWithOptions(contributorCell.mhid_Contributor_Image.bounds.size, NO, 6.0);
+//                            [[UIBezierPath bezierPathWithRoundedRect:contributorCell.mhid_Contributor_Image.bounds cornerRadius:40.0] addClip];
+                      
+                            contributorCell.mhid_Contributor_Image.layer.cornerRadius = 25.0f;
+                            contributorCell.mhid_Contributor_Image.layer.masksToBounds = YES;
                         }
                         
-                        [img drawInRect:contributorCell.mhid_Contributor_Image.bounds];
-                        contributorCell.mhid_Contributor_Image.image = UIGraphicsGetImageFromCurrentImageContext();
-                        UIGraphicsEndImageContext();
+//                        [img drawInRect:contributorCell.mhid_Contributor_Image.bounds];
+//                        contributorCell.mhid_Contributor_Image.image = UIGraphicsGetImageFromCurrentImageContext();
+//                        UIGraphicsEndImageContext();
                         
                         [contributorCell.mhid_Contributor_Image.layer addAnimation:cellAnimate forKey:@"animateOpacity"];
                         
