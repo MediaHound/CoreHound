@@ -19,11 +19,18 @@
 @property (strong, nonatomic) NSMutableArray* mediaContributorsRole;
 @property (strong, nonatomic) NSMutableArray* mediaContributorsImageURLs;
 
+@property BOOL isMedia;
+
+
+
+
+
 
 @end
 
 
 @implementation MH_CH_mhid_vc
+
 
 
 #pragma mark - View Controller Events
@@ -43,6 +50,10 @@
     self.mediaContributorsImageURLs = [[NSMutableArray alloc]init];
     self.mediaMhidPrep              = [[NSMutableArray alloc]init];
     self.mediaNamePrep              = [[NSMutableArray alloc]init];
+    
+    
+    
+    self.isMedia = NO;
     
     
     /*
@@ -101,10 +112,12 @@
                 
                 if ([obj isKindOfClass:MHContributor.class]) {
                     
+                    self.isMedia = YES;
                     return [(MHContributor*)obj fetchMedia];
                     
                 } else {
                     
+                    self.isMedia = NO;
                     return [obj fetchContributors];
                     
                 }
@@ -186,7 +199,9 @@
                      */
                 
                 [PMKPromise when:promiseArray].then(^{
-                    [self.mhidTableView reloadData];
+                    
+                [self.mhidTableView reloadData];
+                    
                 });
                 
                 
@@ -247,11 +262,28 @@ heightForRowAtIndexPath:(NSIndexPath *)indexPath {
 
 }
 
+ // TODO: decide to keep or loose animation
+- (CABasicAnimation*)cellImageAnimation
+{
+    CABasicAnimation* cellAnimation = [CABasicAnimation animationWithKeyPath:@"opacity"];
+    cellAnimation.duration = 0.05;
+    cellAnimation.toValue = [NSNumber numberWithFloat:1.0];
+    cellAnimation.fromValue = [NSNumber numberWithFloat:0.01];
+    return cellAnimation;
+}
+
 
 - (UITableViewCell *)tableView:(UITableView *)tableView
          cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+  
     
-
+    
+    // TODO: decide to keep or loose animation
+    CABasicAnimation* cellAnimate = [self cellImageAnimation];
+    
+    
+    
+    
     
     
     if (indexPath.row == 0) {
@@ -259,6 +291,22 @@ heightForRowAtIndexPath:(NSIndexPath *)indexPath {
         MH_CH_PrimaryImgCell* mainImageCell = [tableView dequeueReusableCellWithIdentifier:@"Primary_Image_Cell"];
         
         mainImageCell.mhid_Primary_Image.image = self.primaryImage;
+        
+        [mainImageCell.mhid_Primary_Image.layer addAnimation:cellAnimate forKey:@"animateOpacity"];
+        
+        
+        
+        
+        
+        /*
+        // TODO: decide to keep or loose animation
+        UIGraphicsBeginImageContextWithOptions(mainImageCell.mhid_Primary_Image.bounds.size, NO, 4.0);
+        [[UIBezierPath bezierPathWithRoundedRect:mainImageCell.mhid_Primary_Image.bounds cornerRadius:8.0] addClip];
+        [self.primaryImage drawInRect:mainImageCell.mhid_Primary_Image.bounds];
+        mainImageCell.mhid_Primary_Image.image = UIGraphicsGetImageFromCurrentImageContext();
+        UIGraphicsEndImageContext();
+        */
+        
         
         
         UIView *bgColorView = [[UIView alloc] init];
@@ -288,6 +336,28 @@ heightForRowAtIndexPath:(NSIndexPath *)indexPath {
                     dispatch_async(dispatch_get_main_queue(), ^{
                         
                         contributorCell.mhid_Contributor_Image.image = img;
+                        
+                        
+                        
+                        if (self.isMedia) {
+                         //
+                            //TODO: handle animation redrawing which scales it to square instead of a rectangle
+                            UIGraphicsBeginImageContextWithOptions(contributorCell.mhid_Contributor_Image.bounds.size, NO, 8.0);
+                            [[UIBezierPath bezierPathWithRoundedRect:contributorCell.mhid_Contributor_Image.bounds cornerRadius:4.0] addClip];
+                            
+                            
+                        } else {
+                            
+                            //TODO: handle animation redrawing which scales it to square instead of a rectangle
+                            UIGraphicsBeginImageContextWithOptions(contributorCell.mhid_Contributor_Image.bounds.size, NO, 6.0);
+                            [[UIBezierPath bezierPathWithRoundedRect:contributorCell.mhid_Contributor_Image.bounds cornerRadius:40.0] addClip];
+                        }
+                        
+                        [img drawInRect:contributorCell.mhid_Contributor_Image.bounds];
+                        contributorCell.mhid_Contributor_Image.image = UIGraphicsGetImageFromCurrentImageContext();
+                        UIGraphicsEndImageContext();
+                        
+                        [contributorCell.mhid_Contributor_Image.layer addAnimation:cellAnimate forKey:@"animateOpacity"];
                         
                     });
                     

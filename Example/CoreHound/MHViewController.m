@@ -12,6 +12,7 @@
 #import "MH_CH_mhid_vc.h"
 
 
+
 @interface MHViewController () <UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
 
 
@@ -159,7 +160,7 @@
         
 
         UIView *bgColorView = [[UIView alloc] init];
-        bgColorView.backgroundColor = [UIColor colorWithRed:0.7f green:0.7f blue:0.7f alpha:0.4];
+        bgColorView.backgroundColor = [UIColor colorWithRed:0.84f green:0.84f blue:0.84f alpha:0.4];
         [cell setSelectedBackgroundView:bgColorView];
         
         
@@ -172,10 +173,7 @@
 
 
 
-#pragma mark - Navigation
-
-
-
+#pragma mark - TableView Management
 
 - (void)tableView:(UITableView *)tableView
 didSelectRowAtIndexPath:(NSIndexPath *)indexPath

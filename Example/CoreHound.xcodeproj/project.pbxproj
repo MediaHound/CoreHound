@@ -151,6 +151,13 @@
 			name = Delegates;
 			sourceTree = "<group>";
 		};
+		3AAFC1DF1AC60BB40035E4A2 /* Animations */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Animations;
+			sourceTree = "<group>";
+		};
 		6003F581195388D10070C39A = {
 			isa = PBXGroup;
 			children = (
@@ -188,6 +195,7 @@
 		6003F593195388D20070C39A /* CoreHound */ = {
 			isa = PBXGroup;
 			children = (
+				3AAFC1DF1AC60BB40035E4A2 /* Animations */,
 				3A62CB2E1AB9F73D0071AAC7 /* Delegates */,
 				3A62CB291AB9F6A30071AAC7 /* Cells */,
 				3A62CB2C1AB9F7180071AAC7 /* Views */,
