@@ -139,14 +139,18 @@ static NSString* const kMixlistSubendpoint = @"mixlist";
 
 + (PMKPromise*)createWithName:(NSString*)name initialContent:(NSArray*)initialContent
 {
-    return [[AVENetworkManager sharedManager] POST:[self rootSubendpoint:@"new"]
-                                        parameters:@{
-                                                     @"name": name
-                                                     }
-                                      networkToken:nil
-                                          priority:[AVENetworkPriority priorityWithLevel:AVENetworkPriorityLevelHigh
-                                                                            postponeable:NO]
-                                           builder:[MHFetcher sharedFetcher].builder].thenInBackground(^(id response) {
+    NSAssert(name, @"Creating a collection must have a name");
+    
+    NSMutableDictionary* parameters = [NSMutableDictionary dictionary];
+    parameters[@"name"] = name;
+    if (initialContent) {
+        parameters[@"content"] = initialContent;
+    }
+    
+    return [[MHFetcher sharedFetcher] postAndFetchModel:MHCollection.class
+                                                   path:[self rootSubendpoint:@"new"]
+                                                keyPath:nil
+                                             parameters:parameters].thenInBackground(^(MHCollection* collection) {
         MHUser* currentUser = [MHLoginSession currentSession].user;
         
         [currentUser fetchSocialForced:YES
@@ -155,17 +159,7 @@ static NSString* const kMixlistSubendpoint = @"mixlist";
         
         [currentUser invalidateOwnedCollections];
         
-        // TODO: We should maybe not fetchbyid and instead use the returned response and convert it to MHCollection.
-        return [MHObject fetchByMhid:response[@"metadata"][@"mhid"]].thenInBackground(^id(MHCollection* collection) {
-            if (initialContent) {
-                return [collection addContents:initialContent].thenInBackground(^{
-                    return collection;
-                });
-            }
-            else {
-                return collection;
-            }
-        });
+        return collection;
     });
 }
 
