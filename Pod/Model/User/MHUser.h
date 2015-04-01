@@ -62,6 +62,16 @@
                            priority:(AVENetworkPriority*)priority
                        networkToken:(AVENetworkToken*)networkToken;
 
+- (PMKPromise*)fetchLiking;
+- (PMKPromise*)fetchLikingForced:(BOOL)forced
+                        priority:(AVENetworkPriority*)priority
+                    networkToken:(AVENetworkToken*)networkToken;
+
+- (PMKPromise*)fetchFollowers;
+- (PMKPromise*)fetchFollowersForced:(BOOL)forced
+                           priority:(AVENetworkPriority*)priority
+                       networkToken:(AVENetworkToken*)networkToken;
+
 - (PMKPromise*)fetchSuggested;
 - (PMKPromise*)fetchSuggestedForced:(BOOL)forced
                            priority:(AVENetworkPriority*)priority

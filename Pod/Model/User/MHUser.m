@@ -22,6 +22,8 @@ static NSString* const kInterestFeedSubendpoint = @"interestFeed";
 static NSString* const kOwnedCollectionsSubendpoint = @"ownedCollections";
 static NSString* const kSourceSettingsEndpoint = @"settings/sources";
 static NSString* const kFollowingSubendpoint = @"following";
+static NSString* const kLikingSubendpoint = @"liking";
+static NSString* const kFollowersSubendpoint = @"followers";
 //static NSString* const kFollowedCollectionsSubendpoint = @"followed";
 
 static MHPagedResponse* s_suggestedUsers = nil;
@@ -64,20 +66,20 @@ static MHPagedResponse* s_suggestedUsers = nil;
     NSData* imageData = UIImageJPEGRepresentation(image, 1.0f);
     
     return [[MHFetcher sharedFetcher] postAndFetchModel:MHImage.class
-                                                  path:[self subendpoint:@"uploadImage"]
-                                               keyPath:@"primaryImage"
-                                            parameters:nil
+                                                   path:[self subendpoint:@"uploadImage"]
+                                                keyPath:@"primaryImage"
+                                             parameters:nil
                               constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
                                   [formData appendPartWithFileData:imageData
                                                               name:@"data"
                                                           fileName:@"data"
                                                           mimeType:@"image/jpeg"];
                               }].thenInBackground(^(MHImage* primaryImage) {
-        if (![self.primaryImage isEqualToMHObject:primaryImage]) {
-            self.primaryImage = primaryImage;
-        }
-        return self.primaryImage;
-    });
+                                  if (![self.primaryImage isEqualToMHObject:primaryImage]) {
+                                      self.primaryImage = primaryImage;
+                                  }
+                                  return self.primaryImage;
+                              });
 }
 
 - (PMKPromise*)setPassword:(NSString*)newPassword
@@ -240,6 +242,42 @@ static MHPagedResponse* s_suggestedUsers = nil;
                        networkToken:(AVENetworkToken*)networkToken
 {
     return [self fetchPagedEndpoint:[self subendpoint:kFollowingSubendpoint]
+                             forced:forced
+                           priority:priority
+                       networkToken:networkToken
+                               next:nil];
+}
+
+- (PMKPromise*)fetchLiking
+{
+    return [self fetchLikingForced:NO
+                          priority:[AVENetworkPriority priorityWithLevel:AVENetworkPriorityLevelHigh]
+                      networkToken:nil];
+}
+
+- (PMKPromise*)fetchLikingForced:(BOOL)forced
+                        priority:(AVENetworkPriority*)priority
+                    networkToken:(AVENetworkToken*)networkToken
+{
+    return [self fetchPagedEndpoint:[self subendpoint:kLikingSubendpoint]
+                             forced:forced
+                           priority:priority
+                       networkToken:networkToken
+                               next:nil];
+}
+
+- (PMKPromise*)fetchFollowers
+{
+    return [self fetchFollowersForced:NO
+                             priority:[AVENetworkPriority priorityWithLevel:AVENetworkPriorityLevelHigh]
+                         networkToken:nil];
+}
+
+- (PMKPromise*)fetchFollowersForced:(BOOL)forced
+                           priority:(AVENetworkPriority*)priority
+                       networkToken:(AVENetworkToken*)networkToken
+{
+    return [self fetchPagedEndpoint:[self subendpoint:kFollowersSubendpoint]
                              forced:forced
                            priority:priority
                        networkToken:networkToken
