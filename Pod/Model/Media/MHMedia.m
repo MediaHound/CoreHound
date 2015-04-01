@@ -17,7 +17,6 @@
 #import "MHSourceMedium+Internal.h"
 
 #import <AtSugar/AtSugar.h>
-#import <Avenue/AVENetworkManager.h>
 
 
 @implementation MHMedia

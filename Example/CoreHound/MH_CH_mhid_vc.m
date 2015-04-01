@@ -66,7 +66,8 @@
     
 // TODO: handle login session scenarios, we don't want to distribute with login credentials present
     
-    [MHLoginSession loginWithUsername:@"db" password:@"p"].then(^() {
+    [[MHSDK sharedSDK] configureWithClientId:@"mhclt_MHLite"
+                                clientSecret:@"1YIdQRqKtvQMmt3t0qZwVc1Tg2dDRheCLjhvODxloO686whQ"].then(^() {
         PMKPromise* promise = [MHObject fetchByMhid:self.currentMHid];
         
         promise.then(^(MHObject* obj){

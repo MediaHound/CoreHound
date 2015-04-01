@@ -6,6 +6,7 @@
 //
 
 #import "MHFetcher.h"
+#import "MHJSONRequestSerializer.h"
 #import "MHJSONResponseSerializerWithData.h"
 
 #import <AtSugar/AtSugar.h>
@@ -33,11 +34,7 @@ static NSString* const MHProductionBaseURL = @"https://api-v10.mediahound.com/";
     if (self = [super init]) {
         AVEHTTPRequestOperationBuilder* builder = [[AVEHTTPRequestOperationBuilder alloc] initWithBaseURL:[NSURL URLWithString:MHProductionBaseURL]];
         
-        AFJSONRequestSerializer* serializer = [AFJSONRequestSerializer serializer];
-        // Disable HTTP-level caching since it causes probelms with our social metrics
-        serializer.cachePolicy = NSURLRequestReloadIgnoringCacheData;
-        
-        builder.requestSerializer = serializer;
+        builder.requestSerializer = [MHJSONRequestSerializer serializer];
         builder.responseSerializer = [MHJSONResponseSerializerWithData serializer];
         
         // Enable SSL Public Key Pinning
