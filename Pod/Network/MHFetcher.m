@@ -9,11 +9,15 @@
 #import "MHJSONRequestSerializer.h"
 #import "MHJSONResponseSerializerWithData.h"
 
+#import <AtSugar/AtSugar.h>
+
 
 static NSString* const MHProductionBaseURL = @"https://api-v10.mediahound.com/";
 
 
 @implementation MHFetcher
+
+@singleton(sharedFetcher)
 
 - (instancetype)init
 {

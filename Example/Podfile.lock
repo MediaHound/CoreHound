@@ -26,7 +26,6 @@ PODS:
     - KVOController
     - PromiseKit/Promise
   - AvenueFetcher (0.0.1):
-    - AtSugar
     - Avenue
     - JSONModel
     - PromiseKit
@@ -113,7 +112,7 @@ CHECKOUT OPTIONS:
     :commit: 8a77861ed0e5ed0f1b119b93c0aedf57fd62264a
     :git: https://github.com/MediaHound/Avenue.git
   AvenueFetcher:
-    :commit: d44e1ca9f062a272ff3c9925dfa93d5c2242eb3b
+    :commit: d7ba1f0f87111a17e26ebd6915450c3bcdbcb5cc
     :git: https://github.com/MediaHound/AvenueFetcher.git
   KVOController:
     :commit: 18c283769babbab43b32a105280527881d06850a
@@ -123,7 +122,7 @@ SPEC CHECKSUMS:
   AFNetworking: fefbce9660acb17f48ae0011292d4da0f457bf36
   AtSugar: 9edc386fe4060f77eb93dfe9e258981e90a5abcf
   Avenue: 5714795d2e88b81c82c7034c424e0c935aacbf63
-  AvenueFetcher: 2015e921f49504f8b0892c0a3dcf0fefaf7402b5
+  AvenueFetcher: 6075a7587f2bf2d9a527b7e2a9b8bcaf846b848a
   CoreHound: 57db59dffa43b80133ee6cab8cbeef0c2b671962
   Expecta: 8c507baf13211207b1e9d0a741480600e6b4ed15
   JSONModel: 6ffcb4ffa3659c9e9a2e5d45d6c7705bab187c03
