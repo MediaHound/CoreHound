@@ -17,6 +17,7 @@ Pod::Spec.new do |s|
 
   s.dependency 'AtSugar'
   s.dependency 'Avenue'
+  s.dependency 'AvenueFetcher'
   s.dependency 'JSONModel'
   s.dependency 'PromiseKit'
   s.dependency 'UICKeyChainStore'

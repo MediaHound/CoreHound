@@ -3,6 +3,7 @@ source 'https://github.com/CocoaPods/Specs.git'
 target 'CoreHound', :exclusive => true do
   pod "AtSugar", :git => "https://github.com/MediaHound/AtSugar.git"
   pod "Avenue", :git => "https://github.com/MediaHound/Avenue.git"
+  pod "AvenueFetcher", :git => "https://github.com/MediaHound/AvenueFetcher.git"
   pod "KVOController", :git => 'https://github.com/facebook/KVOController.git'
   pod "CoreHound", :path => "../"
 end
