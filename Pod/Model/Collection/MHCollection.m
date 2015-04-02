@@ -47,9 +47,9 @@ static NSString* const kMixlistSubendpoint = @"mixlist";
     
     return [[AVENetworkManager sharedManager] PUT:[self subendpoint:@"add"]
                                        parameters:@{@"content": mhids}
-                                     networkToken:nil
                                          priority:[AVENetworkPriority priorityWithLevel:AVENetworkPriorityLevelHigh
                                                                            postponeable:NO]
+                                     networkToken:nil
                                           builder:[MHFetcher sharedFetcher].builder].thenInBackground(^{
         [self invalidateContent];
         [self invalidateMixlist];
@@ -78,9 +78,9 @@ static NSString* const kMixlistSubendpoint = @"mixlist";
     
     return [[AVENetworkManager sharedManager] PUT:[self subendpoint:@"remove"]
                                        parameters:@{@"content": mhids}
-                                     networkToken:nil
                                          priority:[AVENetworkPriority priorityWithLevel:AVENetworkPriorityLevelHigh
                                                                            postponeable:NO]
+                                     networkToken:nil
                                           builder:[MHFetcher sharedFetcher].builder].thenInBackground(^(id responseObject) {
         [self invalidateContent];
         [self invalidateMixlist];

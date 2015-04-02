@@ -73,10 +73,9 @@ static MHLoginSession* s_currentSession = nil;
                                                      @"username": username,
                                                      @"password": password
                                                      }
-                                      networkToken:nil
                                           priority:[AVENetworkPriority priorityWithLevel:AVENetworkPriorityLevelHigh
                                                                             postponeable:NO]
-
+                                      networkToken:nil
                                            builder:[MHFetcher sharedFetcher].builder].thenInBackground(^id(NSDictionary* responseObject) {
         if ([responseObject[@"Error"] isEqualToString:@"Invalid Credentials"]) {
 //            AGLLogInfo(@"[MHLoginSession] Login had invalid credentials");

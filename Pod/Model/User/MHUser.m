@@ -96,9 +96,9 @@ static MHPagedResponse* s_suggestedUsers = nil;
                                                      @"oldPassword": currentPassword,
                                                      @"newPassword": newPassword
                                                      }
-                                      networkToken:nil
                                           priority:[AVENetworkPriority priorityWithLevel:AVENetworkPriorityLevelHigh
                                                                             postponeable:NO]
+                                      networkToken:nil
                                            builder:[MHFetcher sharedFetcher].builder];
 }
 
@@ -161,9 +161,9 @@ static MHPagedResponse* s_suggestedUsers = nil;
                                  };
     return [[AVENetworkManager sharedManager] POST:[self rootSubendpoint:@"new"]
                                         parameters:parameters
-                                      networkToken:nil
                                           priority:[AVENetworkPriority priorityWithLevel:AVENetworkPriorityLevelHigh
                                                                             postponeable:NO]
+                                      networkToken:nil
                                            builder:[MHFetcher sharedFetcher].builder];
 }
 
@@ -338,9 +338,9 @@ static MHPagedResponse* s_suggestedUsers = nil;
                                         parameters:@{
                                                      @"email": email
                                                      }
-                                      networkToken:nil
                                           priority:[AVENetworkPriority priorityWithLevel:AVENetworkPriorityLevelHigh
                                                                             postponeable:NO]
+                                      networkToken:nil
                                            builder:[MHFetcher sharedFetcher].builder];
 }
 
@@ -350,9 +350,9 @@ static MHPagedResponse* s_suggestedUsers = nil;
                                         parameters:@{
                                                      @"email": email
                                                      }
-                                      networkToken:nil
                                           priority:[AVENetworkPriority priorityWithLevel:AVENetworkPriorityLevelHigh
                                                                             postponeable:NO]
+                                      networkToken:nil
                                            builder:[MHFetcher sharedFetcher].builder];
 }
 
@@ -362,9 +362,9 @@ static MHPagedResponse* s_suggestedUsers = nil;
                                         parameters:@{
                                                      @"username": username
                                                      }
-                                      networkToken:nil
                                           priority:[AVENetworkPriority priorityWithLevel:AVENetworkPriorityLevelHigh
                                                                             postponeable:NO]
+                                      networkToken:nil
                                            builder:[MHFetcher sharedFetcher].builder];
 }
 

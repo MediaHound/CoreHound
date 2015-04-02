@@ -40,13 +40,13 @@
     AVEHTTPRequestOperationBuilder* builder = [[AVEHTTPRequestOperationBuilder alloc] initWithBaseURL:baseURL];
     
     return [[AVENetworkManager sharedManager] GET:@"cas/oauth2.0/accessToken"
-                                parameters:@{
-                                             @"client_id": self.clientId,
-                                             @"client_secret": self.clientSecret,
-                                             @"grant_type": @"client_credentials"
-                                             }
-                              networkToken:nil
-                                  priority:[AVENetworkPriority priorityWithLevel:AVENetworkPriorityLevelHigh]
+                                       parameters:@{
+                                                    @"client_id": self.clientId,
+                                                    @"client_secret": self.clientSecret,
+                                                    @"grant_type": @"client_credentials"
+                                                    }
+                                         priority:[AVENetworkPriority priorityWithLevel:AVENetworkPriorityLevelHigh]
+                                     networkToken:nil
                                           builder:builder].then(^(NSDictionary* response) {
         self.accessToken = response[@"accessToken"];
     });
