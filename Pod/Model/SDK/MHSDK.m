@@ -26,7 +26,7 @@
 @singleton (sharedSDK)
 
 - (PMKPromise*)configureWithClientId:(NSString*)clientId
-                 clientSecret:(NSString*)clientSecret
+                        clientSecret:(NSString*)clientSecret
 {
     self.clientId = clientId;
     self.clientSecret = clientSecret;

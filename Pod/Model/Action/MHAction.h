@@ -11,10 +11,14 @@
 
 
 /**
- * The model which represents a Post
+ * An MHAction is an action that occurs in the MediaHound Graph.
  */
 @interface MHAction : MHObject
 
+/**
+ * Metadata about the receiver
+ * This property is guranteed to exist.
+ */
 @property (strong, atomic) MHActionMetadata* metadata;
 
 @property (strong, atomic) MHObject<Optional>* primaryMention;
