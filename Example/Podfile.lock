@@ -84,7 +84,7 @@ PODS:
   - UICKeyChainStore (2.0.4)
 
 DEPENDENCIES:
-  - AtSugar (from `https://github.com/MediaHound/AtSugar.git`)
+  - AtSugar
   - Avenue (from `https://github.com/MediaHound/Avenue.git`)
   - AvenueFetcher (from `https://github.com/MediaHound/AvenueFetcher.git`)
   - CoreHound (from `../`)
@@ -93,8 +93,6 @@ DEPENDENCIES:
   - Specta
 
 EXTERNAL SOURCES:
-  AtSugar:
-    :git: https://github.com/MediaHound/AtSugar.git
   Avenue:
     :git: https://github.com/MediaHound/Avenue.git
   AvenueFetcher:
@@ -105,9 +103,6 @@ EXTERNAL SOURCES:
     :git: https://github.com/facebook/KVOController.git
 
 CHECKOUT OPTIONS:
-  AtSugar:
-    :commit: 9e90840d335615aeacad8ac07008fbb7aacd6264
-    :git: https://github.com/MediaHound/AtSugar.git
   Avenue:
     :commit: 8a77861ed0e5ed0f1b119b93c0aedf57fd62264a
     :git: https://github.com/MediaHound/Avenue.git
