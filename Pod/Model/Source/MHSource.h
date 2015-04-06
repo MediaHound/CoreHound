@@ -15,6 +15,7 @@ extern NSString* const iTunesSourceName;
 
 @interface MHSource : MHObject
 
+@property (strong, atomic) MHSourceMetadata* metadata;
 @property (strong, nonatomic) NSArray<MHSubscription, Optional>* subscriptions;
 @property (strong, nonatomic) NSArray<Optional>* allMediums;
 

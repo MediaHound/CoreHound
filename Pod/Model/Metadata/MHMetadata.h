@@ -120,3 +120,12 @@ typedef NS_ENUM(NSInteger, MHCollectionMixlistType)
 @property (strong, nonatomic) NSArray* mediums;
 
 @end
+
+/**
+ * Metadata about an `MHSource` object.
+ */
+@interface MHSourceMetadata : MHMetadata
+
+@property (strong, nonatomic) NSNumber* connectable;
+
+@end

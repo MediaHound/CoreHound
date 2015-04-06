@@ -174,3 +174,19 @@
 }
 
 @end
+
+@implementation MHSourceMetadata
+
+- (BOOL)isEqualToMHMetadata:(MHSourceMetadata*)metadata
+{
+    return [super isEqualToMHMetadata:metadata]
+    && ((!self.connectable && !metadata.connectable) || ([self.connectable isEqual:metadata.connectable]));
+}
+
+- (NSUInteger)hash
+{
+    return super.hash
+    ^ self.connectable.hash;
+}
+
+@end
