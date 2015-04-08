@@ -30,6 +30,7 @@ extern NSString* const iTunesSourceName;
 @property (nonatomic, readonly) BOOL isSpotify;
 @property (nonatomic, readonly) BOOL isRdio;
 @property (nonatomic, readonly) BOOL isNetflix;
+@property (nonatomic, readonly) BOOL isHulu;
 
 @end
 

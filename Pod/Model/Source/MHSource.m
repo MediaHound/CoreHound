@@ -144,6 +144,11 @@ static MHPagedResponse* s_allSources = nil;
     return [self hasMhid:@"mhsrcwRw33Yek3hvzTpbqzT7hL9EOAeyec7Y61npmukm"];
 }
 
+- (BOOL)isHulu
+{
+    return [self hasMhid:@"mhsrcDINVH54l93akNjR0oiND5Hegf9uChAGRAoxUyTN"];
+}
+
 @end
 
 
