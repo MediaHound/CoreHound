@@ -7,6 +7,8 @@
 
 #import <JSONModel/JSONModel.h>
 
+@class MHImageData;
+
 
 /**
  * Metadata about an `MHObject` object.
@@ -61,6 +63,16 @@
  * Metadata about an `MHImage` object.
  */
 @interface MHImageMetadata : MHMetadata
+
+@property (strong, nonatomic) MHImageData<Optional>* original;
+
+@property (strong, nonatomic) MHImageData<Optional>* thumbnail;
+
+@property (strong, nonatomic) MHImageData<Optional>* small;
+
+@property (strong, nonatomic) MHImageData<Optional>* medium;
+
+@property (strong, nonatomic) MHImageData<Optional>* large;
 
 /**
  * A boolean indicating whether this is a default image or not.

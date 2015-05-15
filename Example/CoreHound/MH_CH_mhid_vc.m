@@ -66,8 +66,7 @@
     
 // TODO: handle login session scenarios, we don't want to distribute with login credentials present
     
-    [[MHSDK sharedSDK] configureWithClientId:@"mhclt_MHLite"
-                                clientSecret:@"1YIdQRqKtvQMmt3t0qZwVc1Tg2dDRheCLjhvODxloO686whQ"].then(^() {
+    
         PMKPromise* promise = [MHObject fetchByMhid:self.currentMHid];
         
         promise.then(^(MHObject* obj){
@@ -88,7 +87,7 @@
             
         }).thenInBackground(^(MHImage* primaryImage) {
             
-            NSString* url = primaryImage.original.url;
+            NSString* url = primaryImage.metadata.original.url;
             NSURL* fetchedUrl = [[NSURL alloc]initWithString:url];
             NSData* data= [NSData dataWithContentsOfURL:fetchedUrl];
             UIImage* img = [UIImage imageWithData:data];
@@ -174,7 +173,7 @@
                     PMKPromise* p = [obj fetchPrimaryImage].then(^(MHImage* metaImg) {
                     
                         
-                        MHImageData* metaImgOrig = metaImg.original;
+                        MHImageData* metaImgOrig = metaImg.metadata.original;
                         NSString* metaImgURL = metaImgOrig.url;
                         self.mediaContributorsImageURLs[i] = metaImgURL;
                         
@@ -207,9 +206,6 @@
                 
                 
             });
-        
-
-    });
 
 }
 

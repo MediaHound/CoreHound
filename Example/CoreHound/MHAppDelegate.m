@@ -8,6 +8,9 @@
 
 #import "MHAppDelegate.h"
 
+#import <CoreHound/MHApi.h>
+
+
 #define UIColorFromRGB(rgbValue) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
 
 
@@ -19,6 +22,11 @@
 
     [[UINavigationBar appearance] setBarTintColor: UIColorFromRGB(0x2270DF)];
     [[UINavigationBar appearance] setTintColor: UIColorFromRGB(0xFDFDFD)];
+    
+    [[MHSDK sharedSDK] configureWithClientId:@"mhclt_MHLite"
+                                clientSecret:@"1YIdQRqKtvQMmt3t0qZwVc1Tg2dDRheCLjhvODxloO686whQ"
+     ];
+    
     return YES;
 }
 							

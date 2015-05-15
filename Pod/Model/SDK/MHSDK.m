@@ -7,6 +7,7 @@
 //
 
 #import "MHSDK.h"
+#import "MHFetcher.h"
 
 #import <AtSugar/AtSugar.h>
 #import <Avenue/Avenue.h>
@@ -36,9 +37,6 @@
 
 - (PMKPromise*)refreshOAuthToken
 {
-    NSURL* baseURL = [NSURL URLWithString:@"https://cas.mediahound.com/"];
-    AVEHTTPRequestOperationBuilder* builder = [[AVEHTTPRequestOperationBuilder alloc] initWithBaseURL:baseURL];
-    
     return [[AVENetworkManager sharedManager] GET:@"cas/oauth2.0/accessToken"
                                        parameters:@{
                                                     @"client_id": self.clientId,
@@ -47,7 +45,7 @@
                                                     }
                                          priority:[AVENetworkPriority priorityWithLevel:AVENetworkPriorityLevelHigh]
                                      networkToken:nil
-                                          builder:builder].then(^(NSDictionary* response) {
+                                          builder:[MHFetcher sharedFetcher].builder].then(^(NSDictionary* response) {
         self.accessToken = response[@"accessToken"];
     });
 }
