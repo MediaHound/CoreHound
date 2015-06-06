@@ -64,4 +64,10 @@
                               priority:(AVENetworkPriority*)priority
                           networkToken:(AVENetworkToken*)networkToken;
 
++ (PMKPromise*)fetchRelatedTo:(NSArray*)medias;
++ (PMKPromise*)fetchRelatedTo:(NSArray*)medias
+                       forced:(BOOL)forced
+                     priority:(AVENetworkPriority*)priority
+                 networkToken:(AVENetworkToken*)networkToken;
+
 @end

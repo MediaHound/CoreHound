@@ -147,4 +147,35 @@
                                next:nil];
 }
 
++ (PMKPromise*)fetchRelatedTo:(NSArray*)medias
+{
+    return [self fetchRelatedTo:medias
+                         forced:NO
+                       priority:[AVENetworkPriority priorityWithLevel:AVENetworkPriorityLevelHigh]
+                   networkToken:nil];
+}
+
++ (PMKPromise*)fetchRelatedTo:(NSArray*)medias
+                       forced:(BOOL)forced
+                     priority:(AVENetworkPriority*)priority
+                 networkToken:(AVENetworkToken*)networkToken
+{
+    // TODO: Use caching and forced flag
+    
+    NSMutableArray* mhids = [NSMutableArray array];
+    for (MHMedia* media in medias) {
+        [mhids addObject:media.metadata.mhid];
+    }
+    
+    return [[MHFetcher sharedFetcher] fetchModel:MHPagedResponse.class
+                                            path:[self rootSubendpoint:@"related"]
+                                         keyPath:nil
+                                      parameters:@{
+                                                   MHFetchParameterView: MHFetchParameterViewFull,
+                                                   @"ids": mhids
+                                                   }
+                                        priority:priority
+                                    networkToken:networkToken];
+}
+
 @end
