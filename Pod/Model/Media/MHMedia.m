@@ -162,7 +162,7 @@
 {
     // TODO: Use caching and forced flag
     
-    NSMutableArray* mhids = [NSMutableArray array];
+    NSMutableSet* mhids = [NSMutableSet set];
     for (MHMedia* media in medias) {
         [mhids addObject:media.metadata.mhid];
     }
