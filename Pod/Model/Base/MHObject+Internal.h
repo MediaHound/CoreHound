@@ -25,6 +25,21 @@ extern NSString* const MHFetchParameterViewFull;
                            priority:(AVENetworkPriority*)priority
                        networkToken:(AVENetworkToken*)networkToken;
 
++ (PMKPromise*)fetchRootPagedEndpoint:(NSString*)path
+                               forced:(BOOL)forced
+                            parameters:(NSDictionary*)parameters
+                             priority:(AVENetworkPriority*)priority
+                         networkToken:(AVENetworkToken*)networkToken
+                                 next:(NSString*)next;
+
++ (PMKPromise*)fetchRootPagedEndpoint:(NSString*)path
+                               forced:(BOOL)forced
+                           parameters:(NSDictionary*)parameters
+                             priority:(AVENetworkPriority*)priority
+                         networkToken:(AVENetworkToken*)networkToken
+                                 next:(NSString*)next
+                            afterEach:(void(^)(MHPagedResponse*))afterEach;
+
 - (PMKPromise*)fetchPagedEndpoint:(NSString*)path
                            forced:(BOOL)forced
                          priority:(AVENetworkPriority*)priority

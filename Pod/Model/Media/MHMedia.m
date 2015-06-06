@@ -167,15 +167,14 @@
         [mhids addObject:media.metadata.mhid];
     }
     
-    return [[MHFetcher sharedFetcher] fetchModel:MHPagedResponse.class
-                                            path:[self rootSubendpoint:@"related"]
-                                         keyPath:nil
-                                      parameters:@{
-                                                   MHFetchParameterView: MHFetchParameterViewFull,
-                                                   @"ids": mhids
-                                                   }
-                                        priority:priority
-                                    networkToken:networkToken];
+    return [self fetchRootPagedEndpoint:[self rootSubendpoint:@"related"]
+                                 forced:forced
+                             parameters:@{
+                                          @"ids": mhids
+                                          }
+                               priority:priority
+                           networkToken:networkToken
+                                   next:nil];
 }
 
 @end

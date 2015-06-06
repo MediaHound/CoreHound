@@ -568,12 +568,90 @@ static NSString* const kCollectionsSubendpoint = @"collections";
                                              forced:NO
                                            priority:priority
                                        networkToken:nil
-                                               next:newNext];
+                                               next:newNext
+                                          afterEach:afterEach];
             };
             
             if (!next) {
                 [self setCachedResponse:pagedResponse forPath:path];
             }
+            
+            return pagedResponse;
+        });
+    });
+}
+
++ (PMKPromise*)fetchRootPagedEndpoint:(NSString*)path
+                               forced:(BOOL)forced
+                           parameters:(NSDictionary*)parameters
+                             priority:(AVENetworkPriority*)priority
+                         networkToken:(AVENetworkToken*)networkToken
+                                 next:(NSString*)next
+{
+    return [self fetchRootPagedEndpoint:path
+                                 forced:forced
+                             parameters:(NSDictionary*)parameters
+                               priority:priority
+                           networkToken:networkToken
+                                   next:next
+                              afterEach:nil];
+}
+
++ (PMKPromise*)fetchRootPagedEndpoint:(NSString*)path
+                               forced:(BOOL)forced
+                           parameters:(NSDictionary*)parameters
+                             priority:(AVENetworkPriority*)priority
+                         networkToken:(AVENetworkToken*)networkToken
+                                 next:(NSString*)next
+                            afterEach:(void(^)(MHPagedResponse*))afterEach
+{
+    @weakSelf()
+    
+    // Hop off the main thread right away
+    return dispatch_promise(^id {
+        // TODO: DO caching
+//        if (!next && !forced) {
+//            MHPagedResponse* cachedResponse = [self cachedResponseForPath:path];
+//            if (cachedResponse) {
+//                return [PMKPromise promiseWithValue:cachedResponse];
+//            }
+//        }
+        
+        NSMutableDictionary* finalParameters = [NSMutableDictionary dictionary];
+        if (parameters) {
+            [finalParameters addEntriesFromDictionary:parameters];
+        }
+        finalParameters[@"pageSize"] = @(MHInternal_DefaultPageSize);
+        finalParameters[MHFetchParameterView] = MHFetchParameterViewFull;
+        if (next) {
+            finalParameters[@"pageNext"] = next;
+            finalParameters[@"next"] = next;
+        }
+        
+        return [[MHFetcher sharedFetcher] fetchModel:MHPagedResponse.class
+                                                path:path
+                                             keyPath:nil
+                                          parameters:finalParameters
+                                            priority:priority
+                                        networkToken:networkToken].thenInBackground(^(MHPagedResponse* pagedResponse) {
+            if (afterEach) {
+                afterEach(pagedResponse);
+            }
+            
+            pagedResponse.fetchNextOperation = ^(NSString* newNext) {
+                return [weakSelf fetchRootPagedEndpoint:path
+                                                 forced:NO
+                                             parameters:parameters
+                                               priority:priority
+                                           networkToken:nil
+                                                   next:newNext
+                                              afterEach:afterEach];
+            };
+
+            // TODO: Caching
+//            if (!next) {
+//                [self setCachedResponse:pagedResponse forPath:path];
+//            }
             
             return pagedResponse;
         });
