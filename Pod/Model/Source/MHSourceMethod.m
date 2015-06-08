@@ -15,6 +15,7 @@ NSString* const MHSourceMethodTypePurchase = @"purchase";
 NSString* const MHSourceMethodTypeRental = @"rental";
 NSString* const MHSourceMethodTypeSubscription = @"subscription";
 NSString* const MHSourceMethodTypeAdSupported = @"adSupported";
+NSString* const MHSourceMethodTypeBroker = @"broker";
 
 
 @interface MHSourceMethod ()

@@ -14,6 +14,7 @@ extern NSString* const MHSourceMethodTypePurchase;
 extern NSString* const MHSourceMethodTypeRental;
 extern NSString* const MHSourceMethodTypeSubscription;
 extern NSString* const MHSourceMethodTypeAdSupported;
+extern NSString* const MHSourceMethodTypeBroker;
 
 
 @protocol MHSourceMethod <NSObject>
