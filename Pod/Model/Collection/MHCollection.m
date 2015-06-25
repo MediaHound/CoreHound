@@ -21,6 +21,7 @@
 
 static NSString* const kContentSubendpoint = @"content";
 static NSString* const kMixlistSubendpoint = @"mixlist";
+static NSString* const kOwnersSubendpoint = @"owners";
 
 
 @implementation MHCollection
@@ -42,27 +43,7 @@ static NSString* const kMixlistSubendpoint = @"mixlist";
 
 - (PMKPromise*)addContents:(NSArray*)contents
 {
-    NSMutableArray* mhids = [NSMutableArray array];
-    for (MHObject* content in contents) {
-        [mhids addObject:content.metadata.mhid];
-    }
-    
-    return [[AVENetworkManager sharedManager] PUT:[self subendpoint:@"add"]
-                                       parameters:@{@"content": mhids}
-                                         priority:[AVENetworkPriority priorityWithLevel:AVENetworkPriorityLevelHigh
-                                                                           postponeable:NO]
-                                     networkToken:nil
-                                          builder:[MHFetcher sharedFetcher].builder].thenInBackground(^{
-        [self invalidateContent];
-        [self invalidateMixlist];
-        
-        for (MHObject* content in contents) {
-            [content fetchSocialForced:YES
-                              priority:[AVENetworkPriority priorityWithLevel:AVENetworkPriorityLevelHigh]
-                          networkToken:nil];
-            [content invalidateCollections];
-        }
-    });
+    return [self changeContents:contents modification:@"add"];
 }
 
 - (PMKPromise*)removeContent:(MHObject*)content
@@ -72,14 +53,20 @@ static NSString* const kMixlistSubendpoint = @"mixlist";
 
 - (PMKPromise*)removeContents:(NSArray*)contents
 {
-    // TODO: This function is very similar to addContents, can share?
+    return [self changeContents:contents modification:@"remove"];
+}
+
+- (PMKPromise*)changeContents:(NSArray*)contents modification:(NSString*)modification
+{
     NSMutableArray* mhids = [NSMutableArray array];
     for (MHObject* content in contents) {
         [mhids addObject:content.metadata.mhid];
     }
     
-    return [[AVENetworkManager sharedManager] PUT:[self subendpoint:@"remove"]
-                                       parameters:@{@"content": mhids}
+    return [[AVENetworkManager sharedManager] PUT:[self subendpoint:modification]
+                                       parameters:@{
+                                                    @"content": mhids
+                                                    }
                                          priority:[AVENetworkPriority priorityWithLevel:AVENetworkPriorityLevelHigh
                                                                            postponeable:NO]
                                      networkToken:nil
@@ -141,7 +128,7 @@ static NSString* const kMixlistSubendpoint = @"mixlist";
 
 + (PMKPromise*)createWithName:(NSString*)name initialContent:(NSArray*)initialContent
 {
-    NSAssert(name, @"Creating a collection must have a name");
+    NSAssert(name, @"When creating a collection, you must provide a name.");
     
     NSMutableDictionary* parameters = [NSMutableDictionary dictionary];
     parameters[@"name"] = name;
@@ -215,7 +202,7 @@ static NSString* const kMixlistSubendpoint = @"mixlist";
                         priority:(AVENetworkPriority*)priority
                     networkToken:(AVENetworkToken*)networkToken
 {
-    return [self fetchPagedEndpoint:[self subendpoint:@"owners"]
+    return [self fetchPagedEndpoint:[self subendpoint:kOwnersSubendpoint]
                              forced:forced
                            priority:priority
                        networkToken:networkToken
