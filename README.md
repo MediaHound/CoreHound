@@ -2,7 +2,7 @@
 # CoreHound: Getting Started
 
 ## What is CoreHound?
-CoreHound is the iOS SDK for accessing MediaHound's Entertainment Graph. Search for media content across movies, books, games, TV, and more. Discover relationships across media via traits and contributors. CoreHound is a fast and easy SDK that lets you enhance your iOS apps with access to an entire world of entertainment content. 
+CoreHound is the iOS SDK for accessing The Entertainment Graph through MediaHound's API. Search for media content across movies, books, games, TV, and more. Discover relationships across media via traits and contributors. CoreHound is a fast and easy SDK that lets you enhance your iOS apps with access to an entire world of entertainment content. 
 
 ## Install CoreHound
 
@@ -19,17 +19,17 @@ Run `pod install`, and you can now use CoreHound by importing it:
 ```
 
 ## The world of media content
-The entertainment graph contains many types of objects— movies, books, people, traits, etc.
+The Entertainment Graph contains many types of objects — movies, books, people, traits, etc.
 
-The MediaHound Entertainment Graph contains a series of objects representing media content, users, collections, etc and the connections between those objects. These objects and connections form a graph of media content. Social interactions live on top of that content graph. 
+The Entertainment Graph contains a series of objects representing media content, users, collections, etc and the connections between those objects. These objects and connections form a graph of media content. Social interactions live on top of that content graph. 
 
-Every object in the Entertainment Graph is uniquely identified by an identifier—- its `mhid`. For example, the movie *Saving Private Ryan* has an `mhid` of *mhmovt8xqWDBFoCiL92HnfA4uYDV8HzPaig8ucgxJEsP*.
+Every object in The Entertainment Graph is uniquely identified by an identifier—- its `mhid`. For example, the movie *Saving Private Ryan* has an `mhid` of *mhmovt8xqWDBFoCiL92HnfA4uYDV8HzPaig8ucgxJEsP*.
 
-Every object in the Entertainment Graph has a type—- Movie, Book, Contributor, etc. There is a well defined type hierarchy, so you can easily work with objects of varying types. 
+Every object in The Entertainment Graph has a type—- Movie, Book, Contributor, etc. There is a well defined type hierarchy, so you can easily work with objects of varying types. 
 
-*Saving Private Ryan* is an `MHMovie`, and *Catch 22* is an `MHBook`. Both `MHMovie` and `MHBook` inherit from `MHMedia`. This lets us work with entertainment  across different content types easily. We can view the content as an `MHMedia`. If we ever need to specifically work with books, we can treat it as an `MHBook`.
+*Saving Private Ryan* is an `MHMovie`, and *Catch 22* is an `MHBook`. Both `MHMovie` and `MHBook` inherit from `MHMedia`. This lets us work with entertainment across different content types easily. We can view the content as an `MHMedia`. When we need to specifically work with books, we can treat them as an `MHBook`.
 
-All objects in the entertainment graph inherit from the `MHObject` class. This class provides the base functionality that all graph objects conform to. All objects have metadata represented as an `MHMetadata`:
+All objects in The Entertainment Graph inherit from the `MHObject` class. This class provides the base functionality that all graph objects conform to. All objects have metadata represented as an `MHMetadata`:
 
 - mhid
 - name
@@ -62,7 +62,7 @@ NSString* theUsualSuspectsMhid = @"mhmovI8Y9tWpUFibqYGZYddt1I5q3znlRAuSQ2a6N437"
 The [PromiseKit docs](http://promisekit.org) are a great way to learn more about how to interact with promises.
 
 ## Objects are progressively loaded
-Since the Entertainment Graph contains so much information about each object and all of its relationships, you must always explicitly fetch the data you want. 
+Since The Entertainment Graph contains so much information about each object and all of its relationships, you must always explicitly fetch the data you want. 
 
 If you want to load the primary image for a movie, you must do this:
 
@@ -80,7 +80,7 @@ Sometimes we want to be notified anytime an `MHObject`'s properties change. All 
 **NOTE:** CoreHound has no thread affinity for KVO notifications. This means that all KVO notifications will be posted from background threads. If you need to tie KVO notifications to UI updates, make sure to dispatch to the main thread when the change notifications occur. 
 
 ## CoreHound is built for large datasets
-Since there are lots of connections between objects in the Entertainment Graph, all methods that return other `MHObjects` take advantage of paging. That means you will only get a subset of results. If you need more, you can fetch more, one page at a time.
+Since there are lots of connections between objects in The Entertainment Graph, all methods that return other `MHObjects` take advantage of paging. That means you will only get a subset of results. If you need more, you can fetch more, one page at a time.
 
 The `MHPagedResponse` class encapsulates a page of results. You can use the `content` property to access the results of that page:
 
@@ -101,8 +101,8 @@ If you need to access the next page just call `-fetchNext` on the paged response
 });
 ```
 
-## Searching the Entertainment Graph
-To perform searches against the Entertainment Graph, use the `MHSearch` class:
+## Searching The Entertainment Graph
+To perform searches against The Entertainment Graph, use the `MHSearch` class:
 
 ```objc
 [MHSearch fetchResultsForSearchTerm:@"The Usual Suspects"
@@ -163,7 +163,3 @@ AVENetworkToken* token = [[AVENetworkToken alloc] init];
 ## License
 
 CoreHound is available under the Apache License 2.0. See the LICENSE file for more info.
-
-
-
-
