@@ -14,4 +14,6 @@ typedef PMKPromise*(^MHPagedResponseFetchNextBlock)(NSString*);
 
 @property (copy, nonatomic) MHPagedResponseFetchNextBlock fetchNextOperation;
 
++ (instancetype)emptyPagedResponse;
+
 @end

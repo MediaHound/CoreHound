@@ -16,6 +16,9 @@ extern const NSInteger MHInternal_DefaultPageSize;
 extern NSString* const MHFetchParameterView;
 extern NSString* const MHFetchParameterViewFull;
 
+extern NSString* const MHFetchParameterPageSize;
+extern NSString* const MHFetchParameterNext;
+
 
 @interface MHObject (Internal)
 

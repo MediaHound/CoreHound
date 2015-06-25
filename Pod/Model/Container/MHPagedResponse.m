@@ -7,14 +7,7 @@
 
 #import "MHPagedResponse.h"
 #import "MHPagedResponse+Internal.h"
-
-#import <AtSugar/AtSugar.h>
-#import <objc/runtime.h>
-
-
-@implementation MHPagingInfo
-
-@end
+#import "MHPagingInfo.h"
 
 
 @interface MHPagedResponse ()
@@ -45,7 +38,20 @@
 
 - (BOOL)hasMorePages
 {
-    return self.pagingInfo.next != nil;
+    return (self.pagingInfo.next != nil);
+}
+
+@end
+
+
+@implementation MHPagedResponse (Internal)
+
++ (instancetype)emptyPagedResponse
+{
+    MHPagedResponse* response = [[MHPagedResponse alloc] init];
+    response.content = (NSArray<MHRelationalPair>*) @[];
+    response.pagingInfo = [[MHPagingInfo alloc] init];
+    return response;
 }
 
 @end

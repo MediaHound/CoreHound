@@ -1,14 +1,14 @@
 //
-//  MHGraphGroup.h
+//  MHPagingInfo.m
 //  CoreHound
 //
 //  Copyright (c) 2015 MediaHound. All rights reserved.
 //
 //
 
-#import "MHMedia.h"
+#import "MHPagingInfo.h"
 
 
-@interface MHGraphGroup : MHMedia
+@implementation MHPagingInfo
 
 @end

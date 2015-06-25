@@ -62,20 +62,17 @@ NSString* NSStringByAddingExtendedPercentEscapes(NSString* str)
                                     next:(NSString*)next
 {
     if (search.length < 1 || NSStringIsWhiteSpace(search)) {
-        MHPagedResponse* response = [[MHPagedResponse alloc] initWithDictionary:@{
-                                                                                  @"content":@[],
-                                                                                  @"pagingInfo": [[MHPagingInfo alloc] initWithDictionary:@{} error:nil]
-                                                                                  }
-                                                                          error:nil];
+        MHPagedResponse* response = [MHPagedResponse emptyPagedResponse];
         return [PMKPromise promiseWithValue:response];
     }
+    
     NSString* scopeString = NSStringFromMHSearchScope(scope);
     NSString* path = [NSString stringWithFormat:@"search/%@/%@", NSStringByAddingExtendedPercentEscapes(scopeString), NSStringByAddingExtendedPercentEscapes(search)];
     
     NSMutableDictionary* parameters = [NSMutableDictionary dictionary];
-    parameters[@"pageSize"] = @(MHInternal_DefaultPageSize);
+    parameters[MHFetchParameterPageSize] = @(MHInternal_DefaultPageSize);
     if (next) {
-        parameters[@"next"] = next;
+        parameters[MHFetchParameterNext] = next;
     }
     
     @weakSelf()

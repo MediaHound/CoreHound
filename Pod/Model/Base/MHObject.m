@@ -27,6 +27,9 @@ const NSInteger MHInternal_DefaultPageSize = 12;
 NSString* const MHFetchParameterView = @"view";
 NSString* const MHFetchParameterViewFull = @"full";
 
+NSString* const MHFetchParameterPageSize = @"pageSize";
+NSString* const MHFetchParameterNext = @"next";
+
 static NSString* const kCollectionsSubendpoint = @"collections";
 static NSString* const kFeedSubendpoint = @"feed";
 
@@ -546,11 +549,10 @@ static NSString* const kFeedSubendpoint = @"feed";
         }
         
         NSMutableDictionary* parameters = [NSMutableDictionary dictionary];
-        parameters[@"pageSize"] = @(MHInternal_DefaultPageSize);
+        parameters[MHFetchParameterPageSize] = @(MHInternal_DefaultPageSize);
         parameters[MHFetchParameterView] = MHFetchParameterViewFull;
         if (next) {
-            parameters[@"pageNext"] = next; // TODO: Remove this
-            parameters[@"next"] = next;
+            parameters[MHFetchParameterNext] = next;
         }
         
         return [[MHFetcher sharedFetcher] fetchModel:MHPagedResponse.class
@@ -621,11 +623,10 @@ static NSString* const kFeedSubendpoint = @"feed";
         if (parameters) {
             [finalParameters addEntriesFromDictionary:parameters];
         }
-        finalParameters[@"pageSize"] = @(MHInternal_DefaultPageSize);
+        finalParameters[MHFetchParameterPageSize] = @(MHInternal_DefaultPageSize);
         finalParameters[MHFetchParameterView] = MHFetchParameterViewFull;
         if (next) {
-            finalParameters[@"pageNext"] = next;
-            finalParameters[@"next"] = next;
+            finalParameters[MHFetchParameterNext] = next;
         }
         
         return [[MHFetcher sharedFetcher] fetchModel:MHPagedResponse.class

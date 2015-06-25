@@ -1,8 +1,8 @@
 //
 //  MHSDK+Internal.h
-//  Pods
+//  CoreHound
 //
-//  Created by Dustin Bachrach on 4/1/15.
+//  Copyright (c) 2015 MediaHound. All rights reserved.
 //
 //
 
