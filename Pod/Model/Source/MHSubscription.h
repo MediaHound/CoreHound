@@ -6,11 +6,9 @@
 //
 
 #import "MHObject.h"
+#import "MHJSONModelInternal.h"
 
-
-@protocol MHSubscription <NSObject>
-
-@end
+MHJSONMODEL_PROTOCOL_DEFINE(MHSubscription)
 
 
 @interface MHSubscription : MHObject

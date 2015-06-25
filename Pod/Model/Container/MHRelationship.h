@@ -7,13 +7,11 @@
 //
 
 #import <JSONModel/JSONModel.h>
+#import "MHJSONModelInternal.h"
 
 @class MHObject;
 
-
-@protocol MHRelationship <NSObject>
-
-@end
+MHJSONMODEL_PROTOCOL_DEFINE(MHRelationship)
 
 
 @interface MHRelationship : JSONModel

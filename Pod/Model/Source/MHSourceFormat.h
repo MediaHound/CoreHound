@@ -6,6 +6,7 @@
 //
 
 #import <JSONModel/JSONModel.h>
+#import "MHJSONModelInternal.h"
 
 @class MHSourceMethod;
 
@@ -19,9 +20,7 @@ extern NSString* const MHSourceFormatLaunchInfoViewTypeHTTPKey;
 extern NSString* const MHSourceFormatTypeUnknownKey;
 
 
-@protocol MHSourceFormat <NSObject>
-
-@end
+MHJSONMODEL_PROTOCOL_DEFINE(MHSourceFormat)
 
 
 @interface MHSourceFormat : JSONModel

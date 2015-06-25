@@ -6,11 +6,9 @@
 //
 
 #import "MHObject.h"
+#import "MHJSONModelInternal.h"
 
-
-@protocol MHUser <NSObject>
-
-@end
+MHJSONMODEL_PROTOCOL_DEFINE(MHUser)
 
 
 /**
@@ -19,6 +17,10 @@
  */
 @interface MHUser : MHObject
 
+/**
+ * Metadata about the receiver
+ * This property is guranteed to exist.
+ */
 @property (strong, atomic) MHUserMetadata* metadata;
 
 /**

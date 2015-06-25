@@ -14,9 +14,6 @@
 
 //#import <AgnosticLogger/AgnosticLogger.h>
 
-
-NSString* const iTunesSourceName = @"iTunes";
-
 NSString* const MHObjectActionParameterPreferenceKey = @"preference";
 
 static MHPagedResponse* s_allSources = nil;

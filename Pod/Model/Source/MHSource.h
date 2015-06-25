@@ -9,9 +9,6 @@
 #import "MHSubscription.h"
 #import "MHSourcePreference.h"
 
-// TODO: Should have MH Prefix
-extern NSString* const iTunesSourceName;
-
 
 @interface MHSource : MHObject
 
