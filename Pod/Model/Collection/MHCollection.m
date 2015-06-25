@@ -2,7 +2,7 @@
 //  MHCollection.m
 //  CoreHound
 //
-//  Copyright (c) 2015 Media Hound. All rights reserved.
+//  Copyright (c) 2015 MediaHound. All rights reserved.
 //
 
 #import "MHCollection.h"
@@ -24,6 +24,8 @@ static NSString* const kMixlistSubendpoint = @"mixlist";
 
 
 @implementation MHCollection
+
+@dynamic metadata;
 
 @declare_class_property (mhidPrefix, @"mhcol")
 @declare_class_property (rootEndpoint, @"graph/collection")
@@ -179,7 +181,7 @@ static NSString* const kMixlistSubendpoint = @"mixlist";
                               priority:(AVENetworkPriority*)priority
                           networkToken:(AVENetworkToken*)networkToken
 {
-    return [self fetchProperty:@"primaryOwner"
+    return [self fetchProperty:NSStringFromSelector(@selector(primaryOwner))
                         forced:forced
                       priority:priority
                   networkToken:networkToken];
@@ -196,7 +198,7 @@ static NSString* const kMixlistSubendpoint = @"mixlist";
                                    priority:(AVENetworkPriority*)priority
                                networkToken:(AVENetworkToken*)networkToken
 {
-    return [self fetchProperty:@"firstContentImage"
+    return [self fetchProperty:NSStringFromSelector(@selector(firstContentImage))
                         forced:forced
                       priority:priority
                   networkToken:networkToken];

@@ -2,9 +2,12 @@
 //  MHApi.h
 //  CoreHound
 //
-//  Copyright (c) 2015 Media Hound. All rights reserved.
+//  Copyright (c) 2015 MediaHound. All rights reserved.
 //
 
+/**
+ * Umbrella Header for the CoreHound SDK
+ */
 
 // SDK
 #import "MHSDK.h"
@@ -20,11 +23,13 @@
 
 // Search
 #import "MHSearch.h"
-#import "AutocompleteResult.h"
 
 
 // Container
 #import "MHRelationalPair.h"
+#import "MHContext.h"
+#import "MHRelationship.h"
+#import "MHSorting.h"
 #import "MHPagedResponse.h"
 
 

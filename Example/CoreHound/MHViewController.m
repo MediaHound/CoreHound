@@ -17,7 +17,7 @@
 
 
 @property (weak, nonatomic) IBOutlet UITableView *TableView;
-@property (strong, nonatomic) MHPagedSearchResponse* response;
+@property (strong, nonatomic) MHPagedResponse* response;
 @property (strong, nonatomic) NSMutableArray* allSearchResults;
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 @property BOOL additionalSearchPages;
@@ -190,7 +190,7 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath
              
              */
             
-            [self.response fetchNext].then(^(MHPagedSearchResponse* responded) {
+            [self.response fetchNext].then(^(MHPagedResponse* responded) {
 
                 self.response = responded;
                 self.additionalSearchPages = YES;
@@ -302,7 +302,7 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath
         MHSearchScopeContributor
 */
         
-        [MHSearch fetchResultsForSearchTerm:searchText scope:MHSearchScopeAll].then(^(MHPagedSearchResponse* pagedSearchResult) {
+        [MHSearch fetchResultsForSearchTerm:searchText scope:MHSearchScopeAll].then(^(MHPagedResponse* pagedSearchResult) {
             
             
             if ([self.searchBar.text isEqualToString:searchText]) {

@@ -2,13 +2,12 @@
 //  MHContributor.m
 //  CoreHound
 //
-//  Copyright (c) 2015 Media Hound. All rights reserved.
+//  Copyright (c) 2015 MediaHound. All rights reserved.
 //
 
 #import "MHContributor.h"
 #import "MHObject+Internal.h"
 #import "MHFetcher.h"
-#import "MHPagedResponse.h"
 
 
 @interface MHContributor ()

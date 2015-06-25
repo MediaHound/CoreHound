@@ -2,7 +2,7 @@
 # CoreHound: Getting Started
 
 ## What is CoreHound?
-CoreHound is the iOS SDK for accessing MediaHound's Entertainment Graph API. Search for media content across movies, books, games, TV, and more. Discover relationships across media via traits and contributors. CoreHound is a fast and easy SDK that lets you enhance your iOS apps with access to an entire world of entertainment content. 
+CoreHound is the iOS SDK for accessing MediaHound's Entertainment Graph. Search for media content across movies, books, games, TV, and more. Discover relationships across media via traits and contributors. CoreHound is a fast and easy SDK that lets you enhance your iOS apps with access to an entire world of entertainment content. 
 
 ## Install CoreHound
 
@@ -19,27 +19,26 @@ Run `pod install`, and you can now use CoreHound by importing it:
 ```
 
 ## The world of media content
-The entertainment graph contains many types of objects— movies, books, people, traits, etc. To uniquely 
-identify 
+The entertainment graph contains many types of objects— movies, books, people, traits, etc.
 
 The MediaHound Entertainment Graph contains a series of objects representing media content, users, collections, etc and the connections between those objects. These objects and connections form a graph of media content. Social interactions live on top of that content graph. 
 
-Every object in the Entertainment Graph is uniquely identified by an identifier— its `mhid`. For example, the movie *Saving Private Ryan* has an `mhid` of *mhmov1todo*.
+Every object in the Entertainment Graph is uniquely identified by an identifier—- its `mhid`. For example, the movie *Saving Private Ryan* has an `mhid` of *mhmovt8xqWDBFoCiL92HnfA4uYDV8HzPaig8ucgxJEsP*.
 
-Every object in the Entertainment Graph has a type— Movie, Book, Contributor, etc. There is a well defined type hierarchy, so you can work easily with objects of varying types. 
+Every object in the Entertainment Graph has a type—- Movie, Book, Contributor, etc. There is a well defined type hierarchy, so you can easily work with objects of varying types. 
 
-*Saving Private Ryan* is an `MHMovie`, and *Catch 22* is an `MHBook`. Both `MHMovie` and `MHBook` inherit from `MHMedia`. This lets us work with entertainment  across different content types easily, view it as an `MHMedia`. If we ever need to specifically work with books, we can work with it as an `MHBook`.
+*Saving Private Ryan* is an `MHMovie`, and *Catch 22* is an `MHBook`. Both `MHMovie` and `MHBook` inherit from `MHMedia`. This lets us work with entertainment  across different content types easily. We can view the content as an `MHMedia`. If we ever need to specifically work with books, we can treat it as an `MHBook`.
 
 All objects in the entertainment graph inherit from the `MHObject` class. This class provides the base functionality that all graph objects conform to. All objects have metadata represented as an `MHMetadata`:
 
 - mhid
 - name
-- description
+- objectDescription
 - createdDate
 
 Some content types have more metadata properties. For example all `MHMedia` objects have an `MHMediaMetadata` which extends `MHMetadata` adding a `releaseDate` property.
 
-Most `MHObjects` also have a primary image. The primary image is the main visual representation for the object. An `MHImage` provides image metadata as well as URLs to the image at varying sizes.
+Most `MHObjects` also have a primary image. The primary image is the main visual representation for the object. An `MHImage` provides image metadata including URLs to the image at varying resolutions.
 
 `MHObjects` have relations to other `MHObjects`. For example, given an `MHMovie`, we can query for the people who have contributed to the movie (actors, director, composer, etc) like this:
 
@@ -47,14 +46,16 @@ Most `MHObjects` also have a primary image. The primary image is the main visual
 [movie fetchContributors]; 
 ```
 
-This gives you list of `MHContributors` who are related to that movie.
+This gives you an array of `MHContributors` who are related to that movie.
 
 ## CoreHound is highly **Asynchronous**
 Almost all interaction you have with the CoreHound SDK is through asynchronous APIs. CoreHound uses *promises* as its asynchronous pattern. As a simple example, to find the release date of *The Usual Suspects*, you would write:
 
 ```objc
-[MHObject fetchByMhid:@"mh..."].then(^(MHObject* result) {
+NSString* theUsualSuspectsMhid = @"mhmovI8Y9tWpUFibqYGZYddt1I5q3znlRAuSQ2a6N437";
+[MHObject fetchByMhid:theUsualSuspectsMhid].then(^(MHObject* result) {
     NSDate* releaseDate = result.metadata.releaseDate;
+    NSLog(@"The Usual Suspects (%@)", releaseDate);
 });
 ```
 
@@ -67,7 +68,7 @@ If you want to load the primary image for a movie, you must do this:
 
 ```objc
 [movie fetchPrimaryImage].then(^(MHImage* primaryImage) {
-    NSString* url = primaryImage.original.url;
+    NSString* url = primaryImage.large.url;
     // Download image at `url`.
 });
 ```
@@ -76,7 +77,7 @@ CoreHound does its best to ensure these fetches are fast. Typically all the data
 
 Sometimes we want to be notified anytime an `MHObject`'s properties change. All `MHObject` properties are KVO-compliant:
 
-**NOTE:** CoreHound has no thread affinity for KVO notifications. This means that all KVO notifications will be posted from background threads. If you need to tie KVO notifications to UI updates, make sure to dispatch to the main thread. 
+**NOTE:** CoreHound has no thread affinity for KVO notifications. This means that all KVO notifications will be posted from background threads. If you need to tie KVO notifications to UI updates, make sure to dispatch to the main thread when the change notifications occur. 
 
 ## CoreHound is built for large datasets
 Since there are lots of connections between objects in the Entertainment Graph, all methods that return other `MHObjects` take advantage of paging. That means you will only get a subset of results. If you need more, you can fetch more, one page at a time.
@@ -93,7 +94,8 @@ If you need to access the next page just call `-fetchNext` on the paged response
 
 ```objc
 [movie fetchContributors].then(^(MHPagedResponse* firstPage) {
-    return response fetchNext];
+    // Access firstPage.content
+    return [response fetchNext];
 }).then(^(MHPagedResponse* secondPage) {
      // Access secondPage.content
 });
@@ -104,9 +106,9 @@ To perform searches against the Entertainment Graph, use the `MHSearch` class:
 
 ```objc
 [MHSearch fetchResultsForSearchTerm:@"The Usual Suspects"
-scope:MHSearchScopeMovie].then(^(MHPagedSearchResponse* response) {
-    id firstResult = response.content.firstObject;
-    NSLog(@"Found %@ with mhid %@", firstResult.name, firstResult.mhid);
+scope:MHSearchScopeMovie].then(^(MHPagedResponse* response) {
+    MHObject* firstResult = response.content.firstObject;
+    NSLog(@"Found %@", firstResult.metadata.name);
 });
 ```
 
@@ -125,11 +127,8 @@ To capture this additional information, we use an `MHContext` object. Each entry
 });
 ```
 
-## Consuming media content
-- TODO: Discuss Sources
-
 ## CoreHound uses **flexible networking**
-CoreHound uses the network extensively to asynchronously provide data and results as you request it. For advanced use cases, though, you need fine-grain control of how CoreHound requests are scheduled compared to your own networking requests. CoreHound exposes a clear API for controlling caching, priority, cancelation, and reprioritization. This networking infrastructure is provided by [Avenue](https://github.com/MediaHound/Avenue), a general networking library (built upon [AFNetworking](https://github.com/AFNetworking/AFNetworking)) that you can use for all network requests in your app.
+CoreHound uses the network extensively to asynchronously provide data and results as you request it. For advanced use cases, though, you need fine-grain control over how CoreHound requests are scheduled compared to your own networking requests. CoreHound exposes a clear API for controlling caching, priority, cancelation, and reprioritization. This networking infrastructure is provided by [Avenue](https://github.com/MediaHound/Avenue), a general networking library (built upon [AFNetworking](https://github.com/AFNetworking/AFNetworking)) that you can use for all network requests in your app.
 
 All CoreHound **fetch** APIs have a version that takes 3 parameters:
 
@@ -137,25 +136,25 @@ All CoreHound **fetch** APIs have a version that takes 3 parameters:
 - Priority: how to schedule this request compared to other concurrent network requests
 - Network Token: a token which allows cancelation and priority changes
 
-In the following example, we fetch a movie's sources, explicitly ignoring the cache. We also prioritize this request as `Low`, meaning it will only execute after all `High` priority requests finish.
+In the following example, we fetch a movie's contributors, explicitly ignoring the cache. We also prioritize this request as `Low`, meaning it will only execute after all `High` priority requests finish.
 
 ```objc
-[movie fetchSourcesForced:YES
-                 priority:[AVENetworkPriority
+[movie fetchContributorsForced:YES
+                      priority:[AVENetworkPriority
         priorityWithLevel:AVENetworkPriorityLevelLow
-             networkToken:nil].then(^(MHPagedResponse* response) {
+                  networkToken:nil].then(^(MHPagedResponse* response) {
     // use the results
 }];
 ```
 
-And in the following example, we've created a `AVENetworkToken` and passed it into the `-fetchSourcesForced:priority:networkToken` method. Afterwards, we call `-cancel` on the token, and the network request will be cancelled (if it has not already completed).
+And in the following example, we've created a `AVENetworkToken` and passed it into the `-fetchContributorsForced:priority:networkToken` method. Afterwards, we call `-cancel` on the token, and the network request will be cancelled (if it has not already completed).
 
 ```objc
 AVENetworkToken* token = [[AVENetworkToken alloc] init];
-[movie fetchSourcesForced:YES
-                 priority:[AVENetworkPriority
+[movie fetchContributorsForced:YES
+                      priority:[AVENetworkPriority
         priorityWithLevel:AVENetworkPriorityLevelLow
-             networkToken:token].then(^(MHPagedResponse* response) {
+                  networkToken:token].then(^(MHPagedResponse* response) {
     // use the results
 }];
 [token cancel];

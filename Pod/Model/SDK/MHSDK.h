@@ -10,7 +10,7 @@
 #import <PromiseKit/PromiseKit.h>
 
 /**
- * The MHSDK is the singular place to configure the SDK.
+ * The MHSDK allows configuration of the SDK.
  */
 @interface MHSDK : NSObject
 

@@ -2,7 +2,7 @@
 //  MHUser.m
 //  CoreHound
 //
-//  Copyright (c) 2015 Media Hound. All rights reserved.
+//  Copyright (c) 2015 MediaHound. All rights reserved.
 //
 
 #import "MHUser.h"
@@ -30,6 +30,8 @@ static MHPagedResponse* s_suggestedUsers = nil;
 
 
 @implementation MHUser
+
+@dynamic metadata;
 
 + (void)load
 {

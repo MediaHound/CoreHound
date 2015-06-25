@@ -2,7 +2,7 @@
 //  MHObject.m
 //  CoreHound
 //
-//  Copyright (c) 2015 Media Hound. All rights reserved.
+//  Copyright (c) 2015 MediaHound. All rights reserved.
 //
 
 #import "MHObject.h"
@@ -28,6 +28,7 @@ NSString* const MHFetchParameterView = @"view";
 NSString* const MHFetchParameterViewFull = @"full";
 
 static NSString* const kCollectionsSubendpoint = @"collections";
+static NSString* const kFeedSubendpoint = @"feed";
 
 
 @interface MHObjectTable : NSObject
@@ -226,7 +227,6 @@ static NSString* const kCollectionsSubendpoint = @"collections";
 
 - (PMKPromise*)unlike
 {
-    
     return [self takeAction:@"unlike"
                  parameters:nil
        predictedSocialBlock:^MHSocial* (MHSocial* oldSocial, NSDictionary* parameters) {
@@ -350,7 +350,7 @@ static NSString* const kCollectionsSubendpoint = @"collections";
                               priority:(AVENetworkPriority*)priority
                           networkToken:(AVENetworkToken*)networkToken
 {
-    return [self fetchProperty:@"primaryImage"
+    return [self fetchProperty:NSStringFromSelector(@selector(primaryImage))
                         forced:forced
                       priority:priority
                   networkToken:networkToken];
@@ -367,7 +367,7 @@ static NSString* const kCollectionsSubendpoint = @"collections";
                                 priority:(AVENetworkPriority*)priority
                             networkToken:(AVENetworkToken*)networkToken
 {
-    return [self fetchProperty:@"secondaryImage"
+    return [self fetchProperty:NSStringFromSelector(@selector(secondaryImage))
                         forced:forced
                       priority:priority
                   networkToken:networkToken];
@@ -384,7 +384,7 @@ static NSString* const kCollectionsSubendpoint = @"collections";
                       priority:(AVENetworkPriority*)priority
                   networkToken:(AVENetworkToken*)networkToken
 {
-    return [self fetchPagedEndpoint:[self subendpoint:@"feed"]
+    return [self fetchPagedEndpoint:[self subendpoint:kFeedSubendpoint]
                              forced:forced
                            priority:priority
                        networkToken:networkToken
@@ -549,7 +549,7 @@ static NSString* const kCollectionsSubendpoint = @"collections";
         parameters[@"pageSize"] = @(MHInternal_DefaultPageSize);
         parameters[MHFetchParameterView] = MHFetchParameterViewFull;
         if (next) {
-            parameters[@"pageNext"] = next;
+            parameters[@"pageNext"] = next; // TODO: Remove this
             parameters[@"next"] = next;
         }
         

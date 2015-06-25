@@ -2,7 +2,7 @@
 //  MHLoginSession.m
 //  CoreHound
 //
-//  Copyright (c) 2015 Media Hound. All rights reserved.
+//  Copyright (c) 2015 MediaHound. All rights reserved.
 //
 
 #import "MHLoginSession.h"

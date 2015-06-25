@@ -2,7 +2,7 @@
 //  MHMetadata.h
 //  CoreHound
 //
-//  Copyright (c) 2015 Media Hound. All rights reserved.
+//  Copyright (c) 2015 MediaHound. All rights reserved.
 //
 
 #import <JSONModel/JSONModel.h>
@@ -19,8 +19,23 @@
  * The unique MediaHound identifier for this object.
  */
 @property (strong, nonatomic) NSString* mhid;
+
+/**
+ * The dispalyable name of this object.
+ */
 @property (strong, nonatomic) NSString<Optional>* name;
+
+/**
+ * A description of this object.
+ */
 @property (strong, nonatomic) NSString<Optional>* objectDescription;
+
+/**
+ * The date this object was created. 
+ * This is typically valid for social objects to indicate
+ * when the social action occured.
+ * For dates related to Media content, consider the `releaseDate` property.
+ */
 @property (nonatomic, strong) NSDate<Optional>* createdDate;
 
 @end
@@ -34,7 +49,7 @@
 /**
  * When the piece of media was publicly released.
  */
-@property (strong, nonatomic) NSDate<Optional>* releaseDate; // TODO: Should not be optional
+@property (strong, nonatomic) NSDate<Optional>* releaseDate;
 
 @end
 
@@ -64,14 +79,34 @@
  */
 @interface MHImageMetadata : MHMetadata
 
+/**
+ * An image representation at the original resolution.
+ * Do not rely on the resolution for all originals to be the same or be fixed.
+ */
 @property (strong, nonatomic) MHImageData<Optional>* original;
 
+/**
+ * An image representation at thumbnail resolution.
+ * Do not rely on the resolution for all thumbnails to be the same or be fixed.
+ */
 @property (strong, nonatomic) MHImageData<Optional>* thumbnail;
 
+/**
+ * An image representation at small resolution.
+ * Do not rely on the resolution for all smalls to be the same or be fixed.
+ */
 @property (strong, nonatomic) MHImageData<Optional>* small;
 
+/**
+ * An image representation at medium resolution.
+ * Do not rely on the resolution for all mediums to be the same or be fixed.
+ */
 @property (strong, nonatomic) MHImageData<Optional>* medium;
 
+/**
+ * An image representation at large resolution.
+ * Do not rely on the resolution for all larges to be the same or be fixed.
+ */
 @property (strong, nonatomic) MHImageData<Optional>* large;
 
 /**
@@ -83,6 +118,10 @@
  */
 @property (strong, nonatomic) NSNumber<Optional>* isDefault;
 
+/**
+ * The average color of the image.
+ * NOTE: Currently unavailable.
+ */
 @property (strong, nonatomic) UIColor<Optional>* averageColor;
 
 @end
@@ -102,11 +141,24 @@
 @end
 
 
-
+/**
+ * What type of mixlist a collection is.
+ */
 typedef NS_ENUM(NSInteger, MHCollectionMixlistType)
 {
+    /**
+     * This collection is not a mixlist.
+     */
     MHCollectionMixlistTypeNone,
+    
+    /** 
+     * This collection is a partial mixlist.
+     */
     MHCollectionMixlistTypePartial,
+    
+    /**
+     * This collection is a fully complete mixlist.
+     */
     MHCollectionMixlistTypeFull,
 };
 
@@ -116,6 +168,9 @@ typedef NS_ENUM(NSInteger, MHCollectionMixlistType)
  */
 @interface MHCollectionMetadata : MHMetadata
 
+/**
+ * What type of a mixlist this collection is.
+ */
 @property (nonatomic) MHCollectionMixlistType mixlist;
 
 @end
@@ -126,9 +181,26 @@ typedef NS_ENUM(NSInteger, MHCollectionMixlistType)
  */
 @interface MHSubscriptionMetadata : MHMetadata
 
+/**
+ * How long this subscription lasts.
+ * E.g.: @"monthly"
+ */
 @property (strong, nonatomic) NSString* timePeriod;
+
+/**
+ * The numeric price for this subscription.
+ */
 @property (strong, nonatomic) NSNumber* price;
+
+/**
+ * The currency of the `price`.
+ */
 @property (strong, nonatomic) NSString* currency;
+
+/**
+ * An array of mediums this subscription supports.
+ * See `MHSourceMedium`.
+ */
 @property (strong, nonatomic) NSArray* mediums;
 
 @end
@@ -138,6 +210,9 @@ typedef NS_ENUM(NSInteger, MHCollectionMixlistType)
  */
 @interface MHSourceMetadata : MHMetadata
 
+/**
+ * Whether the user can connect to this source.
+ */
 @property (strong, nonatomic) NSNumber* connectable;
 
 @end

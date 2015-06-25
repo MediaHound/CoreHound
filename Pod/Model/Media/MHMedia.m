@@ -2,7 +2,7 @@
 //  MHMedia.m
 //  CoreHound
 //
-//  Copyright (c) 2015 Media Hound. All rights reserved.
+//  Copyright (c) 2015 MediaHound. All rights reserved.
 //
 
 #import "MHMedia.h"
@@ -10,6 +10,7 @@
 #import "MHContributor.h"
 #import "MHFetcher.h"
 #import "MHRelationalPair.h"
+#import "MHContext.h"
 #import "MHPagedResponse.h"
 #import "MHPagedResponse+Internal.h"
 #import "MHObject+Internal.h"
@@ -20,6 +21,8 @@
 
 
 @implementation MHMedia
+
+@dynamic metadata;
 
 @declare_class_property (rootEndpoint, @"graph/media")
 
@@ -39,7 +42,7 @@
                               priority:(AVENetworkPriority*)priority
                           networkToken:(AVENetworkToken*)networkToken
 {
-    return [self fetchProperty:@"primaryGroup"
+    return [self fetchProperty:NSStringFromSelector(@selector(primaryGroup))
                         forced:forced
                       priority:priority
                   networkToken:networkToken];
@@ -56,14 +59,10 @@
                                  priority:(AVENetworkPriority*)priority
                              networkToken:(AVENetworkToken*)networkToken
 {
-    if (self.keyContributors && !forced) {
-        return [PMKPromise promiseWithValue:self.keyContributors];
-    }
-    return [self.class fetchFullViewForMhid:self.metadata.mhid
-                                   priority:priority
-                               networkToken:networkToken].thenInBackground(^(MHMedia* object) {
-        return object.keyContributors;
-    });
+    return [self fetchProperty:NSStringFromSelector(@selector(keyContributors))
+                        forced:forced
+                      priority:priority
+                  networkToken:networkToken];
 }
 
 - (PMKPromise*)fetchSources

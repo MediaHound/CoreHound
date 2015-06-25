@@ -2,7 +2,7 @@
 //  MHObject+Internal.h
 //  CoreHound
 //
-//  Copyright (c) 2015 Media Hound. All rights reserved.
+//  Copyright (c) 2015 MediaHound. All rights reserved.
 //
 
 #import "MHObject.h"
@@ -19,7 +19,9 @@ extern NSString* const MHFetchParameterViewFull;
 
 @interface MHObject (Internal)
 
-- (PMKPromise*)takeAction:(NSString*)action parameters:(NSDictionary*)parameters predictedSocialBlock:(MHSocial*(^)(MHSocial*, NSDictionary*))predictedSocialBlock;
+- (PMKPromise*)takeAction:(NSString*)action
+               parameters:(NSDictionary*)parameters
+     predictedSocialBlock:(MHSocial*(^)(MHSocial*, NSDictionary*))predictedSocialBlock;
 
 + (PMKPromise*)fetchFullViewForMhid:(NSString*)mhid
                            priority:(AVENetworkPriority*)priority

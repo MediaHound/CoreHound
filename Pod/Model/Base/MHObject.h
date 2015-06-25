@@ -2,12 +2,13 @@
 //  MHObject.h
 //  CoreHound
 //
-//  Copyright (c) 2015 Media Hound. All rights reserved.
+//  Copyright (c) 2015 MediaHound. All rights reserved.
 //
 
 #import <JSONModel/JSONModel.h>
 #import <Avenue/Avenue.h>
 #import <PromiseKit/PromiseKit.h>
+
 #import "MHMetadata.h"
 
 @class MHImage;

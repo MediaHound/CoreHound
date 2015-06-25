@@ -2,14 +2,14 @@
 //  MHError.h
 //  CoreHound
 //
-//  Copyright (c) 2015 Media Hound. All rights reserved.
+//  Copyright (c) 2015 MediaHound. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 
 /**
  * The MediaHound error domain.
- * All NSErrors thrown from all MediaHound APIs are in this error domain.
+ * All NSErrors returned directly from MediaHound APIs are in this error domain.
  */
 extern NSString* const MHErrorDomain;
 
