@@ -123,6 +123,15 @@
 
 @implementation MHCollectionMetadata
 
+// TODO: Remove this once search indexes the mixlist property
++ (BOOL)propertyIsOptional:(NSString*)propertyName
+{
+    if ([propertyName isEqualToString:@"mixlist"]) {
+        return YES;
+    }
+    return [super propertyIsOptional:propertyName];
+}
+
 - (void)setMixlistWithNSString:(NSString*)mixlistValue
 {
     NSDictionary* mixlistKindMapping = @{
