@@ -143,7 +143,7 @@
  * Fetches the receiver's social metrics.
  * You should never read the `social` property directly from an MHObject. Instead, always access social metrics via
  * the `fetchSocial` promise. The `social` property can be used for observing KVO changes to social metrics.
- * @param forced Whether to use a cached response. If NO, a network request will occur.
+ * @param forced Whether to use a cached response. If YES, a network request will occur. If NO, a cached result may be used.
  * @param priority The network request priority.
  * @param networkToken The token for the network request, allowing cancelation and re-prioritization.
  * @return A promise whcih resolves with an MHSocial.
@@ -164,7 +164,7 @@
  * Fetches the receiver's primary image.
  * You should never read the `primaryImage` property directly from an MHObject. Instead, always access the image via
  * the `fetchPrimaryImage` promise. The `primaryImage` property can be used for observing KVO changes to social metrics.
- * @param forced Whether to use a cached response. If NO, a network request will occur.
+ * @param forced Whether to use a cached response. If YES, a network request will occur. If NO, a cached result may be used.
  * @param priority The network request priority.
  * @param networkToken The token for the network request, allowing cancelation and re-prioritization.
  * @return A promise which resolves with an MHImage.
@@ -185,7 +185,7 @@
  * Fetches the receiver's secondary image.
  * You should never read the `secondaryImage` property directly from an MHObject. Instead, always access the image via
  * the `fetchSecondaryImage` promise. The `secondaryImage` property can be used for observing KVO changes to social metrics.
- * @param forced Whether to use a cached response. If NO, a network request will occur.
+ * @param forced Whether to use a cached response. If YES, a network request will occur. If NO, a cached result may be used.
  * @param priority The network request priority.
  * @param networkToken The token for the network request, allowing cancelation and re-prioritization.
  * @return A promise which resolves with an MHImage.
@@ -202,7 +202,7 @@
 
 /**
  * Fetches the activity feed for the receiver.
- * @param forced Whether to use a cached response. If NO, a network request will occur.
+ * @param forced Whether to use a cached response. If YES, a network request will occur. If NO, a cached result may be used.
  * @param priority The network request priority.
  * @param networkToken The token for the network request, allowing cancelation and re-prioritization.
  * @return A promise which resolves with an MHPagedResponse.
@@ -219,7 +219,7 @@
 
 /**
  * Fetches all collections that contain the receiver.
- * @param forced Whether to use a cached response. If NO, a network request will occur.
+ * @param forced Whether to use a cached response. If YES, a network request will occur. If NO, a cached result may be used.
  * @param priority The network request priority.
  * @param networkToken The token for the network request, allowing cancelation and re-prioritization.
  * @return A promise which resolves with an MHPagedResponse.

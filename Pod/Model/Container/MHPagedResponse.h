@@ -9,8 +9,6 @@
 #import <PromiseKit/PromiseKit.h>
 #import "MHRelationalPair.h"
 
-@class MHPagingInfo;
-
 
 /**
  * An MHPagedResponse represents the result of requesting a single page.
@@ -25,12 +23,6 @@
  * To get the rest of the content use `fetchNext`.
  */
 @property (strong, nonatomic) NSArray<MHRelationalPair>* content;
-
-/**
- * Information about this page and subsequent pages.
- * You should not typically need to access the data.
- */
-@property (strong, nonatomic) MHPagingInfo<Optional>* pagingInfo; // TODO: Remove optionality
 
 /**
  * Whether this paged response has more pages beyond this one.

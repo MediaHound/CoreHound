@@ -31,7 +31,6 @@
 #import "MHRelationship.h"
 #import "MHSorting.h"
 #import "MHPagedResponse.h"
-#import "MHPagingInfo.h"
 
 
 // Social

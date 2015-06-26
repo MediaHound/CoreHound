@@ -12,6 +12,12 @@
 
 @interface MHPagedResponse ()
 
+/**
+ * Information about this page and subsequent pages.
+ * You should not typically need to access the data.
+ */
+@property (strong, nonatomic) MHPagingInfo<Optional>* pagingInfo; // TODO: Remove optionality
+
 @property (copy, nonatomic) MHPagedResponseFetchNextBlock fetchNextOperation;
 
 @property (strong, atomic) MHPagedResponse<Ignore>* cachedNextResponse;

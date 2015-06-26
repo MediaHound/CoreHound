@@ -24,7 +24,13 @@ static NSString* const kSourceSettingsEndpoint = @"settings/sources";
 static NSString* const kFollowingSubendpoint = @"following";
 static NSString* const kLikingSubendpoint = @"liking";
 static NSString* const kFollowersSubendpoint = @"followers";
+static NSString* const kSuggestedSubendpoint = @"suggested";
+static NSString* const kSetImageSubendpoint = @"uploadImage";
+static NSString* const kSetPasswordSubendpoint = @"updatePassword";
 //static NSString* const kFollowedCollectionsSubendpoint = @"followed";
+
+static NSString* const kForgotUsernameRootSubendpoint = @"forgotusername";
+static NSString* const kForgotPasswordRootSubendpoint = @"forgotpassword";
 
 static MHPagedResponse* s_suggestedUsers = nil;
 
@@ -68,7 +74,7 @@ static MHPagedResponse* s_suggestedUsers = nil;
     NSData* imageData = UIImageJPEGRepresentation(image, 1.0f);
     
     return [[MHFetcher sharedFetcher] postAndFetchModel:MHImage.class
-                                                   path:[self subendpoint:@"uploadImage"]
+                                                   path:[self subendpoint:kSetImageSubendpoint]
                                                 keyPath:@"primaryImage"
                                              parameters:nil
                               constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
@@ -93,7 +99,7 @@ static MHPagedResponse* s_suggestedUsers = nil;
                                      userInfo:nil];
     }
     
-    return [[AVENetworkManager sharedManager] POST:[self subendpoint:@"updatePassword"]
+    return [[AVENetworkManager sharedManager] POST:[self subendpoint:kSetPasswordSubendpoint]
                                         parameters:@{
                                                      @"oldPassword": currentPassword,
                                                      @"newPassword": newPassword
@@ -161,7 +167,7 @@ static MHPagedResponse* s_suggestedUsers = nil;
                                  @"firstName": firstName,
                                  @"lastName": lastName
                                  };
-    return [[AVENetworkManager sharedManager] POST:[self rootSubendpoint:@"new"]
+    return [[AVENetworkManager sharedManager] POST:[self rootSubendpoint:kCreateRootSubendpoint]
                                         parameters:parameters
                                           priority:[AVENetworkPriority priorityWithLevel:AVENetworkPriorityLevelHigh
                                                                             postponeable:NO]
@@ -185,9 +191,8 @@ static MHPagedResponse* s_suggestedUsers = nil;
                       priority:(AVENetworkPriority*)priority
                   networkToken:(AVENetworkToken*)networkToken
 {
-    NSString* path = [NSString stringWithFormat:@"%@/lookup/%@", [self.class rootEndpoint], username];
     return [[MHFetcher sharedFetcher] fetchModel:MHUser.class
-                                            path:path
+                                            path:[self rootSubendpointByLookup:username]
                                          keyPath:nil
                                       parameters:@{
                                                    MHFetchParameterView: MHFetchParameterViewFull
@@ -322,7 +327,7 @@ static MHPagedResponse* s_suggestedUsers = nil;
                            priority:(AVENetworkPriority*)priority
                        networkToken:(AVENetworkToken*)networkToken
 {
-    return [self fetchPagedEndpoint:[self subendpoint:@"suggested"]
+    return [self fetchPagedEndpoint:[self subendpoint:kSuggestedSubendpoint]
                              forced:forced
                            priority:priority
                        networkToken:networkToken
@@ -336,7 +341,7 @@ static MHPagedResponse* s_suggestedUsers = nil;
 
 + (PMKPromise*)forgotUsernameWithEmail:(NSString*)email
 {
-    return [[AVENetworkManager sharedManager] POST:[self rootSubendpoint:@"forgotusername"]
+    return [[AVENetworkManager sharedManager] POST:[self rootSubendpoint:kForgotUsernameRootSubendpoint]
                                         parameters:@{
                                                      @"email": email
                                                      }
@@ -348,7 +353,7 @@ static MHPagedResponse* s_suggestedUsers = nil;
 
 + (PMKPromise*)forgotPasswordWithEmail:(NSString*)email
 {
-    return [[AVENetworkManager sharedManager] POST:[self rootSubendpoint:@"forgotpassword"]
+    return [[AVENetworkManager sharedManager] POST:[self rootSubendpoint:kForgotPasswordRootSubendpoint]
                                         parameters:@{
                                                      @"email": email
                                                      }
@@ -360,7 +365,7 @@ static MHPagedResponse* s_suggestedUsers = nil;
 
 + (PMKPromise*)forgotPasswordWithUsername:(NSString*)username
 {
-    return [[AVENetworkManager sharedManager] POST:[self rootSubendpoint:@"forgotpassword"]
+    return [[AVENetworkManager sharedManager] POST:[self rootSubendpoint:kForgotPasswordRootSubendpoint]
                                         parameters:@{
                                                      @"username": username
                                                      }

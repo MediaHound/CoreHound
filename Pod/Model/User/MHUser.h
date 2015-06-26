@@ -106,7 +106,7 @@ MHJSONMODEL_PROTOCOL_DEFINE(MHUser)
 
 /**
  * Fetches the interest feed for this user.
- * @param forced Whether to use a cached response. If NO, a network request will occur.
+ * @param forced Whether to use a cached response. If YES, a network request will occur. If NO, a cached result may be used.
  * @param priority The network request priority.
  * @param networkToken The token for the network request, allowing cancelation and re-prioritization.
  * @return A promise which resolves with an MHPagedResponse.
@@ -123,7 +123,7 @@ MHJSONMODEL_PROTOCOL_DEFINE(MHUser)
 
 /**
  * Fetches all of the collections created by this user.
- * @param forced Whether to use a cached response. If NO, a network request will occur.
+ * @param forced Whether to use a cached response. If YES, a network request will occur. If NO, a cached result may be used.
  * @param priority The network request priority.
  * @param networkToken The token for the network request, allowing cancelation and re-prioritization.
  * @return A promise which resolves with an MHPagedResponse.
@@ -140,7 +140,7 @@ MHJSONMODEL_PROTOCOL_DEFINE(MHUser)
 
 /**
  * Fetches all the things that this user is following.
- * @param forced Whether to use a cached response. If NO, a network request will occur.
+ * @param forced Whether to use a cached response. If YES, a network request will occur. If NO, a cached result may be used.
  * @param priority The network request priority.
  * @param networkToken The token for the network request, allowing cancelation and re-prioritization.
  * @return A promise which resolves with an MHPagedResponse.
@@ -157,7 +157,7 @@ MHJSONMODEL_PROTOCOL_DEFINE(MHUser)
 
 /**
  * Fetches all the things that have been liked by this user.
- * @param forced Whether to use a cached response. If NO, a network request will occur.
+ * @param forced Whether to use a cached response. If YES, a network request will occur. If NO, a cached result may be used.
  * @param priority The network request priority.
  * @param networkToken The token for the network request, allowing cancelation and re-prioritization.
  * @return A promise which resolves with an MHPagedResponse.
@@ -174,7 +174,7 @@ MHJSONMODEL_PROTOCOL_DEFINE(MHUser)
 
 /**
  * Fetches the followers (MHUsers) for this user.
- * @param forced Whether to use a cached response. If NO, a network request will occur.
+ * @param forced Whether to use a cached response. If YES, a network request will occur. If NO, a cached result may be used.
  * @param priority The network request priority.
  * @param networkToken The token for the network request, allowing cancelation and re-prioritization.
  * @return A promise which resolves with an MHPagedResponse.
@@ -191,7 +191,7 @@ MHJSONMODEL_PROTOCOL_DEFINE(MHUser)
 
 /**
  * Fetches suggested content for this user.
- * @param forced Whether to use a cached response. If NO, a network request will occur.
+ * @param forced Whether to use a cached response. If YES, a network request will occur. If NO, a cached result may be used.
  * @param priority The network request priority.
  * @param networkToken The token for the network request, allowing cancelation and re-prioritization.
  * @return A promise which resolves with an MHPagedResponse.

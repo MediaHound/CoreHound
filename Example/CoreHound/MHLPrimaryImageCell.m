@@ -6,8 +6,8 @@
 //  Copyright (c) 2015 Dustin Bachrach. All rights reserved.
 //
 
-#import "MH_CH_PrimaryImgCell.h"
+#import "MHLPrimaryImageCell.h"
 
-@implementation MH_CH_PrimaryImgCell
+@implementation MHLPrimaryImageCell
 
 @end

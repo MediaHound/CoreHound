@@ -30,8 +30,11 @@ NSString* const MHFetchParameterViewFull = @"full";
 NSString* const MHFetchParameterPageSize = @"pageSize";
 NSString* const MHFetchParameterNext = @"next";
 
+NSString* const kCreateRootSubendpoint = @"new";
+
 static NSString* const kCollectionsSubendpoint = @"collections";
 static NSString* const kFeedSubendpoint = @"feed";
+static NSString* const kSocialSubendpoint = @"social";
 
 
 @interface MHObjectTable : NSObject
@@ -329,7 +332,7 @@ static NSString* const kFeedSubendpoint = @"feed";
             }
         }
         return [[MHFetcher sharedFetcher] fetchModel:MHSocial.class
-                                                path:[self subendpoint:@"social"]
+                                                path:[self subendpoint:kSocialSubendpoint]
                                              keyPath:@"social"
                                           parameters:nil
                                             priority:priority
@@ -718,6 +721,11 @@ static NSString* const kFeedSubendpoint = @"feed";
 + (NSString*)rootSubendpoint:(NSString*)sub
 {
     return [NSString stringWithFormat:@"%@/%@", [self rootEndpoint], sub];
+}
+
++ (NSString*)rootSubendpointByLookup:(NSString*)lookup
+{
+    return [self rootSubendpoint:[NSString stringWithFormat:@"lookup/%@", lookup]];
 }
 
 #pragma mark - MHObject Registration

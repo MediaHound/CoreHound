@@ -8,8 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MH_CH_PrimaryImgCell : UITableViewCell
+@interface MHLPrimaryImageCell : UITableViewCell
 
-@property (weak, nonatomic) IBOutlet UIImageView *mhid_Primary_Image;
+@property (weak, nonatomic) IBOutlet UIImageView *primaryImageView;
 
 @end

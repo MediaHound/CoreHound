@@ -6,8 +6,8 @@
 //  Copyright (c) 2015 Dustin Bachrach. All rights reserved.
 //
 
-#import "MH_CH_ContributorCell.h"
+#import "MHLContributorCell.h"
 
-@implementation MH_CH_ContributorCell
+@implementation MHLContributorCell
 
 @end

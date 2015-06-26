@@ -37,9 +37,8 @@
                   priority:(AVENetworkPriority*)priority
               networkToken:(AVENetworkToken*)networkToken
 {
-    NSString* path = [self rootSubendpoint:[NSString stringWithFormat:@"lookup/%@", name]];
     return [[MHFetcher sharedFetcher] fetchModel:MHHashtag.class
-                                            path:path
+                                            path:[self rootSubendpointByLookup:name]
                                          keyPath:nil
                                       parameters:nil
                                         priority:priority

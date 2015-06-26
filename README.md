@@ -48,7 +48,7 @@ Most `MHObjects` also have a primary image. The primary image is the main visual
 
 This gives you an array of `MHContributors` who are related to that movie.
 
-## CoreHound is highly **Asynchronous**
+## CoreHound is highly **asynchronous**
 Almost all interaction you have with the CoreHound SDK is through asynchronous APIs. CoreHound uses *promises* as its asynchronous pattern. As a simple example, to find the release date of *The Usual Suspects*, you would write:
 
 ```objc
@@ -111,6 +111,8 @@ scope:MHSearchScopeMovie].then(^(MHPagedResponse* response) {
     NSLog(@"Found %@", firstResult.metadata.name);
 });
 ```
+
+Search results are just standard `MHObjects`, so you can interact with them like you would an MHObject you got back from `fetchContributors`.
 
 ## Exploring relations between content
 When exploring connections between content, just getting back `MHObjects` would be limiting. We need to know  information about the relationship between the two `MHObjects`. Consider fetching the contributors for a movie. If all we got back was the `MHContributors`, we wouldn't know how that person contributed to the movie. Were they the director, an actor, or produced the movie? 

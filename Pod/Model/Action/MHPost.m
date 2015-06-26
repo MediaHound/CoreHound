@@ -31,7 +31,7 @@
     }
     
     // TODO: MHFetcher should handle this and do it with POST
-    return [[AVENetworkManager sharedManager] POST:[self rootSubendpoint:@"new"]
+    return [[AVENetworkManager sharedManager] POST:[self rootSubendpoint:kCreateRootSubendpoint]
                                        parameters:@{
                                                     @"message": message,
                                                     @"mentions": mentionedMhids,

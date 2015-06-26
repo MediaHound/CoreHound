@@ -6,9 +6,8 @@
 //  Copyright (c) 2015 Dustin Bachrach. All rights reserved.
 //
 
-#import "MH_CH_SearchCell.h"
+#import "MHLSearchCell.h"
 
-@implementation MH_CH_SearchCell
-
+@implementation MHLSearchCell
 
 @end

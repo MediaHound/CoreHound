@@ -19,6 +19,8 @@ extern NSString* const MHFetchParameterViewFull;
 extern NSString* const MHFetchParameterPageSize;
 extern NSString* const MHFetchParameterNext;
 
+extern NSString* const kCreateRootSubendpoint;
+
 
 @interface MHObject (Internal)
 
@@ -84,5 +86,7 @@ extern NSString* const MHFetchParameterNext;
 - (NSString*)subendpoint:(NSString*)sub;
 
 + (NSString*)rootSubendpoint:(NSString*)sub;
+
++ (NSString*)rootSubendpointByLookup:(NSString*)lookup;
 
 @end

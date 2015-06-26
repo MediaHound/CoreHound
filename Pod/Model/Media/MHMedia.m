@@ -19,6 +19,13 @@
 
 #import <AtSugar/AtSugar.h>
 
+static NSString* const kRelatedSubendpoint = @"related";
+static NSString* const kContentSubendpoint = @"content";
+static NSString* const kContributorsSubendpoint = @"contributors";
+static NSString* const kSourcesSubendpoint = @"sources";
+
+static NSString* const kRelatedRootSubendpoint = @"related";
+
 
 @implementation MHMedia
 
@@ -76,7 +83,7 @@
                          priority:(AVENetworkPriority*)priority
                      networkToken:(AVENetworkToken*)networkToken
 {
-    return [self fetchPagedEndpoint:[self subendpoint:@"sources"]
+    return [self fetchPagedEndpoint:[self subendpoint:kSourcesSubendpoint]
                              forced:forced
                            priority:priority
                        networkToken:networkToken
@@ -103,7 +110,7 @@
                          priority:(AVENetworkPriority*)priority
                      networkToken:(AVENetworkToken*)networkToken
 {
-    return [self fetchPagedEndpoint:[self subendpoint:@"related"]
+    return [self fetchPagedEndpoint:[self subendpoint:kRelatedSubendpoint]
                              forced:forced
                            priority:priority
                        networkToken:networkToken
@@ -121,7 +128,7 @@
                          priority:(AVENetworkPriority*)priority
                      networkToken:(AVENetworkToken*)networkToken
 {
-    return [self fetchPagedEndpoint:[self subendpoint:@"content"]
+    return [self fetchPagedEndpoint:[self subendpoint:kContentSubendpoint]
                              forced:forced
                            priority:priority
                        networkToken:networkToken
@@ -139,7 +146,7 @@
                               priority:(AVENetworkPriority*)priority
                           networkToken:(AVENetworkToken*)networkToken
 {
-    return [self fetchPagedEndpoint:[self subendpoint:@"contributors"]
+    return [self fetchPagedEndpoint:[self subendpoint:kContributorsSubendpoint]
                              forced:forced
                            priority:priority
                        networkToken:networkToken
@@ -159,14 +166,12 @@
                      priority:(AVENetworkPriority*)priority
                  networkToken:(AVENetworkToken*)networkToken
 {
-    // TODO: Use caching and forced flag
-    
     NSMutableSet* mhids = [NSMutableSet set];
     for (MHMedia* media in medias) {
         [mhids addObject:media.metadata.mhid];
     }
     
-    return [self fetchRootPagedEndpoint:[self rootSubendpoint:@"related"]
+    return [self fetchRootPagedEndpoint:[self rootSubendpoint:kRelatedRootSubendpoint]
                                  forced:forced
                              parameters:@{
                                           @"ids": mhids

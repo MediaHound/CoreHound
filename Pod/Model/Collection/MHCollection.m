@@ -22,6 +22,7 @@
 static NSString* const kContentSubendpoint = @"content";
 static NSString* const kMixlistSubendpoint = @"mixlist";
 static NSString* const kOwnersSubendpoint = @"owners";
+static NSString* const kUpdateSubendpoint = @"update";
 
 
 @implementation MHCollection
@@ -88,7 +89,7 @@ static NSString* const kOwnersSubendpoint = @"owners";
 - (PMKPromise*)setName:(NSString*)name
 {
     return [[MHFetcher sharedFetcher] putAndFetchModel:MHCollectionMetadata.class
-                                                  path:[self subendpoint:@"update"]
+                                                  path:[self subendpoint:kUpdateSubendpoint]
                                                keyPath:@"metadata"
                                             parameters:@{
                                                          @"name": name
@@ -96,7 +97,7 @@ static NSString* const kOwnersSubendpoint = @"owners";
         if (![self.metadata isEqual:metadata]) {
             self.metadata = metadata;
         }
-        return self.metadata;
+        return self;
     });
 }
 
@@ -137,7 +138,7 @@ static NSString* const kOwnersSubendpoint = @"owners";
     }
     
     return [[MHFetcher sharedFetcher] postAndFetchModel:MHCollection.class
-                                                   path:[self rootSubendpoint:@"new"]
+                                                   path:[self rootSubendpoint:kCreateRootSubendpoint]
                                                 keyPath:nil
                                              parameters:parameters].thenInBackground(^(MHCollection* collection) {
         MHUser* currentUser = [MHLoginSession currentSession].user;

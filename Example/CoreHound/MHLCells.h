@@ -1,5 +1,5 @@
 //
-//  MH_CH_Cells.h
+//  MHLCells.h
 //  CoreHound
 //
 //  Created by Dustin Mote on 3/18/15.
@@ -7,6 +7,6 @@
 //
 
 
-#import "MH_CH_SearchCell.h"
-#import "MH_CH_PrimaryImgCell.h"
-#import "MH_CH_ContributorCell.h"
+#import "MHLSearchCell.h"
+#import "MHLPrimaryImageCell.h"
+#import "MHLContributorCell.h"
