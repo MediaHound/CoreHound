@@ -11,10 +11,7 @@
 NSSet * ScopeStringsFromMHSearchScope(MHSearchScope scope)
 {
     NSMutableSet* set = [NSMutableSet set];
-    if (scope == MHSearchScopeAll) {
-        [set addObject:@"all"];
-    }
-    else {
+    if (scope != MHSearchScopeAll) {
         if (scope & MHSearchScopeMovie) {
             [set addObject:@"movie"];
         }
@@ -48,11 +45,6 @@ NSSet * ScopeStringsFromMHSearchScope(MHSearchScope scope)
         if (scope & MHSearchScopeContributor) {
             [set addObject:@"contributor"];
         }
-    }
-    
-    // If nothing was found, fall back on all
-    if (set.count == 0) {
-        [set addObject:@"all"];
     }
     
     return set;

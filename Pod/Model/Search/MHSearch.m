@@ -72,7 +72,10 @@ NSString* NSStringByAddingExtendedPercentEscapes(NSString* str)
     
     NSMutableDictionary* parameters = [NSMutableDictionary dictionary];
     parameters[MHFetchParameterPageSize] = @(MHInternal_DefaultPageSize);
-    parameters[@"types"] = scopes;
+    
+    if (scopes.count > 0) {
+        parameters[@"types"] = scopes;
+    }
     
     if (next) {
         parameters[MHFetchParameterNext] = next;
