@@ -89,6 +89,7 @@
 {
     MHLResultViewController* resultController = [segue destinationViewController];
     NSIndexPath* path = [self.tableView indexPathForSelectedRow];
+    [self.tableView deselectRowAtIndexPath:path animated:YES];
   
     MHRelationalPair* pair = self.contributors[path.row - 1];
     MHObject* result = pair.object;
