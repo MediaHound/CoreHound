@@ -21,6 +21,10 @@
  * Perform a search of entertainment content given a search term and a scope.
  * @param search The search term to search the entertainment graph for.
  * @param scope A search filter that can restrict the content type of results.
+ *     Scopes can contain multiple filters. For example:
+ *     ```
+ *     [MHSearch fetchResultsForSearchTerm:@"lost" scope:MHSearchScopeMovie | MHSearchScopeShowSeries]
+ *     ```
  * @return A promise which resolves with the MHPagedResponse.
  */
 + (PMKPromise*)fetchResultsForSearchTerm:(NSString*)search
@@ -30,6 +34,10 @@
  * Perform a search of entertainment content given a search term and a scope.
  * @param search The search term to search the entertainment graph for.
  * @param scope A search filter that can restrict the content type of results.
+ *     Scopes can contain multiple filters. For example:
+ *     ```
+ *     [MHSearch fetchResultsForSearchTerm:@"lost" scope:MHSearchScopeMovie | MHSearchScopeShowSeries]
+ *     ```
  * @param priority The network request priority.
  * @param networkToken The token for the network request, allowing cancelation and re-prioritization.
  * @return A promise which resolves with the MHPagedResponse.

@@ -11,6 +11,7 @@
 #import "MHObject+Internal.h"
 #import "MHPagedResponse.h"
 #import "MHPagedResponse+Internal.h"
+#import "MHContext.h"
 
 #import <AtSugar/AtSugar.h>
 
@@ -66,11 +67,13 @@ NSString* NSStringByAddingExtendedPercentEscapes(NSString* str)
         return [PMKPromise promiseWithValue:response];
     }
     
-    NSString* scopeString = NSStringFromMHSearchScope(scope);
-    NSString* path = [NSString stringWithFormat:@"search/%@/%@", NSStringByAddingExtendedPercentEscapes(scopeString), NSStringByAddingExtendedPercentEscapes(search)];
+    NSSet* scopes = ScopeStringsFromMHSearchScope(scope);
+    NSString* path = [NSString stringWithFormat:@"search/all/%@", NSStringByAddingExtendedPercentEscapes(search)];
     
     NSMutableDictionary* parameters = [NSMutableDictionary dictionary];
     parameters[MHFetchParameterPageSize] = @(MHInternal_DefaultPageSize);
+    parameters[@"types"] = scopes;
+    
     if (next) {
         parameters[MHFetchParameterNext] = next;
     }
@@ -92,9 +95,11 @@ NSString* NSStringByAddingExtendedPercentEscapes(NSString* str)
                                           networkToken:nil
                                                   next:newNext];
         };
-//        for (AutocompleteResult* result in pagedResponse.content) {
-//            result.searchTerm = search;
-//        }
+        for (MHRelationalPair* pair in pagedResponse.content) {
+            MHContext* context = pair.context;
+            context.searchTerm = search;
+            context.searchScope = scope;
+        }
         return pagedResponse;
     });
 }

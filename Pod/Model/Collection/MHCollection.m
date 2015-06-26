@@ -59,7 +59,7 @@ static NSString* const kUpdateSubendpoint = @"update";
 
 - (PMKPromise*)changeContents:(NSArray*)contents modification:(NSString*)modification
 {
-    NSMutableArray* mhids = [NSMutableArray array];
+    NSMutableSet* mhids = [NSMutableSet set];
     for (MHObject* content in contents) {
         [mhids addObject:content.metadata.mhid];
     }

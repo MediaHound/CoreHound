@@ -21,6 +21,15 @@
 
 @implementation MHContext
 
++ (BOOL)propertyIsIgnored:(NSString *)propertyName
+{
+    if ([propertyName isEqualToString:@"searchScope"]
+        || [propertyName isEqualToString:@"searchTerm"]) {
+        return YES;
+    }
+    return NO;
+}
+
 - (instancetype)initWithDictionary:(NSDictionary*)dict error:(NSError**)err
 {
     if (self = [super initWithDictionary:dict error:err]) {

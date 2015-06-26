@@ -11,65 +11,69 @@
 /**
  * Search scopes filter what type of content is returned from search.
  * If you do not want to filter by content type, use `MHSearchScopeAll`.
+ * Scopes can contain multiple filters. For example:
+ *     ```
+ *     [MHSearch fetchResultsForSearchTerm:@"lost" scope:MHSearchScopeMovie | MHSearchScopeShowSeries]
+ *     ```
  */
-typedef NS_ENUM(NSInteger, MHSearchScope) {
+typedef NS_ENUM(NSUInteger, MHSearchScope) {
     /**
      * Do not filter by content type. Return all results.
      */
-    MHSearchScopeAll,
+    MHSearchScopeAll         = 0,
     
     /**
      * Only return Movie results.
      */
-    MHSearchScopeMovie,
+    MHSearchScopeMovie       = 1 << 0,
     
     /**
      * Only return Song results.
      */
-    MHSearchScopeSong,
+    MHSearchScopeSong        = 1 << 1,
     
     /**
      * Only return Album results.
      */
-    MHSearchScopeAlbum,
+    MHSearchScopeAlbum       = 1 << 2,
     
     /**
-     * Only return TV Series results.
+     * Only return Show Series results.
      */
-    MHSearchScopeTvSeries,
+    MHSearchScopeShowSeries  = 1 << 3,
     
     /**
-     * Only return TV Season results.
+     * Only return Show Season results.
      */
-    MHSearchScopeTvSeason,
+    MHSearchScopeShowSeason  = 1 << 4,
     
     /**
-     * Only return TV Episode results.
+     * Only return Show Episode results.
      */
-    MHSearchScopeTvEpisode,
+    MHSearchScopeShowEpisode = 1 << 5,
     
     /**
      * Only return Book results.
      */
-    MHSearchScopeBook,
+    MHSearchScopeBook        = 1 << 6,
     
     /**
      * Only return Game results.
      */
-    MHSearchScopeGame,
+    MHSearchScopeGame        = 1 << 7,
     
     /**
      * Only return Collection results.
      */
-    MHSearchScopeCollection,
+    MHSearchScopeCollection  = 1 << 8,
     
     /**
      * Only return User results.
      */
-    MHSearchScopeUser,
+    MHSearchScopeUser        = 1 << 9,
     
     /**
      * Only return Contributor results.
      */
-    MHSearchScopeContributor
+    MHSearchScopeContributor = 1 << 10
 };

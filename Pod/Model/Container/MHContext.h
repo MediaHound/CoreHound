@@ -9,6 +9,7 @@
 #import <JSONModel/JSONModel.h>
 
 #import "MHRelationship.h"
+#import "MHSearchScope.h"
 
 @class MHSourceMedium;
 @class MHSorting;
@@ -25,6 +26,11 @@
 - (MHSourceMedium*)mediumForType:(NSString*)type;
 
 @property (strong, nonatomic, readonly) NSArray* allMediums;
+
+@property (strong, nonatomic) NSString* searchTerm;
+
+@property (nonatomic) MHSearchScope searchScope;
+
 //
 // TODO: Should all contexts have a content pointer back to the object?
 //       if so, then we should remove `content` from MHSourceMedium

@@ -174,9 +174,10 @@
          Use the MHSearch class to perform search queries on The Entertainment Graph.
          When the results return, they will come back in pages.
          Search Scopes allow you to filter what type of content you want to search for.
-         In this case we are searching across all types.
+         In this case we are searching across movies and show series types.
          */
-        [MHSearch fetchResultsForSearchTerm:searchText scope:MHSearchScopeAll].then(^(MHPagedResponse* pagedSearchResult) {
+        [MHSearch fetchResultsForSearchTerm:searchText
+                                      scope:MHSearchScopeMovie | MHSearchScopeShowSeries].then(^(MHPagedResponse* pagedSearchResult) {
             
             /*
              First make sure that the user hasn't changed the search text since we started the search request.

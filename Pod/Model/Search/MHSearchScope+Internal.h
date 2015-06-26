@@ -8,4 +8,4 @@
 
 #import "MHSearchScope.h"
 
-NSString * NSStringFromMHSearchScope(MHSearchScope scope);
+NSSet * ScopeStringsFromMHSearchScope(MHSearchScope scope);
