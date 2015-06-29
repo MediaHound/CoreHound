@@ -67,21 +67,37 @@
 @end
 
 
+/**
+ * An MHRealIndividualContributor is an real individual that in some way contributes to
+ * a piece of content.
+ */
 @interface MHRealIndividualContributor : MHContributor
 
 @end
 
 
+/**
+ * An MHRealGroupContributor is real group entity that in some way contributes to
+ * a piece of content.
+ */
 @interface MHRealGroupContributor : MHContributor
 
 @end
 
 
+/**
+ * An MHFictionalIndividualContributor is an fictional individual that in some way contributes to
+ * a piece of content.
+ */
 @interface MHFictionalIndividualContributor : MHContributor
 
 @end
 
 
+/**
+ * An MHFictionalGroupContributor is a fictional group entity that in some way contributes to
+ * a piece of content.
+ */
 @interface MHFictionalGroupContributor : MHContributor
 
 @end
