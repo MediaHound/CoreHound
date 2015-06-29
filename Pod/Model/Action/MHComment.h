@@ -8,6 +8,9 @@
 #import "MHAction.h"
 
 
+/**
+ * An MHComment action occurs when a user comments on a MHPost.
+ */
 @interface MHComment : MHAction
 
 @end

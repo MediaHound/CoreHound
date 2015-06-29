@@ -9,6 +9,9 @@
 #import "MHAction.h"
 
 
+/**
+ * An MHPublish action occurs when a user publishes a collection.
+ */
 @interface MHPublish : MHAction
 
 @end

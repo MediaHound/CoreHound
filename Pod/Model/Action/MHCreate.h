@@ -8,6 +8,9 @@
 #import "MHAction.h"
 
 
+/**
+ * An MHCreate action occurs when a user creates a collection.
+ */
 @interface MHCreate : MHAction
 
 @end

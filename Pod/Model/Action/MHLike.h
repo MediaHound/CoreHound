@@ -8,6 +8,9 @@
 #import "MHAction.h"
 
 
+/**
+ * An MHLike action occurs when a user likes an MHObject.
+ */
 @interface MHLike : MHAction
 
 @end

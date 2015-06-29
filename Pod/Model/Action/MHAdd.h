@@ -8,6 +8,9 @@
 #import "MHAction.h"
 
 
+/**
+ * An MHAdd action occurs when a user adds content to a collection.
+ */
 @interface MHAdd : MHAction
 
 @end

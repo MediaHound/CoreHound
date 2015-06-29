@@ -129,6 +129,25 @@ To capture this additional information, we use an `MHContext` object. Each entry
 });
 ```
 
+## Acting on Behalf of a User
+Entertainment is only part of The Entertainment Graph. Users bring social interaction and knowledge to the graph. CoreHound lets you authenticate on behalf of the user and take social actions on media, create collections, or interact with other users.
+
+### Logging in a user
+
+CoreHound offers two ways to log in a user: User OAuth and Enterprise xAuth. Most applications will use User OAuth. Enteprise partners can opt-in to an xAuth flow.
+
+### Logging in using User OAuth
+
+**TODO**
+
+### Logging in using Enterprise xAuth
+
+**TODO**
+
+### Creating users in Enterprise xAuth
+
+**TODO**
+
 ## CoreHound uses **flexible networking**
 CoreHound uses the network extensively to asynchronously provide data and results as you request it. For advanced use cases, though, you need fine-grain control over how CoreHound requests are scheduled compared to your own networking requests. CoreHound exposes a clear API for controlling caching, priority, cancelation, and reprioritization. This networking infrastructure is provided by [Avenue](https://github.com/MediaHound/Avenue), a general networking library (built upon [AFNetworking](https://github.com/AFNetworking/AFNetworking)) that you can use for all network requests in your app.
 
