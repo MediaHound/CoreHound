@@ -146,7 +146,7 @@ CoreHound offers two ways to log in a user: User OAuth and Enterprise Auth. Most
 
 ### Logging in using User OAuth
 
-**TODO**
+*Coming soon...*
 
 ### Logging in using Enterprise Auth
 
