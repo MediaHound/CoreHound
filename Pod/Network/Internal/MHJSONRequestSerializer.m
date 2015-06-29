@@ -9,6 +9,8 @@
 #import "MHJSONRequestSerializer.h"
 #import "MHSDK+Internal.h"
 
+static NSString* kAccessTokenKey = @"access_token";
+
 
 @implementation MHJSONRequestSerializer
 
@@ -53,11 +55,11 @@
     if (accessToken) {
         if (parameters) {
             NSMutableDictionary* newParameters = [parameters mutableCopy];
-            newParameters[@"access_token"] = accessToken;
+            newParameters[kAccessTokenKey] = accessToken;
             return newParameters;
         }
         else {
-            return @{ @"access_token": accessToken };
+            return @{ kAccessTokenKey: accessToken };
         }
     }
     else {

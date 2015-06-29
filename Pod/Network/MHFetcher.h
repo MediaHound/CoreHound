@@ -10,7 +10,7 @@
 
 
 /**
- * The main fetcher for all MediaHound API calls
+ * The main fetcher for all MediaHound API network requests.
  */
 @interface MHFetcher : AVEFetcher
 

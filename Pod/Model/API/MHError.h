@@ -24,3 +24,16 @@ extern NSString* const MHErrorDomain;
  * credentials were invalid.
  */
 #define MHLoginSessionInvalidCredentialsError 2
+
+
+/**
+ * NSError userInfo key that will contain response data
+ * Returned on failing network calls
+ */
+extern NSString* const MHJSONResponseSerializerWithDataKey;
+
+/**
+ * NSError userInfo key that will contain response string
+ * Returned on failing network calls
+ */
+extern NSString* const MHJSONResponseSerializerWithStringKey;

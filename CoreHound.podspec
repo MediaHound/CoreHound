@@ -11,7 +11,7 @@ Pod::Spec.new do |s|
   s.requires_arc = true
 
   s.source_files = 'Pod/**/*.{h,m}'
-  s.private_header_files = "{Pod/Model/Internal/**/*.h,Pod/**/*+Internal.h}"
+  s.private_header_files = "{Pod/Model/Internal/**/*.h,Pod/**/*+Internal.h,Pod/Network/Internal/**/*.h}"
 
   s.resources = ['Pod/Resources/*.cer']
 

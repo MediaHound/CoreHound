@@ -6,9 +6,7 @@
 //
 
 #import "MHJSONResponseSerializerWithData.h"
-
-NSString* const MHJSONResponseSerializerWithDataKey = @"MHJSONResponseSerializerWithDataKey";
-NSString* const MHJSONResponseSerializerWithStringKey = @"MHJSONResponseSerializerWithStringKey";
+#import "MHError.h"
 
 
 @implementation MHJSONResponseSerializerWithData
