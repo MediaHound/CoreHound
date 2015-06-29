@@ -22,6 +22,9 @@ extern NSString* const MHLoginSessionUserDidLoginNotification;
 extern NSString* const MHLoginSessionUserDidLogoutNotification;
 
 
+/**
+ * An MHLoginSession represents a logged in session on behalf of a user.
+ */
 @interface MHLoginSession : JSONModel
 
 /**
