@@ -17,6 +17,7 @@
 /**
  * Set the base URL for all MediaHound API calls.
  * You should typically not need to use this method.
+ * @warning This method must be called before a call to `[MHSDK configureWithClientId:clientSecret:]`.
  * @param baseURL The new base URL for all API calls
  */
 - (void)setBaseURL:(NSURL*)baseURL;

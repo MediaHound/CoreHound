@@ -13,5 +13,14 @@
  */
 extern NSString* const MHErrorDomain;
 
+/**
+ * A call to [MHLoginSession loginUsingSavedCredentials] failed because there
+ * were no login credentials found.
+ */
 #define MHLoginSessionNoSavedCredentialsError 1
+
+/**
+ * A call to [MHLoginSession loginWithUsername:password:] failed because the
+ * credentials were invalid.
+ */
 #define MHLoginSessionInvalidCredentialsError 2

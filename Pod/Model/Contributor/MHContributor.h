@@ -47,8 +47,19 @@
 
 @interface MHContributor (Fetching)
 
+/**
+ * Fetches all media that this contributor contributed to.
+ * @return A promise which resolves with an MHPagedResponse.
+ */
 - (PMKPromise*)fetchMedia;
 
+/**
+ * Fetches all media that this contributor contributed to.
+ * @param forced Whether to use a cached response. If YES, a network request will occur. If NO, a cached result may be used.
+ * @param priority The network request priority.
+ * @param networkToken The token for the network request, allowing cancelation and re-prioritization.
+ * @return A promise which resolves with an MHPagedResponse.
+ */
 - (PMKPromise*)fetchMediaForced:(BOOL)forced
                        priority:(AVENetworkPriority*)priority
                    networkToken:(AVENetworkToken*)networkToken;
