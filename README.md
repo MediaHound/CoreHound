@@ -18,6 +18,16 @@ Run `pod install`, and you can now use CoreHound by importing it:
 #import <CoreHound/MHApi.h>
 ```
 
+### Example Project
+
+If you want to explore the example project, SearchLite, just run:
+
+```
+pod try CoreHound
+```
+
+The SearchLite project demonstrates many features like Application OAuth, Search, Images, and Contributor relationships.
+
 ## The world of media content
 The Entertainment Graph contains many types of objects — movies, books, people, traits, etc.
 
