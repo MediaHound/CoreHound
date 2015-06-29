@@ -27,14 +27,18 @@ Every object in The Entertainment Graph is uniquely identified by an identifierâ
 
 Every object in The Entertainment Graph has a typeâ€”- Movie, Book, Contributor, etc. There is a well defined type hierarchy, so you can easily work with objects of varying types. 
 
+![](https://github.com/MediaHound/CoreHound/blob/doc-updates/images/mh-object-types.png)
+
 *Saving Private Ryan* is an `MHMovie`, and *Catch 22* is an `MHBook`. Both `MHMovie` and `MHBook` inherit from `MHMedia`. This lets us work with entertainment across different content types easily. We can view the content as an `MHMedia`. When we need to specifically work with books, we can treat them as an `MHBook`.
 
 All objects in The Entertainment Graph inherit from the `MHObject` class. This class provides the base functionality that all graph objects conform to. All objects have metadata represented as an `MHMetadata`:
 
-- mhid
-- name
-- objectDescription
-- createdDate
+Property | Description
+-------- | -------------
+mhid | The globally unique identifier of the object
+name | A user-displayable name of the object
+objectDescription | A user-displayable description of the object
+createdDate | When the object was created in the graph
 
 Some content types have more metadata properties. For example all `MHMedia` objects have an `MHMediaMetadata` which extends `MHMetadata` adding a `releaseDate` property.
 
@@ -47,6 +51,10 @@ Most `MHObjects` also have a primary image. The primary image is the main visual
 ```
 
 This gives you an array of `MHContributors` who are related to that movie.
+
+The Entertainment Graph is highly connected. Here is a small example of the types of connections between content:
+
+![](https://github.com/MediaHound/CoreHound/blob/doc-updates/images/mh-graph-example.png)
 
 ## CoreHound is highly **asynchronous**
 Almost all interaction you have with the CoreHound SDK is through asynchronous APIs. CoreHound uses *promises* as its asynchronous pattern. As a simple example, to find the release date of *The Usual Suspects*, you would write:

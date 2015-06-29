@@ -8,6 +8,9 @@
 #import "MHObject.h"
 
 
+/**
+ * An MHTrait provides a descriptor about media content.
+ */
 @interface MHTrait : MHObject
 
 @end
