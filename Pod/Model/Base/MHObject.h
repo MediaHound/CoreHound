@@ -155,7 +155,7 @@
 /**
  * Fetches the receiver's primary image.
  * You should never read the `primaryImage` property directly from an MHObject. Instead, always access the image via
- * the `fetchPrimaryImage` promise. The `primaryImage` property can be used for observing KVO changes to social metrics.
+ * the `fetchPrimaryImage` promise. The `primaryImage` property can be used for observing KVO changes to primary image.
  * @return A promise which resolves with an MHImage.
  */
 - (PMKPromise*)fetchPrimaryImage;
@@ -163,7 +163,7 @@
 /**
  * Fetches the receiver's primary image.
  * You should never read the `primaryImage` property directly from an MHObject. Instead, always access the image via
- * the `fetchPrimaryImage` promise. The `primaryImage` property can be used for observing KVO changes to social metrics.
+ * the `fetchPrimaryImage` promise. The `primaryImage` property can be used for observing KVO changes to primary image.
  * @param forced Whether to use a cached response. If YES, a network request will occur. If NO, a cached result may be used.
  * @param priority The network request priority.
  * @param networkToken The token for the network request, allowing cancelation and re-prioritization.
@@ -176,7 +176,7 @@
 /**
  * Fetches the receiver's secondary image.
  * You should never read the `secondaryImage` property directly from an MHObject. Instead, always access the image via
- * the `fetchSecondaryImage` promise. The `secondaryImage` property can be used for observing KVO changes to social metrics.
+ * the `fetchSecondaryImage` promise. The `secondaryImage` property can be used for observing KVO changes to secondary image.
  * @return A promise which resolves with an MHImage.
  */
 - (PMKPromise*)fetchSecondaryImage;
@@ -184,7 +184,7 @@
 /**
  * Fetches the receiver's secondary image.
  * You should never read the `secondaryImage` property directly from an MHObject. Instead, always access the image via
- * the `fetchSecondaryImage` promise. The `secondaryImage` property can be used for observing KVO changes to social metrics.
+ * the `fetchSecondaryImage` promise. The `secondaryImage` property can be used for observing KVO changes to secondary image.
  * @param forced Whether to use a cached response. If YES, a network request will occur. If NO, a cached result may be used.
  * @param priority The network request priority.
  * @param networkToken The token for the network request, allowing cancelation and re-prioritization.

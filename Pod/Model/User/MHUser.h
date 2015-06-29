@@ -205,9 +205,25 @@ MHJSONMODEL_PROTOCOL_DEFINE(MHUser)
 
 @interface MHUser (Forgetting)
 
+/**
+ * Perform the forgot username flow for a user, given the user's email.
+ * @param email The email of the user.
+ * @return A promise which resolves when the action is finished.
+ */
 + (PMKPromise*)forgotUsernameWithEmail:(NSString*)email;
 
+/**
+ * Perform the forgot password flow for a user, given the user's email.
+ * @param email The email of the user.
+ * @return A promise which resolves when the action is finished.
+ */
 + (PMKPromise*)forgotPasswordWithEmail:(NSString*)email;
+
+/**
+ * Perform the forgot password flow for a user, given the user's username.
+ * @param username The username of the user.
+ * @return A promise which resolves when the action is finished.
+ */
 + (PMKPromise*)forgotPasswordWithUsername:(NSString*)username;
 
 @end
