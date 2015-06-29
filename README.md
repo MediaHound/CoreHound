@@ -238,6 +238,17 @@ CoreHound emits login and logout notifications if you want to listen for these e
                                            object:nil];
 ```
 
+## Application OAuth
+
+If your application does not require a logged-in user, then you do not need to perform User OAuth or Enterprise Auth. Instead, you need to perform Application OAuth to access the MediaHound API. You must first have your Client ID and Client Secret, which you can get from the MediaHound Developer Portal.
+
+```objc
+[[MHSDK sharedSDK] configureWithClientId:@"YOUR CLIENT ID"
+                            clientSecret:@"YOUR CLIENT SECRET"];
+```
+
+This method returns a promise, which resolves when the SDK has been succesfully configured. You must not call into CoreHound, until this promise has resolved.
+
 ## CoreHound provides meaningful suggestions
 
 From any media content, you can find other related media content. Given an `MHMedia`, simply call `fetchRelated`:
