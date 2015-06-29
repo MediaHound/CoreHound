@@ -118,3 +118,20 @@
 
 // Hashtag
 #import "MHHashtag.h"
+
+
+// Trait
+#import "MHTrait.h"
+#import "MHAchievements.h"
+#import "MHAudience.h"
+#import "MHEra.h"
+#import "MHFlag.h"
+#import "MHGenre.h"
+#import "MHGraphGenre.h"
+#import "MHMaterialSource.h"
+#import "MHMood.h"
+#import "MHQuality.h"
+#import "MHStoryElement.h"
+#import "MHStyleElement.h"
+#import "MHSubGenre.h"
+#import "MHTheme.h"
