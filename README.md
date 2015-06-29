@@ -142,19 +142,109 @@ Entertainment is only part of The Entertainment Graph. Users bring social intera
 
 ### Logging in a user
 
-CoreHound offers two ways to log in a user: User OAuth and Enterprise xAuth. Most applications will use User OAuth. Enteprise partners can opt-in to an xAuth flow.
+CoreHound offers two ways to log in a user: User OAuth and Enterprise Auth. Most applications will use User OAuth. Enteprise partners can opt-in to an Enterprise Auth flow.
 
 ### Logging in using User OAuth
 
 **TODO**
 
-### Logging in using Enterprise xAuth
+### Logging in using Enterprise Auth
 
-**TODO**
+Enterprise Auth allows you to directly log a user in using their username and password. You should prompt the user for their username and password and then call the `-loginWithUsername:password` method on `MHLoginSession`:
 
-### Creating users in Enterprise xAuth
+```objc
+[MHLoginSession loginWithUsername:usernameField.text
+                         password:passwordField.text].then(^{
+    // User sucesffuly logged in
+}).catch(^(NSError* error) {
+    // Show the user an error
+});
+```
 
-**TODO**
+After a succesful login, CoreHound will securely store the user's credentials to the Keychain. Because of this, you no longer need to store the user's credentials. **You should not store the user's credentials anywhere!**
+
+Once a user has succesfully logged in once, on their next visit to your app, you should try to automatically log in for them.
+
+```objc
+[MHLoginSession loginUsingSavedCredentials].then(^{
+    // User sucesffuly logged in
+}).catch(^(NSError* error) {
+    if ([error.domain isEqualToString:MHErrorDomain]) {
+        if (error.code == MHLoginSessionNoSavedCredentialsError) {
+            // User has no saved credentials
+            // in the keychain.
+        }
+        else if (error.code == MHLoginSessionInvalidCredentialsError) {
+            // The stored credentials are no longer valid.
+            // The user may have changed them elsewhere.
+        }
+    } 
+});
+```
+
+Once a user is logged in, you can access the currently logged in user via the `MHLoginSession`:
+
+```objc
+MHUser* currentUser = [MHLoginSession currentSession].user;
+```
+
+### Creating users in Enterprise Auth
+
+To create a new user, you call the `MHUser` create method. After the creation promise resolves, you can log the user in using `MHLoginSession`.
+
+```objc
+[MHUser createWithUsername:usernameField.text
+                  password:passwordField.text
+                     email:emailField.text
+                 firstName:firstNameField.text
+                  lastName:lastnameField.text].then(^{
+    return [MHLoginSession loginWithUsername:usernameField.text
+                                          password:passwordField.text];
+    // At this point, you no longer need to store the
+    // username or password. You should actively stop
+    // storing them, to ensure the user's security.
+}).then(^(MHLoginSession* session) {
+    // At this point the user is now logged in.
+    // You can upload a profile image if you'd like
+    return [session.user setProfileImage:userImage];
+});
+```
+
+### Login/Logout Notifications
+
+CoreHound emits login and logout notifications if you want to listen for these events in a decoupled manner:
+
+```objc
+// Set up notification observer for login
+[[NSNotificationCenter defaultCenter] addObserver:self
+                                         selector:@selector(userDidLogin:)
+                                             name:MHLoginSessionUserDidLoginNotification
+                                           object:nil];
+
+// Set up notification observer for logout
+[[NSNotificationCenter defaultCenter] addObserver:self
+                                         selector:@selector(userDidLogout:)
+                                             name:MHLoginSessionUserDidLogoutNotification
+                                           object:nil];
+```
+
+## CoreHound provides meaningful suggestions
+
+From any media content, you can find other related media content. Given an `MHMedia`, simply call `fetchRelated`:
+
+```objc
+[movie fetchRelated].then(^(MHPagedResponse* response) {
+    MHMedia* firstRelated = response.content.firstObject;
+});
+```
+
+If you want to find related content to multiple `MHMedia`, then you can use:
+
+```objc
+MHMovie* savingPrivateRyan = /* */;
+MHMovie* theUsualSuspects = /* */;
+[MHMedia fetchRelatedTo:@[savingPrivateRyan, theUsualSuspects]];
+```
 
 ## CoreHound uses **flexible networking**
 CoreHound uses the network extensively to asynchronously provide data and results as you request it. For advanced use cases, though, you need fine-grain control over how CoreHound requests are scheduled compared to your own networking requests. CoreHound exposes a clear API for controlling caching, priority, cancelation, and reprioritization. This networking infrastructure is provided by [Avenue](https://github.com/MediaHound/Avenue), a general networking library (built upon [AFNetworking](https://github.com/AFNetworking/AFNetworking)) that you can use for all network requests in your app.
