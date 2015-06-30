@@ -37,6 +37,15 @@ static NSString* const kUpdateSubendpoint = @"update";
     [self registerMHObject];
 }
 
++ (BOOL)propertyIsOptional:(NSString*)propertyName
+{
+    if ([propertyName isEqualToString:NSStringFromSelector(@selector(primaryOwner))]
+        || [propertyName isEqualToString:NSStringFromSelector(@selector(firstContentImage))]) {
+        return YES;
+    }
+    return [super propertyIsOptional:propertyName];
+}
+
 - (PMKPromise*)addContent:(MHObject*)content
 {
     return [self addContents:@[content]];

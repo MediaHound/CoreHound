@@ -10,6 +10,16 @@
 
 @implementation MHImageData
 
++ (BOOL)propertyIsOptional:(NSString*)propertyName
+{
+    // TODO: Remove optionality for width and height
+    if ([propertyName isEqualToString:NSStringFromSelector(@selector(width))]
+        || [propertyName isEqualToString:NSStringFromSelector(@selector(height))]) {
+        return YES;
+    }
+    return [super propertyIsOptional:propertyName];
+}
+
 - (BOOL)isEqual:(id)object
 {
     if (self == object) {

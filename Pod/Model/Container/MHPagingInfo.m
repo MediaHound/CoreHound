@@ -11,4 +11,12 @@
 
 @implementation MHPagingInfo
 
++ (BOOL)propertyIsOptional:(NSString*)propertyName
+{
+    if ([propertyName isEqualToString:NSStringFromSelector(@selector(next))]) {
+        return YES;
+    }
+    return [super propertyIsOptional:propertyName];
+}
+
 @end

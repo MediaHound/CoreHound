@@ -26,12 +26,12 @@ MHJSONMODEL_PROTOCOL_DEFINE(MHSourceFormat)
 @interface MHSourceFormat : JSONModel
 
 @property (strong, nonatomic) NSString* type;
-@property (strong, nonatomic) NSNumber<Optional>* price;
-@property (strong, nonatomic) NSString<Optional>* currency;
-@property (strong, nonatomic) NSString<Optional>* timePeriod;
+@property (strong, nonatomic) NSNumber* price;
+@property (strong, nonatomic) NSString* currency;
+@property (strong, nonatomic) NSString* timePeriod;
 @property (strong, nonatomic) NSDictionary* launchInfo;
 
-@property (weak, nonatomic, readonly) MHSourceMethod<Ignore>* method;
+@property (weak, nonatomic, readonly) MHSourceMethod* method;
 
 @property (strong, nonatomic, readonly) NSString* displayPrice;
 

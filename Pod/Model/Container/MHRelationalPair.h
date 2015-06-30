@@ -23,11 +23,11 @@ MHJSONMODEL_PROTOCOL_DEFINE(MHRelationalPair)
 /**
  * The object
  */
-@property (strong, nonatomic) MHObject<Optional>* object;
+@property (strong, nonatomic) MHObject* object;
 
 /**
  * Context that relates `object` to the originating request.
  */
-@property (strong, nonatomic) MHContext<Optional>* context;
+@property (strong, nonatomic) MHContext* context;
 
 @end

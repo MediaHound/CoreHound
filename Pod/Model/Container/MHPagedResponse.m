@@ -16,16 +16,33 @@
  * Information about this page and subsequent pages.
  * You should not typically need to access the data.
  */
-@property (strong, nonatomic) MHPagingInfo<Optional>* pagingInfo; // TODO: Remove optionality
+@property (strong, nonatomic) MHPagingInfo* pagingInfo;
 
 @property (copy, nonatomic) MHPagedResponseFetchNextBlock fetchNextOperation;
 
-@property (strong, atomic) MHPagedResponse<Ignore>* cachedNextResponse;
+@property (strong, atomic) MHPagedResponse* cachedNextResponse;
 
 @end
 
 
 @implementation MHPagedResponse
+
++ (BOOL)propertyIsIgnored:(NSString *)propertyName
+{
+    if ([propertyName isEqualToString:NSStringFromSelector(@selector(cachedNextResponse))]) {
+        return YES;
+    }
+    return [super propertyIsIgnored:propertyName];
+}
+
++ (BOOL)propertyIsOptional:(NSString*)propertyName
+{
+    // TODO: Remove optionality for pagingInfo
+    if ([propertyName isEqualToString:NSStringFromSelector(@selector(pagingInfo))]) {
+        return YES;
+    }
+    return [super propertyIsOptional:propertyName];
+}
 
 - (PMKPromise*)fetchNext
 {

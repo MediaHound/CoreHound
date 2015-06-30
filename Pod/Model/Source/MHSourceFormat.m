@@ -20,12 +20,30 @@ NSString* const MHSourceFormatTypeUnknownKey = @"unknown";
 
 @interface MHSourceFormat ()
 
-@property (weak, nonatomic, readwrite) MHSourceMethod<Ignore>* method;
+@property (weak, nonatomic, readwrite) MHSourceMethod* method;
 
 @end
 
 
 @implementation MHSourceFormat
+
++ (BOOL)propertyIsIgnored:(NSString *)propertyName
+{
+    if ([propertyName isEqualToString:NSStringFromSelector(@selector(method))]) {
+        return YES;
+    }
+    return [super propertyIsIgnored:propertyName];
+}
+
++ (BOOL)propertyIsOptional:(NSString*)propertyName
+{
+    if ([propertyName isEqualToString:NSStringFromSelector(@selector(price))]
+        || [propertyName isEqualToString:NSStringFromSelector(@selector(currency))]
+        || [propertyName isEqualToString:NSStringFromSelector(@selector(timePeriod))]) {
+        return YES;
+    }
+    return [super propertyIsOptional:propertyName];
+}
 
 - (NSString*)displayPrice
 {

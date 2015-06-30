@@ -10,6 +10,6 @@
 
 @interface MHSourceFormat (Internal)
 
-@property (weak, nonatomic, readwrite) MHSourceMethod<Ignore>* method;
+@property (weak, nonatomic, readwrite) MHSourceMethod* method;
 
 @end

@@ -34,7 +34,7 @@
  * You need to call -fetchPrimaryImage to ensure it has been loaded.
  * This property is KVO compliant.
  */
-@property (strong, atomic) MHImage<Optional>* primaryImage;
+@property (strong, atomic) MHImage* primaryImage;
 
 /**
  * The secondary image is the receiver's secondary visual representation
@@ -42,7 +42,7 @@
  * You need to call -fetchSecondaryImage to ensure it has been loaded.
  * This property is KVO compliant.
  */
-@property (strong, atomic) MHImage<Optional>* secondaryImage;
+@property (strong, atomic) MHImage* secondaryImage;
 
 /**
  * Social metrics and user-specific information about the receiver
@@ -50,7 +50,7 @@
  * You need to call -fetchSocial to ensure it has been loaded.
  * This property is KVO compliant.
  */
-@property (strong, nonatomic) MHSocial<Optional>* social;
+@property (strong, nonatomic) MHSocial* social;
 
 /**
  * @param mhid The mhid to check for

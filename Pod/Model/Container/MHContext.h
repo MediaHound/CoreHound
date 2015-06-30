@@ -27,17 +27,17 @@
 /**
  * Sorting information on how this MHObject relates.
  */
-@property (strong, nonatomic) MHSorting<Optional>* sorting;
+@property (strong, nonatomic) MHSorting* sorting;
 
 /**
  * An array of relationships that express how a contributor contributed to content.
  */
-@property (strong, nonatomic) NSArray<MHRelationship, Optional>* relationships;
+@property (strong, nonatomic) NSArray<MHRelationship>* relationships;
 
 /**
  * Whether this MHSource is consumable.
  */
-@property (strong, nonatomic) NSNumber<Optional>* consumable;
+@property (strong, nonatomic) NSNumber* consumable;
 
 /** 
  * Get a medium for this MHSource of a specific type.

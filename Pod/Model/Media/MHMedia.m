@@ -33,6 +33,15 @@ static NSString* const kRelatedRootSubendpoint = @"related";
 
 @declare_class_property (rootEndpoint, @"graph/media")
 
++ (BOOL)propertyIsOptional:(NSString*)propertyName
+{
+    if ([propertyName isEqualToString:NSStringFromSelector(@selector(keyContributors))]
+        || [propertyName isEqualToString:NSStringFromSelector(@selector(primaryGroup))]) {
+        return YES;
+    }
+    return [super propertyIsOptional:propertyName];
+}
+
 @end
 
 

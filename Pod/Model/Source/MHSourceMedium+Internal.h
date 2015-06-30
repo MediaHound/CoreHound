@@ -14,9 +14,9 @@
 
 @interface MHSourceMedium (Internal)
 
-@property (weak, nonatomic, readwrite) MHSource<Ignore>* source;
-@property (weak, nonatomic, readwrite) MHObject<Ignore>* content;
+@property (weak, nonatomic, readwrite) MHSource* source;
+@property (weak, nonatomic, readwrite) MHObject* content;
 
-@property (weak, nonatomic) MHContext<Ignore>* context;
+@property (weak, nonatomic) MHContext* context;
 
 @end

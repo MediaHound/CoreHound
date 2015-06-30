@@ -20,11 +20,11 @@
 /**
  * The importance of this MHObject compared to other MHObjects in the result.
  */
-@property (strong, nonatomic) NSNumber<Optional>* importance;
+@property (strong, nonatomic) NSNumber* importance;
 
 /**
  * The raw positional order of this MHObject compared to other MHObjects in the result.
  */
-@property (strong, nonatomic) NSNumber<Optional>* position;
+@property (strong, nonatomic) NSNumber* position;
 
 @end

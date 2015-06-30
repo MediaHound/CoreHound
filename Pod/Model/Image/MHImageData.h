@@ -22,11 +22,11 @@
 /**
  * The width of the image, in pixels.
  */
-@property (strong, nonatomic) NSNumber<Optional>* width; // TODO: Remove optional
+@property (strong, nonatomic) NSNumber* width;
 
 /**
  * The height of the image, in pixels.
  */
-@property (strong, nonatomic) NSNumber<Optional>* height; // TODO: Remove optional
+@property (strong, nonatomic) NSNumber* height;
 
 @end

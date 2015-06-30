@@ -21,14 +21,24 @@ NSString* const MHSourceMediumTypeAttend = @"attend";
 
 @property (strong, nonatomic) NSArray<MHSourceMethod>* methods;
 
-@property (weak, nonatomic, readwrite) MHSource<Ignore>* source;
-@property (weak, nonatomic, readwrite) MHObject<Ignore>* content;
-@property (weak, nonatomic) MHContext<Ignore>* context;
+@property (weak, nonatomic, readwrite) MHSource* source;
+@property (weak, nonatomic, readwrite) MHObject* content;
+@property (weak, nonatomic) MHContext* context;
 
 @end
 
 
 @implementation MHSourceMedium
+
++ (BOOL)propertyIsIgnored:(NSString *)propertyName
+{
+    if ([propertyName isEqualToString:NSStringFromSelector(@selector(source))]
+        || [propertyName isEqualToString:NSStringFromSelector(@selector(content))]
+        || [propertyName isEqualToString:NSStringFromSelector(@selector(context))]) {
+        return YES;
+    }
+    return [super propertyIsIgnored:propertyName];
+}
 
 - (instancetype)initWithDictionary:(NSDictionary*)dict error:(NSError**)err
 {

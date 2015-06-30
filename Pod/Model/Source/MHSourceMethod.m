@@ -20,7 +20,7 @@ NSString* const MHSourceMethodTypeBroker = @"broker";
 
 @interface MHSourceMethod ()
 
-@property (weak, nonatomic, readwrite) MHSourceMedium<Ignore>* medium;
+@property (weak, nonatomic, readwrite) MHSourceMedium* medium;
 
 @property (strong, nonatomic) NSArray<MHSourceFormat>* formats;
 
@@ -28,6 +28,14 @@ NSString* const MHSourceMethodTypeBroker = @"broker";
 
 
 @implementation MHSourceMethod
+
++ (BOOL)propertyIsIgnored:(NSString *)propertyName
+{
+    if ([propertyName isEqualToString:NSStringFromSelector(@selector(medium))]) {
+        return YES;
+    }
+    return [super propertyIsIgnored:propertyName];
+}
 
 - (instancetype)initWithDictionary:(NSDictionary*)dict error:(NSError**)err
 {

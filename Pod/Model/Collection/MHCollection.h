@@ -29,7 +29,7 @@
  * You need to call -fetchPrimaryOwner to ensure it has been loaded.
  * This property is KVO compliant.
  */
-@property (strong, atomic) MHUser<Optional>* primaryOwner;
+@property (strong, atomic) MHUser* primaryOwner;
 
 /**
  * The firstContentImage is the MHImage of the first piece of content in this collection.
@@ -37,7 +37,7 @@
  * You need to call -fetchFirstContentImage to ensure it has been loaded.
  * This property is KVO compliant.
  */
-@property (strong, atomic) MHImage<Optional>* firstContentImage;
+@property (strong, atomic) MHImage* firstContentImage;
 
 /**
  * Add a single MHObject to this collection.

@@ -14,7 +14,7 @@
 
 @interface MHContext ()
 
-@property (strong, nonatomic) NSArray<MHSourceMedium, Optional>* mediums;
+@property (strong, nonatomic) NSArray<MHSourceMedium>* mediums;
 
 @end
 
@@ -23,11 +23,22 @@
 
 + (BOOL)propertyIsIgnored:(NSString *)propertyName
 {
-    if ([propertyName isEqualToString:@"searchScope"]
-        || [propertyName isEqualToString:@"searchTerm"]) {
+    if ([propertyName isEqualToString:NSStringFromSelector(@selector(searchScope))]
+        || [propertyName isEqualToString:NSStringFromSelector(@selector(searchTerm))]) {
         return YES;
     }
-    return NO;
+    return [super propertyIsIgnored:propertyName];
+}
+
++ (BOOL)propertyIsOptional:(NSString*)propertyName
+{
+    if ([propertyName isEqualToString:NSStringFromSelector(@selector(sorting))]
+        || [propertyName isEqualToString:NSStringFromSelector(@selector(relationships))]
+        || [propertyName isEqualToString:NSStringFromSelector(@selector(consumable))]
+        || [propertyName isEqualToString:NSStringFromSelector(@selector(mediums))]) {
+        return YES;
+    }
+    return [super propertyIsOptional:propertyName];
 }
 
 - (instancetype)initWithDictionary:(NSDictionary*)dict error:(NSError**)err

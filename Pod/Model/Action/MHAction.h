@@ -21,7 +21,7 @@
  */
 @property (strong, atomic) MHActionMetadata* metadata;
 
-@property (strong, atomic) MHObject<Optional>* primaryMention;
-@property (strong, atomic) MHUser<Optional>* primaryOwner;
+@property (strong, atomic) MHObject* primaryMention;
+@property (strong, atomic) MHUser* primaryOwner;
 
 @end

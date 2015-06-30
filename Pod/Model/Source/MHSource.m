@@ -36,6 +36,15 @@ static MHPagedResponse* s_allSources = nil;
 @declare_class_property (mhidPrefix, @"mhsrc")
 @declare_class_property (rootEndpoint, @"graph/source")
 
++ (BOOL)propertyIsOptional:(NSString*)propertyName
+{
+    if ([propertyName isEqualToString:NSStringFromSelector(@selector(subscriptions))]
+        || [propertyName isEqualToString:NSStringFromSelector(@selector(allMediums))]) {
+        return YES;
+    }
+    return [super propertyIsOptional:propertyName];
+}
+
 - (PMKPromise*)connect
 {
     return [self takeAction:@"connect"

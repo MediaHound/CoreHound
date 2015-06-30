@@ -90,14 +90,33 @@ static NSString* const kSocialSubendpoint = @"social";
 
 @interface MHObject ()
 
-@property (atomic) NSNumber<Ignore>* mostRecentSocialRequestId;
+@property (atomic) NSNumber* mostRecentSocialRequestId;
 
-@property (strong, nonatomic) NSMutableDictionary<Ignore>* cachedResponses;
+@property (strong, nonatomic) NSMutableDictionary* cachedResponses;
 
 @end
 
 
 @implementation MHObject
+
++ (BOOL)propertyIsIgnored:(NSString *)propertyName
+{
+    if ([propertyName isEqualToString:NSStringFromSelector(@selector(mostRecentSocialRequestId))]
+        || [propertyName isEqualToString:NSStringFromSelector(@selector(cachedResponses))]) {
+        return YES;
+    }
+    return [super propertyIsIgnored:propertyName];
+}
+
++ (BOOL)propertyIsOptional:(NSString*)propertyName
+{
+    if ([propertyName isEqualToString:NSStringFromSelector(@selector(primaryImage))]
+        || [propertyName isEqualToString:NSStringFromSelector(@selector(secondaryImage))]
+        || [propertyName isEqualToString:NSStringFromSelector(@selector(social))]) {
+        return YES;
+    }
+    return [super propertyIsOptional:propertyName];
+}
 
 - (instancetype)initWithDictionary:(NSDictionary *)dict error:(NSError *__autoreleasing *)err
 {

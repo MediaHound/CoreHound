@@ -28,7 +28,7 @@
  * You need to call -fetchKeyContributors to ensure it has been loaded.
  * This property is KVO compliant.
  */
-@property (strong, atomic) NSArray<MHRelationalPair, Optional>* keyContributors;
+@property (strong, atomic) NSArray<MHRelationalPair>* keyContributors;
 
 /**
  * A relational pair to the MHObject the receiver belongs to.
@@ -38,7 +38,7 @@
  * You need to call -fetchPrimaryGroup to ensure it has been loaded.
  * This property is KVO compliant.
  */
-@property (strong, atomic) MHRelationalPair<Optional>* primaryGroup;
+@property (strong, atomic) MHRelationalPair* primaryGroup;
 
 @end
 

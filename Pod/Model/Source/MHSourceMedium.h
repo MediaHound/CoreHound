@@ -25,8 +25,8 @@ MHJSONMODEL_PROTOCOL_DEFINE(MHSourceMedium)
 
 @property (strong, nonatomic) NSString* type;
 
-@property (weak, nonatomic, readonly) MHSource<Ignore>* source;
-@property (weak, nonatomic, readonly) MHObject<Ignore>* content;
+@property (weak, nonatomic, readonly) MHSource* source;
+@property (weak, nonatomic, readonly) MHObject* content;
 
 - (MHSourceMethod*)methodForType:(NSString*)type;
 

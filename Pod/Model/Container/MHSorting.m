@@ -11,4 +11,13 @@
 
 @implementation MHSorting
 
++ (BOOL)propertyIsOptional:(NSString*)propertyName
+{
+    if ([propertyName isEqualToString:NSStringFromSelector(@selector(importance))]
+        || [propertyName isEqualToString:NSStringFromSelector(@selector(position))]) {
+        return YES;
+    }
+    return [super propertyIsOptional:propertyName];
+}
+
 @end
