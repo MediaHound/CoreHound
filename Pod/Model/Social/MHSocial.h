@@ -95,6 +95,7 @@ extern NSString* const MHUserSourceDescriptionBoth;
 @property (strong, nonatomic) NSString* userSourceDescription;
 
 /**
+ * @param social The social object to compare to.
  * @return Whether this MHSocial is identical to another MHSocial object.
  */
 - (BOOL)isEqualToSocial:(MHSocial*)social;

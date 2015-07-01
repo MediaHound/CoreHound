@@ -8,6 +8,9 @@
 #import "MHMedia.h"
 
 
+/**
+ * An MHAlbumSeries
+ */
 @interface MHAlbumSeries : MHMedia
 
 @end

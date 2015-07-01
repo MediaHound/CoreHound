@@ -11,6 +11,7 @@
 #import "MHPagedResponse.h"
 #import "MHObject+Internal.h"
 #import "MHLoginSession.h"
+#import "MHSourcePreference+Internal.h"
 
 //#import <AgnosticLogger/AgnosticLogger.h>
 

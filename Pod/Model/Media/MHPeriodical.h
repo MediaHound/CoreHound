@@ -8,6 +8,9 @@
 #import "MHMedia.h"
 
 
+/**
+ * An MHPeriodical
+ */
 @interface MHPeriodical : MHMedia
 
 @end

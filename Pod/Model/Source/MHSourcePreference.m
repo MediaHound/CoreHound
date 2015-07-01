@@ -6,6 +6,7 @@
 //
 
 #import "MHSourcePreference.h"
+#import "MHSourcePreference+Internal.h"
 
 static NSString* const kSourceValueNone = @"none";
 static NSString* const kSourceValueLow = @"low";

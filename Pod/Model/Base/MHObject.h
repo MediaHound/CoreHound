@@ -59,7 +59,7 @@
 + (Class)classForMhid:(NSString*)mhid;
 
 /**
- * @param The MHObject to check for
+ * @param object The MHObject to check for
  * @return Whether the receiver is equivalent to the given MHObject.
  */
 - (BOOL)isEqualToMHObject:(MHObject*)object;

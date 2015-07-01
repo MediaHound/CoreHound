@@ -9,6 +9,9 @@
 #import "MHMedia.h"
 
 
+/**
+ * An MHGraphGroup
+ */
 @interface MHGraphGroup : MHMedia
 
 @end

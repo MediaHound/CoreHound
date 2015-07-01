@@ -8,6 +8,9 @@
 #import "MHMedia.h"
 
 
+/**
+ * An MHGraphicNovel
+ */
 @interface MHGraphicNovel : MHMedia
 
 @end

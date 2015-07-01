@@ -8,6 +8,9 @@
 #import "MHMedia.h"
 
 
+/**
+ * An MHBookSeries
+ */
 @interface MHBookSeries : MHMedia
 
 @end

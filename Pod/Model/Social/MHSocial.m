@@ -7,6 +7,7 @@
 
 #import "MHSocial.h"
 #import "MHObject+Internal.h"
+#import "MHSourcePreference+Internal.h"
 
 
 // TODO: Deprecate this and get rid of it

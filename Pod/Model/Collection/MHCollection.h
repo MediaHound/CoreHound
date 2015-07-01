@@ -48,10 +48,10 @@
 
 /**
  * Add multiple MHObjects to this collection.
- * @param content The new pieces of content to add to this collection
+ * @param contents The new pieces of content to add to this collection
  * @return A promise which resolves when the content has succesfully been added
  */
-- (PMKPromise*)addContents:(NSArray*)content;
+- (PMKPromise*)addContents:(NSArray*)contents;
 
 /**
  * Remove a single MHObject from this collection.
@@ -62,7 +62,7 @@
 
 /**
  * Remove multiple MHObjects from this collection.
- * @param content The pieces of content to remove from this collection
+ * @param contents The pieces of content to remove from this collection
  * @return A promise which resolves when the content has succesfully been removed
  */
 - (PMKPromise*)removeContents:(NSArray*)contents;
