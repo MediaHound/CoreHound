@@ -42,6 +42,14 @@ static NSString* const kRelatedRootSubendpoint = @"related";
     return [super propertyIsOptional:propertyName];
 }
 
++ (NSString*)protocolForArrayProperty:(NSString*)propertyName
+{
+    if ([propertyName isEqualToString:NSStringFromSelector(@selector(keyContributors))]) {
+        return NSStringFromClass(MHRelationalPair.class);
+    }
+    return [super protocolForArrayProperty:propertyName];
+}
+
 @end
 
 

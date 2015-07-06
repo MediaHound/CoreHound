@@ -44,6 +44,14 @@
     return [super propertyIsOptional:propertyName];
 }
 
++ (NSString*)protocolForArrayProperty:(NSString*)propertyName
+{
+    if ([propertyName isEqualToString:NSStringFromSelector(@selector(content))]) {
+        return NSStringFromClass(MHRelationalPair.class);
+    }
+    return [super protocolForArrayProperty:propertyName];
+}
+
 - (PMKPromise*)fetchNext
 {
     id cachedResponse = self.cachedNextResponse;
@@ -72,7 +80,7 @@
 + (instancetype)emptyPagedResponse
 {
     MHPagedResponse* response = [[MHPagedResponse alloc] init];
-    response.content = (NSArray<MHRelationalPair>*) @[];
+    response.content = @[];
     response.pagingInfo = [[MHPagingInfo alloc] init];
     return response;
 }

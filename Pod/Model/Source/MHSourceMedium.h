@@ -7,7 +7,6 @@
 
 #import <JSONModel/JSONModel.h>
 #import "MHSourceMethod.h"
-#import "MHJSONModelInternal.h"
 
 @class MHSource;
 @class MHObject;
@@ -17,8 +16,6 @@ extern NSString* const MHSourceMediumTypeDownload;
 extern NSString* const MHSourceMediumTypeDeliver;
 extern NSString* const MHSourceMediumTypePickup;
 extern NSString* const MHSourceMediumTypeAttend;
-
-MHJSONMODEL_PROTOCOL_DEFINE(MHSourceMedium)
 
 
 @interface MHSourceMedium : JSONModel

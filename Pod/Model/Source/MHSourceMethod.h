@@ -7,7 +7,6 @@
 
 #import <JSONModel/JSONModel.h>
 #import "MHSourceFormat.h"
-#import "MHJSONModelInternal.h"
 
 @class MHSourceMedium;
 
@@ -16,8 +15,6 @@ extern NSString* const MHSourceMethodTypeRental;
 extern NSString* const MHSourceMethodTypeSubscription;
 extern NSString* const MHSourceMethodTypeAdSupported;
 extern NSString* const MHSourceMethodTypeBroker;
-
-MHJSONMODEL_PROTOCOL_DEFINE(MHSourceMethod)
 
 
 @interface MHSourceMethod : JSONModel

@@ -46,6 +46,14 @@ static MHPagedResponse* s_allSources = nil;
     return [super propertyIsOptional:propertyName];
 }
 
++ (NSString*)protocolForArrayProperty:(NSString*)propertyName
+{
+    if ([propertyName isEqualToString:NSStringFromSelector(@selector(subscriptions))]) {
+        return NSStringFromClass(MHSubscription.class);
+    }
+    return [super protocolForArrayProperty:propertyName];
+}
+
 - (PMKPromise*)connect
 {
     return [self takeAction:@"connect"

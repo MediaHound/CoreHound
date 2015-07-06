@@ -13,7 +13,7 @@
 @interface MHSource : MHObject
 
 @property (strong, atomic) MHSourceMetadata* metadata;
-@property (strong, nonatomic) NSArray<MHSubscription>* subscriptions;
+@property (strong, nonatomic) NSArray* subscriptions;
 @property (strong, nonatomic) NSArray* allMediums;
 
 - (PMKPromise*)connect;

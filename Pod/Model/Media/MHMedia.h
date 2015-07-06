@@ -11,7 +11,7 @@
 
 
 /**
- * A base class which encapsulates common properties of content.
+ * A base class which encapsulates common properties of media content.
  */
 @interface MHMedia : MHObject
 
@@ -22,13 +22,13 @@
 @property (strong, atomic) MHMediaMetadata* metadata;
 
 /**
- * An array of relational pairs to the key contributors for this media.
+ * An array of MHRelationalPairs to the key contributors for this media.
  * For example, an MHMovie's `keyContributors` will be the director, lead actors, etc.
  * This property may be unrealized. You should rarely access it directly.
  * You need to call -fetchKeyContributors to ensure it has been loaded.
  * This property is KVO compliant.
  */
-@property (strong, atomic) NSArray<MHRelationalPair>* keyContributors;
+@property (strong, atomic) NSArray* keyContributors;
 
 /**
  * A relational pair to the MHObject the receiver belongs to.

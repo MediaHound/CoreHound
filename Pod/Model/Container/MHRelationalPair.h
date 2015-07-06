@@ -6,12 +6,9 @@
 //
 
 #import <JSONModel/JSONModel.h>
-#import "MHJSONModelInternal.h"
 
 @class MHObject;
 @class MHContext;
-
-MHJSONMODEL_PROTOCOL_DEFINE(MHRelationalPair)
 
 
 /**

@@ -22,7 +22,7 @@ NSString* const MHSourceMethodTypeBroker = @"broker";
 
 @property (weak, nonatomic, readwrite) MHSourceMedium* medium;
 
-@property (strong, nonatomic) NSArray<MHSourceFormat>* formats;
+@property (strong, nonatomic) NSArray* formats;
 
 @end
 
@@ -35,6 +35,14 @@ NSString* const MHSourceMethodTypeBroker = @"broker";
         return YES;
     }
     return [super propertyIsIgnored:propertyName];
+}
+
++ (NSString*)protocolForArrayProperty:(NSString*)propertyName
+{
+    if ([propertyName isEqualToString:NSStringFromSelector(@selector(formats))]) {
+        return NSStringFromClass(MHSourceFormat.class);
+    }
+    return [super protocolForArrayProperty:propertyName];
 }
 
 - (instancetype)initWithDictionary:(NSDictionary*)dict error:(NSError**)err

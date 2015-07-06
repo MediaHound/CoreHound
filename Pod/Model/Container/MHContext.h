@@ -30,9 +30,9 @@
 @property (strong, nonatomic) MHSorting* sorting;
 
 /**
- * An array of relationships that express how a contributor contributed to content.
+ * An array of MHRelationships that express how a contributor contributed to content.
  */
-@property (strong, nonatomic) NSArray<MHRelationship>* relationships;
+@property (strong, nonatomic) NSArray* relationships;
 
 /**
  * Whether this MHSource is consumable.
@@ -41,6 +41,8 @@
 
 /** 
  * Get a medium for this MHSource of a specific type.
+ * @param type The type of medium to get.
+ * @return The source medium or nil if no medium for the given type is found.
  */
 - (MHSourceMedium*)mediumForType:(NSString*)type;
 

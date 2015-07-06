@@ -27,12 +27,20 @@ static MHLoginSession* s_currentSession = nil;
 
 @interface MHLoginSession ()
 
-@property (strong, nonatomic) NSArray<MHUser>* users;
+@property (strong, nonatomic) NSArray* users;
 
 @end
 
 
 @implementation MHLoginSession
+
++ (NSString*)protocolForArrayProperty:(NSString*)propertyName
+{
+    if ([propertyName isEqualToString:NSStringFromSelector(@selector(users))]) {
+        return NSStringFromClass(MHUser.class);
+    }
+    return [super protocolForArrayProperty:propertyName];
+}
 
 + (instancetype)currentSession
 {

@@ -6,15 +6,23 @@
 //
 
 #import "MHObject.h"
-#import "MHJSONModelInternal.h"
-
-MHJSONMODEL_PROTOCOL_DEFINE(MHSubscription)
 
 
+/**
+ * An MHSubscription is a bundling of content that a user can pay for
+ * to consume media.
+ */
 @interface MHSubscription : MHObject
 
+/**
+ * Metadata about the receiver
+ * This property is guranteed to exist.
+ */
 @property (strong, atomic) MHSubscriptionMetadata* metadata;
 
-- (NSString*)displayPrice;
+/**
+ * A user-displayable price for the subscription.
+ */
+@property (strong, nonatomic, readonly) NSString* displayPrice;
 
 @end

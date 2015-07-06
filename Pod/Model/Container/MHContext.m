@@ -14,7 +14,7 @@
 
 @interface MHContext ()
 
-@property (strong, nonatomic) NSArray<MHSourceMedium>* mediums;
+@property (strong, nonatomic) NSArray* mediums;
 
 @end
 
@@ -39,6 +39,17 @@
         return YES;
     }
     return [super propertyIsOptional:propertyName];
+}
+
++ (NSString*)protocolForArrayProperty:(NSString*)propertyName
+{
+    if ([propertyName isEqualToString:NSStringFromSelector(@selector(relationships))]) {
+        return NSStringFromClass(MHRelationship.class);
+    }
+    else if ([propertyName isEqualToString:NSStringFromSelector(@selector(mediums))]) {
+        return NSStringFromClass(MHSourceMedium.class);
+    }
+    return [super protocolForArrayProperty:propertyName];
 }
 
 - (instancetype)initWithDictionary:(NSDictionary*)dict error:(NSError**)err

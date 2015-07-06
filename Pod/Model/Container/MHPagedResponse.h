@@ -18,11 +18,11 @@
 @interface MHPagedResponse : JSONModel
 
 /**
- * An array of relational pairs that represent the content.
+ * An array of MHRelationalPairs that represent the content.
  * This array contains a single page of content.
  * To get the rest of the content use `fetchNext`.
  */
-@property (strong, nonatomic) NSArray<MHRelationalPair>* content;
+@property (strong, nonatomic) NSArray* content;
 
 /**
  * Whether this paged response has more pages beyond this one.

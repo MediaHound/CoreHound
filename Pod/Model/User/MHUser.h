@@ -6,9 +6,6 @@
 //
 
 #import "MHObject.h"
-#import "MHJSONModelInternal.h"
-
-MHJSONMODEL_PROTOCOL_DEFINE(MHUser)
 
 
 /**

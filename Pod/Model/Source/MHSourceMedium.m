@@ -19,7 +19,7 @@ NSString* const MHSourceMediumTypeAttend = @"attend";
 
 @interface MHSourceMedium ()
 
-@property (strong, nonatomic) NSArray<MHSourceMethod>* methods;
+@property (strong, nonatomic) NSArray* methods;
 
 @property (weak, nonatomic, readwrite) MHSource* source;
 @property (weak, nonatomic, readwrite) MHObject* content;
@@ -38,6 +38,14 @@ NSString* const MHSourceMediumTypeAttend = @"attend";
         return YES;
     }
     return [super propertyIsIgnored:propertyName];
+}
+
++ (NSString*)protocolForArrayProperty:(NSString*)propertyName
+{
+    if ([propertyName isEqualToString:NSStringFromSelector(@selector(methods))]) {
+        return NSStringFromClass(MHSourceMethod.class);
+    }
+    return [super protocolForArrayProperty:propertyName];
 }
 
 - (instancetype)initWithDictionary:(NSDictionary*)dict error:(NSError**)err
