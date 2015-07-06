@@ -300,6 +300,24 @@ AVENetworkToken* token = [[AVENetworkToken alloc] init];
 [token cancel];
 ```
 
+## Traits
+
+Trait | Description | Examples
+----- | ----------- | --------
+MHAchievement | Notable accomplishments or awards | `Academy Awards`, `Tony`, `Emmy`, `Rolling Stone Top 100 Albums`
+MHAudience | Consumer group for which the media is intended for | `Kids`
+MHEra | Time period the media was released in | `Post-War`
+MHFlag | Appropriateness warnings | `Nudity`, `Explicit`, `R Rated`
+MHGenre | Category of media based on stylistic criteria | `Drama`, `Comedy`
+MHGraphGenre | <WIP> | <WIP>
+MHMaterialSource | Where the story originated | `Book`, `Graphic Novel`, `True Story`
+MHMood | The tone or attitude of the media; or how the media is perceived by the audience; or how it makes you feel | `Absurd`, `Goofy`, `Campy`
+MHQuality | Abstract or subjective attributes of the media | `Cult`, `Indie`, `Visually Striking`, `Epic Scope`, `Moving`, `Time-Sensitive Viewing`, `Avant Garde`
+MHStoryElement | Specific settings, items, events, or things that appear or happen within media (like key plot points) | `Current Events`, `War`, `Cops`
+MHStyleElement | Specific attributes pertaining to how the media is composed | `Animated`, `Live Action`, `Hand Drawn`, `Narration`, `Segments`, `Episodic`, `Anime`, `Manga`
+MHSubGenre | A more specific generalization of similar types of media within a less specific genre | `Romantic Comedy`, `Political Thriller`
+MHTheme | The unifying subject or idea of the type of visual work | `Overcoming the Odds`, `Man Vs Nature`
+
 ## License
 
 CoreHound is available under the Apache License 2.0. See the LICENSE file for more info.
