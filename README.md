@@ -309,7 +309,7 @@ MHAudience | Consumer group for which the media is intended for | `Kids`
 MHEra | Time period the media was released in | `Post-War`
 MHFlag | Appropriateness warnings | `Nudity`, `Explicit`, `R Rated`
 MHGenre | Category of media based on stylistic criteria | `Drama`, `Comedy`
-MHGraphGenre | <WIP> | <WIP>
+MHGraphGenre | *WIP* | *WIP*
 MHMaterialSource | Where the story originated | `Book`, `Graphic Novel`, `True Story`
 MHMood | The tone or attitude of the media; or how the media is perceived by the audience; or how it makes you feel | `Absurd`, `Goofy`, `Campy`
 MHQuality | Abstract or subjective attributes of the media | `Cult`, `Indie`, `Visually Striking`, `Epic Scope`, `Moving`, `Time-Sensitive Viewing`, `Avant Garde`
