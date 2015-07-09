@@ -15,9 +15,9 @@ Pod::Spec.new do |s|
 
   s.resources = ['Pod/Resources/*.cer']
 
-  s.dependency 'AtSugar'
-  s.dependency 'Avenue'
-  s.dependency 'AvenueFetcher'
+  s.dependency 'AtSugar', '~> 0.1'
+  s.dependency 'Avenue', '~> 0.1'
+  s.dependency 'AvenueFetcher', '~> 0.1'
   s.dependency 'JSONModel', '~> 1.1'
   s.dependency 'PromiseKit', '~> 1.5'
   s.dependency 'UICKeyChainStore'

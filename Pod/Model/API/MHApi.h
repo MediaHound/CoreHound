@@ -122,7 +122,7 @@
 
 // Trait
 #import "MHTrait.h"
-#import "MHAchievements.h"
+#import "MHAchievement.h"
 #import "MHAudience.h"
 #import "MHEra.h"
 #import "MHFlag.h"
