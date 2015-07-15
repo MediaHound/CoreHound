@@ -300,23 +300,72 @@ AVENetworkToken* token = [[AVENetworkToken alloc] init];
 [token cancel];
 ```
 
+## Media
+
+### Video
+
+Media          | Description
+-------------- | -----------
+MHMovie        | A feature-length motion picture
+MHShowEpisode  | A single installment of video content within a sequence of serialized content
+MHShowSeason   | An ordered list of MHShowEpisode objects
+MHShowSeries   | An ordered list of MHShowSeason objects
+MHMusicVideo   | A video recording accompanying a song or of song performance
+MHSpecial      | A single installment of unserialized video content
+MHTrailer      | A short promotional video intended to preview the content
+
+### Audio
+
+Media          | Description
+-------------- | -----------
+MHTrack        | An individual piece of music or audio content 
+MHAlbum        | An ordered list of MHTracks
+
+### Literature
+
+Media          | Description
+-------------- | -----------
+MHBook         | A novel or nonfiction literary work
+MHComicBook    | A short, serialized work presented in comic-strip format
+MHGraphicNovel | A novel presented in comic-strip format
+MHNovella      | A work of fiction shorter than a novel but longer than a short story
+MHPeriodical   | A collection of news, information, and features published at regular intervals 
+
+### Gaming
+
+Media          | Description
+-------------- | -----------
+MHGame         | A piece of interactive content that provides structured playing
+
+### Mixed
+
+Media          | Description
+-------------- | -----------
+MHMediaGroup   | An unordered list of MHMediaObjects
+MHMediaSeries  | An ordered list of MHMedia Objects
+MHUniverse     | A special unordered list of MHMediaObjects
+
+
+
+
 ## Traits
 
-Trait | Description | Examples
------ | ----------- | --------
-MHAchievement | Notable accomplishments or awards | `Academy Awards`, `Tony`, `Emmy`, `Rolling Stone Top 100 Albums`
-MHAudience | Consumer group for which the media is intended for | `Kids`
-MHEra | Time period the media was released in | `Post-War`
-MHFlag | Appropriateness warnings | `Nudity`, `Explicit`, `R Rated`
-MHGenre | Category of media based on stylistic criteria | `Drama`, `Comedy`
-MHGraphGenre | *WIP* | *WIP*
-MHMaterialSource | Where the story originated | `Book`, `Graphic Novel`, `True Story`
-MHMood | The tone or attitude of the media; or how the media is perceived by the audience; or how it makes you feel | `Absurd`, `Goofy`, `Campy`
-MHQuality | Abstract or subjective attributes of the media | `Cult`, `Indie`, `Visually Striking`, `Epic Scope`, `Moving`, `Time-Sensitive Viewing`, `Avant Garde`
-MHStoryElement | Specific settings, items, events, or things that appear or happen within media (like key plot points) | `Current Events`, `War`, `Cops`
-MHStyleElement | Specific attributes pertaining to how the media is composed | `Animated`, `Live Action`, `Hand Drawn`, `Narration`, `Segments`, `Episodic`, `Anime`, `Manga`
-MHSubGenre | A more specific generalization of similar types of media within a less specific genre | `Romantic Comedy`, `Political Thriller`
-MHTheme | The unifying subject or idea of the type of visual work | `Overcoming the Odds`, `Man Vs Nature`
+Trait            | Description | Examples
+---------------- | ----------- | --------
+MHGenre          | A category of content based on stylistic criteria | `Drama`, `Comedy`
+MHSubgenre       | A more specific category of content within a less specific Genre | `Romantic Comedy`, `Political Thriller`
+MHMood           | The tone or attitude of the content; or how the content is perceived by the audience/ makes it feel | `Absurd`, `Goofy`, `Campy`
+MHQuality        | An abstract or subjective attribute of the content | `Cult`, `Indie`, `Visually Striking`, `Epic Scope`, `Moving`, `Time-Sensitive Viewing`, `Avant Garde`
+MHStyleElement   | A specific attribute pertaining to how the content is composed | `Animated`, `Live Action`, `Hand Drawn`, `Narration`, `Segments`, `Episodic`, `Anime`, `Manga`
+MHStoryElement   | A key plot point, specific setting, item, or event that appears or happens within the content | `Current Events`, `War`, `Cops`
+MHMaterialSource | The source material for the content, or where the content's story originated | `Book`, `Graphic Novel`, `True Story`
+MHTheme          | The unifying subject or idea of the type of visual work | `Overcoming the Odds`, `Man Vs Nature`
+MHAchievement    | A notable accomplishment or award for the content | `Academy Awards`, `Tony`, `Emmy`, `Rolling Stone Top 100 Albums`
+MHEra            | The time period in which the content was released or set | `Post-War`
+MHAudience       | The consumer group for which the content is intended | `Kids`
+MHFlag           | An appropriateness warning for the content | `Nudity`, `Explicit`, `R Rated`
+MHGraphGenre     | A category of content made up of two or more different MHTraits | *WIP*
+
 
 ## License
 
