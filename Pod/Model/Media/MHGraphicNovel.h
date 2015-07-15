@@ -9,7 +9,7 @@
 
 
 /**
- * An MHGraphicNovel
+ * An MHGraphicNovel is a novel presented in comic-strip format.
  */
 @interface MHGraphicNovel : MHMedia
 

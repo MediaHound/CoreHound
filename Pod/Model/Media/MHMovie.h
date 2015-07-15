@@ -9,7 +9,7 @@
 
 
 /**
- * An MHMovie
+ * An MHMovie is a feature-length motion picture.
  */
 @interface MHMovie : MHMedia
 

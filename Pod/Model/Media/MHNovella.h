@@ -9,7 +9,7 @@
 
 
 /**
- * An MHNovella
+ * An MHNovella is a work of fiction shorter than a novel but longer than a short story.
  */
 @interface MHNovella : MHMedia
 

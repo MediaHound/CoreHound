@@ -9,7 +9,7 @@
 
 
 /**
- * An MHSpecial
+ * An MHSpecial is a single installment of unserialized video content.
  */
 @interface MHSpecial : MHMedia
 

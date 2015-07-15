@@ -9,7 +9,7 @@
 
 
 /**
- * An MHMusicVideo
+ * An MHMusicVideo is a video recording accompanying a song or of song performance.
  */
 @interface MHMusicVideo : MHMedia
 

@@ -9,7 +9,7 @@
 
 
 /**
- * An MHGame
+ * An MHGame is a piece of interactive content that provides structured playing.
  */
 @interface MHGame : MHMedia
 

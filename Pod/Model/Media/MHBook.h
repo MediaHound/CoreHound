@@ -9,7 +9,7 @@
 
 
 /**
- * An MHBook
+ * An MHBook is a novel or nonfiction literary work.
  */
 @interface MHBook : MHMedia
 

@@ -9,7 +9,7 @@
 
 
 /**
- * An MHShowSeries
+ * An MHShowSeries is an ordered list of MHShowSeason objects.
  */
 @interface MHShowSeries : MHMedia
 

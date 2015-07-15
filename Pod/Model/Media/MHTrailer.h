@@ -9,7 +9,7 @@
 
 
 /**
- * An MHTrailer
+ * An MHTrailer is a short promotional video intended to preview the content.
  */
 @interface MHTrailer : MHMedia
 

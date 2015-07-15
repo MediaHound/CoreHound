@@ -9,7 +9,7 @@
 
 
 /**
- * An MHPeriodical
+ * An MHPeriodical is a collection of news, information, and features published at regular intervals.
  */
 @interface MHPeriodical : MHMedia
 

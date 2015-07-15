@@ -9,7 +9,7 @@
 
 
 /**
- * An MHShowEpisode
+ * An MHShowEpisode is a single installment of video content within a sequence of serialized content.
  */
 @interface MHShowEpisode : MHMedia
 

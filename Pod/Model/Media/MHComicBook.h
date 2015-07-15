@@ -9,7 +9,7 @@
 
 
 /**
- * An MHComicBook
+ * An MHComicBook is a short, serialized work presented in comic-strip format.
  */
 @interface MHComicBook : MHMedia
 

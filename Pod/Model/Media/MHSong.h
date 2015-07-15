@@ -9,7 +9,7 @@
 
 
 /**
- * An MHSong
+ * An MHSong is an individual piece of music or audio content.
  */
 @interface MHSong : MHMedia
 

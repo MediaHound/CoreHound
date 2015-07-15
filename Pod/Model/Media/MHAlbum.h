@@ -9,7 +9,7 @@
 
 
 /**
- * An MHAlbum
+ * An MHAlbum is an ordered list of MHTracks.
  */
 @interface MHAlbum : MHMedia
 
