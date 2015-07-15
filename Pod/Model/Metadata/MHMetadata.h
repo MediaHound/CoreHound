@@ -36,7 +36,7 @@
  * when the social action occured.
  * For dates related to Media content, consider the `releaseDate` property.
  */
-@property (nonatomic, strong) NSDate* createdDate;
+@property (strong, nonatomic) NSDate* createdDate;
 
 @end
 
@@ -171,7 +171,7 @@ typedef NS_ENUM(NSInteger, MHCollectionMixlistType)
 /**
  * What type of a mixlist this collection is.
  */
-@property (nonatomic) MHCollectionMixlistType mixlist;
+@property (assign, nonatomic) MHCollectionMixlistType mixlist;
 
 @end
 

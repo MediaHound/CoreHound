@@ -33,7 +33,7 @@
         return YES;
     }
     
-    if (![object isKindOfClass:[object class]]) {
+    if (![self isKindOfClass:[object class]]) {
         return NO;
     }
     

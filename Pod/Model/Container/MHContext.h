@@ -59,7 +59,7 @@
 /**
  * The search scope that was used to return this MHObject from search.
  */
-@property (nonatomic) MHSearchScope searchScope;
+@property (assign, nonatomic) MHSearchScope searchScope;
 
 //
 // TODO: Should all contexts have a content pointer back to the object?

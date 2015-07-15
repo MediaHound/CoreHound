@@ -89,7 +89,7 @@ extern NSString* const MHUserSourceDescriptionBoth;
  * @warning This property is only valid if there is a currently logged in user.
  * @warning This property is only valid on an MHSocial object for an MHSource.
  */
-@property (nonatomic) MHSourcePreference userPreference;
+@property (assign, nonatomic) MHSourcePreference userPreference;
 
 // TODO: Remove. Deprecated.
 @property (strong, nonatomic) NSString* userSourceDescription;
