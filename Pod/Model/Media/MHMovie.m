@@ -13,6 +13,11 @@
 
 @declare_class_property (mhidPrefix, @"mhmov")
 
++ (MHEntertainmentSilo)entertainmentSilo
+{
+    return MHEntertainmentSiloVideo;
+}
+
 + (void)load
 {
     [self registerMHObject];

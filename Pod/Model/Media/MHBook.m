@@ -13,6 +13,11 @@
 
 @declare_class_property (mhidPrefix, @"mhbok")
 
++ (MHEntertainmentSilo)entertainmentSilo
+{
+    return MHEntertainmentSiloLiterature;
+}
+
 + (void)load
 {
     [self registerMHObject];

@@ -7,7 +7,7 @@
 
 #import "MHObject.h"
 #import "MHRelationalPair.h"
-
+#import "MHEntertainmentSilo.h"
 
 
 /**
@@ -20,6 +20,16 @@
  * This property is guranteed to exist.
  */
 @property (strong, atomic) MHMediaMetadata* metadata;
+
+/**
+ *
+ */
++ (MHEntertainmentSilo)entertainmentSilo;
+
+/**
+ *
+ */
+@property (assign, nonatomic, readonly) MHEntertainmentSilo entertainmentSilo;
 
 /**
  * An array of MHRelationalPairs to the key contributors for this media.

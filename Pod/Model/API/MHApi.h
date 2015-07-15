@@ -67,6 +67,7 @@
 
 // Media
 #import "MHMedia.h"
+#import "MHEntertainmentSilo.h"
 
 #import "MHMovie.h"
 #import "MHMovieSeries.h"

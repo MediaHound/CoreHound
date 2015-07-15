@@ -50,6 +50,18 @@ static NSString* const kRelatedRootSubendpoint = @"related";
     return [super protocolForArrayProperty:propertyName];
 }
 
++ (MHEntertainmentSilo)entertainmentSilo
+{
+    @throw [NSException exceptionWithName:@"MHEnterainmentSilo not defined on this MHMedia"
+                                   reason:@"This is a problem with CoreHound. Please let us know!"
+                                 userInfo:nil];
+}
+
+- (MHEntertainmentSilo)entertainmentSilo
+{
+    return [self.class entertainmentSilo];
+}
+
 @end
 
 
