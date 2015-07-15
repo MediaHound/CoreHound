@@ -8,6 +8,9 @@
 #import "MHTrait.h"
 
 
+/**
+ * An MHAchievement is a notable accomplishment or award for the content.
+ */
 @interface MHAchievement : MHTrait
 
 @end

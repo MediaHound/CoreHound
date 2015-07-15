@@ -8,6 +8,9 @@
 #import "MHTrait.h"
 
 
+/**
+ * An MHMaterialSource is the source material for the content, or where the content's story originated.
+ */
 @interface MHMaterialSource : MHTrait
 
 @end

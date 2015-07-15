@@ -8,6 +8,9 @@
 #import "MHTrait.h"
 
 
+/**
+ * An MHGenre is a category of content based on stylistic criteria.
+ */
 @interface MHGenre : MHTrait
 
 @end

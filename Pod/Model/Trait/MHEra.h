@@ -8,6 +8,9 @@
 #import "MHTrait.h"
 
 
+/**
+ * An MHEra is the time period in which the content was released or set.
+ */
 @interface MHEra : MHTrait
 
 @end

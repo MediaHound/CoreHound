@@ -8,6 +8,9 @@
 #import "MHTrait.h"
 
 
+/**
+ * An MHQuality is an abstract or subjective attribute of the content.
+ */
 @interface MHQuality : MHTrait
 
 @end

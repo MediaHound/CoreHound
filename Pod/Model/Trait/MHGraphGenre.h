@@ -8,6 +8,9 @@
 #import "MHTrait.h"
 
 
+/**
+ * An MHGraphGenre is a category of content made up of two or more different MHTraits.
+ */
 @interface MHGraphGenre : MHTrait
 
 @end

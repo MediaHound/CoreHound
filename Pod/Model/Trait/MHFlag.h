@@ -8,6 +8,9 @@
 #import "MHTrait.h"
 
 
+/**
+ * An MHFlag is an appropriateness warning for the content.
+ */
 @interface MHFlag : MHTrait
 
 @end

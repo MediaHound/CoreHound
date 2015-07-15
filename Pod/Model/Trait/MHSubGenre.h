@@ -8,6 +8,9 @@
 #import "MHTrait.h"
 
 
+/**
+ * An MHSubGenre is a more specific category of content within a less specific Genre.
+ */
 @interface MHSubGenre : MHTrait
 
 @end

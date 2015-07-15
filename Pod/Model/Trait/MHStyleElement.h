@@ -8,6 +8,9 @@
 #import "MHTrait.h"
 
 
+/**
+ * An MHStyleElement is a specific attribute pertaining to how the content is composed.
+ */
 @interface MHStyleElement : MHTrait
 
 @end
