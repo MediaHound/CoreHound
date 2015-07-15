@@ -302,7 +302,9 @@ AVENetworkToken* token = [[AVENetworkToken alloc] init];
 
 ## Media
 
-### Video
+Here is a list of all media types in The Entertainment Graph. 
+
+#### Video
 
 Media          | Description
 -------------- | -----------
@@ -314,14 +316,14 @@ MHMusicVideo   | A video recording accompanying a song or of song performance
 MHSpecial      | A single installment of unserialized video content
 MHTrailer      | A short promotional video intended to preview the content
 
-### Audio
+#### Audio
 
 Media          | Description
 -------------- | -----------
 MHTrack        | An individual piece of music or audio content 
 MHAlbum        | An ordered list of MHTracks
 
-### Literature
+#### Literature
 
 Media          | Description
 -------------- | -----------
@@ -331,13 +333,13 @@ MHGraphicNovel | A novel presented in comic-strip format
 MHNovella      | A work of fiction shorter than a novel but longer than a short story
 MHPeriodical   | A collection of news, information, and features published at regular intervals 
 
-### Gaming
+#### Gaming
 
 Media          | Description
 -------------- | -----------
 MHGame         | A piece of interactive content that provides structured playing
 
-### Mixed
+#### Mixed
 
 Media          | Description
 -------------- | -----------
@@ -345,10 +347,9 @@ MHMediaGroup   | An unordered list of MHMediaObjects
 MHMediaSeries  | An ordered list of MHMedia Objects
 MHUniverse     | A special unordered list of MHMediaObjects
 
-
-
-
 ## Traits
+
+Here is a list of all trait types in The Entertainment Graph. 
 
 Trait            | Description | Examples
 ---------------- | ----------- | --------
