@@ -16,6 +16,8 @@
 
 @declare_class_property (mhidPrefix, @"mhhtg")
 
+@dynamic metadata;
+
 + (void)load
 {
     [self registerMHObject];

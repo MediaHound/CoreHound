@@ -19,6 +19,8 @@
 
 @declare_class_property (rootEndpoint, @"graph/contributor")
 
+@dynamic metadata;
+
 - (BOOL)isGroup
 {
     return !self.isIndividual;

@@ -216,3 +216,19 @@ typedef NS_ENUM(NSInteger, MHCollectionMixlistType)
 @property (strong, nonatomic) NSNumber* connectable;
 
 @end
+
+
+/**
+ * Metadata about an `MHContributor` object.
+ */
+@interface MHContributorMetadata : MHMetadata
+
+@end
+
+
+/**
+ * Metadata about an `MHHashtag` object.
+ */
+@interface MHHashtagMetadata : MHMetadata
+
+@end

@@ -6,6 +6,7 @@
 //
 
 #import "MHObject.h"
+#import "MHMetadata.h"
 
 
 /**
@@ -16,6 +17,12 @@
  * A fictional contributor is a character or entity that is part of the content.
  */
 @interface MHContributor : MHObject
+
+/**
+ * Metadata about the receiver
+ * This property is guranteed to exist.
+ */
+@property (strong, atomic) MHContributorMetadata* metadata;
 
 /**
  * Whether the contributor is an individual.

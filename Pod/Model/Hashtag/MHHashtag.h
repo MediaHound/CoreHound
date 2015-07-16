@@ -6,12 +6,19 @@
 //
 
 #import "MHObject.h"
+#import "MHMetadata.h"
 
 
 /**
  * An MHHashtag is a mentionable topic in the form "#name".
  */
 @interface MHHashtag : MHObject
+
+/**
+ * Metadata about the receiver
+ * This property is guranteed to exist.
+ */
+@property (strong, atomic) MHHashtagMetadata* metadata;
 
 @end
 
