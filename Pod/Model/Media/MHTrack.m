@@ -1,15 +1,15 @@
 //
-//  MHSong.m
+//  MHTrack.m
 //  CoreHound
 //
 //  Copyright (c) 2015 MediaHound. All rights reserved.
 //
 
-#import "MHSong.h"
+#import "MHTrack.h"
 #import "MHObject+Internal.h"
 
 
-@implementation MHSong
+@implementation MHTrack
 
 @declare_class_property (mhidPrefix, @"mhsng")
 

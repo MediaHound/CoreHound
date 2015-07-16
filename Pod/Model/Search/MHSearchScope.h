@@ -28,9 +28,9 @@ typedef NS_ENUM(NSUInteger, MHSearchScope) {
     MHSearchScopeMovie       = 1 << 0,
     
     /**
-     * Only return Song results.
+     * Only return Track results.
      */
-    MHSearchScopeSong        = 1 << 1,
+    MHSearchScopeTrack        = 1 << 1,
     
     /**
      * Only return Album results.

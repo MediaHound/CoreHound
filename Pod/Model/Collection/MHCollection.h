@@ -12,8 +12,8 @@
 
 /**
  * A collection is a user-created grouping of MHObjects.
- * Collections can contain multiple content types, so users can collect movies, songs, and books
- * all into one collection.
+ * Collections can contain multiple content types, so users can collect movies, tracks, books, etc
+ * all into a single collection.
  */
 @interface MHCollection : MHObject
 

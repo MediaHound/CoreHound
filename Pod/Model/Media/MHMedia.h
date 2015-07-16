@@ -32,8 +32,8 @@
 
 /**
  * A relational pair to the MHObject the receiver belongs to.
- * For example, an MHSong's `primaryGroup` will be the primary MHAlbum its on.
- * This property exists on MHSong, MHShowSeason, MHShowEpisode.
+ * For example, an MHTrack's `primaryGroup` will be the primary MHAlbum its on.
+ * This property exists on MHTrack, MHShowSeason, MHShowEpisode.
  * This property may be unrealized. You should rarely access it directly.
  * You need to call -fetchPrimaryGroup to ensure it has been loaded.
  * This property is KVO compliant.
@@ -47,8 +47,8 @@
 
 /**
  * Fetches the media's primary group.
- * For example, an MHSong's `primaryGroup` will be the primary MHAlbum its on.
- * This method is valid on MHSong, MHShowSeason, MHShowEpisode.
+ * For example, an MHTrack's `primaryGroup` will be the primary MHAlbum its on.
+ * This method is valid on MHTrack, MHShowSeason, MHShowEpisode.
  * You should never read the `primaryGroup` property directly from an MHMedia. Instead, always access the group via
  * the `fetchPrimaryGroup` promise. The `primaryGroup` property can be used for observing KVO changes to primary group.
  * @return A promise which resolves with an MHRelationalPair.
@@ -57,8 +57,8 @@
 
 /**
  * Fetches the media's primary group.
- * For example, an MHSong's `primaryGroup` will be the primary MHAlbum its on.
- * This method is valid on MHSong, MHShowSeason, MHShowEpisode.
+ * For example, an MHTrack's `primaryGroup` will be the primary MHAlbum its on.
+ * This method is valid on MHTrack, MHShowSeason, MHShowEpisode.
  * You should never read the `primaryGroup` property directly from an MHMedia. Instead, always access the group via
  * the `fetchPrimaryGroup` promise. The `primaryGroup` property can be used for observing KVO changes to primary group.
  * @param forced Whether to use a cached response. If YES, a network request will occur. If NO, a cached result may be used.

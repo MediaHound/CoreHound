@@ -1,5 +1,5 @@
 //
-//  MHSong.h
+//  MHTrack.h
 //  CoreHound
 //
 //  Copyright (c) 2015 MediaHound. All rights reserved.
@@ -9,9 +9,9 @@
 
 
 /**
- * An MHSong is an individual piece of music or audio content.
+ * An MHTrack is an individual piece of music or audio content.
  */
-@interface MHSong : MHMedia
+@interface MHTrack : MHMedia
 
 @end
 

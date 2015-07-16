@@ -15,8 +15,8 @@ NSSet * ScopeStringsFromMHSearchScope(MHSearchScope scope)
         if (scope & MHSearchScopeMovie) {
             [set addObject:@"movie"];
         }
-        if (scope & MHSearchScopeSong) {
-            [set addObject:@"song"];
+        if (scope & MHSearchScopeTrack) {
+            [set addObject:@"track"];
         }
         if (scope & MHSearchScopeAlbum) {
             [set addObject:@"album"];
