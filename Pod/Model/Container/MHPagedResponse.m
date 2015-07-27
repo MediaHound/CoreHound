@@ -52,11 +52,11 @@
     return [super protocolForArrayProperty:propertyName];
 }
 
-- (PMKPromise*)fetchNext
+- (AnyPromise*)fetchNext
 {
     id cachedResponse = self.cachedNextResponse;
     if (cachedResponse) {
-        return [PMKPromise promiseWithValue:cachedResponse];
+        return [AnyPromise promiseWithValue:cachedResponse];
     }
     
     return self.fetchNextOperation(self.pagingInfo.next).thenInBackground(^(MHPagedResponse* response) {

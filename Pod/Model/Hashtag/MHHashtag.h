@@ -30,7 +30,7 @@
  * @param name The name of the hashtag, which does not include the '#'
  * @return A promise which resolves with the MHHashtag.
  */
-+ (PMKPromise*)fetchByName:(NSString*)name;
++ (AnyPromise*)fetchByName:(NSString*)name;
 
 /**
  * Fetches a hashtag by it's name.
@@ -39,7 +39,7 @@
  * @param networkToken The token for the network request, allowing cancelation and re-prioritization.
  * @return A promise which resolves with the MHHashtag.
  */
-+ (PMKPromise*)fetchByName:(NSString*)name
++ (AnyPromise*)fetchByName:(NSString*)name
                   priority:(AVENetworkPriority*)priority
               networkToken:(AVENetworkToken*)networkToken;
 

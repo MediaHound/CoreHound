@@ -137,7 +137,7 @@
 
     if (self.additionalSearchPages && indexPath.row == lastCellRow) {
         /*
-         Since the Search results come back as paged reponses, use the fetchNext method (PMKPromise*) to retreive
+         Since the Search results come back as paged reponses, use the fetchNext method (AnyPromise*) to retreive
          the next set of results from the user's search. You will receive another set of results that contain a 
          'content' property of type MHObject, as well as a BOOL (hasMorePages) indicating additional pages.
          */

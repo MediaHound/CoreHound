@@ -58,7 +58,7 @@
  * Fetches all media that this contributor contributed to.
  * @return A promise which resolves with an MHPagedResponse.
  */
-- (PMKPromise*)fetchMedia;
+- (AnyPromise*)fetchMedia;
 
 /**
  * Fetches all media that this contributor contributed to.
@@ -67,7 +67,7 @@
  * @param networkToken The token for the network request, allowing cancelation and re-prioritization.
  * @return A promise which resolves with an MHPagedResponse.
  */
-- (PMKPromise*)fetchMediaForced:(BOOL)forced
+- (AnyPromise*)fetchMediaForced:(BOOL)forced
                        priority:(AVENetworkPriority*)priority
                    networkToken:(AVENetworkToken*)networkToken;
 

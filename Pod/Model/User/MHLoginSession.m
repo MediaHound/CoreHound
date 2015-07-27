@@ -47,7 +47,7 @@ static MHLoginSession* s_currentSession = nil;
     return s_currentSession;
 }
 
-+ (PMKPromise*)loginUsingSavedCredentials
++ (AnyPromise*)loginUsingSavedCredentials
 {
     NSString* username = [UICKeyChainStore stringForKey:LoginKeychainKeyUsername];
     NSString* password = [UICKeyChainStore stringForKey:LoginKeychainKeyPassword];
@@ -55,7 +55,7 @@ static MHLoginSession* s_currentSession = nil;
         return [self loginWithUsername:username password:password];
     }
     else {
-        return [PMKPromise promiseWithValue:MHErrorMake(MHLoginSessionNoSavedCredentialsError, @{})];
+        return [AnyPromise promiseWithValue:MHErrorMake(MHLoginSessionNoSavedCredentialsError, @{})];
     }
 }
 
@@ -71,7 +71,7 @@ static MHLoginSession* s_currentSession = nil;
     [UICKeyChainStore removeItemForKey:LoginKeychainKeyPassword];
 }
 
-+ (PMKPromise*)loginWithUsername:(NSString*)username
++ (AnyPromise*)loginWithUsername:(NSString*)username
                      password:(NSString*)password
 {
 //    AGLLogVerbose(@"[MHLoginSession] Attempting Login");

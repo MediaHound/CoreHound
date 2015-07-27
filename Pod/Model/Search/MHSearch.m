@@ -35,7 +35,7 @@ NSString* NSStringByAddingExtendedPercentEscapes(NSString* str)
 
 @implementation MHSearch
 
-+ (PMKPromise*)fetchResultsForSearchTerm:(NSString*)search
++ (AnyPromise*)fetchResultsForSearchTerm:(NSString*)search
                                    scope:(MHSearchScope)scope
 {
     return [self fetchResultsForSearchTerm:search
@@ -44,7 +44,7 @@ NSString* NSStringByAddingExtendedPercentEscapes(NSString* str)
                               networkToken:nil];
 }
 
-+ (PMKPromise*)fetchResultsForSearchTerm:(NSString*)search
++ (AnyPromise*)fetchResultsForSearchTerm:(NSString*)search
                                    scope:(MHSearchScope)scope
                                 priority:(AVENetworkPriority*)priority
                             networkToken:(AVENetworkToken*)networkToken
@@ -56,7 +56,7 @@ NSString* NSStringByAddingExtendedPercentEscapes(NSString* str)
                                       next:nil];
 }
 
-+ (PMKPromise*)fetchResultsForSearchTerm:(NSString*)search
++ (AnyPromise*)fetchResultsForSearchTerm:(NSString*)search
                                    scope:(MHSearchScope)scope
                                 priority:(AVENetworkPriority*)priority
                             networkToken:(AVENetworkToken*)networkToken
@@ -64,7 +64,7 @@ NSString* NSStringByAddingExtendedPercentEscapes(NSString* str)
 {
     if (search.length < 1 || NSStringIsWhiteSpace(search)) {
         MHPagedResponse* response = [MHPagedResponse emptyPagedResponse];
-        return [PMKPromise promiseWithValue:response];
+        return [AnyPromise promiseWithValue:response];
     }
     
     NSSet* scopes = ScopeStringsFromMHSearchScope(scope);

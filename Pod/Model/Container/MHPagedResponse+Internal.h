@@ -7,7 +7,7 @@
 
 #import "MHPagedResponse.h"
 
-typedef PMKPromise*(^MHPagedResponseFetchNextBlock)(NSString*);
+typedef AnyPromise*(^MHPagedResponseFetchNextBlock)(NSString*);
 
 
 @interface MHPagedResponse (Internal)

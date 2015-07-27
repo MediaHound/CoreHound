@@ -45,27 +45,27 @@ static NSString* const kUpdateSubendpoint = @"update";
     return [super propertyIsOptional:propertyName];
 }
 
-- (PMKPromise*)addContent:(MHObject*)content
+- (AnyPromise*)addContent:(MHObject*)content
 {
     return [self addContents:@[content]];
 }
 
-- (PMKPromise*)addContents:(NSArray*)contents
+- (AnyPromise*)addContents:(NSArray*)contents
 {
     return [self changeContents:contents modification:@"add"];
 }
 
-- (PMKPromise*)removeContent:(MHObject*)content
+- (AnyPromise*)removeContent:(MHObject*)content
 {
     return [self removeContents:@[content]];
 }
 
-- (PMKPromise*)removeContents:(NSArray*)contents
+- (AnyPromise*)removeContents:(NSArray*)contents
 {
     return [self changeContents:contents modification:@"remove"];
 }
 
-- (PMKPromise*)changeContents:(NSArray*)contents modification:(NSString*)modification
+- (AnyPromise*)changeContents:(NSArray*)contents modification:(NSString*)modification
 {
     NSMutableSet* mhids = [NSMutableSet set];
     for (MHObject* content in contents) {
@@ -94,7 +94,7 @@ static NSString* const kUpdateSubendpoint = @"update";
     });
 }
 
-- (PMKPromise*)setName:(NSString*)name
+- (AnyPromise*)setName:(NSString*)name
 {
     return [[MHFetcher sharedFetcher] putAndFetchModel:MHCollectionMetadata.class
                                                   path:[self subendpoint:kUpdateSubendpoint]
@@ -130,12 +130,12 @@ static NSString* const kUpdateSubendpoint = @"update";
 
 @implementation MHCollection (Creating)
 
-+ (PMKPromise*)createWithName:(NSString*)name
++ (AnyPromise*)createWithName:(NSString*)name
 {
     return [self createWithName:name initialContent:nil];
 }
 
-+ (PMKPromise*)createWithName:(NSString*)name initialContent:(NSArray*)initialContent
++ (AnyPromise*)createWithName:(NSString*)name initialContent:(NSArray*)initialContent
 {
     NSAssert(name, @"When creating a collection, you must provide a name.");
     
@@ -166,14 +166,14 @@ static NSString* const kUpdateSubendpoint = @"update";
 
 @implementation MHCollection (Fetching)
 
-- (PMKPromise*)fetchPrimaryOwner
+- (AnyPromise*)fetchPrimaryOwner
 {
     return [self fetchPrimaryOwnerForced:NO
                                 priority:[AVENetworkPriority priorityWithLevel:AVENetworkPriorityLevelHigh]
                             networkToken:nil];
 }
 
-- (PMKPromise*)fetchPrimaryOwnerForced:(BOOL)forced
+- (AnyPromise*)fetchPrimaryOwnerForced:(BOOL)forced
                               priority:(AVENetworkPriority*)priority
                           networkToken:(AVENetworkToken*)networkToken
 {
@@ -183,14 +183,14 @@ static NSString* const kUpdateSubendpoint = @"update";
                   networkToken:networkToken];
 }
 
-- (PMKPromise*)fetchFirstContentImage
+- (AnyPromise*)fetchFirstContentImage
 {
     return [self fetchFirstContentImageForced:NO
                                      priority:[AVENetworkPriority priorityWithLevel:AVENetworkPriorityLevelHigh]
                                  networkToken:nil];
 }
 
-- (PMKPromise*)fetchFirstContentImageForced:(BOOL)forced
+- (AnyPromise*)fetchFirstContentImageForced:(BOOL)forced
                                    priority:(AVENetworkPriority*)priority
                                networkToken:(AVENetworkToken*)networkToken
 {
@@ -200,14 +200,14 @@ static NSString* const kUpdateSubendpoint = @"update";
                   networkToken:networkToken];
 }
 
-- (PMKPromise*)fetchOwners
+- (AnyPromise*)fetchOwners
 {
     return [self fetchOwnersForced:NO
                           priority:[AVENetworkPriority priorityWithLevel:AVENetworkPriorityLevelHigh]
                       networkToken:nil];
 }
 
-- (PMKPromise*)fetchOwnersForced:(BOOL)forced
+- (AnyPromise*)fetchOwnersForced:(BOOL)forced
                         priority:(AVENetworkPriority*)priority
                     networkToken:(AVENetworkToken*)networkToken
 {
@@ -218,14 +218,14 @@ static NSString* const kUpdateSubendpoint = @"update";
                                next:nil];
 }
 
-- (PMKPromise*)fetchContent
+- (AnyPromise*)fetchContent
 {
     return [self fetchContentForced:NO
                            priority:[AVENetworkPriority priorityWithLevel:AVENetworkPriorityLevelHigh]
                        networkToken:nil];
 }
 
-- (PMKPromise*)fetchContentForced:(BOOL)forced
+- (AnyPromise*)fetchContentForced:(BOOL)forced
                          priority:(AVENetworkPriority*)priority
                      networkToken:(AVENetworkToken*)networkToken
 {
@@ -236,14 +236,14 @@ static NSString* const kUpdateSubendpoint = @"update";
                                next:nil];
 }
 
-- (PMKPromise*)fetchMixList
+- (AnyPromise*)fetchMixList
 {
     return [self fetchMixListForced:NO
                            priority:[AVENetworkPriority priorityWithLevel:AVENetworkPriorityLevelHigh]
                        networkToken:nil];
 }
 
-- (PMKPromise*)fetchMixListForced:(BOOL)forced
+- (AnyPromise*)fetchMixListForced:(BOOL)forced
                          priority:(AVENetworkPriority*)priority
                      networkToken:(AVENetworkToken*)networkToken
 {

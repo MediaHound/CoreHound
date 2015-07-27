@@ -26,7 +26,7 @@
 
 @singleton (sharedSDK)
 
-- (PMKPromise*)configureWithClientId:(NSString*)clientId
+- (AnyPromise*)configureWithClientId:(NSString*)clientId
                         clientSecret:(NSString*)clientSecret
 {
     self.clientId = clientId;
@@ -35,7 +35,7 @@
     return [self refreshOAuthToken];
 }
 
-- (PMKPromise*)refreshOAuthToken
+- (AnyPromise*)refreshOAuthToken
 {
     return [[AVENetworkManager sharedManager] GET:@"cas/oauth2.0/accessToken"
                                        parameters:@{

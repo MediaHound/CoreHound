@@ -44,35 +44,35 @@
  * @param content The new piece of content to add to this collection
  * @return A promise which resolves when the content has succesfully been added
  */
-- (PMKPromise*)addContent:(MHObject*)content;
+- (AnyPromise*)addContent:(MHObject*)content;
 
 /**
  * Add multiple MHObjects to this collection.
  * @param contents The new pieces of content to add to this collection
  * @return A promise which resolves when the content has succesfully been added
  */
-- (PMKPromise*)addContents:(NSArray*)contents;
+- (AnyPromise*)addContents:(NSArray*)contents;
 
 /**
  * Remove a single MHObject from this collection.
  * @param content The piece of content to remove from this collection
  * @return A promise which resolves when the content has succesfully been removed
  */
-- (PMKPromise*)removeContent:(MHObject*)content;
+- (AnyPromise*)removeContent:(MHObject*)content;
 
 /**
  * Remove multiple MHObjects from this collection.
  * @param contents The pieces of content to remove from this collection
  * @return A promise which resolves when the content has succesfully been removed
  */
-- (PMKPromise*)removeContents:(NSArray*)contents;
+- (AnyPromise*)removeContents:(NSArray*)contents;
 
 /**
  * Rename this collection to the given name.
  * @param name The new name of the collection
  * @return A promise which resolves when the name has been changed
  */
-- (PMKPromise*)setName:(NSString*)name;
+- (AnyPromise*)setName:(NSString*)name;
 
 @end
 
@@ -86,7 +86,7 @@
  * @param name The name of the collection to create
  * @return A promise which resolves with the newly created MHCollection
  */
-+ (PMKPromise*)createWithName:(NSString*)name;
++ (AnyPromise*)createWithName:(NSString*)name;
 
 /**
  * Creates a new collection with a given name and an array of initial content.
@@ -96,7 +96,7 @@
  * @param initialContent an array of MHObjects to initially put into the collection
  * @return A promise which resolves with the newly created MHCollection.
  */
-+ (PMKPromise*)createWithName:(NSString*)name initialContent:(NSArray*)initialContent;
++ (AnyPromise*)createWithName:(NSString*)name initialContent:(NSArray*)initialContent;
 
 @end
 
@@ -110,7 +110,7 @@
  * The `primaryOwner` property can be used for observing KVO changes.
  * @return A promise which resolves with an MHUser.
  */
-- (PMKPromise*)fetchPrimaryOwner;
+- (AnyPromise*)fetchPrimaryOwner;
 
 /**
  * Fetches the collection's primary owner.
@@ -122,7 +122,7 @@
  * @param networkToken The token for the network request, allowing cancelation and re-prioritization.
  * @return A promise which resolves with an MHUser.
  */
-- (PMKPromise*)fetchPrimaryOwnerForced:(BOOL)forced
+- (AnyPromise*)fetchPrimaryOwnerForced:(BOOL)forced
                               priority:(AVENetworkPriority*)priority
                           networkToken:(AVENetworkToken*)networkToken;
 
@@ -133,7 +133,7 @@
  * The `firstContentImage` property can be used for observing KVO changes.
  * @return A promise which resolves with an MHImage.
  */
-- (PMKPromise*)fetchFirstContentImage;
+- (AnyPromise*)fetchFirstContentImage;
 
 /**
  * Fetches the image of the collection's first piece of content.
@@ -145,7 +145,7 @@
  * @param networkToken The token for the network request, allowing cancelation and re-prioritization.
  * @return A promise which resolves with an MHImage.
  */
-- (PMKPromise*)fetchFirstContentImageForced:(BOOL)forced
+- (AnyPromise*)fetchFirstContentImageForced:(BOOL)forced
                                    priority:(AVENetworkPriority*)priority
                                networkToken:(AVENetworkToken*)networkToken;
 
@@ -153,7 +153,7 @@
  * Fetches all of the owners of this collection.
  * @return A promise which resolves with an MHPagedResponse.
  */
-- (PMKPromise*)fetchOwners;
+- (AnyPromise*)fetchOwners;
 
 /**
  * Fetches all of the owners of this collection.
@@ -162,7 +162,7 @@
  * @param networkToken The token for the network request, allowing cancelation and re-prioritization.
  * @return A promise which resolves with an MHPagedResponse.
  */
-- (PMKPromise*)fetchOwnersForced:(BOOL)forced
+- (AnyPromise*)fetchOwnersForced:(BOOL)forced
                         priority:(AVENetworkPriority*)priority
                     networkToken:(AVENetworkToken*)networkToken;
 
@@ -170,7 +170,7 @@
  * Fetches all content that is in the collection.
  * @return A promise which resolves with an MHPagedResponse.
  */
-- (PMKPromise*)fetchContent;
+- (AnyPromise*)fetchContent;
 
 /**
  * Fetches all content that is in the collection.
@@ -179,7 +179,7 @@
  * @param networkToken The token for the network request, allowing cancelation and re-prioritization.
  * @return A promise which resolves with an MHPagedResponse.
  */
-- (PMKPromise*)fetchContentForced:(BOOL)forced
+- (AnyPromise*)fetchContentForced:(BOOL)forced
                          priority:(AVENetworkPriority*)priority
                      networkToken:(AVENetworkToken*)networkToken;
 
@@ -187,7 +187,7 @@
  * Fetches all mixlist content that is in the collection.
  * @return A promise which resolves with an MHPagedResponse.
  */
-- (PMKPromise*)fetchMixList;
+- (AnyPromise*)fetchMixList;
 
 /**
  * Fetches all mixlist content that is in the collection.
@@ -196,7 +196,7 @@
  * @param networkToken The token for the network request, allowing cancelation and re-prioritization.
  * @return A promise which resolves with an MHPagedResponse.
  */
-- (PMKPromise*)fetchMixListForced:(BOOL)forced
+- (AnyPromise*)fetchMixListForced:(BOOL)forced
                          priority:(AVENetworkPriority*)priority
                      networkToken:(AVENetworkToken*)networkToken;
 

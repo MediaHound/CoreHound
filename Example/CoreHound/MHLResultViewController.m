@@ -34,7 +34,7 @@
         self.tableView.userInteractionEnabled = NO;
     }
     
-    PMKPromise* promise = nil;
+    AnyPromise* promise = nil;
     if ([self.result isKindOfClass:MHMedia.class]) {
         /*
          If this page is Media, then we fetch the contributors to the media.

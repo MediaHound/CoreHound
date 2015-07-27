@@ -53,7 +53,7 @@
  * the `fetchPrimaryGroup` promise. The `primaryGroup` property can be used for observing KVO changes to primary group.
  * @return A promise which resolves with an MHRelationalPair.
  */
-- (PMKPromise*)fetchPrimaryGroup;
+- (AnyPromise*)fetchPrimaryGroup;
 
 /**
  * Fetches the media's primary group.
@@ -66,7 +66,7 @@
  * @param networkToken The token for the network request, allowing cancelation and re-prioritization.
  * @return A promise which resolves with an MHRelationalPair.
  */
-- (PMKPromise*)fetchPrimaryGroupForced:(BOOL)forced
+- (AnyPromise*)fetchPrimaryGroupForced:(BOOL)forced
                               priority:(AVENetworkPriority*)priority
                           networkToken:(AVENetworkToken*)networkToken;
 
@@ -76,7 +76,7 @@
  * the `fetchKeyContributors` promise. The `keyContributors` property can be used for observing KVO changes to key contributors.
  * @return A promise which resolves with an NSArray of MHRelationalPairs.
  */
-- (PMKPromise*)fetchKeyContributors;
+- (AnyPromise*)fetchKeyContributors;
 
 /**
  * Fetches the media's key contributors.
@@ -87,7 +87,7 @@
  * @param networkToken The token for the network request, allowing cancelation and re-prioritization.
  * @return A promise which resolves with an NSArray of MHRelationalPairs.
  */
-- (PMKPromise*)fetchKeyContributorsForced:(BOOL)forced
+- (AnyPromise*)fetchKeyContributorsForced:(BOOL)forced
                                  priority:(AVENetworkPriority*)priority
                              networkToken:(AVENetworkToken*)networkToken;
 
@@ -95,7 +95,7 @@
  * Fetches sources for this media.
  * @return A promise which resolves with an MHPagedResponse.
  */
-- (PMKPromise*)fetchSources;
+- (AnyPromise*)fetchSources;
 
 /**
  * Fetches sources for this media.
@@ -104,7 +104,7 @@
  * @param networkToken The token for the network request, allowing cancelation and re-prioritization.
  * @return A promise which resolves with an MHPagedResponse.
  */
-- (PMKPromise*)fetchSourcesForced:(BOOL)forced
+- (AnyPromise*)fetchSourcesForced:(BOOL)forced
                          priority:(AVENetworkPriority*)priority
                      networkToken:(AVENetworkToken*)networkToken;
 
@@ -112,7 +112,7 @@
  * Fetches related content similar to this MHMedia.
  * @return A promise which resolves with an MHPagedResponse.
  */
-- (PMKPromise*)fetchRelated;
+- (AnyPromise*)fetchRelated;
 
 /**
  * Fetches related content similar to this MHMedia.
@@ -121,7 +121,7 @@
  * @param networkToken The token for the network request, allowing cancelation and re-prioritization.
  * @return A promise which resolves with an MHPagedResponse.
  */
-- (PMKPromise*)fetchRelatedForced:(BOOL)forced
+- (AnyPromise*)fetchRelatedForced:(BOOL)forced
                          priority:(AVENetworkPriority*)priority
                      networkToken:(AVENetworkToken*)networkToken;
 
@@ -130,7 +130,7 @@
  * For example, calling `-fetchContent` on a MHShowSeason gives all MHShowEpisodes in that season.
  * @return A promise which resolves with an MHPagedResponse.
  */
-- (PMKPromise*)fetchContent;
+- (AnyPromise*)fetchContent;
 
 /**
  * Fetches all contained content that this media is parent to.
@@ -140,7 +140,7 @@
  * @param networkToken The token for the network request, allowing cancelation and re-prioritization.
  * @return A promise which resolves with an MHPagedResponse.
  */
-- (PMKPromise*)fetchContentForced:(BOOL)forced
+- (AnyPromise*)fetchContentForced:(BOOL)forced
                          priority:(AVENetworkPriority*)priority
                      networkToken:(AVENetworkToken*)networkToken;
 
@@ -148,7 +148,7 @@
  * Fetches all contributors who have contributed to this media.
  * @return A promise which resolves with an MHPagedResponse.
  */
-- (PMKPromise*)fetchContributors;
+- (AnyPromise*)fetchContributors;
 
 /**
  * Fetches all contributors who have contributed to this media.
@@ -157,7 +157,7 @@
  * @param networkToken The token for the network request, allowing cancelation and re-prioritization.
  * @return A promise which resolves with an MHPagedResponse.
  */
-- (PMKPromise*)fetchContributorsForced:(BOOL)forced
+- (AnyPromise*)fetchContributorsForced:(BOOL)forced
                               priority:(AVENetworkPriority*)priority
                           networkToken:(AVENetworkToken*)networkToken;
 
@@ -166,7 +166,7 @@
  * @param medias An array of media to find related content to.
  * @return A promise which resolves with an MHPagedResponse.
  */
-+ (PMKPromise*)fetchRelatedTo:(NSArray*)medias;
++ (AnyPromise*)fetchRelatedTo:(NSArray*)medias;
 
 /**
  * Fetches content that is related to the given array of media.
@@ -176,7 +176,7 @@
  * @param networkToken The token for the network request, allowing cancelation and re-prioritization.
  * @return A promise which resolves with an MHPagedResponse.
  */
-+ (PMKPromise*)fetchRelatedTo:(NSArray*)medias
++ (AnyPromise*)fetchRelatedTo:(NSArray*)medias
                        forced:(BOOL)forced
                      priority:(AVENetworkPriority*)priority
                  networkToken:(AVENetworkToken*)networkToken;

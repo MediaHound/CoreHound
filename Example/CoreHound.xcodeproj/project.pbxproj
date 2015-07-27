@@ -12,7 +12,6 @@
 		3A62CB341AB9F9AD0071AAC7 /* MHLContributorCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A62CB331AB9F9AD0071AAC7 /* MHLContributorCell.m */; };
 		3A86E1281AB9ED0100C5F4AB /* MHLResultViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A86E1271AB9ED0100C5F4AB /* MHLResultViewController.m */; };
 		3AE250BE1AAE6089000AEEC0 /* MHLSearchCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AE250BD1AAE6089000AEEC0 /* MHLSearchCell.m */; };
-		3B0BAF7A4B6F44B04FF5BFB0 /* libPods-Tests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A4739EB423DFE5B54A3BA533 /* libPods-Tests.a */; };
 		6003F58E195388D20070C39A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58D195388D20070C39A /* Foundation.framework */; };
 		6003F590195388D20070C39A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58F195388D20070C39A /* CoreGraphics.framework */; };
 		6003F592195388D20070C39A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F591195388D20070C39A /* UIKit.framework */; };
@@ -26,7 +25,8 @@
 		6003F5B2195388D20070C39A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F591195388D20070C39A /* UIKit.framework */; };
 		6003F5BA195388D20070C39A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6003F5B8195388D20070C39A /* InfoPlist.strings */; };
 		6003F5BC195388D20070C39A /* Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6003F5BB195388D20070C39A /* Tests.m */; };
-		C34DF0C77C81FD0B0A135DE2 /* libPods-CoreHound.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AF9E3ACE94E6DA65A043A7CC /* libPods-CoreHound.a */; };
+		B5CCC8D108086E388BFAC09C /* Pods_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 050F23998C55021C827D0D67 /* Pods_Tests.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		C91E90630B1F2C4F169B9427 /* Pods_CoreHound.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99D3DDBA7CC60A98CB3B137A /* Pods_CoreHound.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +40,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		050F23998C55021C827D0D67 /* Pods_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2CD5159029C86FD8187E5813 /* CoreHound.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = CoreHound.podspec; path = ../CoreHound.podspec; sourceTree = "<group>"; };
 		3A62CB271AB9EF9F0071AAC7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPhone.storyboard; sourceTree = "<group>"; };
 		3A62CB2F1AB9F8B50071AAC7 /* MHLPrimaryImageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MHLPrimaryImageCell.h; sourceTree = "<group>"; };
@@ -75,8 +76,7 @@
 		835255BF5435411A45637AC2 /* Pods-CoreHound.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CoreHound.release.xcconfig"; path = "Pods/Target Support Files/Pods-CoreHound/Pods-CoreHound.release.xcconfig"; sourceTree = "<group>"; };
 		997C6A82FA9743C1C8F19CDB /* Pods-Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Tests/Pods-Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		999F1EAF7D6F8833C919B235 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
-		A4739EB423DFE5B54A3BA533 /* libPods-Tests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Tests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		AF9E3ACE94E6DA65A043A7CC /* libPods-CoreHound.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CoreHound.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		99D3DDBA7CC60A98CB3B137A /* Pods_CoreHound.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CoreHound.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B256FAD792A0BEA5012C8C38 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -88,7 +88,7 @@
 				6003F590195388D20070C39A /* CoreGraphics.framework in Frameworks */,
 				6003F592195388D20070C39A /* UIKit.framework in Frameworks */,
 				6003F58E195388D20070C39A /* Foundation.framework in Frameworks */,
-				C34DF0C77C81FD0B0A135DE2 /* libPods-CoreHound.a in Frameworks */,
+				C91E90630B1F2C4F169B9427 /* Pods_CoreHound.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -99,7 +99,7 @@
 				6003F5B0195388D20070C39A /* XCTest.framework in Frameworks */,
 				6003F5B2195388D20070C39A /* UIKit.framework in Frameworks */,
 				6003F5B1195388D20070C39A /* Foundation.framework in Frameworks */,
-				3B0BAF7A4B6F44B04FF5BFB0 /* libPods-Tests.a in Frameworks */,
+				B5CCC8D108086E388BFAC09C /* Pods_Tests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -176,8 +176,8 @@
 				6003F58F195388D20070C39A /* CoreGraphics.framework */,
 				6003F591195388D20070C39A /* UIKit.framework */,
 				6003F5AF195388D20070C39A /* XCTest.framework */,
-				AF9E3ACE94E6DA65A043A7CC /* libPods-CoreHound.a */,
-				A4739EB423DFE5B54A3BA533 /* libPods-Tests.a */,
+				99D3DDBA7CC60A98CB3B137A /* Pods_CoreHound.framework */,
+				050F23998C55021C827D0D67 /* Pods_Tests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -259,6 +259,7 @@
 				6003F587195388D20070C39A /* Frameworks */,
 				6003F588195388D20070C39A /* Resources */,
 				051AE02CB4AED3F37DADFA81 /* Copy Pods Resources */,
+				40E208387AB14211CD488F88 /* Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -278,6 +279,7 @@
 				6003F5AB195388D20070C39A /* Frameworks */,
 				6003F5AC195388D20070C39A /* Resources */,
 				9874DB20B378E920F889DD39 /* Copy Pods Resources */,
+				0D6238278B4259FB95D80D74 /* Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -358,6 +360,36 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CoreHound/Pods-CoreHound-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		0D6238278B4259FB95D80D74 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Tests/Pods-Tests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		40E208387AB14211CD488F88 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CoreHound/Pods-CoreHound-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		4C74A5692198B55BD156F9DD /* Check Pods Manifest.lock */ = {
@@ -500,7 +532,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -533,7 +565,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;

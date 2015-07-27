@@ -28,8 +28,13 @@ static NSString* const MHProductionBaseURL = @"https://api-v10.mediahound.com/";
         builder.responseSerializer = [MHJSONResponseSerializerWithData serializer];
         
         // Enable SSL Public Key Pinning
+        NSBundle* coreHoundBundle = [NSBundle bundleForClass:MHFetcher.class];
+        NSString* certificatePath = [coreHoundBundle pathForResource:@"*.mediahound.com" ofType:@"cer"];
+        NSData* certificate = [NSData dataWithContentsOfFile:certificatePath];
+        
         AFSecurityPolicy* securityPolicy = [AFSecurityPolicy policyWithPinningMode:AFSSLPinningModePublicKey];
         securityPolicy.validatesCertificateChain = NO;
+        securityPolicy.pinnedCertificates = @[certificate];
         builder.securityPolicy = securityPolicy;
         
         self.builder = builder;

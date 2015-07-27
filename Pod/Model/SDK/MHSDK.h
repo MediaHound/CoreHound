@@ -26,7 +26,7 @@
  * @param clientSecret Your application's client secret.
  * @return A Promise that resolves when configuration is complete.
  */
-- (PMKPromise*)configureWithClientId:(NSString*)clientId
+- (AnyPromise*)configureWithClientId:(NSString*)clientId
                         clientSecret:(NSString*)clientSecret;
 
 @end

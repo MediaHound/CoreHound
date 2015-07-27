@@ -20,7 +20,7 @@
  * @param primaryMention The primary mention that the user is posting about.
  * @return A promise which resolves when the message is created.
  */
-+ (PMKPromise*)createWithMessage:(NSString*)message
++ (AnyPromise*)createWithMessage:(NSString*)message
                         mentions:(NSArray*)mentions
                   primaryMention:(MHObject*)primaryMention;
 

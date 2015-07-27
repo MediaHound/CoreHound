@@ -81,7 +81,7 @@
  * The returned promise resolves to an updated MHSocial.
  * The receiver's social property will be updated before the promise resolves.
  */
-- (PMKPromise*)like;
+- (AnyPromise*)like;
 
 /**
  * Undoes a `like` action on the receiver.
@@ -89,7 +89,7 @@
  * The returned promise resolves to an updated MHSocial.
  * The receiver's social property will be updated before the promise resolves.
  */
-- (PMKPromise*)unlike;
+- (AnyPromise*)unlike;
 
 /**
  * Mark the receiver as `followed` by the current user.
@@ -97,14 +97,14 @@
  * The returned promise resolves to an updated MHSocial.
  * The receiver's social property will be updated before the promise resolves.
  */
-- (PMKPromise*)follow;
+- (AnyPromise*)follow;
 /**
  * Undoes a `follow` action on the receiver.
  * The returned promise resolves when the request has completed.
  * The returned promise resolves to an updated MHSocial.
  * The receiver's social property will be updated before the promise resolves.
  */
-- (PMKPromise*)unfollow;
+- (AnyPromise*)unfollow;
 
 @end
 
@@ -117,7 +117,7 @@
  * @param mhid The identifier for the MHObject
  * @return A promise which resolves with the MHObject.
  */
-+ (PMKPromise*)fetchByMhid:(NSString*)mhid;
++ (AnyPromise*)fetchByMhid:(NSString*)mhid;
 
 /**
  * Fetches an MHObject by its mhid.
@@ -127,7 +127,7 @@
  * @param networkToken The token for the network request, allowing cancelation and re-prioritization.
  * @return A promise which resolves with the MHObject.
  */
-+ (PMKPromise*)fetchByMhid:(NSString*)mhid
++ (AnyPromise*)fetchByMhid:(NSString*)mhid
                   priority:(AVENetworkPriority*)priority
               networkToken:(AVENetworkToken*)networkToken;
 
@@ -137,7 +137,7 @@
  * the `fetchSocial` promise. The `social` property can be used for observing KVO changes to social metrics.
  * @return A promise whcih resolves with an MHSocial.
  */
-- (PMKPromise*)fetchSocial;
+- (AnyPromise*)fetchSocial;
 
 /**
  * Fetches the receiver's social metrics.
@@ -148,7 +148,7 @@
  * @param networkToken The token for the network request, allowing cancelation and re-prioritization.
  * @return A promise whcih resolves with an MHSocial.
  */
-- (PMKPromise*)fetchSocialForced:(BOOL)forced
+- (AnyPromise*)fetchSocialForced:(BOOL)forced
                         priority:(AVENetworkPriority*)priority
                     networkToken:(AVENetworkToken*)networkToken;
 
@@ -158,7 +158,7 @@
  * the `fetchPrimaryImage` promise. The `primaryImage` property can be used for observing KVO changes to primary image.
  * @return A promise which resolves with an MHImage.
  */
-- (PMKPromise*)fetchPrimaryImage;
+- (AnyPromise*)fetchPrimaryImage;
 
 /**
  * Fetches the receiver's primary image.
@@ -169,7 +169,7 @@
  * @param networkToken The token for the network request, allowing cancelation and re-prioritization.
  * @return A promise which resolves with an MHImage.
  */
-- (PMKPromise*)fetchPrimaryImageForced:(BOOL)forced
+- (AnyPromise*)fetchPrimaryImageForced:(BOOL)forced
                               priority:(AVENetworkPriority*)priority
                           networkToken:(AVENetworkToken*)networkToken;
 
@@ -179,7 +179,7 @@
  * the `fetchSecondaryImage` promise. The `secondaryImage` property can be used for observing KVO changes to secondary image.
  * @return A promise which resolves with an MHImage.
  */
-- (PMKPromise*)fetchSecondaryImage;
+- (AnyPromise*)fetchSecondaryImage;
 
 /**
  * Fetches the receiver's secondary image.
@@ -190,7 +190,7 @@
  * @param networkToken The token for the network request, allowing cancelation and re-prioritization.
  * @return A promise which resolves with an MHImage.
  */
-- (PMKPromise*)fetchSecondaryImageForced:(BOOL)forced
+- (AnyPromise*)fetchSecondaryImageForced:(BOOL)forced
                                 priority:(AVENetworkPriority*)priority
                             networkToken:(AVENetworkToken*)networkToken;
 
@@ -198,7 +198,7 @@
  * Fetches the activity feed for the receiver.
  * @return A promise which resolves with an MHPagedResponse.
  */
-- (PMKPromise*)fetchFeed;
+- (AnyPromise*)fetchFeed;
 
 /**
  * Fetches the activity feed for the receiver.
@@ -207,7 +207,7 @@
  * @param networkToken The token for the network request, allowing cancelation and re-prioritization.
  * @return A promise which resolves with an MHPagedResponse.
  */
-- (PMKPromise*)fetchFeedForced:(BOOL)forced
+- (AnyPromise*)fetchFeedForced:(BOOL)forced
                       priority:(AVENetworkPriority*)priority
                   networkToken:(AVENetworkToken*)networkToken;
 
@@ -215,7 +215,7 @@
  * Fetches all collections that contain the receiver.
  * @return A promise which resolves with an MHPagedResponse.
  */
-- (PMKPromise*)fetchCollections;
+- (AnyPromise*)fetchCollections;
 
 /**
  * Fetches all collections that contain the receiver.
@@ -224,7 +224,7 @@
  * @param networkToken The token for the network request, allowing cancelation and re-prioritization.
  * @return A promise which resolves with an MHPagedResponse.
  */
-- (PMKPromise*)fetchCollectionsForced:(BOOL)forced
+- (AnyPromise*)fetchCollectionsForced:(BOOL)forced
                              priority:(AVENetworkPriority*)priority
                          networkToken:(AVENetworkToken*)networkToken;
 

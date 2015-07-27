@@ -54,7 +54,7 @@ static NSString* const kAllRootSubendpoint = @"all";
     return [super protocolForArrayProperty:propertyName];
 }
 
-- (PMKPromise*)connect
+- (AnyPromise*)connect
 {
     return [self takeAction:@"connect"
                  parameters:@{} // TODO: This is ugly. we shouldn't have to pass {}
@@ -65,7 +65,7 @@ static NSString* const kAllRootSubendpoint = @"all";
        }];
 }
 
-- (PMKPromise*)connectWithPreference:(MHSourcePreference)preference
+- (AnyPromise*)connectWithPreference:(MHSourcePreference)preference
 {
     return [self takeAction:@"connect"
                  parameters:@{
@@ -79,7 +79,7 @@ static NSString* const kAllRootSubendpoint = @"all";
        }];
 }
 
-- (PMKPromise*)connectWithPreference:(MHSourcePreference)preference description:(NSString*)description
+- (AnyPromise*)connectWithPreference:(MHSourcePreference)preference description:(NSString*)description
 {
     return [self takeAction:@"connect"
                  parameters:@{
@@ -95,7 +95,7 @@ static NSString* const kAllRootSubendpoint = @"all";
        }];
 }
 
-- (PMKPromise*)disconnect
+- (AnyPromise*)disconnect
 {
     return [self takeAction:@"disconnect"
                  parameters:@{} // TODO: This is ugly. we shouldn't have to pass {}
@@ -106,7 +106,7 @@ static NSString* const kAllRootSubendpoint = @"all";
        }];
 }
 
-- (PMKPromise*)updatePreference:(MHSourcePreference)preference
+- (AnyPromise*)updatePreference:(MHSourcePreference)preference
 {
     return [self takeAction:@"update"
                  parameters:@{
@@ -119,7 +119,7 @@ static NSString* const kAllRootSubendpoint = @"all";
        }];
 }
 
-- (PMKPromise*)updateDescription:(NSString*)description;
+- (AnyPromise*)updateDescription:(NSString*)description;
 {
     return [self takeAction:@"update"
                  parameters:@{
@@ -172,14 +172,14 @@ static NSString* const kAllRootSubendpoint = @"all";
 
 @implementation MHSource (Fetching)
 
-+ (PMKPromise*)fetchAll
++ (AnyPromise*)fetchAll
 {
     return [self fetchAllForced:NO
                        priority:[AVENetworkPriority priorityWithLevel:AVENetworkPriorityLevelHigh]
                    networkToken:nil];
 }
 
-+ (PMKPromise*)fetchAllForced:(BOOL)forced
++ (AnyPromise*)fetchAllForced:(BOOL)forced
                      priority:(AVENetworkPriority*)priority
                  networkToken:(AVENetworkToken*)networkToken
 {

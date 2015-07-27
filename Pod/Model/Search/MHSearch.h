@@ -27,7 +27,7 @@
  *     ```
  * @return A promise which resolves with the MHPagedResponse.
  */
-+ (PMKPromise*)fetchResultsForSearchTerm:(NSString*)search
++ (AnyPromise*)fetchResultsForSearchTerm:(NSString*)search
                                    scope:(MHSearchScope)scope;
 
 /**
@@ -42,7 +42,7 @@
  * @param networkToken The token for the network request, allowing cancelation and re-prioritization.
  * @return A promise which resolves with the MHPagedResponse.
  */
-+ (PMKPromise*)fetchResultsForSearchTerm:(NSString*)search
++ (AnyPromise*)fetchResultsForSearchTerm:(NSString*)search
                                    scope:(MHSearchScope)scope
                                 priority:(AVENetworkPriority*)priority
                             networkToken:(AVENetworkToken*)networkToken;

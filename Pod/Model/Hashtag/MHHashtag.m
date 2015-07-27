@@ -28,14 +28,14 @@
 
 @implementation MHHashtag (Fetching)
 
-+ (PMKPromise*)fetchByName:(NSString*)name
++ (AnyPromise*)fetchByName:(NSString*)name
 {
     return [self fetchByName:name
                     priority:[AVENetworkPriority priorityWithLevel:AVENetworkPriorityLevelHigh]
                 networkToken:nil];
 }
 
-+ (PMKPromise*)fetchByName:(NSString*)name
++ (AnyPromise*)fetchByName:(NSString*)name
                   priority:(AVENetworkPriority*)priority
               networkToken:(AVENetworkToken*)networkToken
 {

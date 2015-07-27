@@ -16,12 +16,12 @@
 @property (strong, nonatomic) NSArray* subscriptions;
 @property (strong, nonatomic) NSArray* allMediums;
 
-- (PMKPromise*)connect;
-- (PMKPromise*)connectWithPreference:(MHSourcePreference)preference;
-- (PMKPromise*)connectWithPreference:(MHSourcePreference)preference description:(NSString*)description;
-- (PMKPromise*)disconnect;
-- (PMKPromise*)updatePreference:(MHSourcePreference)preference;
-- (PMKPromise*)updateDescription:(NSString*)description;
+- (AnyPromise*)connect;
+- (AnyPromise*)connectWithPreference:(MHSourcePreference)preference;
+- (AnyPromise*)connectWithPreference:(MHSourcePreference)preference description:(NSString*)description;
+- (AnyPromise*)disconnect;
+- (AnyPromise*)updatePreference:(MHSourcePreference)preference;
+- (AnyPromise*)updateDescription:(NSString*)description;
 
 @property (nonatomic, readonly) BOOL isITunes;
 @property (nonatomic, readonly) BOOL isSpotify;
@@ -34,8 +34,8 @@
 
 @interface MHSource (Fetching)
 
-+ (PMKPromise*)fetchAll;
-+ (PMKPromise*)fetchAllForced:(BOOL)forced
++ (AnyPromise*)fetchAll;
++ (AnyPromise*)fetchAllForced:(BOOL)forced
                      priority:(AVENetworkPriority*)priority
                  networkToken:(AVENetworkToken*)networkToken;
 

@@ -36,14 +36,14 @@
 
 @implementation MHContributor (Fetching)
 
-- (PMKPromise*)fetchMedia
+- (AnyPromise*)fetchMedia
 {
     return [self fetchMediaForced:NO
                          priority:[AVENetworkPriority priorityWithLevel:AVENetworkPriorityLevelHigh]
                      networkToken:nil];
 }
 
-- (PMKPromise*)fetchMediaForced:(BOOL)forced
+- (AnyPromise*)fetchMediaForced:(BOOL)forced
                        priority:(AVENetworkPriority*)priority
                    networkToken:(AVENetworkToken*)networkToken
 {

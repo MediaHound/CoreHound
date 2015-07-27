@@ -55,14 +55,14 @@ static NSString* const kRelatedRootSubendpoint = @"related";
 
 @implementation MHMedia (Fetching)
 
-- (PMKPromise*)fetchPrimaryGroup
+- (AnyPromise*)fetchPrimaryGroup
 {
     return [self fetchPrimaryGroupForced:NO
                                 priority:[AVENetworkPriority priorityWithLevel:AVENetworkPriorityLevelHigh]
                             networkToken:nil];
 }
 
-- (PMKPromise*)fetchPrimaryGroupForced:(BOOL)forced
+- (AnyPromise*)fetchPrimaryGroupForced:(BOOL)forced
                               priority:(AVENetworkPriority*)priority
                           networkToken:(AVENetworkToken*)networkToken
 {
@@ -72,14 +72,14 @@ static NSString* const kRelatedRootSubendpoint = @"related";
                   networkToken:networkToken];
 }
 
-- (PMKPromise*)fetchKeyContributors
+- (AnyPromise*)fetchKeyContributors
 {
     return [self fetchKeyContributorsForced:NO
                                    priority:[AVENetworkPriority priorityWithLevel:AVENetworkPriorityLevelHigh]
                                networkToken:nil];
 }
 
-- (PMKPromise*)fetchKeyContributorsForced:(BOOL)forced
+- (AnyPromise*)fetchKeyContributorsForced:(BOOL)forced
                                  priority:(AVENetworkPriority*)priority
                              networkToken:(AVENetworkToken*)networkToken
 {
@@ -89,14 +89,14 @@ static NSString* const kRelatedRootSubendpoint = @"related";
                   networkToken:networkToken];
 }
 
-- (PMKPromise*)fetchSources
+- (AnyPromise*)fetchSources
 {
     return [self fetchSourcesForced:NO
                            priority:[AVENetworkPriority priorityWithLevel:AVENetworkPriorityLevelHigh]
                        networkToken:nil];
 }
 
-- (PMKPromise*)fetchSourcesForced:(BOOL)forced
+- (AnyPromise*)fetchSourcesForced:(BOOL)forced
                          priority:(AVENetworkPriority*)priority
                      networkToken:(AVENetworkToken*)networkToken
 {
@@ -116,14 +116,14 @@ static NSString* const kRelatedRootSubendpoint = @"related";
                           }];
 }
 
-- (PMKPromise*)fetchRelated
+- (AnyPromise*)fetchRelated
 {
     return [self fetchRelatedForced:NO
                            priority:[AVENetworkPriority priorityWithLevel:AVENetworkPriorityLevelHigh]
                        networkToken:nil];
 }
 
-- (PMKPromise*)fetchRelatedForced:(BOOL)forced
+- (AnyPromise*)fetchRelatedForced:(BOOL)forced
                          priority:(AVENetworkPriority*)priority
                      networkToken:(AVENetworkToken*)networkToken
 {
@@ -134,14 +134,14 @@ static NSString* const kRelatedRootSubendpoint = @"related";
                                next:nil];
 }
 
-- (PMKPromise*)fetchContent
+- (AnyPromise*)fetchContent
 {
     return [self fetchContentForced:NO
                            priority:[AVENetworkPriority priorityWithLevel:AVENetworkPriorityLevelHigh]
                        networkToken:nil];
 }
 
-- (PMKPromise*)fetchContentForced:(BOOL)forced
+- (AnyPromise*)fetchContentForced:(BOOL)forced
                          priority:(AVENetworkPriority*)priority
                      networkToken:(AVENetworkToken*)networkToken
 {
@@ -152,14 +152,14 @@ static NSString* const kRelatedRootSubendpoint = @"related";
                                next:nil];
 }
 
-- (PMKPromise*)fetchContributors
+- (AnyPromise*)fetchContributors
 {
     return [self fetchContributorsForced:NO
                                 priority:[AVENetworkPriority priorityWithLevel:AVENetworkPriorityLevelHigh]
                             networkToken:nil];
 }
 
-- (PMKPromise*)fetchContributorsForced:(BOOL)forced
+- (AnyPromise*)fetchContributorsForced:(BOOL)forced
                               priority:(AVENetworkPriority*)priority
                           networkToken:(AVENetworkToken*)networkToken
 {
@@ -170,7 +170,7 @@ static NSString* const kRelatedRootSubendpoint = @"related";
                                next:nil];
 }
 
-+ (PMKPromise*)fetchRelatedTo:(NSArray*)medias
++ (AnyPromise*)fetchRelatedTo:(NSArray*)medias
 {
     return [self fetchRelatedTo:medias
                          forced:NO
@@ -178,7 +178,7 @@ static NSString* const kRelatedRootSubendpoint = @"related";
                    networkToken:nil];
 }
 
-+ (PMKPromise*)fetchRelatedTo:(NSArray*)medias
++ (AnyPromise*)fetchRelatedTo:(NSArray*)medias
                        forced:(BOOL)forced
                      priority:(AVENetworkPriority*)priority
                  networkToken:(AVENetworkToken*)networkToken

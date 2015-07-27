@@ -24,22 +24,22 @@ extern NSString* const kCreateRootSubendpoint;
 
 @interface MHObject (Internal)
 
-- (PMKPromise*)takeAction:(NSString*)action
+- (AnyPromise*)takeAction:(NSString*)action
                parameters:(NSDictionary*)parameters
      predictedSocialBlock:(MHSocial*(^)(MHSocial*, NSDictionary*))predictedSocialBlock;
 
-+ (PMKPromise*)fetchFullViewForMhid:(NSString*)mhid
++ (AnyPromise*)fetchFullViewForMhid:(NSString*)mhid
                            priority:(AVENetworkPriority*)priority
                        networkToken:(AVENetworkToken*)networkToken;
 
-+ (PMKPromise*)fetchRootPagedEndpoint:(NSString*)path
++ (AnyPromise*)fetchRootPagedEndpoint:(NSString*)path
                                forced:(BOOL)forced
                             parameters:(NSDictionary*)parameters
                              priority:(AVENetworkPriority*)priority
                          networkToken:(AVENetworkToken*)networkToken
                                  next:(NSString*)next;
 
-+ (PMKPromise*)fetchRootPagedEndpoint:(NSString*)path
++ (AnyPromise*)fetchRootPagedEndpoint:(NSString*)path
                                forced:(BOOL)forced
                            parameters:(NSDictionary*)parameters
                              priority:(AVENetworkPriority*)priority
@@ -47,20 +47,20 @@ extern NSString* const kCreateRootSubendpoint;
                                  next:(NSString*)next
                             afterEach:(void(^)(MHPagedResponse*))afterEach;
 
-- (PMKPromise*)fetchPagedEndpoint:(NSString*)path
+- (AnyPromise*)fetchPagedEndpoint:(NSString*)path
                            forced:(BOOL)forced
                          priority:(AVENetworkPriority*)priority
                      networkToken:(AVENetworkToken*)networkToken
                              next:(NSString*)next;
 
-- (PMKPromise*)fetchPagedEndpoint:(NSString*)path
+- (AnyPromise*)fetchPagedEndpoint:(NSString*)path
                            forced:(BOOL)forced
                          priority:(AVENetworkPriority*)priority
                      networkToken:(AVENetworkToken*)networkToken
                              next:(NSString*)next
                         afterEach:(void(^)(MHPagedResponse*))afterEach;
 
-- (PMKPromise*)fetchProperty:(NSString*)property
+- (AnyPromise*)fetchProperty:(NSString*)property
                       forced:(BOOL)forced
                     priority:(AVENetworkPriority*)priority
                 networkToken:(AVENetworkToken*)networkToken;

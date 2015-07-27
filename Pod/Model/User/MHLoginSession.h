@@ -40,7 +40,7 @@ extern NSString* const MHLoginSessionUserDidLogoutNotification;
  * If there are saved credentials, but the credentials are no longer valid, the promise propogates
  *   with an MHLoginSessionInvalidCredentialsError.
  */
-+ (PMKPromise*)loginUsingSavedCredentials;
++ (AnyPromise*)loginUsingSavedCredentials;
 
 /**
  * Create a login session by logging in a user with a given username and password.
@@ -51,7 +51,7 @@ extern NSString* const MHLoginSessionUserDidLogoutNotification;
  * If login is succesful, the user's credentials will be persisted to the Keychain securely.
  * You should NOT store the username and password your self.
  */
-+ (PMKPromise*)loginWithUsername:(NSString*)username
++ (AnyPromise*)loginWithUsername:(NSString*)username
                         password:(NSString*)password;
 
 /**

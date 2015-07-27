@@ -13,6 +13,6 @@
 
 @property (strong, nonatomic) NSString* accessToken;
 
-- (PMKPromise*)refreshOAuthToken;
+- (AnyPromise*)refreshOAuthToken;
 
 @end

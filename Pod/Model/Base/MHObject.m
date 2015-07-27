@@ -238,7 +238,7 @@ static NSString* const kSocialSubendpoint = @"social";
 
 @implementation MHObject (Actions)
 
-- (PMKPromise*)like
+- (AnyPromise*)like
 {
     return [self takeAction:@"like"
                  parameters:nil
@@ -250,7 +250,7 @@ static NSString* const kSocialSubendpoint = @"social";
        }];
 }
 
-- (PMKPromise*)unlike
+- (AnyPromise*)unlike
 {
     return [self takeAction:@"unlike"
                  parameters:nil
@@ -262,7 +262,7 @@ static NSString* const kSocialSubendpoint = @"social";
        }];
 }
 
-- (PMKPromise*)follow
+- (AnyPromise*)follow
 {
     return [self takeAction:@"follow"
                  parameters:nil
@@ -277,7 +277,7 @@ static NSString* const kSocialSubendpoint = @"social";
        });
 }
 
-- (PMKPromise*)unfollow
+- (AnyPromise*)unfollow
 {
     return [self takeAction:@"unfollow"
                  parameters:nil
@@ -297,14 +297,14 @@ static NSString* const kSocialSubendpoint = @"social";
 
 @implementation MHObject (Fetching)
 
-+ (PMKPromise*)fetchByMhid:(NSString*)mhid
++ (AnyPromise*)fetchByMhid:(NSString*)mhid
 {
     return [self fetchByMhid:mhid
                     priority:[AVENetworkPriority priorityWithLevel:AVENetworkPriorityLevelHigh]
                 networkToken:nil];
 }
 
-+ (PMKPromise*)fetchByMhid:(NSString*)mhid
++ (AnyPromise*)fetchByMhid:(NSString*)mhid
                   priority:(AVENetworkPriority*)priority
               networkToken:(AVENetworkToken*)networkToken
 {
@@ -331,14 +331,14 @@ static NSString* const kSocialSubendpoint = @"social";
     });
 }
 
-- (PMKPromise*)fetchSocial
+- (AnyPromise*)fetchSocial
 {
     return [self fetchSocialForced:NO
                           priority:[AVENetworkPriority priorityWithLevel:AVENetworkPriorityLevelHigh]
                       networkToken:nil];
 }
 
-- (PMKPromise*)fetchSocialForced:(BOOL)forced
+- (AnyPromise*)fetchSocialForced:(BOOL)forced
                         priority:(AVENetworkPriority*)priority
                     networkToken:(AVENetworkToken*)networkToken
 {
@@ -347,7 +347,7 @@ static NSString* const kSocialSubendpoint = @"social";
         if (!forced) {
             MHSocial* social = self.social;
             if (social) {
-                return [PMKPromise promiseWithValue:social];
+                return [AnyPromise promiseWithValue:social];
             }
         }
         return [[MHFetcher sharedFetcher] fetchModel:MHSocial.class
@@ -364,14 +364,14 @@ static NSString* const kSocialSubendpoint = @"social";
     });
 }
 
-- (PMKPromise*)fetchPrimaryImage
+- (AnyPromise*)fetchPrimaryImage
 {
     return [self fetchPrimaryImageForced:NO
                                 priority:[AVENetworkPriority priorityWithLevel:AVENetworkPriorityLevelHigh]
                             networkToken:nil];
 }
 
-- (PMKPromise*)fetchPrimaryImageForced:(BOOL)forced
+- (AnyPromise*)fetchPrimaryImageForced:(BOOL)forced
                               priority:(AVENetworkPriority*)priority
                           networkToken:(AVENetworkToken*)networkToken
 {
@@ -381,14 +381,14 @@ static NSString* const kSocialSubendpoint = @"social";
                   networkToken:networkToken];
 }
 
-- (PMKPromise*)fetchSecondaryImage
+- (AnyPromise*)fetchSecondaryImage
 {
     return [self fetchSecondaryImageForced:NO
                                   priority:[AVENetworkPriority priorityWithLevel:AVENetworkPriorityLevelHigh]
                               networkToken:nil];
 }
 
-- (PMKPromise*)fetchSecondaryImageForced:(BOOL)forced
+- (AnyPromise*)fetchSecondaryImageForced:(BOOL)forced
                                 priority:(AVENetworkPriority*)priority
                             networkToken:(AVENetworkToken*)networkToken
 {
@@ -398,14 +398,14 @@ static NSString* const kSocialSubendpoint = @"social";
                   networkToken:networkToken];
 }
 
-- (PMKPromise*)fetchFeed
+- (AnyPromise*)fetchFeed
 {
     return [self fetchFeedForced:NO
                         priority:[AVENetworkPriority priorityWithLevel:AVENetworkPriorityLevelHigh]
                     networkToken:nil];
 }
 
-- (PMKPromise*)fetchFeedForced:(BOOL)forced
+- (AnyPromise*)fetchFeedForced:(BOOL)forced
                       priority:(AVENetworkPriority*)priority
                   networkToken:(AVENetworkToken*)networkToken
 {
@@ -416,14 +416,14 @@ static NSString* const kSocialSubendpoint = @"social";
                                next:nil];
 }
 
-- (PMKPromise*)fetchCollections
+- (AnyPromise*)fetchCollections
 {
     return [self fetchCollectionsForced:NO
                                priority:[AVENetworkPriority priorityWithLevel:AVENetworkPriorityLevelHigh]
                            networkToken:nil];
 }
 
-- (PMKPromise*)fetchCollectionsForced:(BOOL)forced
+- (AnyPromise*)fetchCollectionsForced:(BOOL)forced
                              priority:(AVENetworkPriority*)priority
                          networkToken:(AVENetworkToken*)networkToken
 {
@@ -446,7 +446,7 @@ static NSString* const kSocialSubendpoint = @"social";
     return nil;
 }
 
-- (PMKPromise*)takeAction:(NSString*)action
+- (AnyPromise*)takeAction:(NSString*)action
                parameters:(NSDictionary*)parameters
      predictedSocialBlock:(MHSocial*(^)(MHSocial*, NSDictionary*))predictedSocialBlock
 {
@@ -483,7 +483,7 @@ static NSString* const kSocialSubendpoint = @"social";
 
 #pragma mark - Fetching
 
-+ (PMKPromise*)fetchFullViewForMhid:(NSString*)mhid
++ (AnyPromise*)fetchFullViewForMhid:(NSString*)mhid
                            priority:(AVENetworkPriority*)priority
                        networkToken:(AVENetworkToken*)networkToken
 {
@@ -588,7 +588,7 @@ static NSString* const kSocialSubendpoint = @"social";
                     networkToken:nil];
 }
 
-- (PMKPromise*)fetchPagedEndpoint:(NSString*)path
+- (AnyPromise*)fetchPagedEndpoint:(NSString*)path
                            forced:(BOOL)forced
                          priority:(AVENetworkPriority*)priority
                      networkToken:(AVENetworkToken*)networkToken
@@ -602,7 +602,7 @@ static NSString* const kSocialSubendpoint = @"social";
                           afterEach:nil];
 }
 
-- (PMKPromise*)fetchPagedEndpoint:(NSString*)path
+- (AnyPromise*)fetchPagedEndpoint:(NSString*)path
                            forced:(BOOL)forced
                          priority:(AVENetworkPriority*)priority
                      networkToken:(AVENetworkToken*)networkToken
@@ -616,7 +616,7 @@ static NSString* const kSocialSubendpoint = @"social";
         if (!next && !forced) {
             MHPagedResponse* cachedResponse = [self cachedResponseForPath:path];
             if (cachedResponse) {
-                return [PMKPromise promiseWithValue:cachedResponse];
+                return [AnyPromise promiseWithValue:cachedResponse];
             }
         }
         
@@ -655,7 +655,7 @@ static NSString* const kSocialSubendpoint = @"social";
     });
 }
 
-+ (PMKPromise*)fetchRootPagedEndpoint:(NSString*)path
++ (AnyPromise*)fetchRootPagedEndpoint:(NSString*)path
                                forced:(BOOL)forced
                            parameters:(NSDictionary*)parameters
                              priority:(AVENetworkPriority*)priority
@@ -671,7 +671,7 @@ static NSString* const kSocialSubendpoint = @"social";
                               afterEach:nil];
 }
 
-+ (PMKPromise*)fetchRootPagedEndpoint:(NSString*)path
++ (AnyPromise*)fetchRootPagedEndpoint:(NSString*)path
                                forced:(BOOL)forced
                            parameters:(NSDictionary*)parameters
                              priority:(AVENetworkPriority*)priority
@@ -686,7 +686,7 @@ static NSString* const kSocialSubendpoint = @"social";
         if (!next && !forced) {
             MHPagedResponse* cachedResponse = [self cachedRootResponseForPath:path parameters:parameters];
             if (cachedResponse) {
-                return [PMKPromise promiseWithValue:cachedResponse];
+                return [AnyPromise promiseWithValue:cachedResponse];
             }
         }
         
@@ -729,7 +729,7 @@ static NSString* const kSocialSubendpoint = @"social";
     });
 }
 
-- (PMKPromise*)fetchProperty:(NSString*)property
+- (AnyPromise*)fetchProperty:(NSString*)property
                       forced:(BOOL)forced
                     priority:(AVENetworkPriority*)priority
                 networkToken:(AVENetworkToken*)networkToken
@@ -741,7 +741,7 @@ static NSString* const kSocialSubendpoint = @"social";
         if (!forced) {
             id value = [self valueForKey:property];
             if (value) {
-                return [PMKPromise promiseWithValue:value];
+                return [AnyPromise promiseWithValue:value];
             }
         }
         return [self.class fetchFullViewForMhid:self.metadata.mhid

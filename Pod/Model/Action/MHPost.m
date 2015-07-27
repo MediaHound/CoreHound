@@ -21,7 +21,7 @@
     [self registerMHObject];
 }
 
-+ (PMKPromise*)createWithMessage:(NSString*)message
++ (AnyPromise*)createWithMessage:(NSString*)message
                         mentions:(NSArray*)mentions
                   primaryMention:(MHObject*)primaryMention
 {

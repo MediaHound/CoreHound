@@ -33,6 +33,6 @@
  * Fetch the next page of results.
  * Returns a promise that resolves with an MHPagedResponse.
  */
-- (PMKPromise*)fetchNext;
+- (AnyPromise*)fetchNext;
 
 @end

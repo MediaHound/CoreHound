@@ -26,7 +26,7 @@
  * @param image The user's new profile image
  * @return A promise which resolves when the profile image is updated
  */
-- (PMKPromise*)setProfileImage:(UIImage*)image;
+- (AnyPromise*)setProfileImage:(UIImage*)image;
 
 /**
  * Change the user's password.
@@ -35,7 +35,7 @@
  * @param currentPassword The user's current password, which will be changed
  * @return A promise which resolves when the user's password has been changed
  */
-- (PMKPromise*)setPassword:(NSString*)newPassword
+- (AnyPromise*)setPassword:(NSString*)newPassword
            currentPassword:(NSString*)currentPassword;
 
 /**
@@ -58,7 +58,7 @@
  * @return a promise which resolves when the user has been created.
  * After the promise resolves, you can login as the user using `MHLoginSession`.
  */
-+ (PMKPromise*)createWithUsername:(NSString*)username
++ (AnyPromise*)createWithUsername:(NSString*)username
                          password:(NSString*)password
                             email:(NSString*)email
                         firstName:(NSString*)firstName
@@ -75,7 +75,7 @@
  * @return A promise which resolves with an MHUser
  * If no user with this username exists, the promise propogates an error.
  */
-+ (PMKPromise*)fetchByUsername:(NSString*)username;
++ (AnyPromise*)fetchByUsername:(NSString*)username;
 
 /**
  * Fetches an MHUser by a username.
@@ -85,7 +85,7 @@
  * @return A promise which resolves with an MHUser
  * If no user with this username exists, the promise propogates an error.
  */
-+ (PMKPromise*)fetchByUsername:(NSString*)username
++ (AnyPromise*)fetchByUsername:(NSString*)username
                       priority:(AVENetworkPriority*)priority
                   networkToken:(AVENetworkToken*)networkToken;
 
@@ -93,7 +93,7 @@
  * Fetches a set of suggested users that may be of interest to follow.
  * @return A promise which resolves with an MHPagedResponse.
  */
-+ (PMKPromise*)fetchSuggestedUsers;
++ (AnyPromise*)fetchSuggestedUsers;
 
 /**
  * Fetches a set of suggested users that may be of interest to follow.
@@ -102,7 +102,7 @@
  * @param networkToken The token for the network request, allowing cancelation and re-prioritization.
  * @return A promise which resolves with an MHPagedResponse.
  */
-+ (PMKPromise*)fetchSuggestedUsersForced:(BOOL)forced
++ (AnyPromise*)fetchSuggestedUsersForced:(BOOL)forced
                                 priority:(AVENetworkPriority*)priority
                             networkToken:(AVENetworkToken*)networkToken;
 
@@ -110,7 +110,7 @@
  * Fetches the interest feed for this user.
  * @return A promise which resolves with an MHPagedResponse.
  */
-- (PMKPromise*)fetchInterestFeed;
+- (AnyPromise*)fetchInterestFeed;
 
 /**
  * Fetches the interest feed for this user.
@@ -119,7 +119,7 @@
  * @param networkToken The token for the network request, allowing cancelation and re-prioritization.
  * @return A promise which resolves with an MHPagedResponse.
  */
-- (PMKPromise*)fetchInterestFeedForced:(BOOL)forced
+- (AnyPromise*)fetchInterestFeedForced:(BOOL)forced
                               priority:(AVENetworkPriority*)priority
                           networkToken:(AVENetworkToken*)networkToken;
 
@@ -127,7 +127,7 @@
  * Fetches all of the collections created by this user.
  * @return A promise which resolves with an MHPagedResponse.
  */
-- (PMKPromise*)fetchOwnedCollections;
+- (AnyPromise*)fetchOwnedCollections;
 
 /**
  * Fetches all of the collections created by this user.
@@ -136,7 +136,7 @@
  * @param networkToken The token for the network request, allowing cancelation and re-prioritization.
  * @return A promise which resolves with an MHPagedResponse.
  */
-- (PMKPromise*)fetchOwnedCollectionsForced:(BOOL)forced
+- (AnyPromise*)fetchOwnedCollectionsForced:(BOOL)forced
                                   priority:(AVENetworkPriority*)priority
                               networkToken:(AVENetworkToken*)networkToken;
 
@@ -144,7 +144,7 @@
  * Fetches all the things that this user is following.
  * @return A promise which resolves with an MHPagedResponse.
  */
-- (PMKPromise*)fetchFollowing;
+- (AnyPromise*)fetchFollowing;
 
 /**
  * Fetches all the things that this user is following.
@@ -153,7 +153,7 @@
  * @param networkToken The token for the network request, allowing cancelation and re-prioritization.
  * @return A promise which resolves with an MHPagedResponse.
  */
-- (PMKPromise*)fetchFollowingForced:(BOOL)forced
+- (AnyPromise*)fetchFollowingForced:(BOOL)forced
                            priority:(AVENetworkPriority*)priority
                        networkToken:(AVENetworkToken*)networkToken;
 
@@ -161,7 +161,7 @@
  * Fetches all the things that have been liked by this user.
  * @return A promise which resolves with an MHPagedResponse.
  */
-- (PMKPromise*)fetchLiking;
+- (AnyPromise*)fetchLiking;
 
 /**
  * Fetches all the things that have been liked by this user.
@@ -170,7 +170,7 @@
  * @param networkToken The token for the network request, allowing cancelation and re-prioritization.
  * @return A promise which resolves with an MHPagedResponse.
  */
-- (PMKPromise*)fetchLikingForced:(BOOL)forced
+- (AnyPromise*)fetchLikingForced:(BOOL)forced
                         priority:(AVENetworkPriority*)priority
                     networkToken:(AVENetworkToken*)networkToken;
 
@@ -178,7 +178,7 @@
  * Fetches the followers (MHUsers) who follow this user.
  * @return A promise which resolves with an MHPagedResponse.
  */
-- (PMKPromise*)fetchFollowers;
+- (AnyPromise*)fetchFollowers;
 
 /**
  * Fetches the followers (MHUsers) for this user.
@@ -187,7 +187,7 @@
  * @param networkToken The token for the network request, allowing cancelation and re-prioritization.
  * @return A promise which resolves with an MHPagedResponse.
  */
-- (PMKPromise*)fetchFollowersForced:(BOOL)forced
+- (AnyPromise*)fetchFollowersForced:(BOOL)forced
                            priority:(AVENetworkPriority*)priority
                        networkToken:(AVENetworkToken*)networkToken;
 
@@ -195,7 +195,7 @@
  * Fetches suggested content for this user.
  * @return A promise which resolves with an MHPagedResponse.
  */
-- (PMKPromise*)fetchSuggested;
+- (AnyPromise*)fetchSuggested;
 
 /**
  * Fetches suggested content for this user.
@@ -204,7 +204,7 @@
  * @param networkToken The token for the network request, allowing cancelation and re-prioritization.
  * @return A promise which resolves with an MHPagedResponse.
  */
-- (PMKPromise*)fetchSuggestedForced:(BOOL)forced
+- (AnyPromise*)fetchSuggestedForced:(BOOL)forced
                            priority:(AVENetworkPriority*)priority
                        networkToken:(AVENetworkToken*)networkToken;
 
@@ -218,20 +218,20 @@
  * @param email The email of the user.
  * @return A promise which resolves when the action is finished.
  */
-+ (PMKPromise*)forgotUsernameWithEmail:(NSString*)email;
++ (AnyPromise*)forgotUsernameWithEmail:(NSString*)email;
 
 /**
  * Perform the forgot password flow for a user, given the user's email.
  * @param email The email of the user.
  * @return A promise which resolves when the action is finished.
  */
-+ (PMKPromise*)forgotPasswordWithEmail:(NSString*)email;
++ (AnyPromise*)forgotPasswordWithEmail:(NSString*)email;
 
 /**
  * Perform the forgot password flow for a user, given the user's username.
  * @param username The username of the user.
  * @return A promise which resolves when the action is finished.
  */
-+ (PMKPromise*)forgotPasswordWithUsername:(NSString*)username;
++ (AnyPromise*)forgotPasswordWithUsername:(NSString*)username;
 
 @end
