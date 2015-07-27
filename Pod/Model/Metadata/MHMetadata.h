@@ -232,3 +232,11 @@ typedef NS_ENUM(NSInteger, MHCollectionMixlistType)
 @interface MHHashtagMetadata : MHMetadata
 
 @end
+
+
+/**
+ * Metadata about an `MHTrait` object.
+ */
+@interface MHTraitMetadata : MHMetadata
+
+@end
