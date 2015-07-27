@@ -67,6 +67,9 @@ extern NSString* const kCreateRootSubendpoint;
 
 - (void)invalidateCacheForEndpoint:(NSString*)path;
 
++ (void)invalidateRootCacheForEndpoint:(NSString*)path
+                            parameters:(NSDictionary*)parameters;
+
 - (void)invalidateCollections;
 
 + (void)registerMHObject;

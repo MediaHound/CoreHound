@@ -17,7 +17,7 @@
 
 NSString* const MHObjectActionParameterPreferenceKey = @"preference";
 
-static MHPagedResponse* s_allSources = nil;
+static NSString* const kAllRootSubendpoint = @"all";
 
 
 @implementation MHSource
@@ -136,7 +136,8 @@ static MHPagedResponse* s_allSources = nil;
 
 + (void)userDidLogout:(NSNotification*)notification
 {
-    s_allSources = nil;
+    [self invalidateRootCacheForEndpoint:[self rootSubendpoint:kAllRootSubendpoint]
+                              parameters:nil];
 }
 
 #pragma mark - Source Checks
@@ -182,28 +183,12 @@ static MHPagedResponse* s_allSources = nil;
                      priority:(AVENetworkPriority*)priority
                  networkToken:(AVENetworkToken*)networkToken
 {
-    if (!forced) {
-        @synchronized (self) {
-            if (s_allSources) {
-                return [PMKPromise promiseWithValue:s_allSources];
-            }
-        }
-    }
-    
-    return [[MHFetcher sharedFetcher] fetchModel:MHPagedResponse.class
-                                            path:[self rootSubendpoint:@"all"]
-                                         keyPath:nil
-                                      parameters:@{
-                                                   MHFetchParameterView: MHFetchParameterViewFull
-                                                   }
-                                        priority:[AVENetworkPriority priorityWithLevel:AVENetworkPriorityLevelHigh]
-                                    networkToken:nil].thenInBackground(^(MHPagedResponse* response) {
-        @synchronized (self) {
-            s_allSources = response;
-        }
-        
-        return response;
-    });
+    return [self fetchRootPagedEndpoint:[self rootSubendpoint:kAllRootSubendpoint]
+                                 forced:forced
+                             parameters:nil
+                               priority:priority
+                           networkToken:networkToken
+                                   next:nil];
 }
 
 @end

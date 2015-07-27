@@ -522,11 +522,61 @@ static NSString* const kSocialSubendpoint = @"social";
     }
 }
 
++ (NSMutableDictionary*)cachedRootResponses
+{
+    static NSMutableDictionary* s_cachedRootResponses = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        s_cachedRootResponses = [[NSMutableDictionary alloc] init];
+    });
+    return s_cachedRootResponses;
+}
+
++ (NSString*)rootResponseCacheKeyForPath:(NSString*)path parameters:(NSDictionary*)parameters
+{
+    NSString* parametersAsJson = @"";
+    if (parameters) {
+        NSData* jsonData = [NSJSONSerialization dataWithJSONObject:parameters
+                                                           options:0
+                                                             error:nil];
+        parametersAsJson = [[NSString alloc] initWithData:jsonData
+                                                 encoding:NSUTF8StringEncoding];
+    }
+    return [NSString stringWithFormat:@"___root_cached_%@_::_%@", path, parametersAsJson];
+}
+
++ (MHPagedResponse*)cachedRootResponseForPath:(NSString*)path parameters:(NSDictionary*)parameters
+{
+    NSString* cacheKey = [self rootResponseCacheKeyForPath:path parameters:parameters];
+    @synchronized (self) {
+        return self.cachedRootResponses[cacheKey];
+    }
+}
+
++ (void)setCachedRootResponse:(MHPagedResponse*)response
+                      forPath:(NSString*)path
+                   parameters:(NSDictionary*)parameters
+{
+    NSString* cacheKey = [self rootResponseCacheKeyForPath:path parameters:parameters];
+    @synchronized (self) {
+        self.cachedRootResponses[cacheKey] = response;
+    }
+}
+
 - (void)invalidateCacheForEndpoint:(NSString*)path
 {
     NSString* cacheKey = [self responseCacheKeyForPath:path];
     @synchronized (self) {
         [self.cachedResponses removeObjectForKey:cacheKey];
+    }
+}
+
++ (void)invalidateRootCacheForEndpoint:(NSString*)path
+                            parameters:(NSDictionary*)parameters
+{
+    NSString* cacheKey = [self rootResponseCacheKeyForPath:path parameters:parameters];
+    @synchronized (self) {
+        [self.cachedRootResponses removeObjectForKey:cacheKey];
     }
 }
 
@@ -633,13 +683,12 @@ static NSString* const kSocialSubendpoint = @"social";
     
     // Hop off the main thread right away
     return dispatch_promise(^id {
-        // TODO: DO caching
-//        if (!next && !forced) {
-//            MHPagedResponse* cachedResponse = [self cachedResponseForPath:path];
-//            if (cachedResponse) {
-//                return [PMKPromise promiseWithValue:cachedResponse];
-//            }
-//        }
+        if (!next && !forced) {
+            MHPagedResponse* cachedResponse = [self cachedRootResponseForPath:path parameters:parameters];
+            if (cachedResponse) {
+                return [PMKPromise promiseWithValue:cachedResponse];
+            }
+        }
         
         NSMutableDictionary* finalParameters = [NSMutableDictionary dictionary];
         if (parameters) {
@@ -671,10 +720,9 @@ static NSString* const kSocialSubendpoint = @"social";
                                               afterEach:afterEach];
             };
 
-            // TODO: Caching
-//            if (!next) {
-//                [self setCachedResponse:pagedResponse forPath:path];
-//            }
+            if (!next) {
+                [self setCachedRootResponse:pagedResponse forPath:path parameters:parameters];
+            }
             
             return pagedResponse;
         });

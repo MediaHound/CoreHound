@@ -29,10 +29,10 @@ static NSString* const kSetImageSubendpoint = @"uploadImage";
 static NSString* const kSetPasswordSubendpoint = @"updatePassword";
 //static NSString* const kFollowedCollectionsSubendpoint = @"followed";
 
+static NSString* const kSuggestedRootSubendpoint = @"suggested";
+
 static NSString* const kForgotUsernameRootSubendpoint = @"forgotusername";
 static NSString* const kForgotPasswordRootSubendpoint = @"forgotpassword";
-
-static MHPagedResponse* s_suggestedUsers = nil;
 
 
 @implementation MHUser
@@ -145,7 +145,8 @@ static MHPagedResponse* s_suggestedUsers = nil;
 
 + (void)userDidLogout:(NSNotification*)notification
 {
-    s_suggestedUsers = nil;
+    [self invalidateRootCacheForEndpoint:[self rootSubendpoint:kSuggestedRootSubendpoint]
+                              parameters:nil];
 }
 
 @end
@@ -293,27 +294,21 @@ static MHPagedResponse* s_suggestedUsers = nil;
 
 + (PMKPromise*)fetchSuggestedUsers
 {
-    
-    @synchronized (self) {
-        if (s_suggestedUsers) {
-            return [PMKPromise promiseWithValue:s_suggestedUsers];
-        }
-    }
-    
-    return [[MHFetcher sharedFetcher] fetchModel:MHPagedResponse.class
-                                            path:[self rootSubendpoint:@"suggested"]
-                                         keyPath:nil
-                                      parameters:@{
-                                                   MHFetchParameterView: MHFetchParameterViewFull
-                                                   }
-                                        priority:[AVENetworkPriority priorityWithLevel:AVENetworkPriorityLevelHigh]
-                                    networkToken:nil].thenInBackground(^(MHPagedResponse* response) {
-        @synchronized (self) {
-            s_suggestedUsers = response;
-        }
-        
-        return response;
-    });
+    return [self fetchSuggestedUsersForced:NO
+                                  priority:[AVENetworkPriority priorityWithLevel:AVENetworkPriorityLevelHigh]
+                              networkToken:nil];
+}
+
++ (PMKPromise*)fetchSuggestedUsersForced:(BOOL)forced
+                                priority:(AVENetworkPriority*)priority
+                            networkToken:(AVENetworkToken*)networkToken
+{
+    return [self fetchRootPagedEndpoint:[self rootSubendpoint:kSuggestedRootSubendpoint]
+                                 forced:forced
+                             parameters:nil
+                               priority:priority
+                           networkToken:networkToken
+                                   next:nil];
 }
 
 - (PMKPromise*)fetchSuggested

@@ -96,6 +96,17 @@
 + (PMKPromise*)fetchSuggestedUsers;
 
 /**
+ * Fetches a set of suggested users that may be of interest to follow.
+ * @param forced Whether to use a cached response. If YES, a network request will occur. If NO, a cached result may be used.
+ * @param priority The network request priority.
+ * @param networkToken The token for the network request, allowing cancelation and re-prioritization.
+ * @return A promise which resolves with an MHPagedResponse.
+ */
++ (PMKPromise*)fetchSuggestedUsersForced:(BOOL)forced
+                                priority:(AVENetworkPriority*)priority
+                            networkToken:(AVENetworkToken*)networkToken;
+
+/**
  * Fetches the interest feed for this user.
  * @return A promise which resolves with an MHPagedResponse.
  */
