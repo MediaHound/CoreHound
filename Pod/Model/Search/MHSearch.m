@@ -81,9 +81,6 @@ NSString* NSStringByAddingExtendedPercentEscapes(NSString* str)
         parameters[MHFetchParameterNext] = next;
     }
     
-    // TODO: Remove this after v=2 is no longer needed
-    parameters[@"v"] = @"2";
-    
     @weakSelf()
     return [[MHFetcher sharedFetcher] fetchModel:MHPagedResponse.class
                                             path:path
