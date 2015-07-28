@@ -21,44 +21,26 @@ PODS:
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
   - AtSugar (0.1.1)
-  - Avenue (0.2.0):
+  - Avenue (0.2.1):
     - AFNetworking
     - KVOController
-    - PromiseKit (~> 2.0)
-  - AvenueFetcher (0.2.0):
+    - PromiseKit/CorePromise (~> 2.0)
+  - AvenueFetcher (0.2.1):
     - Avenue (~> 0.2)
     - JSONModel (~> 1.1)
-    - PromiseKit (~> 2.0)
+    - PromiseKit/CorePromise (~> 2.0)
   - CoreHound (0.2.0):
     - AFNetworking
     - AtSugar (~> 0.1)
     - Avenue (~> 0.2)
     - AvenueFetcher (~> 0.2)
     - JSONModel (~> 1.1)
-    - PromiseKit (~> 2.0)
+    - PromiseKit/CorePromise (~> 2.0)
     - UICKeyChainStore
   - Expecta (1.0.2)
   - JSONModel (1.1)
   - KVOController (1.0.3)
-  - OMGHTTPURLRQ (2.1.3):
-    - OMGHTTPURLRQ/RQ (= 2.1.3)
-  - OMGHTTPURLRQ/FormURLEncode (2.1.3)
-  - OMGHTTPURLRQ/RQ (2.1.3):
-    - OMGHTTPURLRQ/FormURLEncode
-    - OMGHTTPURLRQ/UserAgent
-  - OMGHTTPURLRQ/UserAgent (2.1.3)
-  - PromiseKit (2.1.1):
-    - PromiseKit/Foundation (= 2.1.1)
-    - PromiseKit/QuartzCore (= 2.1.1)
-    - PromiseKit/UIKit (= 2.1.1)
   - PromiseKit/CorePromise (2.1.1)
-  - PromiseKit/Foundation (2.1.1):
-    - OMGHTTPURLRQ (~> 2.1.3)
-    - PromiseKit/CorePromise
-  - PromiseKit/QuartzCore (2.1.1):
-    - PromiseKit/CorePromise
-  - PromiseKit/UIKit (2.1.1):
-    - PromiseKit/CorePromise
   - Specta (1.0.3)
   - UICKeyChainStore (2.0.6)
 
@@ -83,13 +65,12 @@ CHECKOUT OPTIONS:
 SPEC CHECKSUMS:
   AFNetworking: 05edc0ac4c4c8cf57bcf4b84be5b0744b6d8e71e
   AtSugar: 25ddf068f42f2e35c6cc2ef0275e87d8395ac332
-  Avenue: 73008e0afa3d2b7687c83e0b4dff2dba801f11fc
-  AvenueFetcher: 058f185f6b9bf487b9ef2269976b15f35d541f40
-  CoreHound: d279fecbf6b43d9706a91a65ec651164b3ddfa68
+  Avenue: d7624a212a3555c5f8a2cfed7989490130708e54
+  AvenueFetcher: 35dc54435c5f060458bdd738bd5eda6694f98ea6
+  CoreHound: 099a66cacfb87ed7bc81585764b0f752e1eb695e
   Expecta: 54e8a3530add08f4f0208c111355eda7cde74a53
   JSONModel: f7c057e3da7839e47e4174735ae5f38fdfb2a34d
   KVOController: 9fd8f0343670994e4b6f9f0b31f5a45663f3e1cf
-  OMGHTTPURLRQ: c4268dea4295b585d711055dbcd87bfa82badd5f
   PromiseKit: 45fa68ef95b049be494a1502dab228a60374ad5a
   Specta: cf3e4188cf35375c3ee2cd03f8db8f1f4ef98234
   UICKeyChainStore: c5719c814e8bd69e74e4a0fc09daf8f4d6257a59
