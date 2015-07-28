@@ -25,8 +25,8 @@ extern NSString* const MHSourceFormatTypeUnknownKey;
 @property (strong, nonatomic) NSNumber* price;
 @property (strong, nonatomic) NSString* currency;
 @property (strong, nonatomic) NSString* timePeriod;
+@property (strong, nonatomic) NSNumber* contentCount;
 @property (strong, nonatomic) NSDictionary* launchInfo;
-// TODO: Add contentCount?
 
 @property (weak, nonatomic, readonly) MHSourceMethod* method;
 

@@ -39,7 +39,8 @@ NSString* const MHSourceFormatTypeUnknownKey = @"unknown";
 {
     if ([propertyName isEqualToString:NSStringFromSelector(@selector(price))]
         || [propertyName isEqualToString:NSStringFromSelector(@selector(currency))]
-        || [propertyName isEqualToString:NSStringFromSelector(@selector(timePeriod))]) {
+        || [propertyName isEqualToString:NSStringFromSelector(@selector(timePeriod))]
+        || [propertyName isEqualToString:NSStringFromSelector(@selector(contentCount))]) {
         return YES;
     }
     return [super propertyIsOptional:propertyName];
