@@ -6,7 +6,7 @@
 //
 //
 
-#import <CoreHound/CoreHound.h>
+#import "MHAction.h"
 
 
 @interface MHPublish : MHAction
