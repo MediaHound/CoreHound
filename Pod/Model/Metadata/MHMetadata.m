@@ -247,3 +247,18 @@
 }
 
 @end
+
+
+@implementation MHContributorMetadata
+
+@end
+
+
+@implementation MHHashtagMetadata
+
+@end
+
+
+@implementation MHTraitMetadata
+
+@end
