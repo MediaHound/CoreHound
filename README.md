@@ -152,7 +152,7 @@ Entertainment is only part of The Entertainment Graph. Users bring social intera
 
 ### Logging in a user
 
-CoreHound offers two ways to log in a user: User OAuth and Enterprise Auth. Most applications will use User OAuth. Enteprise partners can opt-in to an Enterprise Auth flow.
+CoreHound offers two ways to log in a user: User OAuth and Enterprise Auth. Most applications will use User OAuth. Enterprise partners can opt-in to an Enterprise Auth flow.
 
 ### Logging in using User OAuth
 
