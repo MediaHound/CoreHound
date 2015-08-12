@@ -8,6 +8,8 @@
 #import "MHObject.h"
 #import "MHMetadata.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 
 /**
  * An MHTrait provides a descriptor about media content.
@@ -21,3 +23,5 @@
 @property (strong, atomic) MHTraitMetadata* metadata;
 
 @end
+
+NS_ASSUME_NONNULL_END

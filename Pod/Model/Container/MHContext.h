@@ -14,6 +14,8 @@
 @class MHSourceMedium;
 @class MHSorting;
 
+NS_ASSUME_NONNULL_BEGIN
+
 
 /**
  * An MHContext includes arbitrary data about the context of MHObjects when returned in a MHRelationalPair.
@@ -27,34 +29,34 @@
 /**
  * Sorting information on how this MHObject relates.
  */
-@property (strong, nonatomic) MHSorting* sorting;
+@property (strong, nonatomic) MHSorting* __nullable sorting;
 
 /**
  * An array of MHRelationships that express how a contributor contributed to content.
  */
-@property (strong, nonatomic) NSArray* relationships;
+@property (strong, nonatomic) NSArray* __nullable relationships;
 
 /**
  * Whether this MHSource is consumable.
  */
-@property (strong, nonatomic) NSNumber* consumable;
+@property (strong, nonatomic) NSNumber* __nullable consumable;
 
 /** 
  * Get a medium for this MHSource of a specific type.
  * @param type The type of medium to get.
  * @return The source medium or nil if no medium for the given type is found.
  */
-- (MHSourceMedium*)mediumForType:(NSString*)type;
+- (MHSourceMedium* __nullable)mediumForType:(NSString*)type;
 
 /**
  * All mediums for this MHSource.
  */
-@property (strong, nonatomic, readonly) NSArray* allMediums;
+@property (strong, nonatomic, readonly) NSArray* __nullable allMediums;
 
 /**
  * The search term that was used to return this MHObject from search.
  */
-@property (strong, nonatomic) NSString* searchTerm;
+@property (strong, nonatomic) NSString* __nullable searchTerm;
 
 /**
  * The search scope that was used to return this MHObject from search.
@@ -67,3 +69,5 @@
 //@property (strong, nonatomic, readonly) MHMedia* content;
 
 @end
+
+NS_ASSUME_NONNULL_END

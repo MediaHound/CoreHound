@@ -9,12 +9,14 @@
 #import "MHSubscription.h"
 #import "MHSourcePreference.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 
 @interface MHSource : MHObject
 
 @property (strong, atomic) MHSourceMetadata* metadata;
-@property (strong, nonatomic) NSArray* subscriptions;
-@property (strong, nonatomic) NSArray* allMediums;
+@property (strong, nonatomic) NSArray* __nullable subscriptions;
+@property (strong, nonatomic) NSArray* __nullable allMediums;
 
 - (AnyPromise*)connect;
 - (AnyPromise*)connectWithPreference:(MHSourcePreference)preference;
@@ -37,8 +39,8 @@
 + (AnyPromise*)fetchAll;
 + (AnyPromise*)fetchAllForced:(BOOL)forced
                      priority:(AVENetworkPriority*)priority
-                 networkToken:(AVENetworkToken*)networkToken;
+                 networkToken:(AVENetworkToken* __nullable)networkToken;
 
 @end
 
-
+NS_ASSUME_NONNULL_END

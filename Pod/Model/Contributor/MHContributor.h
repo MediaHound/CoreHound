@@ -8,6 +8,8 @@
 #import "MHObject.h"
 #import "MHMetadata.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 
 /**
  * An MHContributor is an individual or group entity that in some way contributes to
@@ -69,7 +71,7 @@
  */
 - (AnyPromise*)fetchMediaForced:(BOOL)forced
                        priority:(AVENetworkPriority*)priority
-                   networkToken:(AVENetworkToken*)networkToken;
+                   networkToken:(AVENetworkToken* __nullable)networkToken;
 
 @end
 
@@ -108,4 +110,6 @@
 @interface MHFictionalGroupContributor : MHContributor
 
 @end
+
+NS_ASSUME_NONNULL_END
 

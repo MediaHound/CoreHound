@@ -7,6 +7,8 @@
 
 #import <Foundation/Foundation.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 /**
  * The MediaHound error domain.
  * All NSErrors returned directly from MediaHound APIs are in this error domain.
@@ -37,3 +39,5 @@ extern NSString* const MHJSONResponseSerializerWithDataKey;
  * Returned on failing network calls
  */
 extern NSString* const MHJSONResponseSerializerWithStringKey;
+
+NS_ASSUME_NONNULL_END

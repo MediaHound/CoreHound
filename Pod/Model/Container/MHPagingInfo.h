@@ -8,6 +8,8 @@
 
 #import <JSONModel/JSONModel.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 
 /**
  * Represents information about the current page of a MHPagedResponse.
@@ -19,6 +21,8 @@
  * that can be used to fetch the next page.
  * If this is the last page, then the `next` property is nil.
  */
-@property (strong, nonatomic) NSString* next;
+@property (strong, nonatomic) NSString* __nullable next;
 
 @end
+
+NS_ASSUME_NONNULL_END

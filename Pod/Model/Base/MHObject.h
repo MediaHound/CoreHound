@@ -14,6 +14,8 @@
 @class MHImage;
 @class MHSocial;
 
+NS_ASSUME_NONNULL_BEGIN
+
 
 /**
  * The base model for a MediaHound entity.
@@ -34,7 +36,7 @@
  * You need to call -fetchPrimaryImage to ensure it has been loaded.
  * This property is KVO compliant.
  */
-@property (strong, atomic) MHImage* primaryImage;
+@property (strong, atomic) MHImage* __nullable primaryImage;
 
 /**
  * The secondary image is the receiver's secondary visual representation
@@ -42,7 +44,7 @@
  * You need to call -fetchSecondaryImage to ensure it has been loaded.
  * This property is KVO compliant.
  */
-@property (strong, atomic) MHImage* secondaryImage;
+@property (strong, atomic) MHImage* __nullable secondaryImage;
 
 /**
  * Social metrics and user-specific information about the receiver
@@ -50,7 +52,7 @@
  * You need to call -fetchSocial to ensure it has been loaded.
  * This property is KVO compliant.
  */
-@property (strong, nonatomic) MHSocial* social;
+@property (strong, nonatomic) MHSocial* __nullable social;
 
 /**
  * @param mhid The mhid to check for
@@ -129,7 +131,7 @@
  */
 + (AnyPromise*)fetchByMhid:(NSString*)mhid
                   priority:(AVENetworkPriority*)priority
-              networkToken:(AVENetworkToken*)networkToken;
+              networkToken:(AVENetworkToken* __nullable)networkToken;
 
 /**
  * Fetches the receiver's social metrics.
@@ -150,7 +152,7 @@
  */
 - (AnyPromise*)fetchSocialForced:(BOOL)forced
                         priority:(AVENetworkPriority*)priority
-                    networkToken:(AVENetworkToken*)networkToken;
+                    networkToken:(AVENetworkToken* __nullable)networkToken;
 
 /**
  * Fetches the receiver's primary image.
@@ -171,7 +173,7 @@
  */
 - (AnyPromise*)fetchPrimaryImageForced:(BOOL)forced
                               priority:(AVENetworkPriority*)priority
-                          networkToken:(AVENetworkToken*)networkToken;
+                          networkToken:(AVENetworkToken* __nullable)networkToken;
 
 /**
  * Fetches the receiver's secondary image.
@@ -192,7 +194,7 @@
  */
 - (AnyPromise*)fetchSecondaryImageForced:(BOOL)forced
                                 priority:(AVENetworkPriority*)priority
-                            networkToken:(AVENetworkToken*)networkToken;
+                            networkToken:(AVENetworkToken* __nullable)networkToken;
 
 /**
  * Fetches the activity feed for the receiver.
@@ -209,7 +211,7 @@
  */
 - (AnyPromise*)fetchFeedForced:(BOOL)forced
                       priority:(AVENetworkPriority*)priority
-                  networkToken:(AVENetworkToken*)networkToken;
+                  networkToken:(AVENetworkToken* __nullable)networkToken;
 
 /**
  * Fetches all collections that contain the receiver.
@@ -226,6 +228,8 @@
  */
 - (AnyPromise*)fetchCollectionsForced:(BOOL)forced
                              priority:(AVENetworkPriority*)priority
-                         networkToken:(AVENetworkToken*)networkToken;
+                         networkToken:(AVENetworkToken* __nullable)networkToken;
 
 @end
+
+NS_ASSUME_NONNULL_END

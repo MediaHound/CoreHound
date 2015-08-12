@@ -8,6 +8,8 @@
 #import "MHObject.h"
 #import "MHMetadata.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 
 /**
  * An MHHashtag is a mentionable topic in the form "#name".
@@ -41,6 +43,8 @@
  */
 + (AnyPromise*)fetchByName:(NSString*)name
                   priority:(AVENetworkPriority*)priority
-              networkToken:(AVENetworkToken*)networkToken;
+              networkToken:(AVENetworkToken* __nullable)networkToken;
 
 @end
+
+NS_ASSUME_NONNULL_END

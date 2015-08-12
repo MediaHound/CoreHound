@@ -9,6 +9,9 @@
 #import <Foundation/Foundation.h>
 #import <PromiseKit/PromiseKit.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
+
 /**
  * The MHSDK allows configuration of the SDK.
  */
@@ -30,3 +33,5 @@
                         clientSecret:(NSString*)clientSecret;
 
 @end
+
+NS_ASSUME_NONNULL_END

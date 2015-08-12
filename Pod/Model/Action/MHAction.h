@@ -9,6 +9,8 @@
 
 @class MHUser;
 
+NS_ASSUME_NONNULL_BEGIN
+
 
 /**
  * An MHAction is an action that occurs in the MediaHound Graph.
@@ -21,7 +23,9 @@
  */
 @property (strong, atomic) MHActionMetadata* metadata;
 
-@property (strong, atomic) MHObject* primaryMention;
-@property (strong, atomic) MHUser* primaryOwner;
+@property (strong, atomic) MHObject* __nullable primaryMention;
+@property (strong, atomic) MHUser* __nullable primaryOwner;
 
 @end
+
+NS_ASSUME_NONNULL_END

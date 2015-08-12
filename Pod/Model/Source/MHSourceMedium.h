@@ -11,6 +11,8 @@
 @class MHSource;
 @class MHObject;
 
+NS_ASSUME_NONNULL_BEGIN
+
 extern NSString* const MHSourceMediumTypeStream;
 extern NSString* const MHSourceMediumTypeDownload;
 extern NSString* const MHSourceMediumTypeDeliver;
@@ -23,10 +25,12 @@ extern NSString* const MHSourceMediumTypeAttend;
 @property (strong, nonatomic) NSString* type;
 
 @property (weak, nonatomic, readonly) MHSource* source;
-@property (weak, nonatomic, readonly) MHObject* content;
+@property (weak, nonatomic, readonly) MHObject* __nullable content;
 
-- (MHSourceMethod*)methodForType:(NSString*)type;
+- (MHSourceMethod* __nullable)methodForType:(NSString*)type;
 
 @property (strong, nonatomic, readonly) NSArray* allMethods;
 
 @end
+
+NS_ASSUME_NONNULL_END

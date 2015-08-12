@@ -9,6 +9,8 @@
 #import <PromiseKit/PromiseKit.h>
 #import "MHRelationalPair.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 
 /**
  * An MHPagedResponse represents the result of requesting a single page.
@@ -36,3 +38,5 @@
 - (AnyPromise*)fetchNext;
 
 @end
+
+NS_ASSUME_NONNULL_END

@@ -7,6 +7,8 @@
 
 #import "MHAction.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 
 /**
  * An MHPost action occurs when a user creates a post.
@@ -25,3 +27,5 @@
                   primaryMention:(MHObject*)primaryMention;
 
 @end
+
+NS_ASSUME_NONNULL_END

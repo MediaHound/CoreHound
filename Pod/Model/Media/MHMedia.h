@@ -8,6 +8,7 @@
 #import "MHObject.h"
 #import "MHRelationalPair.h"
 
+NS_ASSUME_NONNULL_BEGIN
 
 
 /**
@@ -28,7 +29,7 @@
  * You need to call -fetchKeyContributors to ensure it has been loaded.
  * This property is KVO compliant.
  */
-@property (strong, atomic) NSArray* keyContributors;
+@property (strong, atomic) NSArray* __nullable keyContributors;
 
 /**
  * A relational pair to the MHObject the receiver belongs to.
@@ -38,7 +39,7 @@
  * You need to call -fetchPrimaryGroup to ensure it has been loaded.
  * This property is KVO compliant.
  */
-@property (strong, atomic) MHRelationalPair* primaryGroup;
+@property (strong, atomic) MHRelationalPair* __nullable primaryGroup;
 
 @end
 
@@ -68,7 +69,7 @@
  */
 - (AnyPromise*)fetchPrimaryGroupForced:(BOOL)forced
                               priority:(AVENetworkPriority*)priority
-                          networkToken:(AVENetworkToken*)networkToken;
+                          networkToken:(AVENetworkToken* __nullable)networkToken;
 
 /**
  * Fetches the media's key contributors.
@@ -89,7 +90,7 @@
  */
 - (AnyPromise*)fetchKeyContributorsForced:(BOOL)forced
                                  priority:(AVENetworkPriority*)priority
-                             networkToken:(AVENetworkToken*)networkToken;
+                             networkToken:(AVENetworkToken* __nullable)networkToken;
 
 /**
  * Fetches sources for this media.
@@ -106,7 +107,7 @@
  */
 - (AnyPromise*)fetchSourcesForced:(BOOL)forced
                          priority:(AVENetworkPriority*)priority
-                     networkToken:(AVENetworkToken*)networkToken;
+                     networkToken:(AVENetworkToken* __nullable)networkToken;
 
 /**
  * Fetches related content similar to this MHMedia.
@@ -123,7 +124,7 @@
  */
 - (AnyPromise*)fetchRelatedForced:(BOOL)forced
                          priority:(AVENetworkPriority*)priority
-                     networkToken:(AVENetworkToken*)networkToken;
+                     networkToken:(AVENetworkToken* __nullable)networkToken;
 
 /**
  * Fetches all contained content that this media is parent to.
@@ -142,7 +143,7 @@
  */
 - (AnyPromise*)fetchContentForced:(BOOL)forced
                          priority:(AVENetworkPriority*)priority
-                     networkToken:(AVENetworkToken*)networkToken;
+                     networkToken:(AVENetworkToken* __nullable)networkToken;
 
 /**
  * Fetches all contributors who have contributed to this media.
@@ -159,7 +160,7 @@
  */
 - (AnyPromise*)fetchContributorsForced:(BOOL)forced
                               priority:(AVENetworkPriority*)priority
-                          networkToken:(AVENetworkToken*)networkToken;
+                          networkToken:(AVENetworkToken* __nullable)networkToken;
 
 /**
  * Fetches content that is related to the given array of media.
@@ -179,6 +180,8 @@
 + (AnyPromise*)fetchRelatedTo:(NSArray*)medias
                        forced:(BOOL)forced
                      priority:(AVENetworkPriority*)priority
-                 networkToken:(AVENetworkToken*)networkToken;
+                 networkToken:(AVENetworkToken* __nullable)networkToken;
 
 @end
+
+NS_ASSUME_NONNULL_END

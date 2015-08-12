@@ -7,6 +7,8 @@
 
 #import <JSONModel/JSONModel.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 
 /**
  * An MHImageData represents the data for a specific MHImage at a specific resoultion.
@@ -22,11 +24,13 @@
 /**
  * The width of the image, in pixels.
  */
-@property (strong, nonatomic) NSNumber* width;
+@property (strong, nonatomic) NSNumber* __nullable width;
 
 /**
  * The height of the image, in pixels.
  */
-@property (strong, nonatomic) NSNumber* height;
+@property (strong, nonatomic) NSNumber* __nullable height;
 
 @end
+
+NS_ASSUME_NONNULL_END

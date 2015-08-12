@@ -7,6 +7,8 @@
 
 #import "MHObject.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 
 /**
  * An MHSubscription is a bundling of content that a user can pay for
@@ -26,3 +28,5 @@
 @property (strong, nonatomic, readonly) NSString* displayPrice;
 
 @end
+
+NS_ASSUME_NONNULL_END

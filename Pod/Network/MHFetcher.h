@@ -8,6 +8,8 @@
 #import <PromiseKit/PromiseKit.h>
 #import <AvenueFetcher/AVEFetcher.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 
 /**
  * The main fetcher for all MediaHound API network requests.
@@ -23,3 +25,5 @@
 - (void)setBaseURL:(NSURL*)baseURL;
 
 @end
+
+NS_ASSUME_NONNULL_END

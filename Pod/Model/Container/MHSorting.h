@@ -8,6 +8,8 @@
 
 #import <JSONModel/JSONModel.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 
 /**
  * An MHSorting will appear inside of an MHContext indicating how the MHObject should be sorted
@@ -20,11 +22,13 @@
 /**
  * The importance of this MHObject compared to other MHObjects in the result.
  */
-@property (strong, nonatomic) NSNumber* importance;
+@property (strong, nonatomic) NSNumber* __nullable importance;
 
 /**
  * The raw positional order of this MHObject compared to other MHObjects in the result.
  */
-@property (strong, nonatomic) NSNumber* position;
+@property (strong, nonatomic) NSNumber* __nullable position;
 
 @end
+
+NS_ASSUME_NONNULL_END

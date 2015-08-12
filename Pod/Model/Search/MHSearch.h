@@ -11,6 +11,8 @@
 
 #import "MHSearchScope.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 
 /**
  * Perform searches against the entertainment graph.
@@ -45,6 +47,8 @@
 + (AnyPromise*)fetchResultsForSearchTerm:(NSString*)search
                                    scope:(MHSearchScope)scope
                                 priority:(AVENetworkPriority*)priority
-                            networkToken:(AVENetworkToken*)networkToken;
+                            networkToken:(AVENetworkToken* __nullable)networkToken;
 
 @end
+
+NS_ASSUME_NONNULL_END

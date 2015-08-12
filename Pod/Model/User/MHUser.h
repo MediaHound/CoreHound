@@ -7,6 +7,8 @@
 
 #import "MHObject.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 
 /**
  * An MHUser is a user that interacts with The Entertainment Graph.
@@ -87,7 +89,7 @@
  */
 + (AnyPromise*)fetchByUsername:(NSString*)username
                       priority:(AVENetworkPriority*)priority
-                  networkToken:(AVENetworkToken*)networkToken;
+                  networkToken:(AVENetworkToken* __nullable)networkToken;
 
 /**
  * Fetches a set of suggested users that may be of interest to follow.
@@ -104,7 +106,7 @@
  */
 + (AnyPromise*)fetchSuggestedUsersForced:(BOOL)forced
                                 priority:(AVENetworkPriority*)priority
-                            networkToken:(AVENetworkToken*)networkToken;
+                            networkToken:(AVENetworkToken* __nullable)networkToken;
 
 /**
  * Fetches the interest feed for this user.
@@ -121,7 +123,7 @@
  */
 - (AnyPromise*)fetchInterestFeedForced:(BOOL)forced
                               priority:(AVENetworkPriority*)priority
-                          networkToken:(AVENetworkToken*)networkToken;
+                          networkToken:(AVENetworkToken* __nullable)networkToken;
 
 /**
  * Fetches all of the collections created by this user.
@@ -138,7 +140,7 @@
  */
 - (AnyPromise*)fetchOwnedCollectionsForced:(BOOL)forced
                                   priority:(AVENetworkPriority*)priority
-                              networkToken:(AVENetworkToken*)networkToken;
+                              networkToken:(AVENetworkToken* __nullable)networkToken;
 
 /**
  * Fetches all the things that this user is following.
@@ -155,7 +157,7 @@
  */
 - (AnyPromise*)fetchFollowingForced:(BOOL)forced
                            priority:(AVENetworkPriority*)priority
-                       networkToken:(AVENetworkToken*)networkToken;
+                       networkToken:(AVENetworkToken* __nullable)networkToken;
 
 /**
  * Fetches all the things that have been liked by this user.
@@ -172,7 +174,7 @@
  */
 - (AnyPromise*)fetchLikingForced:(BOOL)forced
                         priority:(AVENetworkPriority*)priority
-                    networkToken:(AVENetworkToken*)networkToken;
+                    networkToken:(AVENetworkToken* __nullable)networkToken;
 
 /**
  * Fetches the followers (MHUsers) who follow this user.
@@ -189,7 +191,7 @@
  */
 - (AnyPromise*)fetchFollowersForced:(BOOL)forced
                            priority:(AVENetworkPriority*)priority
-                       networkToken:(AVENetworkToken*)networkToken;
+                       networkToken:(AVENetworkToken* __nullable)networkToken;
 
 /**
  * Fetches suggested content for this user.
@@ -206,7 +208,7 @@
  */
 - (AnyPromise*)fetchSuggestedForced:(BOOL)forced
                            priority:(AVENetworkPriority*)priority
-                       networkToken:(AVENetworkToken*)networkToken;
+                       networkToken:(AVENetworkToken* __nullable)networkToken;
 
 @end
 
@@ -235,3 +237,5 @@
 + (AnyPromise*)forgotPasswordWithUsername:(NSString*)username;
 
 @end
+
+NS_ASSUME_NONNULL_END

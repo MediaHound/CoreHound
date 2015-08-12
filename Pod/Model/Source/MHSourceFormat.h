@@ -9,6 +9,8 @@
 
 @class MHSourceMethod;
 
+NS_ASSUME_NONNULL_BEGIN
+
 extern NSString* const MHSourceFormatLaunchInfoViewKey;
 extern NSString* const MHSourceFormatLaunchInfoConsumeKey;
 extern NSString* const MHSourceFormatLaunchInfoPreviewKey;
@@ -22,10 +24,10 @@ extern NSString* const MHSourceFormatTypeUnknownKey;
 @interface MHSourceFormat : JSONModel
 
 @property (strong, nonatomic) NSString* type;
-@property (strong, nonatomic) NSNumber* price;
-@property (strong, nonatomic) NSString* currency;
-@property (strong, nonatomic) NSString* timePeriod;
-@property (strong, nonatomic) NSNumber* contentCount;
+@property (strong, nonatomic) NSNumber* __nullable price;
+@property (strong, nonatomic) NSString* __nullable currency;
+@property (strong, nonatomic) NSString* __nullable timePeriod;
+@property (strong, nonatomic) NSNumber* __nullable contentCount;
 @property (strong, nonatomic) NSDictionary* launchInfo;
 
 @property (weak, nonatomic, readonly) MHSourceMethod* method;
@@ -33,3 +35,5 @@ extern NSString* const MHSourceFormatTypeUnknownKey;
 @property (strong, nonatomic, readonly) NSString* displayPrice;
 
 @end
+
+NS_ASSUME_NONNULL_END

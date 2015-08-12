@@ -7,6 +7,8 @@
 
 #import "MHObject.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 
 /**
  * An MHImage is a visual representaiton of an object in The Entertainment Graph.
@@ -21,3 +23,5 @@
 @property (strong, atomic) MHImageMetadata* metadata;
 
 @end
+
+NS_ASSUME_NONNULL_END

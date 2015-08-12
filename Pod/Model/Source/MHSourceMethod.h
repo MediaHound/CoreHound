@@ -10,6 +10,8 @@
 
 @class MHSourceMedium;
 
+NS_ASSUME_NONNULL_BEGIN
+
 extern NSString* const MHSourceMethodTypePurchase;
 extern NSString* const MHSourceMethodTypeRental;
 extern NSString* const MHSourceMethodTypeSubscription;
@@ -23,12 +25,14 @@ extern NSString* const MHSourceMethodTypeBroker;
 
 @property (weak, nonatomic, readonly) MHSourceMedium* medium;
 
-@property (strong, nonatomic, readonly) NSString* displayName;
+@property (strong, nonatomic, readonly) NSString* __nullable displayName;
 
-- (MHSourceFormat*)formatForType:(NSString*)type;
+- (MHSourceFormat* __nullable)formatForType:(NSString*)type;
 
 @property (strong, nonatomic, readonly) MHSourceFormat* defaultFormat;
 
 @property (strong, nonatomic, readonly) NSArray* allFormats;
 
 @end
+
+NS_ASSUME_NONNULL_END

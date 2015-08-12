@@ -11,6 +11,8 @@
 
 @class MHUser;
 
+NS_ASSUME_NONNULL_BEGIN
+
 /**
  * Notificaiton raised when a login is succesful.
  */
@@ -30,7 +32,7 @@ extern NSString* const MHLoginSessionUserDidLogoutNotification;
 /**
  * The user that is logged in for this session.
  */
-@property (strong, nonatomic, readonly) MHUser* user;
+@property (strong, nonatomic, readonly) MHUser* __nullable user;
 
 /**
  * Creates a login session by logging a user in with credentials store in the Keychain.
@@ -67,3 +69,5 @@ extern NSString* const MHLoginSessionUserDidLogoutNotification;
 + (instancetype)currentSession;
 
 @end
+
+NS_ASSUME_NONNULL_END

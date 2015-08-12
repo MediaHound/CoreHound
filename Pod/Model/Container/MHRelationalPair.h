@@ -10,6 +10,8 @@
 @class MHObject;
 @class MHContext;
 
+NS_ASSUME_NONNULL_BEGIN
+
 
 /**
  * An MHRelationalPair represents an object with additional context.
@@ -20,11 +22,13 @@
 /**
  * The object
  */
-@property (strong, nonatomic) MHObject* object;
+@property (strong, nonatomic) MHObject* __nullable object;
 
 /**
  * Context that relates `object` to the originating request.
  */
-@property (strong, nonatomic) MHContext* context;
+@property (strong, nonatomic) MHContext* __nullable context;
 
 @end
+
+NS_ASSUME_NONNULL_END
