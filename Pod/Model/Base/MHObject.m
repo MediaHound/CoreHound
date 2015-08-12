@@ -623,14 +623,11 @@ static NSString* const kSocialSubendpoint = @"social";
         NSMutableDictionary* parameters = [NSMutableDictionary dictionary];
         parameters[MHFetchParameterPageSize] = @(MHInternal_DefaultPageSize);
         parameters[MHFetchParameterView] = MHFetchParameterViewFull;
-        if (next) {
-            parameters[MHFetchParameterNext] = next;
-        }
         
         return [[MHFetcher sharedFetcher] fetchModel:MHPagedResponse.class
-                                                path:path
+                                                path:(next) ? next : path
                                              keyPath:nil
-                                          parameters:parameters
+                                          parameters:(next) ? nil : parameters
                                             priority:priority
                                         networkToken:networkToken].thenInBackground(^(MHPagedResponse* pagedResponse) {
             if (afterEach) {
@@ -696,14 +693,11 @@ static NSString* const kSocialSubendpoint = @"social";
         }
         finalParameters[MHFetchParameterPageSize] = @(MHInternal_DefaultPageSize);
         finalParameters[MHFetchParameterView] = MHFetchParameterViewFull;
-        if (next) {
-            finalParameters[MHFetchParameterNext] = next;
-        }
         
         return [[MHFetcher sharedFetcher] fetchModel:MHPagedResponse.class
-                                                path:path
+                                                path:(next) ? next : path
                                              keyPath:nil
-                                          parameters:finalParameters
+                                          parameters:(next) ? nil : finalParameters
                                             priority:priority
                                         networkToken:networkToken].thenInBackground(^(MHPagedResponse* pagedResponse) {
             if (afterEach) {

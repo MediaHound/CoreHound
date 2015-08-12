@@ -77,16 +77,12 @@ NSString* NSStringByAddingExtendedPercentEscapes(NSString* str)
         parameters[@"types"] = scopes;
     }
     
-    if (next) {
-        parameters[MHFetchParameterNext] = next;
-    }
-    
     @weakSelf()
     return [[MHFetcher sharedFetcher] fetchModel:MHPagedResponse.class
-                                            path:path
+                                            path:(next) ? next : path
                                          keyPath:nil
-                                      parameters:parameters
-                                        priority:[AVENetworkPriority priorityWithLevel:AVENetworkPriorityLevelHigh]
+                                      parameters:(next) ? nil : parameters
+                                        priority:priority
                                     networkToken:networkToken].thenInBackground(^(MHPagedResponse* pagedResponse) {
         pagedResponse.fetchNextOperation = ^(NSString* newNext) {
             return [weakSelf fetchResultsForSearchTerm:search

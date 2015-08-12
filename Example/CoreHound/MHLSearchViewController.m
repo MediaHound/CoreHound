@@ -186,7 +186,6 @@
                 NSMutableArray* searchResultContent = pagedSearchResult.content.mutableCopy;
                 self.response = pagedSearchResult;
                 self.allSearchResults = searchResultContent;
-                [self.tableView reloadData];
                 
                 /*
                  An MHPagedSearchResponse will indicate if there are additional paged responses that can 
@@ -194,7 +193,9 @@
                  */
                 if (pagedSearchResult.hasMorePages) {
                     self.additionalSearchPages = YES;
-                };
+                }
+                
+                [self.tableView reloadData];
             }
         });
     }
