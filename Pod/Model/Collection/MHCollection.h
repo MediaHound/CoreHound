@@ -31,7 +31,7 @@ NS_ASSUME_NONNULL_BEGIN
  * You need to call -fetchPrimaryOwner to ensure it has been loaded.
  * This property is KVO compliant.
  */
-@property (strong, atomic) MHUser* __nullable primaryOwner;
+@property (strong, nullable, atomic) MHUser* primaryOwner;
 
 /**
  * The firstContentImage is the MHImage of the first piece of content in this collection.
@@ -39,7 +39,7 @@ NS_ASSUME_NONNULL_BEGIN
  * You need to call -fetchFirstContentImage to ensure it has been loaded.
  * This property is KVO compliant.
  */
-@property (strong, atomic) MHImage* __nullable firstContentImage;
+@property (strong, nullable, atomic) MHImage* firstContentImage;
 
 /**
  * Add a single MHObject to this collection.
@@ -98,7 +98,7 @@ NS_ASSUME_NONNULL_BEGIN
  * @param initialContent an array of MHObjects to initially put into the collection
  * @return A promise which resolves with the newly created MHCollection.
  */
-+ (AnyPromise*)createWithName:(NSString*)name initialContent:(NSArray* __nullable)initialContent;
++ (AnyPromise*)createWithName:(NSString*)name initialContent:(nullable NSArray*)initialContent;
 
 @end
 
@@ -126,7 +126,7 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (AnyPromise*)fetchPrimaryOwnerForced:(BOOL)forced
                               priority:(AVENetworkPriority*)priority
-                          networkToken:(AVENetworkToken* __nullable)networkToken;
+                          networkToken:(nullable AVENetworkToken*)networkToken;
 
 /**
  * Fetches the image of the collection's first piece of content.
@@ -149,7 +149,7 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (AnyPromise*)fetchFirstContentImageForced:(BOOL)forced
                                    priority:(AVENetworkPriority*)priority
-                               networkToken:(AVENetworkToken* __nullable)networkToken;
+                               networkToken:(nullable AVENetworkToken*)networkToken;
 
 /**
  * Fetches all of the owners of this collection.
@@ -166,7 +166,7 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (AnyPromise*)fetchOwnersForced:(BOOL)forced
                         priority:(AVENetworkPriority*)priority
-                    networkToken:(AVENetworkToken* __nullable)networkToken;
+                    networkToken:(nullable AVENetworkToken*)networkToken;
 
 /**
  * Fetches all content that is in the collection.
@@ -183,7 +183,7 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (AnyPromise*)fetchContentForced:(BOOL)forced
                          priority:(AVENetworkPriority*)priority
-                     networkToken:(AVENetworkToken* __nullable)networkToken;
+                     networkToken:(nullable AVENetworkToken*)networkToken;
 
 /**
  * Fetches all mixlist content that is in the collection.
@@ -200,7 +200,7 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (AnyPromise*)fetchMixListForced:(BOOL)forced
                          priority:(AVENetworkPriority*)priority
-                     networkToken:(AVENetworkToken* __nullable)networkToken;
+                     networkToken:(nullable AVENetworkToken*)networkToken;
 
 @end
 

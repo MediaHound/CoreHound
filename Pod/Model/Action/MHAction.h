@@ -23,8 +23,8 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @property (strong, atomic) MHActionMetadata* metadata;
 
-@property (strong, atomic) MHObject* __nullable primaryMention;
-@property (strong, atomic) MHUser* __nullable primaryOwner;
+@property (strong, nullable, atomic) MHObject* primaryMention;
+@property (strong, nullable, atomic) MHUser* primaryOwner;
 
 @end
 

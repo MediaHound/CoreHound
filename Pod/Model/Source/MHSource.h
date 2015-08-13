@@ -15,15 +15,13 @@ NS_ASSUME_NONNULL_BEGIN
 @interface MHSource : MHObject
 
 @property (strong, atomic) MHSourceMetadata* metadata;
-@property (strong, nonatomic) NSArray* __nullable subscriptions;
-@property (strong, nonatomic) NSArray* __nullable allMediums;
+@property (strong, nullable, nonatomic) NSArray* subscriptions;
+@property (strong, nullable, nonatomic) NSArray* allMediums;
 
 - (AnyPromise*)connect;
 - (AnyPromise*)connectWithPreference:(MHSourcePreference)preference;
-- (AnyPromise*)connectWithPreference:(MHSourcePreference)preference description:(NSString*)description;
 - (AnyPromise*)disconnect;
 - (AnyPromise*)updatePreference:(MHSourcePreference)preference;
-- (AnyPromise*)updateDescription:(NSString*)description;
 
 @property (nonatomic, readonly) BOOL isITunes;
 @property (nonatomic, readonly) BOOL isSpotify;
@@ -39,7 +37,7 @@ NS_ASSUME_NONNULL_BEGIN
 + (AnyPromise*)fetchAll;
 + (AnyPromise*)fetchAllForced:(BOOL)forced
                      priority:(AVENetworkPriority*)priority
-                 networkToken:(AVENetworkToken* __nullable)networkToken;
+                 networkToken:(nullable AVENetworkToken*)networkToken;
 
 @end
 

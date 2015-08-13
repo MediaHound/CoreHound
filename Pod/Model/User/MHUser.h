@@ -89,7 +89,7 @@ NS_ASSUME_NONNULL_BEGIN
  */
 + (AnyPromise*)fetchByUsername:(NSString*)username
                       priority:(AVENetworkPriority*)priority
-                  networkToken:(AVENetworkToken* __nullable)networkToken;
+                  networkToken:(nullable AVENetworkToken*)networkToken;
 
 /**
  * Fetches a set of suggested users that may be of interest to follow.
@@ -106,7 +106,7 @@ NS_ASSUME_NONNULL_BEGIN
  */
 + (AnyPromise*)fetchSuggestedUsersForced:(BOOL)forced
                                 priority:(AVENetworkPriority*)priority
-                            networkToken:(AVENetworkToken* __nullable)networkToken;
+                            networkToken:(nullable AVENetworkToken*)networkToken;
 
 /**
  * Fetches the interest feed for this user.
@@ -123,7 +123,7 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (AnyPromise*)fetchInterestFeedForced:(BOOL)forced
                               priority:(AVENetworkPriority*)priority
-                          networkToken:(AVENetworkToken* __nullable)networkToken;
+                          networkToken:(nullable AVENetworkToken*)networkToken;
 
 /**
  * Fetches all of the collections created by this user.
@@ -140,7 +140,7 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (AnyPromise*)fetchOwnedCollectionsForced:(BOOL)forced
                                   priority:(AVENetworkPriority*)priority
-                              networkToken:(AVENetworkToken* __nullable)networkToken;
+                              networkToken:(nullable AVENetworkToken*)networkToken;
 
 /**
  * Fetches all the things that this user is following.
@@ -157,7 +157,7 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (AnyPromise*)fetchFollowingForced:(BOOL)forced
                            priority:(AVENetworkPriority*)priority
-                       networkToken:(AVENetworkToken* __nullable)networkToken;
+                       networkToken:(nullable AVENetworkToken*)networkToken;
 
 /**
  * Fetches all the things that have been liked by this user.
@@ -174,7 +174,7 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (AnyPromise*)fetchLikingForced:(BOOL)forced
                         priority:(AVENetworkPriority*)priority
-                    networkToken:(AVENetworkToken* __nullable)networkToken;
+                    networkToken:(nullable AVENetworkToken*)networkToken;
 
 /**
  * Fetches the followers (MHUsers) who follow this user.
@@ -191,7 +191,7 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (AnyPromise*)fetchFollowersForced:(BOOL)forced
                            priority:(AVENetworkPriority*)priority
-                       networkToken:(AVENetworkToken* __nullable)networkToken;
+                       networkToken:(nullable AVENetworkToken*)networkToken;
 
 /**
  * Fetches suggested content for this user.
@@ -208,7 +208,7 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (AnyPromise*)fetchSuggestedForced:(BOOL)forced
                            priority:(AVENetworkPriority*)priority
-                       networkToken:(AVENetworkToken* __nullable)networkToken;
+                       networkToken:(nullable AVENetworkToken*)networkToken;
 
 @end
 

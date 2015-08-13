@@ -24,12 +24,12 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  * The width of the image, in pixels.
  */
-@property (strong, nonatomic) NSNumber* __nullable width;
+@property (strong, nullable, nonatomic) NSNumber* width;
 
 /**
  * The height of the image, in pixels.
  */
-@property (strong, nonatomic) NSNumber* __nullable height;
+@property (strong, nullable, nonatomic) NSNumber* height;
 
 @end
 

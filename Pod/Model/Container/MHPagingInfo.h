@@ -21,7 +21,7 @@ NS_ASSUME_NONNULL_BEGIN
  * that can be used to fetch the next page.
  * If this is the last page, then the `next` property is nil.
  */
-@property (strong, nonatomic) NSString* __nullable next;
+@property (strong, nullable, nonatomic) NSString* next;
 
 @end
 

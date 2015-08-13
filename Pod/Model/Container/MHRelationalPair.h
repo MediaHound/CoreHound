@@ -22,12 +22,12 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  * The object
  */
-@property (strong, nonatomic) MHObject* __nullable object;
+@property (strong, nullable, nonatomic) MHObject* object;
 
 /**
  * Context that relates `object` to the originating request.
  */
-@property (strong, nonatomic) MHContext* __nullable context;
+@property (strong, nullable, nonatomic) MHContext* context;
 
 @end
 

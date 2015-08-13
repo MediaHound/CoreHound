@@ -10,12 +10,6 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-// TODO: Deprecate this and get rid of it
-extern NSString* const MHUserSourceDescriptionNone;
-extern NSString* const MHUserSourceDescriptionStreaming;
-extern NSString* const MHUserSourceDescriptionDelivery;
-extern NSString* const MHUserSourceDescriptionBoth;
-
 
 /**
  * An MHSocial object contains all social metrics and user-specific 
@@ -26,65 +20,65 @@ extern NSString* const MHUserSourceDescriptionBoth;
 /**
  * The number of users that follow this MHObject.
  */
-@property (strong, nonatomic) NSNumber* __nullable followers;
+@property (strong, nullable, nonatomic) NSNumber* followers;
 
 /**
  * The number of users that like this MHObject.
  */
-@property (strong, nonatomic) NSNumber* __nullable likers;
+@property (strong, nullable, nonatomic) NSNumber* likers;
 
 /**
  * The number of users that have collected this MHObject.
  */
-@property (strong, nonatomic) NSNumber* __nullable collectors;
+@property (strong, nullable, nonatomic) NSNumber* collectors;
 
 /**
  * The number of users that have mentioned this MHObject in an MHAction.
  */
-@property (strong, nonatomic) NSNumber* __nullable mentioners;
+@property (strong, nullable, nonatomic) NSNumber* mentioners;
 
 /**
  * The number of users this MHUser is following.
  * @warning This property is only valid on an MHSocial object for an MHUser.
  */
-@property (strong, nonatomic) NSNumber* __nullable following;
+@property (strong, nullable, nonatomic) NSNumber* following;
 
 /**
  * The number of collections created by this MHUser.
  * @warning This property is only valid on an MHSocial object for an MHUser.
  */
-@property (strong, nonatomic) NSNumber* __nullable ownedCollections;
+@property (strong, nullable, nonatomic) NSNumber* ownedCollections;
 
 /**
  * Whether the currently logged in user likes this MHObject.
  * @warning This property is only valid if there is a currently logged in user.
  */
-@property (strong, nonatomic) NSNumber* __nullable userLikes;
+@property (strong, nullable, nonatomic) NSNumber* userLikes;
 
 /**
  * Whether the currently logged in user follows this MHObject.
  * @warning This property is only valid if there is a currently logged in user.
  */
-@property (strong, nonatomic) NSNumber* __nullable userFollows;
+@property (strong, nullable, nonatomic) NSNumber* userFollows;
 
 /**
  * The number of items in this MHCollection.
  * @warning This property is only valid on an MHSocial object for an MHCollection.
  */
-@property (strong, nonatomic) NSNumber* __nullable items;
+@property (strong, nullable, nonatomic) NSNumber* items;
 
 /**
  * Whether or not this MHObject is featured.
  * Featured objects have been deemed featured by an Admin.
  */
-@property (strong, nonatomic) NSNumber* __nullable isFeatured;
+@property (strong, nullable, nonatomic) NSNumber* isFeatured;
 
 /**
  * Whether or not the currently logged in user is connected to this MHSource.
  * @warning This property is only valid if there is a currently logged in user.
  * @warning This property is only valid on an MHSocial object for an MHSource.
  */
-@property (strong, nonatomic) NSNumber* __nullable userConnected;
+@property (strong, nullable, nonatomic) NSNumber* userConnected;
 
 /**
  * How preferred this MHSource is to the currently logged in user.
@@ -92,9 +86,6 @@ extern NSString* const MHUserSourceDescriptionBoth;
  * @warning This property is only valid on an MHSocial object for an MHSource.
  */
 @property (assign, nonatomic) MHSourcePreference userPreference;
-
-// TODO: Remove. Deprecated.
-@property (strong, nonatomic) NSString* userSourceDescription;
 
 /**
  * @param social The social object to compare to.

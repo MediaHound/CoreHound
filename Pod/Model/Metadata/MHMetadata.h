@@ -25,12 +25,12 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  * The dispalyable name of this object.
  */
-@property (strong, nonatomic) NSString* __nullable name;
+@property (strong, nullable, nonatomic) NSString* name;
 
 /**
  * A description of this object.
  */
-@property (strong, nonatomic) NSString* __nullable objectDescription;
+@property (strong, nullable, nonatomic) NSString* objectDescription;
 
 /**
  * The date this object was created. 
@@ -38,7 +38,7 @@ NS_ASSUME_NONNULL_BEGIN
  * when the social action occured.
  * For dates related to Media content, consider the `releaseDate` property.
  */
-@property (strong, nonatomic) NSDate* __nullable createdDate;
+@property (strong, nullable, nonatomic) NSDate* createdDate;
 
 @end
 
@@ -51,7 +51,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  * When the piece of media was publicly released.
  */
-@property (strong, nonatomic) NSDate* __nullable releaseDate;
+@property (strong, nullable, nonatomic) NSDate* releaseDate;
 
 @end
 
@@ -71,7 +71,7 @@ NS_ASSUME_NONNULL_BEGIN
  * The user's email address.
  * The email address is only populated for the currently logged-in user.
  */
-@property (nonatomic, strong) NSString* __nullable email;
+@property (nonatomic, nullable, strong) NSString* email;
 
 @end
 
@@ -85,31 +85,31 @@ NS_ASSUME_NONNULL_BEGIN
  * An image representation at the original resolution.
  * Do not rely on the resolution for all originals to be the same or be fixed.
  */
-@property (strong, nonatomic) MHImageData* __nullable original;
+@property (strong, nullable, nonatomic) MHImageData* original;
 
 /**
  * An image representation at thumbnail resolution.
  * Do not rely on the resolution for all thumbnails to be the same or be fixed.
  */
-@property (strong, nonatomic) MHImageData* __nullable thumbnail;
+@property (strong, nullable, nonatomic) MHImageData* thumbnail;
 
 /**
  * An image representation at small resolution.
  * Do not rely on the resolution for all smalls to be the same or be fixed.
  */
-@property (strong, nonatomic) MHImageData* small;
+@property (strong, nullable, nonatomic) MHImageData* small;
 
 /**
  * An image representation at medium resolution.
  * Do not rely on the resolution for all mediums to be the same or be fixed.
  */
-@property (strong, nonatomic) MHImageData* __nullable medium;
+@property (strong, nullable, nonatomic) MHImageData* medium;
 
 /**
  * An image representation at large resolution.
  * Do not rely on the resolution for all larges to be the same or be fixed.
  */
-@property (strong, nonatomic) MHImageData* __nullable large;
+@property (strong, nullable, nonatomic) MHImageData* large;
 
 /**
  * A boolean indicating whether this is a default image or not.
@@ -118,13 +118,13 @@ NS_ASSUME_NONNULL_BEGIN
  * If you want to have custom default images, then check for this property
  * and load your own image instead.
  */
-@property (strong, nonatomic) NSNumber* __nullable isDefault;
+@property (strong, nullable, nonatomic) NSNumber* isDefault;
 
 /**
  * The average color of the image.
  * NOTE: Currently unavailable.
  */
-@property (strong, nonatomic) UIColor* __nullable averageColor;
+@property (strong, nullable, nonatomic) UIColor* averageColor;
 
 @end
 
@@ -138,7 +138,7 @@ NS_ASSUME_NONNULL_BEGIN
  * The user-created message for an action.
  * Note: This property will only exist for `MHPost` objects.
  */
-@property (strong, nonatomic) NSString* __nullable message;
+@property (strong, nullable, nonatomic) NSString* message;
 
 @end
 

@@ -49,9 +49,13 @@ NSString* const MHSourceFormatTypeUnknownKey = @"unknown";
 - (NSString*)displayPrice
 {
     // TODO: Handle other kinds of currency
-    NSNumberFormatter* numberFormatter = [[NSNumberFormatter alloc] init];
-    numberFormatter.numberStyle = NSNumberFormatterCurrencyStyle;
-    return [NSString stringWithFormat:@"%@", [numberFormatter stringFromNumber:self.price]];
+    static NSNumberFormatter* s_numberFormatter = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        s_numberFormatter = [[NSNumberFormatter alloc] init];
+        s_numberFormatter.numberStyle = NSNumberFormatterCurrencyStyle;
+    });
+    return [NSString stringWithFormat:@"%@", [s_numberFormatter stringFromNumber:self.price]];
 }
 
 @end

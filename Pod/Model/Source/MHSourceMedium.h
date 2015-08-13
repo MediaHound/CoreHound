@@ -25,9 +25,9 @@ extern NSString* const MHSourceMediumTypeAttend;
 @property (strong, nonatomic) NSString* type;
 
 @property (weak, nonatomic, readonly) MHSource* source;
-@property (weak, nonatomic, readonly) MHObject* __nullable content;
+@property (weak, nullable, nonatomic, readonly) MHObject* content;
 
-- (MHSourceMethod* __nullable)methodForType:(NSString*)type;
+- (nullable MHSourceMethod*)methodForType:(NSString*)type;
 
 @property (strong, nonatomic, readonly) NSArray* allMethods;
 

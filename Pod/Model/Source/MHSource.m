@@ -79,22 +79,6 @@ static NSString* const kAllRootSubendpoint = @"all";
        }];
 }
 
-- (AnyPromise*)connectWithPreference:(MHSourcePreference)preference description:(NSString*)description
-{
-    return [self takeAction:@"connect"
-                 parameters:@{
-                              MHObjectActionParameterPreferenceKey: NSStringFromMHSourcePreference(preference),
-                              @"description": description
-                              }
-       predictedSocialBlock:^MHSocial* (MHSocial* oldSocial, NSDictionary* parameters) {
-           MHSocial* newSocial = oldSocial.copy;
-           newSocial.userConnected = @YES;
-           newSocial.userPreference = preference;
-           newSocial.userSourceDescription = description;
-           return newSocial;
-       }];
-}
-
 - (AnyPromise*)disconnect
 {
     return [self takeAction:@"disconnect"
@@ -115,19 +99,6 @@ static NSString* const kAllRootSubendpoint = @"all";
        predictedSocialBlock:^MHSocial* (MHSocial* oldSocial, NSDictionary* parameters) {
            MHSocial* newSocial = oldSocial.copy;
            newSocial.userPreference = preference;
-           return newSocial;
-       }];
-}
-
-- (AnyPromise*)updateDescription:(NSString*)description;
-{
-    return [self takeAction:@"update"
-                 parameters:@{
-                              @"description": description
-                              }
-       predictedSocialBlock:^MHSocial* (MHSocial* oldSocial, NSDictionary* parameters) {
-           MHSocial* newSocial = oldSocial.copy;
-           newSocial.userSourceDescription = description;
            return newSocial;
        }];
 }

@@ -21,7 +21,7 @@ PODS:
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
   - AtSugar (0.1.1)
-  - Avenue (0.2.1):
+  - Avenue (0.2.2):
     - AFNetworking
     - KVOController
     - PromiseKit/CorePromise (~> 2.0)
@@ -65,7 +65,7 @@ CHECKOUT OPTIONS:
 SPEC CHECKSUMS:
   AFNetworking: 05edc0ac4c4c8cf57bcf4b84be5b0744b6d8e71e
   AtSugar: 25ddf068f42f2e35c6cc2ef0275e87d8395ac332
-  Avenue: d7624a212a3555c5f8a2cfed7989490130708e54
+  Avenue: 1daac39f83120c060086e1dc5ec977ebe4d1d81a
   AvenueFetcher: 35dc54435c5f060458bdd738bd5eda6694f98ea6
   CoreHound: 099a66cacfb87ed7bc81585764b0f752e1eb695e
   Expecta: 54e8a3530add08f4f0208c111355eda7cde74a53

@@ -32,7 +32,7 @@ extern NSString* const MHLoginSessionUserDidLogoutNotification;
 /**
  * The user that is logged in for this session.
  */
-@property (strong, nonatomic, readonly) MHUser* __nullable user;
+@property (strong, nullable, nonatomic, readonly) MHUser* user;
 
 /**
  * Creates a login session by logging a user in with credentials store in the Keychain.

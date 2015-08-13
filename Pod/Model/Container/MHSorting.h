@@ -22,12 +22,12 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  * The importance of this MHObject compared to other MHObjects in the result.
  */
-@property (strong, nonatomic) NSNumber* __nullable importance;
+@property (strong, nullable, nonatomic) NSNumber* importance;
 
 /**
  * The raw positional order of this MHObject compared to other MHObjects in the result.
  */
-@property (strong, nonatomic) NSNumber* __nullable position;
+@property (strong, nullable, nonatomic) NSNumber*  position;
 
 @end
 

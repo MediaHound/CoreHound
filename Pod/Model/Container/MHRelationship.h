@@ -21,19 +21,19 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  * What type of contribution. E.g. "Producer", "Director", "Actor".
  */
-@property (strong, nonatomic) NSString* __nullable contribution;
+@property (strong, nullable, nonatomic) NSString* contribution;
 
 /**
  * If the `contribution` was "Actor", then the `role` may contain the name of the
  * character they played. E.g. "Security Guard", "Young Anakin Skywalker".
  */
-@property (strong, nonatomic) NSString* __nullable role;
+@property (strong, nullable, nonatomic) NSString* role;
 
 /**
  * If the `contribution` was "Actor", then the `object` may contain the fictional
  * contributor they played. E.g. the Batman fictional contributor.
  */
-@property (strong, nonatomic) MHObject* __nullable object;
+@property (strong, nullable, nonatomic) MHObject* object;
 
 @end
 

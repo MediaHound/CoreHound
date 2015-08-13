@@ -25,9 +25,9 @@ extern NSString* const MHSourceMethodTypeBroker;
 
 @property (weak, nonatomic, readonly) MHSourceMedium* medium;
 
-@property (strong, nonatomic, readonly) NSString* __nullable displayName;
+@property (strong, nullable, nonatomic, readonly) NSString* displayName;
 
-- (MHSourceFormat* __nullable)formatForType:(NSString*)type;
+- (nullable MHSourceFormat*)formatForType:(NSString*)type;
 
 @property (strong, nonatomic, readonly) MHSourceFormat* defaultFormat;
 

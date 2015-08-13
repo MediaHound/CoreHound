@@ -29,44 +29,39 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  * Sorting information on how this MHObject relates.
  */
-@property (strong, nonatomic) MHSorting* __nullable sorting;
+@property (strong, nullable, nonatomic) MHSorting* sorting;
 
 /**
  * An array of MHRelationships that express how a contributor contributed to content.
  */
-@property (strong, nonatomic) NSArray* __nullable relationships;
+@property (strong, nullable, nonatomic) NSArray* relationships;
 
 /**
  * Whether this MHSource is consumable.
  */
-@property (strong, nonatomic) NSNumber* __nullable consumable;
+@property (strong, nullable, nonatomic) NSNumber* consumable;
 
 /** 
  * Get a medium for this MHSource of a specific type.
  * @param type The type of medium to get.
  * @return The source medium or nil if no medium for the given type is found.
  */
-- (MHSourceMedium* __nullable)mediumForType:(NSString*)type;
+- (nullable MHSourceMedium*)mediumForType:(NSString*)type;
 
 /**
  * All mediums for this MHSource.
  */
-@property (strong, nonatomic, readonly) NSArray* __nullable allMediums;
+@property (strong, nullable, nonatomic, readonly) NSArray* allMediums;
 
 /**
  * The search term that was used to return this MHObject from search.
  */
-@property (strong, nonatomic) NSString* __nullable searchTerm;
+@property (strong, nullable, nonatomic) NSString* searchTerm;
 
 /**
  * The search scope that was used to return this MHObject from search.
  */
 @property (assign, nonatomic) MHSearchScope searchScope;
-
-//
-// TODO: Should all contexts have a content pointer back to the object?
-//       if so, then we should remove `content` from MHSourceMedium
-//@property (strong, nonatomic, readonly) MHMedia* content;
 
 @end
 

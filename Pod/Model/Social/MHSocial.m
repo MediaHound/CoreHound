@@ -10,18 +10,10 @@
 #import "MHSourcePreference+Internal.h"
 
 
-// TODO: Deprecate this and get rid of it
-NSString* const MHUserSourceDescriptionNone = @"none";
-NSString* const MHUserSourceDescriptionStreaming = @"streaming";
-NSString* const MHUserSourceDescriptionDelivery = @"delivery";
-NSString* const MHUserSourceDescriptionBoth = @"both";
-
-
 @implementation MHSocial
 
 + (BOOL)propertyIsOptional:(NSString*)propertyName
 {
-    // TODO: Consider this more
     return YES;
 }
 
@@ -60,7 +52,6 @@ NSString* const MHUserSourceDescriptionBoth = @"both";
     && ((!self.items && !social.items) || ([self.items isEqual:social.items]))
     && ((!self.isFeatured && !social.isFeatured) || ([self.isFeatured isEqual:social.isFeatured]))
     && ((!self.userConnected && !social.userConnected) || ([self.userConnected isEqual:social.userConnected]))
-    && ((!self.userSourceDescription && !social.userSourceDescription) || ([self.userSourceDescription isEqual:social.userSourceDescription]))
     && ((self.userPreference == social.userPreference));
 }
 
@@ -77,7 +68,6 @@ NSString* const MHUserSourceDescriptionBoth = @"both";
         ^ self.items.hash
         ^ self.isFeatured.hash
         ^ self.userConnected.hash
-        ^ self.userSourceDescription.hash
         ^ self.userPreference;
 }
 
