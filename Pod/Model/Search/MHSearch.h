@@ -46,7 +46,7 @@ NS_ASSUME_NONNULL_BEGIN
  */
 + (AnyPromise*)fetchResultsForSearchTerm:(NSString*)search
                                    scope:(MHSearchScope)scope
-                                priority:(AVENetworkPriority*)priority
+                                priority:(nullable AVENetworkPriority*)priority
                             networkToken:(nullable AVENetworkToken*)networkToken;
 
 @end

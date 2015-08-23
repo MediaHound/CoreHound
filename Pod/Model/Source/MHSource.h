@@ -36,7 +36,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (AnyPromise*)fetchAll;
 + (AnyPromise*)fetchAllForced:(BOOL)forced
-                     priority:(AVENetworkPriority*)priority
+                     priority:(nullable AVENetworkPriority*)priority
                  networkToken:(nullable AVENetworkToken*)networkToken;
 
 @end

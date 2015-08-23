@@ -31,7 +31,7 @@
 + (AnyPromise*)fetchByName:(NSString*)name
 {
     return [self fetchByName:name
-                    priority:[AVENetworkPriority priorityWithLevel:AVENetworkPriorityLevelHigh]
+                    priority:nil
                 networkToken:nil];
 }
 

@@ -300,7 +300,7 @@ static NSString* const kSocialSubendpoint = @"social";
 + (AnyPromise*)fetchByMhid:(NSString*)mhid
 {
     return [self fetchByMhid:mhid
-                    priority:[AVENetworkPriority priorityWithLevel:AVENetworkPriorityLevelHigh]
+                    priority:nil
                 networkToken:nil];
 }
 
@@ -334,7 +334,7 @@ static NSString* const kSocialSubendpoint = @"social";
 - (AnyPromise*)fetchSocial
 {
     return [self fetchSocialForced:NO
-                          priority:[AVENetworkPriority priorityWithLevel:AVENetworkPriorityLevelHigh]
+                          priority:nil
                       networkToken:nil];
 }
 
@@ -367,7 +367,7 @@ static NSString* const kSocialSubendpoint = @"social";
 - (AnyPromise*)fetchPrimaryImage
 {
     return [self fetchPrimaryImageForced:NO
-                                priority:[AVENetworkPriority priorityWithLevel:AVENetworkPriorityLevelHigh]
+                                priority:nil
                             networkToken:nil];
 }
 
@@ -384,7 +384,7 @@ static NSString* const kSocialSubendpoint = @"social";
 - (AnyPromise*)fetchSecondaryImage
 {
     return [self fetchSecondaryImageForced:NO
-                                  priority:[AVENetworkPriority priorityWithLevel:AVENetworkPriorityLevelHigh]
+                                  priority:nil
                               networkToken:nil];
 }
 
@@ -401,7 +401,7 @@ static NSString* const kSocialSubendpoint = @"social";
 - (AnyPromise*)fetchFeed
 {
     return [self fetchFeedForced:NO
-                        priority:[AVENetworkPriority priorityWithLevel:AVENetworkPriorityLevelHigh]
+                        priority:nil
                     networkToken:nil];
 }
 
@@ -419,7 +419,7 @@ static NSString* const kSocialSubendpoint = @"social";
 - (AnyPromise*)fetchCollections
 {
     return [self fetchCollectionsForced:NO
-                               priority:[AVENetworkPriority priorityWithLevel:AVENetworkPriorityLevelHigh]
+                               priority:nil
                            networkToken:nil];
 }
 

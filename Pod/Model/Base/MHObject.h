@@ -130,7 +130,7 @@ NS_ASSUME_NONNULL_BEGIN
  * @return A promise which resolves with the MHObject.
  */
 + (AnyPromise*)fetchByMhid:(NSString*)mhid
-                  priority:(AVENetworkPriority*)priority
+                  priority:(nullable AVENetworkPriority*)priority
               networkToken:(nullable AVENetworkToken*)networkToken;
 
 /**
@@ -151,7 +151,7 @@ NS_ASSUME_NONNULL_BEGIN
  * @return A promise whcih resolves with an MHSocial.
  */
 - (AnyPromise*)fetchSocialForced:(BOOL)forced
-                        priority:(AVENetworkPriority*)priority
+                        priority:(nullable AVENetworkPriority*)priority
                     networkToken:(nullable AVENetworkToken*)networkToken;
 
 /**
@@ -172,7 +172,7 @@ NS_ASSUME_NONNULL_BEGIN
  * @return A promise which resolves with an MHImage.
  */
 - (AnyPromise*)fetchPrimaryImageForced:(BOOL)forced
-                              priority:(AVENetworkPriority*)priority
+                              priority:(nullable AVENetworkPriority*)priority
                           networkToken:(nullable AVENetworkToken*)networkToken;
 
 /**
@@ -193,7 +193,7 @@ NS_ASSUME_NONNULL_BEGIN
  * @return A promise which resolves with an MHImage.
  */
 - (AnyPromise*)fetchSecondaryImageForced:(BOOL)forced
-                                priority:(AVENetworkPriority*)priority
+                                priority:(nullable AVENetworkPriority*)priority
                             networkToken:(nullable AVENetworkToken*)networkToken;
 
 /**
@@ -210,7 +210,7 @@ NS_ASSUME_NONNULL_BEGIN
  * @return A promise which resolves with an MHPagedResponse.
  */
 - (AnyPromise*)fetchFeedForced:(BOOL)forced
-                      priority:(AVENetworkPriority*)priority
+                      priority:(nullable AVENetworkPriority*)priority
                   networkToken:(nullable AVENetworkToken*)networkToken;
 
 /**
@@ -227,7 +227,7 @@ NS_ASSUME_NONNULL_BEGIN
  * @return A promise which resolves with an MHPagedResponse.
  */
 - (AnyPromise*)fetchCollectionsForced:(BOOL)forced
-                             priority:(AVENetworkPriority*)priority
+                             priority:(nullable AVENetworkPriority*)priority
                          networkToken:(nullable AVENetworkToken*)networkToken;
 
 @end

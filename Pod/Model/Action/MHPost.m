@@ -37,14 +37,13 @@
                                                     @"mentions": mentionedMhids,
                                                     @"primaryMention": primaryMention.metadata.mhid
                                                     }
-                                          priority:[AVENetworkPriority priorityWithLevel:AVENetworkPriorityLevelHigh
-                                                                            postponeable:NO]
+                                          priority:nil
                                       networkToken:nil
                                            builder:[MHFetcher sharedFetcher].builder].thenInBackground(^(id result) {
         // All mentioned content should update social data becaise it's mentioned count has changed
         for (MHObject* object in mentions) {
             [object fetchSocialForced:YES
-                             priority:[AVENetworkPriority priorityWithLevel:AVENetworkPriorityLevelHigh]
+                             priority:nil
                          networkToken:nil];
         }
         return result;

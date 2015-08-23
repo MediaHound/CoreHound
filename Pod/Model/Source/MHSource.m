@@ -146,7 +146,7 @@ static NSString* const kAllRootSubendpoint = @"all";
 + (AnyPromise*)fetchAll
 {
     return [self fetchAllForced:NO
-                       priority:[AVENetworkPriority priorityWithLevel:AVENetworkPriorityLevelHigh]
+                       priority:nil
                    networkToken:nil];
 }
 

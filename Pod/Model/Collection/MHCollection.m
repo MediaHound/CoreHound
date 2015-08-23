@@ -76,8 +76,7 @@ static NSString* const kUpdateSubendpoint = @"update";
                                        parameters:@{
                                                     @"content": mhids
                                                     }
-                                         priority:[AVENetworkPriority priorityWithLevel:AVENetworkPriorityLevelHigh
-                                                                           postponeable:NO]
+                                         priority:nil
                                      networkToken:nil
                                           builder:[MHFetcher sharedFetcher].builder].thenInBackground(^(id responseObject) {
         [self invalidateContent];
@@ -85,7 +84,7 @@ static NSString* const kUpdateSubendpoint = @"update";
         
         for (MHObject* content in contents) {
             [content fetchSocialForced:YES
-                              priority:[AVENetworkPriority priorityWithLevel:AVENetworkPriorityLevelHigh]
+                              priority:nil
                           networkToken:nil];
             [content invalidateCollections];
         }
@@ -152,7 +151,7 @@ static NSString* const kUpdateSubendpoint = @"update";
         MHUser* currentUser = [MHLoginSession currentSession].user;
         
         [currentUser fetchSocialForced:YES
-                              priority:[AVENetworkPriority priorityWithLevel:AVENetworkPriorityLevelHigh]
+                              priority:nil
                           networkToken:nil];
         
         [currentUser invalidateOwnedCollections];
@@ -169,7 +168,7 @@ static NSString* const kUpdateSubendpoint = @"update";
 - (AnyPromise*)fetchPrimaryOwner
 {
     return [self fetchPrimaryOwnerForced:NO
-                                priority:[AVENetworkPriority priorityWithLevel:AVENetworkPriorityLevelHigh]
+                                priority:nil
                             networkToken:nil];
 }
 
@@ -186,7 +185,7 @@ static NSString* const kUpdateSubendpoint = @"update";
 - (AnyPromise*)fetchFirstContentImage
 {
     return [self fetchFirstContentImageForced:NO
-                                     priority:[AVENetworkPriority priorityWithLevel:AVENetworkPriorityLevelHigh]
+                                     priority:nil
                                  networkToken:nil];
 }
 
@@ -203,7 +202,7 @@ static NSString* const kUpdateSubendpoint = @"update";
 - (AnyPromise*)fetchOwners
 {
     return [self fetchOwnersForced:NO
-                          priority:[AVENetworkPriority priorityWithLevel:AVENetworkPriorityLevelHigh]
+                          priority:nil
                       networkToken:nil];
 }
 
@@ -221,7 +220,7 @@ static NSString* const kUpdateSubendpoint = @"update";
 - (AnyPromise*)fetchContent
 {
     return [self fetchContentForced:NO
-                           priority:[AVENetworkPriority priorityWithLevel:AVENetworkPriorityLevelHigh]
+                           priority:nil
                        networkToken:nil];
 }
 
@@ -239,7 +238,7 @@ static NSString* const kUpdateSubendpoint = @"update";
 - (AnyPromise*)fetchMixList
 {
     return [self fetchMixListForced:NO
-                           priority:[AVENetworkPriority priorityWithLevel:AVENetworkPriorityLevelHigh]
+                           priority:nil
                        networkToken:nil];
 }
 

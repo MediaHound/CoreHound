@@ -39,7 +39,7 @@
 - (AnyPromise*)fetchMedia
 {
     return [self fetchMediaForced:NO
-                         priority:[AVENetworkPriority priorityWithLevel:AVENetworkPriorityLevelHigh]
+                         priority:nil
                      networkToken:nil];
 }
 

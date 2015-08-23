@@ -68,7 +68,7 @@ NS_ASSUME_NONNULL_BEGIN
  * @return A promise which resolves with an MHRelationalPair.
  */
 - (AnyPromise*)fetchPrimaryGroupForced:(BOOL)forced
-                              priority:(AVENetworkPriority*)priority
+                              priority:(nullable AVENetworkPriority*)priority
                           networkToken:(nullable AVENetworkToken*)networkToken;
 
 /**
@@ -89,7 +89,7 @@ NS_ASSUME_NONNULL_BEGIN
  * @return A promise which resolves with an NSArray of MHRelationalPairs.
  */
 - (AnyPromise*)fetchKeyContributorsForced:(BOOL)forced
-                                 priority:(AVENetworkPriority*)priority
+                                 priority:(nullable AVENetworkPriority*)priority
                              networkToken:(nullable AVENetworkToken*)networkToken;
 
 /**
@@ -106,7 +106,7 @@ NS_ASSUME_NONNULL_BEGIN
  * @return A promise which resolves with an MHPagedResponse.
  */
 - (AnyPromise*)fetchSourcesForced:(BOOL)forced
-                         priority:(AVENetworkPriority*)priority
+                         priority:(nullable AVENetworkPriority*)priority
                      networkToken:(nullable AVENetworkToken*)networkToken;
 
 /**
@@ -123,7 +123,7 @@ NS_ASSUME_NONNULL_BEGIN
  * @return A promise which resolves with an MHPagedResponse.
  */
 - (AnyPromise*)fetchRelatedForced:(BOOL)forced
-                         priority:(AVENetworkPriority*)priority
+                         priority:(nullable AVENetworkPriority*)priority
                      networkToken:(nullable AVENetworkToken*)networkToken;
 
 /**
@@ -142,7 +142,7 @@ NS_ASSUME_NONNULL_BEGIN
  * @return A promise which resolves with an MHPagedResponse.
  */
 - (AnyPromise*)fetchContentForced:(BOOL)forced
-                         priority:(AVENetworkPriority*)priority
+                         priority:(nullable AVENetworkPriority*)priority
                      networkToken:(nullable AVENetworkToken*)networkToken;
 
 /**
@@ -159,7 +159,7 @@ NS_ASSUME_NONNULL_BEGIN
  * @return A promise which resolves with an MHPagedResponse.
  */
 - (AnyPromise*)fetchContributorsForced:(BOOL)forced
-                              priority:(AVENetworkPriority*)priority
+                              priority:(nullable AVENetworkPriority*)priority
                           networkToken:(nullable AVENetworkToken*)networkToken;
 
 /**
@@ -179,7 +179,7 @@ NS_ASSUME_NONNULL_BEGIN
  */
 + (AnyPromise*)fetchRelatedTo:(NSArray*)medias
                        forced:(BOOL)forced
-                     priority:(AVENetworkPriority*)priority
+                     priority:(nullable AVENetworkPriority*)priority
                  networkToken:(nullable AVENetworkToken*)networkToken;
 
 @end

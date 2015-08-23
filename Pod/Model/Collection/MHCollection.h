@@ -125,7 +125,7 @@ NS_ASSUME_NONNULL_BEGIN
  * @return A promise which resolves with an MHUser.
  */
 - (AnyPromise*)fetchPrimaryOwnerForced:(BOOL)forced
-                              priority:(AVENetworkPriority*)priority
+                              priority:(nullable AVENetworkPriority*)priority
                           networkToken:(nullable AVENetworkToken*)networkToken;
 
 /**
@@ -148,7 +148,7 @@ NS_ASSUME_NONNULL_BEGIN
  * @return A promise which resolves with an MHImage.
  */
 - (AnyPromise*)fetchFirstContentImageForced:(BOOL)forced
-                                   priority:(AVENetworkPriority*)priority
+                                   priority:(nullable AVENetworkPriority*)priority
                                networkToken:(nullable AVENetworkToken*)networkToken;
 
 /**
@@ -165,7 +165,7 @@ NS_ASSUME_NONNULL_BEGIN
  * @return A promise which resolves with an MHPagedResponse.
  */
 - (AnyPromise*)fetchOwnersForced:(BOOL)forced
-                        priority:(AVENetworkPriority*)priority
+                        priority:(nullable AVENetworkPriority*)priority
                     networkToken:(nullable AVENetworkToken*)networkToken;
 
 /**
@@ -182,7 +182,7 @@ NS_ASSUME_NONNULL_BEGIN
  * @return A promise which resolves with an MHPagedResponse.
  */
 - (AnyPromise*)fetchContentForced:(BOOL)forced
-                         priority:(AVENetworkPriority*)priority
+                         priority:(nullable AVENetworkPriority*)priority
                      networkToken:(nullable AVENetworkToken*)networkToken;
 
 /**
@@ -199,7 +199,7 @@ NS_ASSUME_NONNULL_BEGIN
  * @return A promise which resolves with an MHPagedResponse.
  */
 - (AnyPromise*)fetchMixListForced:(BOOL)forced
-                         priority:(AVENetworkPriority*)priority
+                         priority:(nullable AVENetworkPriority*)priority
                      networkToken:(nullable AVENetworkToken*)networkToken;
 
 @end

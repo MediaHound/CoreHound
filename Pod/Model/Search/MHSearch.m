@@ -40,7 +40,7 @@ NSString* NSStringByAddingExtendedPercentEscapes(NSString* str)
 {
     return [self fetchResultsForSearchTerm:search
                                      scope:scope
-                                  priority:[AVENetworkPriority priorityWithLevel:AVENetworkPriorityLevelHigh]
+                                  priority:nil
                               networkToken:nil];
 }
 

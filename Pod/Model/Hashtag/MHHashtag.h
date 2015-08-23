@@ -42,7 +42,7 @@ NS_ASSUME_NONNULL_BEGIN
  * @return A promise which resolves with the MHHashtag.
  */
 + (AnyPromise*)fetchByName:(NSString*)name
-                  priority:(AVENetworkPriority*)priority
+                  priority:(nullable AVENetworkPriority*)priority
               networkToken:(nullable AVENetworkToken*)networkToken;
 
 @end

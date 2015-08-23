@@ -104,8 +104,7 @@ static NSString* const kForgotPasswordRootSubendpoint = @"forgotpassword";
                                                      @"oldPassword": currentPassword,
                                                      @"newPassword": newPassword
                                                      }
-                                          priority:[AVENetworkPriority priorityWithLevel:AVENetworkPriorityLevelHigh
-                                                                            postponeable:NO]
+                                          priority:nil
                                       networkToken:nil
                                            builder:[MHFetcher sharedFetcher].builder];
 }
@@ -170,8 +169,7 @@ static NSString* const kForgotPasswordRootSubendpoint = @"forgotpassword";
                                  };
     return [[AVENetworkManager sharedManager] POST:[self rootSubendpoint:kCreateRootSubendpoint]
                                         parameters:parameters
-                                          priority:[AVENetworkPriority priorityWithLevel:AVENetworkPriorityLevelHigh
-                                                                            postponeable:NO]
+                                          priority:nil
                                       networkToken:nil
                                            builder:[MHFetcher sharedFetcher].builder];
 }
@@ -184,7 +182,7 @@ static NSString* const kForgotPasswordRootSubendpoint = @"forgotpassword";
 + (AnyPromise*)fetchByUsername:(NSString*)username
 {
     return [self fetchByUsername:username
-                        priority:[AVENetworkPriority priorityWithLevel:AVENetworkPriorityLevelHigh]
+                        priority:nil
                     networkToken:nil];
 }
 
@@ -205,7 +203,7 @@ static NSString* const kForgotPasswordRootSubendpoint = @"forgotpassword";
 - (AnyPromise*)fetchInterestFeed
 {
     return [self fetchInterestFeedForced:NO
-                                priority:[AVENetworkPriority priorityWithLevel:AVENetworkPriorityLevelHigh]
+                                priority:nil
                             networkToken:nil];
 }
 
@@ -223,7 +221,7 @@ static NSString* const kForgotPasswordRootSubendpoint = @"forgotpassword";
 - (AnyPromise*)fetchOwnedCollections
 {
     return [self fetchOwnedCollectionsForced:NO
-                                    priority:[AVENetworkPriority priorityWithLevel:AVENetworkPriorityLevelHigh]
+                                    priority:nil
                                 networkToken:nil];
 }
 
@@ -241,7 +239,7 @@ static NSString* const kForgotPasswordRootSubendpoint = @"forgotpassword";
 - (AnyPromise*)fetchFollowing
 {
     return [self fetchFollowingForced:NO
-                             priority:[AVENetworkPriority priorityWithLevel:AVENetworkPriorityLevelHigh]
+                             priority:nil
                          networkToken:nil];
 }
 
@@ -259,7 +257,7 @@ static NSString* const kForgotPasswordRootSubendpoint = @"forgotpassword";
 - (AnyPromise*)fetchLiking
 {
     return [self fetchLikingForced:NO
-                          priority:[AVENetworkPriority priorityWithLevel:AVENetworkPriorityLevelHigh]
+                          priority:nil
                       networkToken:nil];
 }
 
@@ -277,7 +275,7 @@ static NSString* const kForgotPasswordRootSubendpoint = @"forgotpassword";
 - (AnyPromise*)fetchFollowers
 {
     return [self fetchFollowersForced:NO
-                             priority:[AVENetworkPriority priorityWithLevel:AVENetworkPriorityLevelHigh]
+                             priority:nil
                          networkToken:nil];
 }
 
@@ -295,7 +293,7 @@ static NSString* const kForgotPasswordRootSubendpoint = @"forgotpassword";
 + (AnyPromise*)fetchSuggestedUsers
 {
     return [self fetchSuggestedUsersForced:NO
-                                  priority:[AVENetworkPriority priorityWithLevel:AVENetworkPriorityLevelHigh]
+                                  priority:nil
                               networkToken:nil];
 }
 
@@ -314,7 +312,7 @@ static NSString* const kForgotPasswordRootSubendpoint = @"forgotpassword";
 - (AnyPromise*)fetchSuggested
 {
     return [self fetchSuggestedForced:NO
-                             priority:[AVENetworkPriority priorityWithLevel:AVENetworkPriorityLevelHigh]
+                             priority:nil
                          networkToken:nil];
 }
 
@@ -340,8 +338,7 @@ static NSString* const kForgotPasswordRootSubendpoint = @"forgotpassword";
                                         parameters:@{
                                                      @"email": email
                                                      }
-                                          priority:[AVENetworkPriority priorityWithLevel:AVENetworkPriorityLevelHigh
-                                                                            postponeable:NO]
+                                          priority:nil
                                       networkToken:nil
                                            builder:[MHFetcher sharedFetcher].builder];
 }
@@ -352,8 +349,7 @@ static NSString* const kForgotPasswordRootSubendpoint = @"forgotpassword";
                                         parameters:@{
                                                      @"email": email
                                                      }
-                                          priority:[AVENetworkPriority priorityWithLevel:AVENetworkPriorityLevelHigh
-                                                                            postponeable:NO]
+                                          priority:nil
                                       networkToken:nil
                                            builder:[MHFetcher sharedFetcher].builder];
 }
@@ -364,8 +360,7 @@ static NSString* const kForgotPasswordRootSubendpoint = @"forgotpassword";
                                         parameters:@{
                                                      @"username": username
                                                      }
-                                          priority:[AVENetworkPriority priorityWithLevel:AVENetworkPriorityLevelHigh
-                                                                            postponeable:NO]
+                                          priority:nil
                                       networkToken:nil
                                            builder:[MHFetcher sharedFetcher].builder];
 }

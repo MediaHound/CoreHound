@@ -88,7 +88,7 @@ NS_ASSUME_NONNULL_BEGIN
  * If no user with this username exists, the promise propogates an error.
  */
 + (AnyPromise*)fetchByUsername:(NSString*)username
-                      priority:(AVENetworkPriority*)priority
+                      priority:(nullable AVENetworkPriority*)priority
                   networkToken:(nullable AVENetworkToken*)networkToken;
 
 /**
@@ -105,7 +105,7 @@ NS_ASSUME_NONNULL_BEGIN
  * @return A promise which resolves with an MHPagedResponse.
  */
 + (AnyPromise*)fetchSuggestedUsersForced:(BOOL)forced
-                                priority:(AVENetworkPriority*)priority
+                                priority:(nullable AVENetworkPriority*)priority
                             networkToken:(nullable AVENetworkToken*)networkToken;
 
 /**
@@ -122,7 +122,7 @@ NS_ASSUME_NONNULL_BEGIN
  * @return A promise which resolves with an MHPagedResponse.
  */
 - (AnyPromise*)fetchInterestFeedForced:(BOOL)forced
-                              priority:(AVENetworkPriority*)priority
+                              priority:(nullable AVENetworkPriority*)priority
                           networkToken:(nullable AVENetworkToken*)networkToken;
 
 /**
@@ -139,7 +139,7 @@ NS_ASSUME_NONNULL_BEGIN
  * @return A promise which resolves with an MHPagedResponse.
  */
 - (AnyPromise*)fetchOwnedCollectionsForced:(BOOL)forced
-                                  priority:(AVENetworkPriority*)priority
+                                  priority:(nullable AVENetworkPriority*)priority
                               networkToken:(nullable AVENetworkToken*)networkToken;
 
 /**
@@ -156,7 +156,7 @@ NS_ASSUME_NONNULL_BEGIN
  * @return A promise which resolves with an MHPagedResponse.
  */
 - (AnyPromise*)fetchFollowingForced:(BOOL)forced
-                           priority:(AVENetworkPriority*)priority
+                           priority:(nullable AVENetworkPriority*)priority
                        networkToken:(nullable AVENetworkToken*)networkToken;
 
 /**
@@ -173,7 +173,7 @@ NS_ASSUME_NONNULL_BEGIN
  * @return A promise which resolves with an MHPagedResponse.
  */
 - (AnyPromise*)fetchLikingForced:(BOOL)forced
-                        priority:(AVENetworkPriority*)priority
+                        priority:(nullable AVENetworkPriority*)priority
                     networkToken:(nullable AVENetworkToken*)networkToken;
 
 /**
@@ -190,7 +190,7 @@ NS_ASSUME_NONNULL_BEGIN
  * @return A promise which resolves with an MHPagedResponse.
  */
 - (AnyPromise*)fetchFollowersForced:(BOOL)forced
-                           priority:(AVENetworkPriority*)priority
+                           priority:(nullable AVENetworkPriority*)priority
                        networkToken:(nullable AVENetworkToken*)networkToken;
 
 /**
@@ -207,7 +207,7 @@ NS_ASSUME_NONNULL_BEGIN
  * @return A promise which resolves with an MHPagedResponse.
  */
 - (AnyPromise*)fetchSuggestedForced:(BOOL)forced
-                           priority:(AVENetworkPriority*)priority
+                           priority:(nullable AVENetworkPriority*)priority
                        networkToken:(nullable AVENetworkToken*)networkToken;
 
 @end

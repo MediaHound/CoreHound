@@ -70,7 +70,7 @@ NS_ASSUME_NONNULL_BEGIN
  * @return A promise which resolves with an MHPagedResponse.
  */
 - (AnyPromise*)fetchMediaForced:(BOOL)forced
-                       priority:(AVENetworkPriority*)priority
+                       priority:(nullable AVENetworkPriority*)priority
                    networkToken:(nullable AVENetworkToken*)networkToken;
 
 @end

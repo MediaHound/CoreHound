@@ -43,7 +43,7 @@
                                                     @"client_secret": self.clientSecret,
                                                     @"grant_type": @"client_credentials"
                                                     }
-                                         priority:[AVENetworkPriority priorityWithLevel:AVENetworkPriorityLevelHigh]
+                                         priority:nil
                                      networkToken:nil
                                           builder:[MHFetcher sharedFetcher].builder].then(^(NSDictionary* response) {
         self.accessToken = response[@"accessToken"];

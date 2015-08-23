@@ -21,19 +21,19 @@ PODS:
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
   - AtSugar (0.1.1)
-  - Avenue (0.2.2):
+  - Avenue (0.3.0):
     - AFNetworking
     - KVOController
     - PromiseKit/CorePromise (~> 2.0)
-  - AvenueFetcher (0.2.1):
-    - Avenue (~> 0.2)
+  - AvenueFetcher (0.3.0):
+    - Avenue (~> 0.3)
     - JSONModel (~> 1.1)
     - PromiseKit/CorePromise (~> 2.0)
   - CoreHound (0.2.0):
     - AFNetworking
     - AtSugar (~> 0.1)
-    - Avenue (~> 0.2)
-    - AvenueFetcher (~> 0.2)
+    - Avenue (~> 0.3)
+    - AvenueFetcher (~> 0.3)
     - JSONModel (~> 1.1)
     - PromiseKit/CorePromise (~> 2.0)
     - UICKeyChainStore
@@ -65,9 +65,9 @@ CHECKOUT OPTIONS:
 SPEC CHECKSUMS:
   AFNetworking: 05edc0ac4c4c8cf57bcf4b84be5b0744b6d8e71e
   AtSugar: 25ddf068f42f2e35c6cc2ef0275e87d8395ac332
-  Avenue: 1daac39f83120c060086e1dc5ec977ebe4d1d81a
-  AvenueFetcher: 35dc54435c5f060458bdd738bd5eda6694f98ea6
-  CoreHound: 099a66cacfb87ed7bc81585764b0f752e1eb695e
+  Avenue: aa72b4ffb97efb5a5d6f9b8cd7cdfb760a976f45
+  AvenueFetcher: 95fd9e63089b99c9f486fcf9d2091846d75e05c7
+  CoreHound: 95e55f61881f4d377c9d362af71958d9f069ea98
   Expecta: 54e8a3530add08f4f0208c111355eda7cde74a53
   JSONModel: f7c057e3da7839e47e4174735ae5f38fdfb2a34d
   KVOController: 9fd8f0343670994e4b6f9f0b31f5a45663f3e1cf
