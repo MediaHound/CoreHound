@@ -12,7 +12,7 @@
 #import <AtSugar/AtSugar.h>
 
 
-static NSString* const MHProductionBaseURL = @"https://api-v10.mediahound.com/";
+static NSString* const MHProductionBaseURL = @"https://api-v11.mediahound.com/";
 
 
 @implementation MHFetcher
