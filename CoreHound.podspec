@@ -15,7 +15,7 @@ Pod::Spec.new do |s|
 
   s.resources = ['Pod/Resources/*.cer']
 
-  s.dependency 'AFNetworking'
+  s.dependency 'AFNetworking', '~> 2.6'
   s.dependency 'AtSugar', '~> 0.1'
   s.dependency 'Avenue', '~> 0.3'
   s.dependency 'AvenueFetcher', '~> 0.3'

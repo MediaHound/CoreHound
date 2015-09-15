@@ -33,7 +33,6 @@ static NSString* const MHProductionBaseURL = @"https://api-v11.mediahound.com/";
         NSData* certificate = [NSData dataWithContentsOfFile:certificatePath];
         
         AFSecurityPolicy* securityPolicy = [AFSecurityPolicy policyWithPinningMode:AFSSLPinningModePublicKey];
-        securityPolicy.validatesCertificateChain = NO;
         securityPolicy.pinnedCertificates = @[certificate];
         builder.securityPolicy = securityPolicy;
         

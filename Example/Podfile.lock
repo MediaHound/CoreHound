@@ -1,27 +1,27 @@
 PODS:
-  - AFNetworking (2.5.4):
-    - AFNetworking/NSURLConnection (= 2.5.4)
-    - AFNetworking/NSURLSession (= 2.5.4)
-    - AFNetworking/Reachability (= 2.5.4)
-    - AFNetworking/Security (= 2.5.4)
-    - AFNetworking/Serialization (= 2.5.4)
-    - AFNetworking/UIKit (= 2.5.4)
-  - AFNetworking/NSURLConnection (2.5.4):
+  - AFNetworking (2.6.0):
+    - AFNetworking/NSURLConnection (= 2.6.0)
+    - AFNetworking/NSURLSession (= 2.6.0)
+    - AFNetworking/Reachability (= 2.6.0)
+    - AFNetworking/Security (= 2.6.0)
+    - AFNetworking/Serialization (= 2.6.0)
+    - AFNetworking/UIKit (= 2.6.0)
+  - AFNetworking/NSURLConnection (2.6.0):
     - AFNetworking/Reachability
     - AFNetworking/Security
     - AFNetworking/Serialization
-  - AFNetworking/NSURLSession (2.5.4):
+  - AFNetworking/NSURLSession (2.6.0):
     - AFNetworking/Reachability
     - AFNetworking/Security
     - AFNetworking/Serialization
-  - AFNetworking/Reachability (2.5.4)
-  - AFNetworking/Security (2.5.4)
-  - AFNetworking/Serialization (2.5.4)
-  - AFNetworking/UIKit (2.5.4):
+  - AFNetworking/Reachability (2.6.0)
+  - AFNetworking/Security (2.6.0)
+  - AFNetworking/Serialization (2.6.0)
+  - AFNetworking/UIKit (2.6.0):
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
   - AtSugar (0.1.1)
-  - Avenue (0.3.0):
+  - Avenue (0.3.1):
     - AFNetworking
     - KVOController
     - PromiseKit/CorePromise (~> 2.0)
@@ -30,17 +30,17 @@ PODS:
     - JSONModel (~> 1.1)
     - PromiseKit/CorePromise (~> 2.0)
   - CoreHound (0.2.0):
-    - AFNetworking
+    - AFNetworking (~> 2.6)
     - AtSugar (~> 0.1)
     - Avenue (~> 0.3)
     - AvenueFetcher (~> 0.3)
     - JSONModel (~> 1.1)
     - PromiseKit/CorePromise (~> 2.0)
     - UICKeyChainStore
-  - Expecta (1.0.2)
+  - Expecta (1.0.3)
   - JSONModel (1.1)
   - KVOController (1.0.3)
-  - PromiseKit/CorePromise (2.1.1)
+  - PromiseKit/CorePromise (2.2.1)
   - Specta (1.0.3)
   - UICKeyChainStore (2.0.6)
 
@@ -63,15 +63,15 @@ CHECKOUT OPTIONS:
     :git: https://github.com/dbachrach/JSONModel.git
 
 SPEC CHECKSUMS:
-  AFNetworking: 05edc0ac4c4c8cf57bcf4b84be5b0744b6d8e71e
+  AFNetworking: 79f7eb1a0fcfa7beb409332b2ca49afe9ce53b05
   AtSugar: 25ddf068f42f2e35c6cc2ef0275e87d8395ac332
-  Avenue: aa72b4ffb97efb5a5d6f9b8cd7cdfb760a976f45
+  Avenue: 8fcd118e983cd49d27fcf304454fb13ac67ce381
   AvenueFetcher: 95fd9e63089b99c9f486fcf9d2091846d75e05c7
-  CoreHound: 95e55f61881f4d377c9d362af71958d9f069ea98
-  Expecta: 54e8a3530add08f4f0208c111355eda7cde74a53
+  CoreHound: aaf0f6ad211f20003212719b0d26f03e24d2956a
+  Expecta: 9d1bff6c8b0eeee73a166a2ee898892478927a15
   JSONModel: f7c057e3da7839e47e4174735ae5f38fdfb2a34d
   KVOController: 9fd8f0343670994e4b6f9f0b31f5a45663f3e1cf
-  PromiseKit: 45fa68ef95b049be494a1502dab228a60374ad5a
+  PromiseKit: 9c92257e39abf4b634533d44268592dfc6e4b5c2
   Specta: cf3e4188cf35375c3ee2cd03f8db8f1f4ef98234
   UICKeyChainStore: c5719c814e8bd69e74e4a0fc09daf8f4d6257a59
 
