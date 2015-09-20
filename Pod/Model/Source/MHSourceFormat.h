@@ -24,10 +24,10 @@ extern NSString* const MHSourceFormatTypeUnknownKey;
 @interface MHSourceFormat : JSONModel
 
 @property (strong, nonatomic) NSString* type;
-@property (strong, nullable, nonatomic) NSNumber* price;
-@property (strong, nullable, nonatomic) NSString* currency;
-@property (strong, nullable, nonatomic) NSString* timePeriod;
-@property (strong, nullable, nonatomic) NSNumber* contentCount;
+@property (strong, nullable, nonatomic) NSNumber<Optional>* price;
+@property (strong, nullable, nonatomic) NSString<Optional>* currency;
+@property (strong, nullable, nonatomic) NSString<Optional>* timePeriod;
+@property (strong, nullable, nonatomic) NSNumber<Optional>* contentCount;
 @property (strong, nonatomic) NSDictionary* launchInfo;
 
 @property (weak, nonatomic, readonly) MHSourceMethod* method;
