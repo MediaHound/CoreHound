@@ -2,13 +2,16 @@
 //  MHMovieGroup.h
 //  CoreHound
 //
-//  Created by Dustin Bachrach on 6/2/15.
+//  Copyright (c) 2015 MediaHound. All rights reserved.
 //
 //
 
 #import "MHMedia.h"
 
 
+/**
+ * An MHMovieGroup
+ */
 @interface MHMovieGroup : MHMedia
 
 @end

@@ -2,7 +2,7 @@
 //  MHHashtag.m
 //  CoreHound
 //
-//  Copyright (c) 2015 Media Hound. All rights reserved.
+//  Copyright (c) 2015 MediaHound. All rights reserved.
 //
 
 #import "MHHashtag.h"
@@ -16,6 +16,8 @@
 
 @declare_class_property (mhidPrefix, @"mhhtg")
 
+@dynamic metadata;
+
 + (void)load
 {
     [self registerMHObject];
@@ -26,20 +28,19 @@
 
 @implementation MHHashtag (Fetching)
 
-+ (PMKPromise*)fetchByName:(NSString*)name
++ (AnyPromise*)fetchByName:(NSString*)name
 {
     return [self fetchByName:name
-                    priority:[AVENetworkPriority priorityWithLevel:AVENetworkPriorityLevelHigh]
+                    priority:nil
                 networkToken:nil];
 }
 
-+ (PMKPromise*)fetchByName:(NSString*)name
++ (AnyPromise*)fetchByName:(NSString*)name
                   priority:(AVENetworkPriority*)priority
               networkToken:(AVENetworkToken*)networkToken
 {
-    NSString* path = [NSString stringWithFormat:@"%@/lookup/%@", [self.class rootEndpoint], name];
     return [[MHFetcher sharedFetcher] fetchModel:MHHashtag.class
-                                            path:path
+                                            path:[self rootSubendpointByLookup:name]
                                          keyPath:nil
                                       parameters:nil
                                         priority:priority

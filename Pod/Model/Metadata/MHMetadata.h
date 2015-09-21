@@ -2,12 +2,14 @@
 //  MHMetadata.h
 //  CoreHound
 //
-//  Copyright (c) 2015 Media Hound. All rights reserved.
+//  Copyright (c) 2015 MediaHound. All rights reserved.
 //
 
 #import <JSONModel/JSONModel.h>
 
 @class MHImageData;
+
+NS_ASSUME_NONNULL_BEGIN
 
 
 /**
@@ -19,9 +21,24 @@
  * The unique MediaHound identifier for this object.
  */
 @property (strong, nonatomic) NSString* mhid;
-@property (strong, nonatomic) NSString<Optional>* name;
-@property (strong, nonatomic) NSString<Optional>* objectDescription;
-@property (nonatomic, strong) NSDate<Optional>* createdDate;
+
+/**
+ * The dispalyable name of this object.
+ */
+@property (strong, nullable, nonatomic) NSString* name;
+
+/**
+ * A description of this object.
+ */
+@property (strong, nullable, nonatomic) NSString* objectDescription;
+
+/**
+ * The date this object was created. 
+ * This is typically valid for social objects to indicate
+ * when the social action occured.
+ * For dates related to Media content, consider the `releaseDate` property.
+ */
+@property (strong, nullable, nonatomic) NSDate* createdDate;
 
 @end
 
@@ -34,7 +51,7 @@
 /**
  * When the piece of media was publicly released.
  */
-@property (strong, nonatomic) NSDate<Optional>* releaseDate; // TODO: Should not be optional
+@property (strong, nullable, nonatomic) NSDate* releaseDate;
 
 @end
 
@@ -54,7 +71,7 @@
  * The user's email address.
  * The email address is only populated for the currently logged-in user.
  */
-@property (nonatomic, strong) NSString<Optional>* email;
+@property (nonatomic, nullable, strong) NSString* email;
 
 @end
 
@@ -64,15 +81,35 @@
  */
 @interface MHImageMetadata : MHMetadata
 
-@property (strong, nonatomic) MHImageData<Optional>* original;
+/**
+ * An image representation at the original resolution.
+ * Do not rely on the resolution for all originals to be the same or be fixed.
+ */
+@property (strong, nullable, nonatomic) MHImageData* original;
 
-@property (strong, nonatomic) MHImageData<Optional>* thumbnail;
+/**
+ * An image representation at thumbnail resolution.
+ * Do not rely on the resolution for all thumbnails to be the same or be fixed.
+ */
+@property (strong, nullable, nonatomic) MHImageData* thumbnail;
 
-@property (strong, nonatomic) MHImageData<Optional>* small;
+/**
+ * An image representation at small resolution.
+ * Do not rely on the resolution for all smalls to be the same or be fixed.
+ */
+@property (strong, nullable, nonatomic) MHImageData* small;
 
-@property (strong, nonatomic) MHImageData<Optional>* medium;
+/**
+ * An image representation at medium resolution.
+ * Do not rely on the resolution for all mediums to be the same or be fixed.
+ */
+@property (strong, nullable, nonatomic) MHImageData* medium;
 
-@property (strong, nonatomic) MHImageData<Optional>* large;
+/**
+ * An image representation at large resolution.
+ * Do not rely on the resolution for all larges to be the same or be fixed.
+ */
+@property (strong, nullable, nonatomic) MHImageData* large;
 
 /**
  * A boolean indicating whether this is a default image or not.
@@ -81,9 +118,13 @@
  * If you want to have custom default images, then check for this property
  * and load your own image instead.
  */
-@property (strong, nonatomic) NSNumber<Optional>* isDefault;
+@property (strong, nullable, nonatomic) NSNumber* isDefault;
 
-@property (strong, nonatomic) UIColor<Optional>* averageColor;
+/**
+ * The average color of the image.
+ * NOTE: Currently unavailable.
+ */
+@property (strong, nullable, nonatomic) UIColor* averageColor;
 
 @end
 
@@ -97,16 +138,29 @@
  * The user-created message for an action.
  * Note: This property will only exist for `MHPost` objects.
  */
-@property (strong, nonatomic) NSString<Optional>* message;
+@property (strong, nullable, nonatomic) NSString* message;
 
 @end
 
 
-
+/**
+ * What type of mixlist a collection is.
+ */
 typedef NS_ENUM(NSInteger, MHCollectionMixlistType)
 {
+    /**
+     * This collection is not a mixlist.
+     */
     MHCollectionMixlistTypeNone,
+    
+    /** 
+     * This collection is a partial mixlist.
+     */
     MHCollectionMixlistTypePartial,
+    
+    /**
+     * This collection is a fully complete mixlist.
+     */
     MHCollectionMixlistTypeFull,
 };
 
@@ -116,7 +170,10 @@ typedef NS_ENUM(NSInteger, MHCollectionMixlistType)
  */
 @interface MHCollectionMetadata : MHMetadata
 
-@property (nonatomic) MHCollectionMixlistType mixlist;
+/**
+ * What type of a mixlist this collection is.
+ */
+@property (assign, nonatomic) MHCollectionMixlistType mixlist;
 
 @end
 
@@ -126,9 +183,26 @@ typedef NS_ENUM(NSInteger, MHCollectionMixlistType)
  */
 @interface MHSubscriptionMetadata : MHMetadata
 
+/**
+ * How long this subscription lasts.
+ * E.g.: @"monthly"
+ */
 @property (strong, nonatomic) NSString* timePeriod;
+
+/**
+ * The numeric price for this subscription.
+ */
 @property (strong, nonatomic) NSNumber* price;
+
+/**
+ * The currency of the `price`.
+ */
 @property (strong, nonatomic) NSString* currency;
+
+/**
+ * An array of mediums this subscription supports.
+ * See `MHSourceMedium`.
+ */
 @property (strong, nonatomic) NSArray* mediums;
 
 @end
@@ -138,6 +212,35 @@ typedef NS_ENUM(NSInteger, MHCollectionMixlistType)
  */
 @interface MHSourceMetadata : MHMetadata
 
+/**
+ * Whether the user can connect to this source.
+ */
 @property (strong, nonatomic) NSNumber* connectable;
 
 @end
+
+
+/**
+ * Metadata about an `MHContributor` object.
+ */
+@interface MHContributorMetadata : MHMetadata
+
+@end
+
+
+/**
+ * Metadata about an `MHHashtag` object.
+ */
+@interface MHHashtagMetadata : MHMetadata
+
+@end
+
+
+/**
+ * Metadata about an `MHTrait` object.
+ */
+@interface MHTraitMetadata : MHMetadata
+
+@end
+
+NS_ASSUME_NONNULL_END

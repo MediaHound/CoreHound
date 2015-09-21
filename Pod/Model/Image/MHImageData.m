@@ -2,13 +2,23 @@
 //  MHImageData.m
 //  CoreHound
 //
-//  Copyright (c) 2015 Media Hound. All rights reserved.
+//  Copyright (c) 2015 MediaHound. All rights reserved.
 //
 
 #import "MHImageData.h"
 
 
 @implementation MHImageData
+
++ (BOOL)propertyIsOptional:(NSString*)propertyName
+{
+    // TODO: Remove optionality for width and height
+    if ([propertyName isEqualToString:NSStringFromSelector(@selector(width))]
+        || [propertyName isEqualToString:NSStringFromSelector(@selector(height))]) {
+        return YES;
+    }
+    return [super propertyIsOptional:propertyName];
+}
 
 - (BOOL)isEqual:(id)object
 {

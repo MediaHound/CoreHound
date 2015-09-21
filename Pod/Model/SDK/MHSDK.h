@@ -2,15 +2,18 @@
 //  MHSDK.h
 //  CoreHound
 //
-//  Created by Dustin Bachrach on 4/1/15.
+//  Copyright (c) 2015 MediaHound. All rights reserved.
 //
 //
 
 #import <Foundation/Foundation.h>
 #import <PromiseKit/PromiseKit.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
+
 /**
- * The MHSDK is the singular place to configure the SDK.
+ * The MHSDK allows configuration of the SDK.
  */
 @interface MHSDK : NSObject
 
@@ -26,7 +29,9 @@
  * @param clientSecret Your application's client secret.
  * @return A Promise that resolves when configuration is complete.
  */
-- (PMKPromise*)configureWithClientId:(NSString*)clientId
+- (AnyPromise*)configureWithClientId:(NSString*)clientId
                         clientSecret:(NSString*)clientSecret;
 
 @end
+
+NS_ASSUME_NONNULL_END

@@ -2,7 +2,7 @@
 //  MHLoginSession.m
 //  CoreHound
 //
-//  Copyright (c) 2015 Media Hound. All rights reserved.
+//  Copyright (c) 2015 MediaHound. All rights reserved.
 //
 
 #import "MHLoginSession.h"
@@ -27,19 +27,27 @@ static MHLoginSession* s_currentSession = nil;
 
 @interface MHLoginSession ()
 
-@property (strong, nonatomic) NSArray<MHUser>* users;
+@property (strong, nonatomic) NSArray* users;
 
 @end
 
 
 @implementation MHLoginSession
 
++ (NSString*)protocolForArrayProperty:(NSString*)propertyName
+{
+    if ([propertyName isEqualToString:NSStringFromSelector(@selector(users))]) {
+        return NSStringFromClass(MHUser.class);
+    }
+    return [super protocolForArrayProperty:propertyName];
+}
+
 + (instancetype)currentSession
 {
     return s_currentSession;
 }
 
-+ (PMKPromise*)loginUsingSavedCredentials
++ (AnyPromise*)loginUsingSavedCredentials
 {
     NSString* username = [UICKeyChainStore stringForKey:LoginKeychainKeyUsername];
     NSString* password = [UICKeyChainStore stringForKey:LoginKeychainKeyPassword];
@@ -47,7 +55,7 @@ static MHLoginSession* s_currentSession = nil;
         return [self loginWithUsername:username password:password];
     }
     else {
-        return [PMKPromise promiseWithValue:MHErrorMake(MHLoginSessionNoSavedCredentialsError, @{})];
+        return [AnyPromise promiseWithValue:MHErrorMake(MHLoginSessionNoSavedCredentialsError, @{})];
     }
 }
 
@@ -63,7 +71,7 @@ static MHLoginSession* s_currentSession = nil;
     [UICKeyChainStore removeItemForKey:LoginKeychainKeyPassword];
 }
 
-+ (PMKPromise*)loginWithUsername:(NSString*)username
++ (AnyPromise*)loginWithUsername:(NSString*)username
                      password:(NSString*)password
 {
 //    AGLLogVerbose(@"[MHLoginSession] Attempting Login");
@@ -73,8 +81,7 @@ static MHLoginSession* s_currentSession = nil;
                                                      @"username": username,
                                                      @"password": password
                                                      }
-                                          priority:[AVENetworkPriority priorityWithLevel:AVENetworkPriorityLevelHigh
-                                                                            postponeable:NO]
+                                          priority:nil
                                       networkToken:nil
                                            builder:[MHFetcher sharedFetcher].builder].thenInBackground(^id(NSDictionary* responseObject) {
         if ([responseObject[@"Error"] isEqualToString:@"Invalid Credentials"]) {

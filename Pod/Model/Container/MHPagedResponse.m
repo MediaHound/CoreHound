@@ -2,37 +2,61 @@
 //  MHPagedResponse.m
 //  CoreHound
 //
-//  Copyright (c) 2015 Media Hound. All rights reserved.
+//  Copyright (c) 2015 MediaHound. All rights reserved.
 //
 
 #import "MHPagedResponse.h"
 #import "MHPagedResponse+Internal.h"
-
-#import <AtSugar/AtSugar.h>
-#import <objc/runtime.h>
-
-
-@implementation MHPagingInfo
-
-@end
+#import "MHPagingInfo.h"
 
 
 @interface MHPagedResponse ()
 
+/**
+ * Information about this page and subsequent pages.
+ * You should not typically need to access the data.
+ */
+@property (strong, nonatomic) MHPagingInfo* pagingInfo;
+
 @property (copy, nonatomic) MHPagedResponseFetchNextBlock fetchNextOperation;
 
-@property (strong, atomic) MHPagedResponse<Ignore>* cachedNextResponse;
+@property (strong, atomic) MHPagedResponse* cachedNextResponse;
 
 @end
 
 
 @implementation MHPagedResponse
 
-- (PMKPromise*)fetchNext
++ (BOOL)propertyIsIgnored:(NSString *)propertyName
+{
+    if ([propertyName isEqualToString:NSStringFromSelector(@selector(cachedNextResponse))]) {
+        return YES;
+    }
+    return [super propertyIsIgnored:propertyName];
+}
+
++ (BOOL)propertyIsOptional:(NSString*)propertyName
+{
+    // TODO: Remove optionality for pagingInfo
+    if ([propertyName isEqualToString:NSStringFromSelector(@selector(pagingInfo))]) {
+        return YES;
+    }
+    return [super propertyIsOptional:propertyName];
+}
+
++ (NSString*)protocolForArrayProperty:(NSString*)propertyName
+{
+    if ([propertyName isEqualToString:NSStringFromSelector(@selector(content))]) {
+        return NSStringFromClass(MHRelationalPair.class);
+    }
+    return [super protocolForArrayProperty:propertyName];
+}
+
+- (AnyPromise*)fetchNext
 {
     id cachedResponse = self.cachedNextResponse;
     if (cachedResponse) {
-        return [PMKPromise promiseWithValue:cachedResponse];
+        return [AnyPromise promiseWithValue:cachedResponse];
     }
     
     return self.fetchNextOperation(self.pagingInfo.next).thenInBackground(^(MHPagedResponse* response) {
@@ -45,7 +69,20 @@
 
 - (BOOL)hasMorePages
 {
-    return self.pagingInfo.next != nil;
+    return (self.pagingInfo.next != nil);
+}
+
+@end
+
+
+@implementation MHPagedResponse (Internal)
+
++ (instancetype)emptyPagedResponse
+{
+    MHPagedResponse* response = [[MHPagedResponse alloc] init];
+    response.content = @[];
+    response.pagingInfo = [[MHPagingInfo alloc] init];
+    return response;
 }
 
 @end

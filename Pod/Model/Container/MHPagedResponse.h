@@ -2,29 +2,41 @@
 //  MHPagedResponse.h
 //  CoreHound
 //
-//  Copyright (c) 2015 Media Hound. All rights reserved.
+//  Copyright (c) 2015 MediaHound. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
 #import <JSONModel/JSONModel.h>
 #import <PromiseKit/PromiseKit.h>
 #import "MHRelationalPair.h"
 
-
-@interface MHPagingInfo : JSONModel
-
-@property (strong, nonatomic) NSString<Optional>* next;
-
-@end
+NS_ASSUME_NONNULL_BEGIN
 
 
+/**
+ * An MHPagedResponse represents the result of requesting a single page.
+ * It contains the contents of that page along with the ability to fetch
+ * the next page of results.
+ */
 @interface MHPagedResponse : JSONModel
 
-@property (strong, nonatomic) NSArray<MHRelationalPair>* content;
-@property (strong, nonatomic) MHPagingInfo<Optional>* pagingInfo; // TODO: Remove optionality
+/**
+ * An array of MHRelationalPairs that represent the content.
+ * This array contains a single page of content.
+ * To get the rest of the content use `fetchNext`.
+ */
+@property (strong, nonatomic) NSArray* content;
 
+/**
+ * Whether this paged response has more pages beyond this one.
+ */
 @property (nonatomic, readonly) BOOL hasMorePages;
 
-- (PMKPromise*)fetchNext;
+/**
+ * Fetch the next page of results.
+ * Returns a promise that resolves with an MHPagedResponse.
+ */
+- (AnyPromise*)fetchNext;
 
 @end
+
+NS_ASSUME_NONNULL_END

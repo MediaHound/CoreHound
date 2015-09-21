@@ -2,7 +2,7 @@
 //  MHMedia.m
 //  CoreHound
 //
-//  Copyright (c) 2015 Media Hound. All rights reserved.
+//  Copyright (c) 2015 MediaHound. All rights reserved.
 //
 
 #import "MHMedia.h"
@@ -10,6 +10,7 @@
 #import "MHContributor.h"
 #import "MHFetcher.h"
 #import "MHRelationalPair.h"
+#import "MHContext.h"
 #import "MHPagedResponse.h"
 #import "MHPagedResponse+Internal.h"
 #import "MHObject+Internal.h"
@@ -18,66 +19,88 @@
 
 #import <AtSugar/AtSugar.h>
 
+static NSString* const kRelatedSubendpoint = @"related";
+static NSString* const kContentSubendpoint = @"content";
+static NSString* const kContributorsSubendpoint = @"contributors";
+static NSString* const kSourcesSubendpoint = @"sources";
+
+static NSString* const kRelatedRootSubendpoint = @"related";
+
 
 @implementation MHMedia
 
+@dynamic metadata;
+
 @declare_class_property (rootEndpoint, @"graph/media")
+
++ (BOOL)propertyIsOptional:(NSString*)propertyName
+{
+    if ([propertyName isEqualToString:NSStringFromSelector(@selector(keyContributors))]
+        || [propertyName isEqualToString:NSStringFromSelector(@selector(primaryGroup))]) {
+        return YES;
+    }
+    return [super propertyIsOptional:propertyName];
+}
+
++ (NSString*)protocolForArrayProperty:(NSString*)propertyName
+{
+    if ([propertyName isEqualToString:NSStringFromSelector(@selector(keyContributors))]) {
+        return NSStringFromClass(MHRelationalPair.class);
+    }
+    return [super protocolForArrayProperty:propertyName];
+}
 
 @end
 
 
 @implementation MHMedia (Fetching)
 
-- (PMKPromise*)fetchPrimaryGroup
+- (AnyPromise*)fetchPrimaryGroup
 {
     return [self fetchPrimaryGroupForced:NO
-                                priority:[AVENetworkPriority priorityWithLevel:AVENetworkPriorityLevelHigh]
+                                priority:nil
                             networkToken:nil];
 }
 
-- (PMKPromise*)fetchPrimaryGroupForced:(BOOL)forced
+- (AnyPromise*)fetchPrimaryGroupForced:(BOOL)forced
                               priority:(AVENetworkPriority*)priority
                           networkToken:(AVENetworkToken*)networkToken
 {
-    return [self fetchProperty:@"primaryGroup"
+    return [self fetchProperty:NSStringFromSelector(@selector(primaryGroup))
                         forced:forced
                       priority:priority
                   networkToken:networkToken];
 }
 
-- (PMKPromise*)fetchKeyContributors
+- (AnyPromise*)fetchKeyContributors
 {
     return [self fetchKeyContributorsForced:NO
-                                   priority:[AVENetworkPriority priorityWithLevel:AVENetworkPriorityLevelHigh]
+                                   priority:nil
                                networkToken:nil];
 }
 
-- (PMKPromise*)fetchKeyContributorsForced:(BOOL)forced
+- (AnyPromise*)fetchKeyContributorsForced:(BOOL)forced
                                  priority:(AVENetworkPriority*)priority
                              networkToken:(AVENetworkToken*)networkToken
 {
-    if (self.keyContributors && !forced) {
-        return [PMKPromise promiseWithValue:self.keyContributors];
-    }
-    return [self.class fetchFullViewForMhid:self.metadata.mhid
-                                   priority:priority
-                               networkToken:networkToken].thenInBackground(^(MHMedia* object) {
-        return object.keyContributors;
-    });
+    return [self fetchProperty:NSStringFromSelector(@selector(keyContributors))
+                        forced:forced
+                      priority:priority
+                  networkToken:networkToken];
 }
 
-- (PMKPromise*)fetchSources
+- (AnyPromise*)fetchSources
 {
     return [self fetchSourcesForced:NO
-                           priority:[AVENetworkPriority priorityWithLevel:AVENetworkPriorityLevelHigh]
+                           priority:nil
                        networkToken:nil];
 }
 
-- (PMKPromise*)fetchSourcesForced:(BOOL)forced
+- (AnyPromise*)fetchSourcesForced:(BOOL)forced
                          priority:(AVENetworkPriority*)priority
                      networkToken:(AVENetworkToken*)networkToken
 {
-    return [self fetchPagedEndpoint:[self subendpoint:@"sources"]
+    return [self fetchPagedEndpoint:[self subendpoint:kSourcesSubendpoint]
                              forced:forced
                            priority:priority
                        networkToken:networkToken
@@ -93,81 +116,79 @@
                           }];
 }
 
-- (PMKPromise*)fetchRelated
+- (AnyPromise*)fetchRelated
 {
     return [self fetchRelatedForced:NO
-                           priority:[AVENetworkPriority priorityWithLevel:AVENetworkPriorityLevelHigh]
+                           priority:nil
                        networkToken:nil];
 }
 
-- (PMKPromise*)fetchRelatedForced:(BOOL)forced
+- (AnyPromise*)fetchRelatedForced:(BOOL)forced
                          priority:(AVENetworkPriority*)priority
                      networkToken:(AVENetworkToken*)networkToken
 {
-    return [self fetchPagedEndpoint:[self subendpoint:@"related"]
+    return [self fetchPagedEndpoint:[self subendpoint:kRelatedSubendpoint]
                              forced:forced
                            priority:priority
                        networkToken:networkToken
                                next:nil];
 }
 
-- (PMKPromise*)fetchContent
+- (AnyPromise*)fetchContent
 {
     return [self fetchContentForced:NO
-                           priority:[AVENetworkPriority priorityWithLevel:AVENetworkPriorityLevelHigh]
+                           priority:nil
                        networkToken:nil];
 }
 
-- (PMKPromise*)fetchContentForced:(BOOL)forced
+- (AnyPromise*)fetchContentForced:(BOOL)forced
                          priority:(AVENetworkPriority*)priority
                      networkToken:(AVENetworkToken*)networkToken
 {
-    return [self fetchPagedEndpoint:[self subendpoint:@"content"]
+    return [self fetchPagedEndpoint:[self subendpoint:kContentSubendpoint]
                              forced:forced
                            priority:priority
                        networkToken:networkToken
                                next:nil];
 }
 
-- (PMKPromise*)fetchContributors
+- (AnyPromise*)fetchContributors
 {
     return [self fetchContributorsForced:NO
-                                priority:[AVENetworkPriority priorityWithLevel:AVENetworkPriorityLevelHigh]
+                                priority:nil
                             networkToken:nil];
 }
 
-- (PMKPromise*)fetchContributorsForced:(BOOL)forced
+- (AnyPromise*)fetchContributorsForced:(BOOL)forced
                               priority:(AVENetworkPriority*)priority
                           networkToken:(AVENetworkToken*)networkToken
 {
-    return [self fetchPagedEndpoint:[self subendpoint:@"contributors"]
+    return [self fetchPagedEndpoint:[self subendpoint:kContributorsSubendpoint]
                              forced:forced
                            priority:priority
                        networkToken:networkToken
                                next:nil];
 }
 
-+ (PMKPromise*)fetchRelatedTo:(NSArray*)medias
++ (AnyPromise*)fetchRelatedTo:(NSArray*)medias
 {
     return [self fetchRelatedTo:medias
                          forced:NO
-                       priority:[AVENetworkPriority priorityWithLevel:AVENetworkPriorityLevelHigh]
+                       priority:nil
                    networkToken:nil];
 }
 
-+ (PMKPromise*)fetchRelatedTo:(NSArray*)medias
++ (AnyPromise*)fetchRelatedTo:(NSArray*)medias
                        forced:(BOOL)forced
                      priority:(AVENetworkPriority*)priority
                  networkToken:(AVENetworkToken*)networkToken
 {
-    // TODO: Use caching and forced flag
-    
     NSMutableSet* mhids = [NSMutableSet set];
     for (MHMedia* media in medias) {
         [mhids addObject:media.metadata.mhid];
     }
     
-    return [self fetchRootPagedEndpoint:[self rootSubendpoint:@"related"]
+    return [self fetchRootPagedEndpoint:[self rootSubendpoint:kRelatedRootSubendpoint]
                                  forced:forced
                              parameters:@{
                                           @"ids": mhids

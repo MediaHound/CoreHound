@@ -1,130 +1,78 @@
 PODS:
-  - AFNetworking (2.5.2):
-    - AFNetworking/NSURLConnection (= 2.5.2)
-    - AFNetworking/NSURLSession (= 2.5.2)
-    - AFNetworking/Reachability (= 2.5.2)
-    - AFNetworking/Security (= 2.5.2)
-    - AFNetworking/Serialization (= 2.5.2)
-    - AFNetworking/UIKit (= 2.5.2)
-  - AFNetworking/NSURLConnection (2.5.2):
+  - AFNetworking (2.6.0):
+    - AFNetworking/NSURLConnection (= 2.6.0)
+    - AFNetworking/NSURLSession (= 2.6.0)
+    - AFNetworking/Reachability (= 2.6.0)
+    - AFNetworking/Security (= 2.6.0)
+    - AFNetworking/Serialization (= 2.6.0)
+    - AFNetworking/UIKit (= 2.6.0)
+  - AFNetworking/NSURLConnection (2.6.0):
     - AFNetworking/Reachability
     - AFNetworking/Security
     - AFNetworking/Serialization
-  - AFNetworking/NSURLSession (2.5.2):
+  - AFNetworking/NSURLSession (2.6.0):
     - AFNetworking/Reachability
     - AFNetworking/Security
     - AFNetworking/Serialization
-  - AFNetworking/Reachability (2.5.2)
-  - AFNetworking/Security (2.5.2)
-  - AFNetworking/Serialization (2.5.2)
-  - AFNetworking/UIKit (2.5.2):
+  - AFNetworking/Reachability (2.6.0)
+  - AFNetworking/Security (2.6.0)
+  - AFNetworking/Serialization (2.6.0)
+  - AFNetworking/UIKit (2.6.0):
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
-  - AtSugar (0.1.0)
-  - Avenue (0.0.2):
+  - AtSugar (0.1.1)
+  - Avenue (0.3.1):
     - AFNetworking
     - KVOController
-    - PromiseKit/Promise
-  - AvenueFetcher (0.0.1):
-    - Avenue
-    - JSONModel
-    - PromiseKit
-  - CoreHound (0.1.0):
-    - AtSugar
-    - Avenue
-    - AvenueFetcher
-    - JSONModel
-    - PromiseKit
+    - PromiseKit/CorePromise (~> 2.0)
+  - AvenueFetcher (0.3.0):
+    - Avenue (~> 0.3)
+    - JSONModel (~> 1.1)
+    - PromiseKit/CorePromise (~> 2.0)
+  - CoreHound (0.2.0):
+    - AFNetworking (~> 2.6)
+    - AtSugar (~> 0.1)
+    - Avenue (~> 0.3)
+    - AvenueFetcher (~> 0.3)
+    - JSONModel (~> 1.1)
+    - PromiseKit/CorePromise (~> 2.0)
     - UICKeyChainStore
-  - Expecta (0.3.2)
-  - JSONModel (1.0.2)
+  - Expecta (1.0.3)
+  - JSONModel (1.1)
   - KVOController (1.0.3)
-  - OMGHTTPURLRQ (2.1):
-    - OMGHTTPURLRQ/RQ (= 2.1)
-  - OMGHTTPURLRQ/FormURLEncode (2.1)
-  - OMGHTTPURLRQ/RQ (2.1):
-    - OMGHTTPURLRQ/FormURLEncode
-    - OMGHTTPURLRQ/UserAgent
-  - OMGHTTPURLRQ/UserAgent (2.1)
-  - PromiseKit (1.4.2):
-    - PromiseKit/CALayer (= 1.4.2)
-    - PromiseKit/NSNotificationCenter (= 1.4.2)
-    - PromiseKit/NSURLConnection (= 1.4.2)
-    - PromiseKit/Pause (= 1.4.2)
-    - PromiseKit/UIActionSheet (= 1.4.2)
-    - PromiseKit/UIAlertView (= 1.4.2)
-    - PromiseKit/UIView (= 1.4.2)
-    - PromiseKit/UIViewController (= 1.4.2)
-    - PromiseKit/Until (= 1.4.2)
-    - PromiseKit/When (= 1.4.2)
-  - PromiseKit/CALayer (1.4.2):
-    - PromiseKit/Promise
-  - PromiseKit/NSNotificationCenter (1.4.2):
-    - PromiseKit/Promise
-  - PromiseKit/NSURLConnection (1.4.2):
-    - OMGHTTPURLRQ
-    - PromiseKit/Promise
-  - PromiseKit/Pause (1.4.2):
-    - PromiseKit/Promise
-  - PromiseKit/Promise (1.4.2)
-  - PromiseKit/UIActionSheet (1.4.2):
-    - PromiseKit/Promise
-  - PromiseKit/UIAlertView (1.4.2):
-    - PromiseKit/Promise
-  - PromiseKit/UIView (1.4.2):
-    - PromiseKit/Promise
-  - PromiseKit/UIViewController (1.4.2):
-    - PromiseKit/Promise
-  - PromiseKit/Until (1.4.2):
-    - PromiseKit/Promise
-    - PromiseKit/When
-  - PromiseKit/When (1.4.2):
-    - PromiseKit/Promise
-  - Specta (0.4.0)
-  - UICKeyChainStore (2.0.4)
+  - PromiseKit/CorePromise (2.2.1)
+  - Specta (1.0.3)
+  - UICKeyChainStore (2.0.6)
 
 DEPENDENCIES:
-  - AtSugar
-  - Avenue (from `https://github.com/MediaHound/Avenue.git`)
-  - AvenueFetcher (from `https://github.com/MediaHound/AvenueFetcher.git`)
   - CoreHound (from `../`)
   - Expecta
-  - KVOController (from `https://github.com/facebook/KVOController.git`)
+  - JSONModel (from `https://github.com/dbachrach/JSONModel.git`, branch `container-array-properties`)
   - Specta
 
 EXTERNAL SOURCES:
-  Avenue:
-    :git: https://github.com/MediaHound/Avenue.git
-  AvenueFetcher:
-    :git: https://github.com/MediaHound/AvenueFetcher.git
   CoreHound:
-    :path: ../
-  KVOController:
-    :git: https://github.com/facebook/KVOController.git
+    :path: "../"
+  JSONModel:
+    :branch: container-array-properties
+    :git: https://github.com/dbachrach/JSONModel.git
 
 CHECKOUT OPTIONS:
-  Avenue:
-    :commit: 8a77861ed0e5ed0f1b119b93c0aedf57fd62264a
-    :git: https://github.com/MediaHound/Avenue.git
-  AvenueFetcher:
-    :commit: d7ba1f0f87111a17e26ebd6915450c3bcdbcb5cc
-    :git: https://github.com/MediaHound/AvenueFetcher.git
-  KVOController:
-    :commit: 18c283769babbab43b32a105280527881d06850a
-    :git: https://github.com/facebook/KVOController.git
+  JSONModel:
+    :commit: c18cfedaed4254f7c37828c834a8fa47a64a0aa6
+    :git: https://github.com/dbachrach/JSONModel.git
 
 SPEC CHECKSUMS:
-  AFNetworking: fefbce9660acb17f48ae0011292d4da0f457bf36
-  AtSugar: 9edc386fe4060f77eb93dfe9e258981e90a5abcf
-  Avenue: 5714795d2e88b81c82c7034c424e0c935aacbf63
-  AvenueFetcher: 6075a7587f2bf2d9a527b7e2a9b8bcaf846b848a
-  CoreHound: 57db59dffa43b80133ee6cab8cbeef0c2b671962
-  Expecta: 8c507baf13211207b1e9d0a741480600e6b4ed15
-  JSONModel: 6ffcb4ffa3659c9e9a2e5d45d6c7705bab187c03
-  KVOController: dfb2f4a6703b75be99849e8ad65bfb7e5190cffe
-  OMGHTTPURLRQ: f8c515dfd2f57a5d74c710978f600231f52afec5
-  PromiseKit: ea36001b558f42aa104a1422f305b46f8c343f2e
-  Specta: a353759f073ffcc0a365b782fe4aaeac064c03c6
-  UICKeyChainStore: 69eb0c3a6f669bccf16ba88de3b9069b71501361
+  AFNetworking: 79f7eb1a0fcfa7beb409332b2ca49afe9ce53b05
+  AtSugar: 25ddf068f42f2e35c6cc2ef0275e87d8395ac332
+  Avenue: 8fcd118e983cd49d27fcf304454fb13ac67ce381
+  AvenueFetcher: 95fd9e63089b99c9f486fcf9d2091846d75e05c7
+  CoreHound: aaf0f6ad211f20003212719b0d26f03e24d2956a
+  Expecta: 9d1bff6c8b0eeee73a166a2ee898892478927a15
+  JSONModel: f7c057e3da7839e47e4174735ae5f38fdfb2a34d
+  KVOController: 9fd8f0343670994e4b6f9f0b31f5a45663f3e1cf
+  PromiseKit: 9c92257e39abf4b634533d44268592dfc6e4b5c2
+  Specta: cf3e4188cf35375c3ee2cd03f8db8f1f4ef98234
+  UICKeyChainStore: c5719c814e8bd69e74e4a0fc09daf8f4d6257a59
 
-COCOAPODS: 0.36.3
+COCOAPODS: 0.38.2

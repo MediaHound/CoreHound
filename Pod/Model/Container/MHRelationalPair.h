@@ -2,67 +2,33 @@
 //  MHRelationalPair.h
 //  CoreHound
 //
-//  Copyright (c) 2015 Media Hound. All rights reserved.
+//  Copyright (c) 2015 MediaHound. All rights reserved.
 //
 
 #import <JSONModel/JSONModel.h>
-#import "MHSourceMedium.h"
 
 @class MHObject;
+@class MHContext;
+
+NS_ASSUME_NONNULL_BEGIN
 
 
-@interface MHSorting : JSONModel
-
-@property (strong, nonatomic) NSNumber<Optional>* importance;
-
-@property (strong, nonatomic) NSNumber<Optional>* position;
-
-@end
-
-
-@protocol MHRelationship <NSObject>
-
-@end
-
-
-@interface MHRelationship : JSONModel
-
-@property (strong, nonatomic) NSString* contribution;
-
-@property (strong, nonatomic) NSString<Optional>* role;
-
-@property (strong, nonatomic) MHObject<Optional>* object;
-
-@end
-
-
-@interface MHContext : JSONModel
-
-@property (strong, nonatomic) MHSorting<Optional>* sorting;
-
-@property (strong, nonatomic) NSArray<MHRelationship, Optional>* relationships;
-
-@property (strong, nonatomic) NSNumber<Optional>* consumable;
-
-- (MHSourceMedium*)mediumForType:(NSString*)type;
-
-@property (strong, nonatomic, readonly) NSArray* allMediums;
-//
-// TODO: Should all contexts have a content pointer back to the object?
-//       if so, then we should remove `content` from MHSourceMedium
-//@property (strong, nonatomic, readonly) MHMedia* content;
-
-@end
-
-
-@protocol MHRelationalPair <NSObject>
-
-@end
-
-
+/**
+ * An MHRelationalPair represents an object with additional context.
+ * Relational pairs are the contents of all MHPagedResponses.
+ */
 @interface MHRelationalPair : JSONModel
 
-@property (strong, nonatomic) MHObject<Optional>* object;
-@property (strong, nonatomic) MHContext<Optional>* context;
+/**
+ * The object
+ */
+@property (strong, nullable, nonatomic) MHObject* object;
+
+/**
+ * Context that relates `object` to the originating request.
+ */
+@property (strong, nullable, nonatomic) MHContext* context;
 
 @end
+
+NS_ASSUME_NONNULL_END

@@ -2,7 +2,7 @@
 //  MHObject.m
 //  CoreHound
 //
-//  Copyright (c) 2015 Media Hound. All rights reserved.
+//  Copyright (c) 2015 MediaHound. All rights reserved.
 //
 
 #import "MHObject.h"
@@ -27,7 +27,14 @@ const NSInteger MHInternal_DefaultPageSize = 12;
 NSString* const MHFetchParameterView = @"view";
 NSString* const MHFetchParameterViewFull = @"full";
 
+NSString* const MHFetchParameterPageSize = @"pageSize";
+NSString* const MHFetchParameterNext = @"next";
+
+NSString* const kCreateRootSubendpoint = @"new";
+
 static NSString* const kCollectionsSubendpoint = @"collections";
+static NSString* const kFeedSubendpoint = @"feed";
+static NSString* const kSocialSubendpoint = @"social";
 
 
 @interface MHObjectTable : NSObject
@@ -83,14 +90,33 @@ static NSString* const kCollectionsSubendpoint = @"collections";
 
 @interface MHObject ()
 
-@property (atomic) NSNumber<Ignore>* mostRecentSocialRequestId;
+@property (atomic) NSNumber* mostRecentSocialRequestId;
 
-@property (strong, nonatomic) NSMutableDictionary<Ignore>* cachedResponses;
+@property (strong, nonatomic) NSMutableDictionary* cachedResponses;
 
 @end
 
 
 @implementation MHObject
+
++ (BOOL)propertyIsIgnored:(NSString *)propertyName
+{
+    if ([propertyName isEqualToString:NSStringFromSelector(@selector(mostRecentSocialRequestId))]
+        || [propertyName isEqualToString:NSStringFromSelector(@selector(cachedResponses))]) {
+        return YES;
+    }
+    return [super propertyIsIgnored:propertyName];
+}
+
++ (BOOL)propertyIsOptional:(NSString*)propertyName
+{
+    if ([propertyName isEqualToString:NSStringFromSelector(@selector(primaryImage))]
+        || [propertyName isEqualToString:NSStringFromSelector(@selector(secondaryImage))]
+        || [propertyName isEqualToString:NSStringFromSelector(@selector(social))]) {
+        return YES;
+    }
+    return [super propertyIsOptional:propertyName];
+}
 
 - (instancetype)initWithDictionary:(NSDictionary *)dict error:(NSError *__autoreleasing *)err
 {
@@ -212,7 +238,7 @@ static NSString* const kCollectionsSubendpoint = @"collections";
 
 @implementation MHObject (Actions)
 
-- (PMKPromise*)like
+- (AnyPromise*)like
 {
     return [self takeAction:@"like"
                  parameters:nil
@@ -224,9 +250,8 @@ static NSString* const kCollectionsSubendpoint = @"collections";
        }];
 }
 
-- (PMKPromise*)unlike
+- (AnyPromise*)unlike
 {
-    
     return [self takeAction:@"unlike"
                  parameters:nil
        predictedSocialBlock:^MHSocial* (MHSocial* oldSocial, NSDictionary* parameters) {
@@ -237,7 +262,7 @@ static NSString* const kCollectionsSubendpoint = @"collections";
        }];
 }
 
-- (PMKPromise*)follow
+- (AnyPromise*)follow
 {
     return [self takeAction:@"follow"
                  parameters:nil
@@ -252,7 +277,7 @@ static NSString* const kCollectionsSubendpoint = @"collections";
        });
 }
 
-- (PMKPromise*)unfollow
+- (AnyPromise*)unfollow
 {
     return [self takeAction:@"unfollow"
                  parameters:nil
@@ -272,14 +297,14 @@ static NSString* const kCollectionsSubendpoint = @"collections";
 
 @implementation MHObject (Fetching)
 
-+ (PMKPromise*)fetchByMhid:(NSString*)mhid
++ (AnyPromise*)fetchByMhid:(NSString*)mhid
 {
     return [self fetchByMhid:mhid
-                    priority:[AVENetworkPriority priorityWithLevel:AVENetworkPriorityLevelHigh]
+                    priority:nil
                 networkToken:nil];
 }
 
-+ (PMKPromise*)fetchByMhid:(NSString*)mhid
++ (AnyPromise*)fetchByMhid:(NSString*)mhid
                   priority:(AVENetworkPriority*)priority
               networkToken:(AVENetworkToken*)networkToken
 {
@@ -306,14 +331,14 @@ static NSString* const kCollectionsSubendpoint = @"collections";
     });
 }
 
-- (PMKPromise*)fetchSocial
+- (AnyPromise*)fetchSocial
 {
     return [self fetchSocialForced:NO
-                          priority:[AVENetworkPriority priorityWithLevel:AVENetworkPriorityLevelHigh]
+                          priority:nil
                       networkToken:nil];
 }
 
-- (PMKPromise*)fetchSocialForced:(BOOL)forced
+- (AnyPromise*)fetchSocialForced:(BOOL)forced
                         priority:(AVENetworkPriority*)priority
                     networkToken:(AVENetworkToken*)networkToken
 {
@@ -322,11 +347,11 @@ static NSString* const kCollectionsSubendpoint = @"collections";
         if (!forced) {
             MHSocial* social = self.social;
             if (social) {
-                return [PMKPromise promiseWithValue:social];
+                return [AnyPromise promiseWithValue:social];
             }
         }
         return [[MHFetcher sharedFetcher] fetchModel:MHSocial.class
-                                                path:[self subendpoint:@"social"]
+                                                path:[self subendpoint:kSocialSubendpoint]
                                              keyPath:@"social"
                                           parameters:nil
                                             priority:priority
@@ -339,66 +364,66 @@ static NSString* const kCollectionsSubendpoint = @"collections";
     });
 }
 
-- (PMKPromise*)fetchPrimaryImage
+- (AnyPromise*)fetchPrimaryImage
 {
     return [self fetchPrimaryImageForced:NO
-                                priority:[AVENetworkPriority priorityWithLevel:AVENetworkPriorityLevelHigh]
+                                priority:nil
                             networkToken:nil];
 }
 
-- (PMKPromise*)fetchPrimaryImageForced:(BOOL)forced
+- (AnyPromise*)fetchPrimaryImageForced:(BOOL)forced
                               priority:(AVENetworkPriority*)priority
                           networkToken:(AVENetworkToken*)networkToken
 {
-    return [self fetchProperty:@"primaryImage"
+    return [self fetchProperty:NSStringFromSelector(@selector(primaryImage))
                         forced:forced
                       priority:priority
                   networkToken:networkToken];
 }
 
-- (PMKPromise*)fetchSecondaryImage
+- (AnyPromise*)fetchSecondaryImage
 {
     return [self fetchSecondaryImageForced:NO
-                                  priority:[AVENetworkPriority priorityWithLevel:AVENetworkPriorityLevelHigh]
+                                  priority:nil
                               networkToken:nil];
 }
 
-- (PMKPromise*)fetchSecondaryImageForced:(BOOL)forced
+- (AnyPromise*)fetchSecondaryImageForced:(BOOL)forced
                                 priority:(AVENetworkPriority*)priority
                             networkToken:(AVENetworkToken*)networkToken
 {
-    return [self fetchProperty:@"secondaryImage"
+    return [self fetchProperty:NSStringFromSelector(@selector(secondaryImage))
                         forced:forced
                       priority:priority
                   networkToken:networkToken];
 }
 
-- (PMKPromise*)fetchFeed
+- (AnyPromise*)fetchFeed
 {
     return [self fetchFeedForced:NO
-                        priority:[AVENetworkPriority priorityWithLevel:AVENetworkPriorityLevelHigh]
+                        priority:nil
                     networkToken:nil];
 }
 
-- (PMKPromise*)fetchFeedForced:(BOOL)forced
+- (AnyPromise*)fetchFeedForced:(BOOL)forced
                       priority:(AVENetworkPriority*)priority
                   networkToken:(AVENetworkToken*)networkToken
 {
-    return [self fetchPagedEndpoint:[self subendpoint:@"feed"]
+    return [self fetchPagedEndpoint:[self subendpoint:kFeedSubendpoint]
                              forced:forced
                            priority:priority
                        networkToken:networkToken
                                next:nil];
 }
 
-- (PMKPromise*)fetchCollections
+- (AnyPromise*)fetchCollections
 {
     return [self fetchCollectionsForced:NO
-                               priority:[AVENetworkPriority priorityWithLevel:AVENetworkPriorityLevelHigh]
+                               priority:nil
                            networkToken:nil];
 }
 
-- (PMKPromise*)fetchCollectionsForced:(BOOL)forced
+- (AnyPromise*)fetchCollectionsForced:(BOOL)forced
                              priority:(AVENetworkPriority*)priority
                          networkToken:(AVENetworkToken*)networkToken
 {
@@ -421,7 +446,7 @@ static NSString* const kCollectionsSubendpoint = @"collections";
     return nil;
 }
 
-- (PMKPromise*)takeAction:(NSString*)action
+- (AnyPromise*)takeAction:(NSString*)action
                parameters:(NSDictionary*)parameters
      predictedSocialBlock:(MHSocial*(^)(MHSocial*, NSDictionary*))predictedSocialBlock
 {
@@ -458,7 +483,7 @@ static NSString* const kCollectionsSubendpoint = @"collections";
 
 #pragma mark - Fetching
 
-+ (PMKPromise*)fetchFullViewForMhid:(NSString*)mhid
++ (AnyPromise*)fetchFullViewForMhid:(NSString*)mhid
                            priority:(AVENetworkPriority*)priority
                        networkToken:(AVENetworkToken*)networkToken
 {
@@ -497,11 +522,61 @@ static NSString* const kCollectionsSubendpoint = @"collections";
     }
 }
 
++ (NSMutableDictionary*)cachedRootResponses
+{
+    static NSMutableDictionary* s_cachedRootResponses = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        s_cachedRootResponses = [[NSMutableDictionary alloc] init];
+    });
+    return s_cachedRootResponses;
+}
+
++ (NSString*)rootResponseCacheKeyForPath:(NSString*)path parameters:(NSDictionary*)parameters
+{
+    NSString* parametersAsJson = @"";
+    if (parameters) {
+        NSData* jsonData = [NSJSONSerialization dataWithJSONObject:parameters
+                                                           options:0
+                                                             error:nil];
+        parametersAsJson = [[NSString alloc] initWithData:jsonData
+                                                 encoding:NSUTF8StringEncoding];
+    }
+    return [NSString stringWithFormat:@"___root_cached_%@_::_%@", path, parametersAsJson];
+}
+
++ (MHPagedResponse*)cachedRootResponseForPath:(NSString*)path parameters:(NSDictionary*)parameters
+{
+    NSString* cacheKey = [self rootResponseCacheKeyForPath:path parameters:parameters];
+    @synchronized (self) {
+        return self.cachedRootResponses[cacheKey];
+    }
+}
+
++ (void)setCachedRootResponse:(MHPagedResponse*)response
+                      forPath:(NSString*)path
+                   parameters:(NSDictionary*)parameters
+{
+    NSString* cacheKey = [self rootResponseCacheKeyForPath:path parameters:parameters];
+    @synchronized (self) {
+        self.cachedRootResponses[cacheKey] = response;
+    }
+}
+
 - (void)invalidateCacheForEndpoint:(NSString*)path
 {
     NSString* cacheKey = [self responseCacheKeyForPath:path];
     @synchronized (self) {
         [self.cachedResponses removeObjectForKey:cacheKey];
+    }
+}
+
++ (void)invalidateRootCacheForEndpoint:(NSString*)path
+                            parameters:(NSDictionary*)parameters
+{
+    NSString* cacheKey = [self rootResponseCacheKeyForPath:path parameters:parameters];
+    @synchronized (self) {
+        [self.cachedRootResponses removeObjectForKey:cacheKey];
     }
 }
 
@@ -513,7 +588,7 @@ static NSString* const kCollectionsSubendpoint = @"collections";
                     networkToken:nil];
 }
 
-- (PMKPromise*)fetchPagedEndpoint:(NSString*)path
+- (AnyPromise*)fetchPagedEndpoint:(NSString*)path
                            forced:(BOOL)forced
                          priority:(AVENetworkPriority*)priority
                      networkToken:(AVENetworkToken*)networkToken
@@ -527,7 +602,7 @@ static NSString* const kCollectionsSubendpoint = @"collections";
                           afterEach:nil];
 }
 
-- (PMKPromise*)fetchPagedEndpoint:(NSString*)path
+- (AnyPromise*)fetchPagedEndpoint:(NSString*)path
                            forced:(BOOL)forced
                          priority:(AVENetworkPriority*)priority
                      networkToken:(AVENetworkToken*)networkToken
@@ -541,22 +616,18 @@ static NSString* const kCollectionsSubendpoint = @"collections";
         if (!next && !forced) {
             MHPagedResponse* cachedResponse = [self cachedResponseForPath:path];
             if (cachedResponse) {
-                return [PMKPromise promiseWithValue:cachedResponse];
+                return [AnyPromise promiseWithValue:cachedResponse];
             }
         }
         
         NSMutableDictionary* parameters = [NSMutableDictionary dictionary];
-        parameters[@"pageSize"] = @(MHInternal_DefaultPageSize);
+        parameters[MHFetchParameterPageSize] = @(MHInternal_DefaultPageSize);
         parameters[MHFetchParameterView] = MHFetchParameterViewFull;
-        if (next) {
-            parameters[@"pageNext"] = next;
-            parameters[@"next"] = next;
-        }
         
         return [[MHFetcher sharedFetcher] fetchModel:MHPagedResponse.class
-                                                path:path
+                                                path:(next) ? next : path
                                              keyPath:nil
-                                          parameters:parameters
+                                          parameters:(next) ? nil : parameters
                                             priority:priority
                                         networkToken:networkToken].thenInBackground(^(MHPagedResponse* pagedResponse) {
             if (afterEach) {
@@ -581,7 +652,7 @@ static NSString* const kCollectionsSubendpoint = @"collections";
     });
 }
 
-+ (PMKPromise*)fetchRootPagedEndpoint:(NSString*)path
++ (AnyPromise*)fetchRootPagedEndpoint:(NSString*)path
                                forced:(BOOL)forced
                            parameters:(NSDictionary*)parameters
                              priority:(AVENetworkPriority*)priority
@@ -597,7 +668,7 @@ static NSString* const kCollectionsSubendpoint = @"collections";
                               afterEach:nil];
 }
 
-+ (PMKPromise*)fetchRootPagedEndpoint:(NSString*)path
++ (AnyPromise*)fetchRootPagedEndpoint:(NSString*)path
                                forced:(BOOL)forced
                            parameters:(NSDictionary*)parameters
                              priority:(AVENetworkPriority*)priority
@@ -609,29 +680,24 @@ static NSString* const kCollectionsSubendpoint = @"collections";
     
     // Hop off the main thread right away
     return dispatch_promise(^id {
-        // TODO: DO caching
-//        if (!next && !forced) {
-//            MHPagedResponse* cachedResponse = [self cachedResponseForPath:path];
-//            if (cachedResponse) {
-//                return [PMKPromise promiseWithValue:cachedResponse];
-//            }
-//        }
+        if (!next && !forced) {
+            MHPagedResponse* cachedResponse = [self cachedRootResponseForPath:path parameters:parameters];
+            if (cachedResponse) {
+                return [AnyPromise promiseWithValue:cachedResponse];
+            }
+        }
         
         NSMutableDictionary* finalParameters = [NSMutableDictionary dictionary];
         if (parameters) {
             [finalParameters addEntriesFromDictionary:parameters];
         }
-        finalParameters[@"pageSize"] = @(MHInternal_DefaultPageSize);
+        finalParameters[MHFetchParameterPageSize] = @(MHInternal_DefaultPageSize);
         finalParameters[MHFetchParameterView] = MHFetchParameterViewFull;
-        if (next) {
-            finalParameters[@"pageNext"] = next;
-            finalParameters[@"next"] = next;
-        }
         
         return [[MHFetcher sharedFetcher] fetchModel:MHPagedResponse.class
-                                                path:path
+                                                path:(next) ? next : path
                                              keyPath:nil
-                                          parameters:finalParameters
+                                          parameters:(next) ? nil : finalParameters
                                             priority:priority
                                         networkToken:networkToken].thenInBackground(^(MHPagedResponse* pagedResponse) {
             if (afterEach) {
@@ -648,17 +714,16 @@ static NSString* const kCollectionsSubendpoint = @"collections";
                                               afterEach:afterEach];
             };
 
-            // TODO: Caching
-//            if (!next) {
-//                [self setCachedResponse:pagedResponse forPath:path];
-//            }
+            if (!next) {
+                [self setCachedRootResponse:pagedResponse forPath:path parameters:parameters];
+            }
             
             return pagedResponse;
         });
     });
 }
 
-- (PMKPromise*)fetchProperty:(NSString*)property
+- (AnyPromise*)fetchProperty:(NSString*)property
                       forced:(BOOL)forced
                     priority:(AVENetworkPriority*)priority
                 networkToken:(AVENetworkToken*)networkToken
@@ -670,7 +735,7 @@ static NSString* const kCollectionsSubendpoint = @"collections";
         if (!forced) {
             id value = [self valueForKey:property];
             if (value) {
-                return [PMKPromise promiseWithValue:value];
+                return [AnyPromise promiseWithValue:value];
             }
         }
         return [self.class fetchFullViewForMhid:self.metadata.mhid
@@ -717,6 +782,11 @@ static NSString* const kCollectionsSubendpoint = @"collections";
 + (NSString*)rootSubendpoint:(NSString*)sub
 {
     return [NSString stringWithFormat:@"%@/%@", [self rootEndpoint], sub];
+}
+
++ (NSString*)rootSubendpointByLookup:(NSString*)lookup
+{
+    return [self rootSubendpoint:[NSString stringWithFormat:@"lookup/%@", lookup]];
 }
 
 #pragma mark - MHObject Registration

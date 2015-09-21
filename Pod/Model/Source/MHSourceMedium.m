@@ -2,7 +2,7 @@
 //  MHSourceMedium.m
 //  CoreHound
 //
-//  Copyright (c) 2015 Media Hound. All rights reserved.
+//  Copyright (c) 2015 MediaHound. All rights reserved.
 //
 
 #import "MHSourceMedium.h"
@@ -19,16 +19,34 @@ NSString* const MHSourceMediumTypeAttend = @"attend";
 
 @interface MHSourceMedium ()
 
-@property (strong, nonatomic) NSArray<MHSourceMethod>* methods;
+@property (strong, nonatomic) NSArray* methods;
 
-@property (weak, nonatomic, readwrite) MHSource<Ignore>* source;
-@property (weak, nonatomic, readwrite) MHObject<Ignore>* content;
-@property (weak, nonatomic) MHContext<Ignore>* context;
+@property (weak, nonatomic, readwrite) MHSource* source;
+@property (weak, nonatomic, readwrite) MHObject* content;
+@property (weak, nonatomic) MHContext* context;
 
 @end
 
 
 @implementation MHSourceMedium
+
++ (BOOL)propertyIsIgnored:(NSString *)propertyName
+{
+    if ([propertyName isEqualToString:NSStringFromSelector(@selector(source))]
+        || [propertyName isEqualToString:NSStringFromSelector(@selector(content))]
+        || [propertyName isEqualToString:NSStringFromSelector(@selector(context))]) {
+        return YES;
+    }
+    return [super propertyIsIgnored:propertyName];
+}
+
++ (NSString*)protocolForArrayProperty:(NSString*)propertyName
+{
+    if ([propertyName isEqualToString:NSStringFromSelector(@selector(methods))]) {
+        return NSStringFromClass(MHSourceMethod.class);
+    }
+    return [super protocolForArrayProperty:propertyName];
+}
 
 - (instancetype)initWithDictionary:(NSDictionary*)dict error:(NSError**)err
 {

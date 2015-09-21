@@ -2,9 +2,12 @@
 //  MHApi.h
 //  CoreHound
 //
-//  Copyright (c) 2015 Media Hound. All rights reserved.
+//  Copyright (c) 2015 MediaHound. All rights reserved.
 //
 
+/**
+ * Umbrella Header for the CoreHound SDK
+ */
 
 // SDK
 #import "MHSDK.h"
@@ -20,11 +23,13 @@
 
 // Search
 #import "MHSearch.h"
-#import "AutocompleteResult.h"
 
 
 // Container
 #import "MHRelationalPair.h"
+#import "MHContext.h"
+#import "MHRelationship.h"
+#import "MHSorting.h"
 #import "MHPagedResponse.h"
 
 
@@ -66,7 +71,7 @@
 #import "MHMovie.h"
 #import "MHMovieSeries.h"
 
-#import "MHSong.h"
+#import "MHTrack.h"
 #import "MHAlbum.h"
 #import "MHAlbumSeries.h"
 
@@ -113,3 +118,20 @@
 
 // Hashtag
 #import "MHHashtag.h"
+
+
+// Trait
+#import "MHTrait.h"
+#import "MHAchievement.h"
+#import "MHAudience.h"
+#import "MHEra.h"
+#import "MHFlag.h"
+#import "MHGenre.h"
+#import "MHGraphGenre.h"
+#import "MHMaterialSource.h"
+#import "MHMood.h"
+#import "MHQuality.h"
+#import "MHStoryElement.h"
+#import "MHStyleElement.h"
+#import "MHSubGenre.h"
+#import "MHTheme.h"

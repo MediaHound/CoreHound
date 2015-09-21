@@ -2,14 +2,19 @@
 //  MHSearch.m
 //  CoreHound
 //
-//  Copyright (c) 2015 Media Hound. All rights reserved.
+//  Copyright (c) 2015 MediaHound. All rights reserved.
 //
 
 #import "MHSearch.h"
+#import "MHSearchScope+Internal.h"
 #import "MHFetcher.h"
 #import "MHObject+Internal.h"
+#import "MHPagedResponse.h"
+#import "MHPagedResponse+Internal.h"
+#import "MHContext.h"
 
 #import <AtSugar/AtSugar.h>
+
 
 BOOL NSStringIsWhiteSpace(NSString* str)
 {
@@ -30,16 +35,16 @@ NSString* NSStringByAddingExtendedPercentEscapes(NSString* str)
 
 @implementation MHSearch
 
-+ (PMKPromise*)fetchResultsForSearchTerm:(NSString*)search
++ (AnyPromise*)fetchResultsForSearchTerm:(NSString*)search
                                    scope:(MHSearchScope)scope
 {
     return [self fetchResultsForSearchTerm:search
                                      scope:scope
-                                  priority:[AVENetworkPriority priorityWithLevel:AVENetworkPriorityLevelHigh]
+                                  priority:nil
                               networkToken:nil];
 }
 
-+ (PMKPromise*)fetchResultsForSearchTerm:(NSString*)search
++ (AnyPromise*)fetchResultsForSearchTerm:(NSString*)search
                                    scope:(MHSearchScope)scope
                                 priority:(AVENetworkPriority*)priority
                             networkToken:(AVENetworkToken*)networkToken
@@ -51,34 +56,34 @@ NSString* NSStringByAddingExtendedPercentEscapes(NSString* str)
                                       next:nil];
 }
 
-+ (PMKPromise*)fetchResultsForSearchTerm:(NSString*)search
++ (AnyPromise*)fetchResultsForSearchTerm:(NSString*)search
                                    scope:(MHSearchScope)scope
                                 priority:(AVENetworkPriority*)priority
                             networkToken:(AVENetworkToken*)networkToken
                                     next:(NSString*)next
 {
     if (search.length < 1 || NSStringIsWhiteSpace(search)) {
-        MHPagedSearchResponse* response = [[MHPagedSearchResponse alloc] initWithDictionary:@{@"content":@[], @"number": @0, @"totalPages": @0} error:nil];
-        return [PMKPromise promiseWithValue:response];
+        MHPagedResponse* response = [MHPagedResponse emptyPagedResponse];
+        return [AnyPromise promiseWithValue:response];
     }
-    NSString* scopeString = [self scopeStringForScope:scope];
-    NSString* path = [NSString stringWithFormat:@"search/%@/%@", NSStringByAddingExtendedPercentEscapes(scopeString), NSStringByAddingExtendedPercentEscapes(search)];
+    
+    NSSet* scopes = ScopeStringsFromMHSearchScope(scope);
+    NSString* path = [NSString stringWithFormat:@"search/all/%@", NSStringByAddingExtendedPercentEscapes(search)];
     
     NSMutableDictionary* parameters = [NSMutableDictionary dictionary];
-    parameters[@"page.size"] = @(MHInternal_DefaultPageSize);
-    if (next) {
-        parameters[@"pageNext"] = next;
-        // TODO: Remove
-        parameters[@"page"] = next;
+    parameters[MHFetchParameterPageSize] = @(MHInternal_DefaultPageSize);
+    
+    if (scopes.count > 0) {
+        parameters[@"types"] = scopes;
     }
     
     @weakSelf()
-    return [[MHFetcher sharedFetcher] fetchModel:MHPagedSearchResponse.class
-                                            path:path
+    return [[MHFetcher sharedFetcher] fetchModel:MHPagedResponse.class
+                                            path:(next) ? next : path
                                          keyPath:nil
-                                      parameters:parameters
-                                        priority:[AVENetworkPriority priorityWithLevel:AVENetworkPriorityLevelHigh]
-                                    networkToken:networkToken].thenInBackground(^(MHPagedSearchResponse* pagedResponse) {
+                                      parameters:(next) ? nil : parameters
+                                        priority:priority
+                                    networkToken:networkToken].thenInBackground(^(MHPagedResponse* pagedResponse) {
         pagedResponse.fetchNextOperation = ^(NSString* newNext) {
             return [weakSelf fetchResultsForSearchTerm:search
                                                  scope:scope
@@ -86,48 +91,13 @@ NSString* NSStringByAddingExtendedPercentEscapes(NSString* str)
                                           networkToken:nil
                                                   next:newNext];
         };
-        for (AutocompleteResult* result in pagedResponse.content) {
-            result.searchTerm = search;
+        for (MHRelationalPair* pair in pagedResponse.content) {
+            MHContext* context = pair.context;
+            context.searchTerm = search;
+            context.searchScope = scope;
         }
         return pagedResponse;
     });
 }
 
-+ (NSString*)scopeStringForScope:(MHSearchScope)scope
-{
-    NSDictionary* scopeString = @{
-                                  @(MHSearchScopeAll): @"all",
-                                  @(MHSearchScopeMovie): @"movie",
-                                  @(MHSearchScopeSong): @"song",
-                                  @(MHSearchScopeAlbum): @"album",
-                                  @(MHSearchScopeTvSeries): @"tvseries",
-                                  @(MHSearchScopeTvSeason): @"tvseason",
-                                  @(MHSearchScopeTvEpisode): @"tvepisode",
-                                  @(MHSearchScopeBook): @"book",
-                                  @(MHSearchScopeGame): @"game",
-                                  @(MHSearchScopeCollection): @"collection",
-                                  @(MHSearchScopeUser): @"user",
-                                  @(MHSearchScopeContributor): @"person"
-                                  };
-    return scopeString[@(scope)];
-}
-
 @end
-
-
-@implementation MHPagedSearchResponse
-                  
-- (BOOL)hasMorePages
-{
-    return self.number.integerValue + 1 < self.totalPages.integerValue;
-}
-                  
-- (PMKPromise*)fetchNext
-{
-    // TODO:
-    //    return self.fetchNextOperation(self.pagingInfo.next);
-    return self.fetchNextOperation(@(self.number.integerValue + 1).stringValue);
-}
-                  
-@end
-

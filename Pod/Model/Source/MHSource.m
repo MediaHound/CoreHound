@@ -2,7 +2,7 @@
 //  MHSource.m
 //  CoreHound
 //
-//  Copyright (c) 2015 Media Hound. All rights reserved.
+//  Copyright (c) 2015 MediaHound. All rights reserved.
 //
 
 #import "MHSource.h"
@@ -11,18 +11,18 @@
 #import "MHPagedResponse.h"
 #import "MHObject+Internal.h"
 #import "MHLoginSession.h"
+#import "MHSourcePreference+Internal.h"
 
 //#import <AgnosticLogger/AgnosticLogger.h>
 
-
-NSString* const iTunesSourceName = @"iTunes";
-
 NSString* const MHObjectActionParameterPreferenceKey = @"preference";
 
-static MHPagedResponse* s_allSources = nil;
+static NSString* const kAllRootSubendpoint = @"all";
 
 
 @implementation MHSource
+
+@dynamic metadata;
 
 + (void)load
 {
@@ -37,7 +37,24 @@ static MHPagedResponse* s_allSources = nil;
 @declare_class_property (mhidPrefix, @"mhsrc")
 @declare_class_property (rootEndpoint, @"graph/source")
 
-- (PMKPromise*)connect
++ (BOOL)propertyIsOptional:(NSString*)propertyName
+{
+    if ([propertyName isEqualToString:NSStringFromSelector(@selector(subscriptions))]
+        || [propertyName isEqualToString:NSStringFromSelector(@selector(allMediums))]) {
+        return YES;
+    }
+    return [super propertyIsOptional:propertyName];
+}
+
++ (NSString*)protocolForArrayProperty:(NSString*)propertyName
+{
+    if ([propertyName isEqualToString:NSStringFromSelector(@selector(subscriptions))]) {
+        return NSStringFromClass(MHSubscription.class);
+    }
+    return [super protocolForArrayProperty:propertyName];
+}
+
+- (AnyPromise*)connect
 {
     return [self takeAction:@"connect"
                  parameters:@{} // TODO: This is ugly. we shouldn't have to pass {}
@@ -48,7 +65,7 @@ static MHPagedResponse* s_allSources = nil;
        }];
 }
 
-- (PMKPromise*)connectWithPreference:(MHSourcePreference)preference
+- (AnyPromise*)connectWithPreference:(MHSourcePreference)preference
 {
     return [self takeAction:@"connect"
                  parameters:@{
@@ -62,23 +79,7 @@ static MHPagedResponse* s_allSources = nil;
        }];
 }
 
-- (PMKPromise*)connectWithPreference:(MHSourcePreference)preference description:(NSString*)description
-{
-    return [self takeAction:@"connect"
-                 parameters:@{
-                              MHObjectActionParameterPreferenceKey: NSStringFromMHSourcePreference(preference),
-                              @"description": description
-                              }
-       predictedSocialBlock:^MHSocial* (MHSocial* oldSocial, NSDictionary* parameters) {
-           MHSocial* newSocial = oldSocial.copy;
-           newSocial.userConnected = @YES;
-           newSocial.userPreference = preference;
-           newSocial.userSourceDescription = description;
-           return newSocial;
-       }];
-}
-
-- (PMKPromise*)disconnect
+- (AnyPromise*)disconnect
 {
     return [self takeAction:@"disconnect"
                  parameters:@{} // TODO: This is ugly. we shouldn't have to pass {}
@@ -89,7 +90,7 @@ static MHPagedResponse* s_allSources = nil;
        }];
 }
 
-- (PMKPromise*)updatePreference:(MHSourcePreference)preference
+- (AnyPromise*)updatePreference:(MHSourcePreference)preference
 {
     return [self takeAction:@"update"
                  parameters:@{
@@ -102,24 +103,12 @@ static MHPagedResponse* s_allSources = nil;
        }];
 }
 
-- (PMKPromise*)updateDescription:(NSString*)description;
-{
-    return [self takeAction:@"update"
-                 parameters:@{
-                              @"description": description
-                              }
-       predictedSocialBlock:^MHSocial* (MHSocial* oldSocial, NSDictionary* parameters) {
-           MHSocial* newSocial = oldSocial.copy;
-           newSocial.userSourceDescription = description;
-           return newSocial;
-       }];
-}
-
 #pragma mark - Notifications
 
 + (void)userDidLogout:(NSNotification*)notification
 {
-    s_allSources = nil;
+    [self invalidateRootCacheForEndpoint:[self rootSubendpoint:kAllRootSubendpoint]
+                              parameters:nil];
 }
 
 #pragma mark - Source Checks
@@ -154,39 +143,23 @@ static MHPagedResponse* s_allSources = nil;
 
 @implementation MHSource (Fetching)
 
-+ (PMKPromise*)fetchAll
++ (AnyPromise*)fetchAll
 {
     return [self fetchAllForced:NO
-                       priority:[AVENetworkPriority priorityWithLevel:AVENetworkPriorityLevelHigh]
+                       priority:nil
                    networkToken:nil];
 }
 
-+ (PMKPromise*)fetchAllForced:(BOOL)forced
++ (AnyPromise*)fetchAllForced:(BOOL)forced
                      priority:(AVENetworkPriority*)priority
                  networkToken:(AVENetworkToken*)networkToken
 {
-    if (!forced) {
-        @synchronized (self) {
-            if (s_allSources) {
-                return [PMKPromise promiseWithValue:s_allSources];
-            }
-        }
-    }
-    
-    return [[MHFetcher sharedFetcher] fetchModel:MHPagedResponse.class
-                                            path:[self rootSubendpoint:@"all"]
-                                         keyPath:nil
-                                      parameters:@{
-                                                   MHFetchParameterView: MHFetchParameterViewFull
-                                                   }
-                                        priority:[AVENetworkPriority priorityWithLevel:AVENetworkPriorityLevelHigh]
-                                    networkToken:nil].thenInBackground(^(MHPagedResponse* response) {
-        @synchronized (self) {
-            s_allSources = response;
-        }
-        
-        return response;
-    });
+    return [self fetchRootPagedEndpoint:[self rootSubendpoint:kAllRootSubendpoint]
+                                 forced:forced
+                             parameters:nil
+                               priority:priority
+                           networkToken:networkToken
+                                   next:nil];
 }
 
 @end

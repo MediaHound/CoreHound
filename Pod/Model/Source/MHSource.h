@@ -2,29 +2,26 @@
 //  MHSource.h
 //  CoreHound
 //
-//  Copyright (c) 2015 Media Hound. All rights reserved.
+//  Copyright (c) 2015 MediaHound. All rights reserved.
 //
 
 #import "MHObject.h"
 #import "MHSubscription.h"
 #import "MHSourcePreference.h"
 
-// TODO: Should have MH Prefix
-extern NSString* const iTunesSourceName;
+NS_ASSUME_NONNULL_BEGIN
 
 
 @interface MHSource : MHObject
 
 @property (strong, atomic) MHSourceMetadata* metadata;
-@property (strong, nonatomic) NSArray<MHSubscription, Optional>* subscriptions;
-@property (strong, nonatomic) NSArray<Optional>* allMediums;
+@property (strong, nullable, nonatomic) NSArray* subscriptions;
+@property (strong, nullable, nonatomic) NSArray* allMediums;
 
-- (PMKPromise*)connect;
-- (PMKPromise*)connectWithPreference:(MHSourcePreference)preference;
-- (PMKPromise*)connectWithPreference:(MHSourcePreference)preference description:(NSString*)description;
-- (PMKPromise*)disconnect;
-- (PMKPromise*)updatePreference:(MHSourcePreference)preference;
-- (PMKPromise*)updateDescription:(NSString*)description;
+- (AnyPromise*)connect;
+- (AnyPromise*)connectWithPreference:(MHSourcePreference)preference;
+- (AnyPromise*)disconnect;
+- (AnyPromise*)updatePreference:(MHSourcePreference)preference;
 
 @property (nonatomic, readonly) BOOL isITunes;
 @property (nonatomic, readonly) BOOL isSpotify;
@@ -37,11 +34,11 @@ extern NSString* const iTunesSourceName;
 
 @interface MHSource (Fetching)
 
-+ (PMKPromise*)fetchAll;
-+ (PMKPromise*)fetchAllForced:(BOOL)forced
-                     priority:(AVENetworkPriority*)priority
-                 networkToken:(AVENetworkToken*)networkToken;
++ (AnyPromise*)fetchAll;
++ (AnyPromise*)fetchAllForced:(BOOL)forced
+                     priority:(nullable AVENetworkPriority*)priority
+                 networkToken:(nullable AVENetworkToken*)networkToken;
 
 @end
 
-
+NS_ASSUME_NONNULL_END

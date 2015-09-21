@@ -2,12 +2,14 @@
 //  MHAction.h
 //  CoreHound
 //
-//  Copyright (c) 2015 Media Hound. All rights reserved.
+//  Copyright (c) 2015 MediaHound. All rights reserved.
 //
 
 #import "MHObject.h"
 
 @class MHUser;
+
+NS_ASSUME_NONNULL_BEGIN
 
 
 /**
@@ -21,7 +23,9 @@
  */
 @property (strong, atomic) MHActionMetadata* metadata;
 
-@property (strong, atomic) MHObject<Optional>* primaryMention;
-@property (strong, atomic) MHUser<Optional>* primaryOwner;
+@property (strong, nullable, atomic) MHObject* primaryMention;
+@property (strong, nullable, atomic) MHUser* primaryOwner;
 
 @end
+
+NS_ASSUME_NONNULL_END

@@ -2,7 +2,7 @@
 //  MHSourceMedium+Internal.h
 //  CoreHound
 //
-//  Copyright (c) 2015 Media Hound. All rights reserved.
+//  Copyright (c) 2015 MediaHound. All rights reserved.
 //
 
 #import "MHSourceMedium.h"
@@ -14,9 +14,9 @@
 
 @interface MHSourceMedium (Internal)
 
-@property (weak, nonatomic, readwrite) MHSource<Ignore>* source;
-@property (weak, nonatomic, readwrite) MHObject<Ignore>* content;
+@property (weak, nonatomic, readwrite) MHSource* source;
+@property (weak, nonatomic, readwrite) MHObject* content;
 
-@property (weak, nonatomic) MHContext<Ignore>* context;
+@property (weak, nonatomic) MHContext* context;
 
 @end

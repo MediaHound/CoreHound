@@ -2,7 +2,7 @@
 //  MHSourceMethod.m
 //  CoreHound
 //
-//  Copyright (c) 2015 Media Hound. All rights reserved.
+//  Copyright (c) 2015 MediaHound. All rights reserved.
 //
 
 #import "MHSourceMethod.h"
@@ -20,14 +20,30 @@ NSString* const MHSourceMethodTypeBroker = @"broker";
 
 @interface MHSourceMethod ()
 
-@property (weak, nonatomic, readwrite) MHSourceMedium<Ignore>* medium;
+@property (weak, nonatomic, readwrite) MHSourceMedium* medium;
 
-@property (strong, nonatomic) NSArray<MHSourceFormat>* formats;
+@property (strong, nonatomic) NSArray* formats;
 
 @end
 
 
 @implementation MHSourceMethod
+
++ (BOOL)propertyIsIgnored:(NSString *)propertyName
+{
+    if ([propertyName isEqualToString:NSStringFromSelector(@selector(medium))]) {
+        return YES;
+    }
+    return [super propertyIsIgnored:propertyName];
+}
+
++ (NSString*)protocolForArrayProperty:(NSString*)propertyName
+{
+    if ([propertyName isEqualToString:NSStringFromSelector(@selector(formats))]) {
+        return NSStringFromClass(MHSourceFormat.class);
+    }
+    return [super protocolForArrayProperty:propertyName];
+}
 
 - (instancetype)initWithDictionary:(NSDictionary*)dict error:(NSError**)err
 {

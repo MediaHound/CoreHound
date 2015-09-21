@@ -2,7 +2,7 @@
 //  MHUser.m
 //  CoreHound
 //
-//  Copyright (c) 2015 Media Hound. All rights reserved.
+//  Copyright (c) 2015 MediaHound. All rights reserved.
 //
 
 #import "MHUser.h"
@@ -24,12 +24,20 @@ static NSString* const kSourceSettingsEndpoint = @"settings/sources";
 static NSString* const kFollowingSubendpoint = @"following";
 static NSString* const kLikingSubendpoint = @"liking";
 static NSString* const kFollowersSubendpoint = @"followers";
+static NSString* const kSuggestedSubendpoint = @"suggested";
+static NSString* const kSetImageSubendpoint = @"uploadImage";
+static NSString* const kSetPasswordSubendpoint = @"updatePassword";
 //static NSString* const kFollowedCollectionsSubendpoint = @"followed";
 
-static MHPagedResponse* s_suggestedUsers = nil;
+static NSString* const kSuggestedRootSubendpoint = @"suggested";
+
+static NSString* const kForgotUsernameRootSubendpoint = @"forgotusername";
+static NSString* const kForgotPasswordRootSubendpoint = @"forgotpassword";
 
 
 @implementation MHUser
+
+@dynamic metadata;
 
 + (void)load
 {
@@ -49,10 +57,10 @@ static MHPagedResponse* s_suggestedUsers = nil;
     return ([self isEqualToMHObject:[MHLoginSession currentSession].user]);
 }
 
-- (PMKPromise*)setProfileImage:(UIImage*)image
+- (AnyPromise*)setProfileImage:(UIImage*)image
 {
     if (!image) {
-        return [PMKPromise promiseWithValue:nil];
+        return [AnyPromise promiseWithValue:nil];
     }
     
     if (!self.isCurrentUser) {
@@ -66,7 +74,7 @@ static MHPagedResponse* s_suggestedUsers = nil;
     NSData* imageData = UIImageJPEGRepresentation(image, 1.0f);
     
     return [[MHFetcher sharedFetcher] postAndFetchModel:MHImage.class
-                                                   path:[self subendpoint:@"uploadImage"]
+                                                   path:[self subendpoint:kSetImageSubendpoint]
                                                 keyPath:@"primaryImage"
                                              parameters:nil
                               constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
@@ -82,7 +90,7 @@ static MHPagedResponse* s_suggestedUsers = nil;
                               });
 }
 
-- (PMKPromise*)setPassword:(NSString*)newPassword
+- (AnyPromise*)setPassword:(NSString*)newPassword
            currentPassword:(NSString*)currentPassword
 {
     if (!self.isCurrentUser) {
@@ -91,13 +99,12 @@ static MHPagedResponse* s_suggestedUsers = nil;
                                      userInfo:nil];
     }
     
-    return [[AVENetworkManager sharedManager] POST:[self subendpoint:@"updatePassword"]
+    return [[AVENetworkManager sharedManager] POST:[self subendpoint:kSetPasswordSubendpoint]
                                         parameters:@{
                                                      @"oldPassword": currentPassword,
                                                      @"newPassword": newPassword
                                                      }
-                                          priority:[AVENetworkPriority priorityWithLevel:AVENetworkPriorityLevelHigh
-                                                                            postponeable:NO]
+                                          priority:nil
                                       networkToken:nil
                                            builder:[MHFetcher sharedFetcher].builder];
 }
@@ -137,7 +144,8 @@ static MHPagedResponse* s_suggestedUsers = nil;
 
 + (void)userDidLogout:(NSNotification*)notification
 {
-    s_suggestedUsers = nil;
+    [self invalidateRootCacheForEndpoint:[self rootSubendpoint:kSuggestedRootSubendpoint]
+                              parameters:nil];
 }
 
 @end
@@ -145,7 +153,7 @@ static MHPagedResponse* s_suggestedUsers = nil;
 
 @implementation MHUser (Creating)
 
-+ (PMKPromise*)createWithUsername:(NSString*)username
++ (AnyPromise*)createWithUsername:(NSString*)username
                          password:(NSString*)password
                             email:(NSString*)email
                         firstName:(NSString*)firstName
@@ -159,10 +167,9 @@ static MHPagedResponse* s_suggestedUsers = nil;
                                  @"firstName": firstName,
                                  @"lastName": lastName
                                  };
-    return [[AVENetworkManager sharedManager] POST:[self rootSubendpoint:@"new"]
+    return [[AVENetworkManager sharedManager] POST:[self rootSubendpoint:kCreateRootSubendpoint]
                                         parameters:parameters
-                                          priority:[AVENetworkPriority priorityWithLevel:AVENetworkPriorityLevelHigh
-                                                                            postponeable:NO]
+                                          priority:nil
                                       networkToken:nil
                                            builder:[MHFetcher sharedFetcher].builder];
 }
@@ -172,20 +179,19 @@ static MHPagedResponse* s_suggestedUsers = nil;
 
 @implementation MHUser (Fetching)
 
-+ (PMKPromise*)fetchByUsername:(NSString*)username
++ (AnyPromise*)fetchByUsername:(NSString*)username
 {
     return [self fetchByUsername:username
-                        priority:[AVENetworkPriority priorityWithLevel:AVENetworkPriorityLevelHigh]
+                        priority:nil
                     networkToken:nil];
 }
 
-+ (PMKPromise*)fetchByUsername:(NSString*)username
++ (AnyPromise*)fetchByUsername:(NSString*)username
                       priority:(AVENetworkPriority*)priority
                   networkToken:(AVENetworkToken*)networkToken
 {
-    NSString* path = [NSString stringWithFormat:@"%@/lookup/%@", [self.class rootEndpoint], username];
     return [[MHFetcher sharedFetcher] fetchModel:MHUser.class
-                                            path:path
+                                            path:[self rootSubendpointByLookup:username]
                                          keyPath:nil
                                       parameters:@{
                                                    MHFetchParameterView: MHFetchParameterViewFull
@@ -194,14 +200,14 @@ static MHPagedResponse* s_suggestedUsers = nil;
                                     networkToken:networkToken];
 }
 
-- (PMKPromise*)fetchInterestFeed
+- (AnyPromise*)fetchInterestFeed
 {
     return [self fetchInterestFeedForced:NO
-                                priority:[AVENetworkPriority priorityWithLevel:AVENetworkPriorityLevelHigh]
+                                priority:nil
                             networkToken:nil];
 }
 
-- (PMKPromise*)fetchInterestFeedForced:(BOOL)forced
+- (AnyPromise*)fetchInterestFeedForced:(BOOL)forced
                               priority:(AVENetworkPriority*)priority
                           networkToken:(AVENetworkToken*)networkToken
 {
@@ -212,14 +218,14 @@ static MHPagedResponse* s_suggestedUsers = nil;
                                next:nil];
 }
 
-- (PMKPromise*)fetchOwnedCollections
+- (AnyPromise*)fetchOwnedCollections
 {
     return [self fetchOwnedCollectionsForced:NO
-                                    priority:[AVENetworkPriority priorityWithLevel:AVENetworkPriorityLevelHigh]
+                                    priority:nil
                                 networkToken:nil];
 }
 
-- (PMKPromise*)fetchOwnedCollectionsForced:(BOOL)forced
+- (AnyPromise*)fetchOwnedCollectionsForced:(BOOL)forced
                                   priority:(AVENetworkPriority*)priority
                               networkToken:(AVENetworkToken*)networkToken
 {
@@ -230,14 +236,14 @@ static MHPagedResponse* s_suggestedUsers = nil;
                                next:nil];
 }
 
-- (PMKPromise*)fetchFollowing
+- (AnyPromise*)fetchFollowing
 {
     return [self fetchFollowingForced:NO
-                             priority:[AVENetworkPriority priorityWithLevel:AVENetworkPriorityLevelHigh]
+                             priority:nil
                          networkToken:nil];
 }
 
-- (PMKPromise*)fetchFollowingForced:(BOOL)forced
+- (AnyPromise*)fetchFollowingForced:(BOOL)forced
                            priority:(AVENetworkPriority*)priority
                        networkToken:(AVENetworkToken*)networkToken
 {
@@ -248,14 +254,14 @@ static MHPagedResponse* s_suggestedUsers = nil;
                                next:nil];
 }
 
-- (PMKPromise*)fetchLiking
+- (AnyPromise*)fetchLiking
 {
     return [self fetchLikingForced:NO
-                          priority:[AVENetworkPriority priorityWithLevel:AVENetworkPriorityLevelHigh]
+                          priority:nil
                       networkToken:nil];
 }
 
-- (PMKPromise*)fetchLikingForced:(BOOL)forced
+- (AnyPromise*)fetchLikingForced:(BOOL)forced
                         priority:(AVENetworkPriority*)priority
                     networkToken:(AVENetworkToken*)networkToken
 {
@@ -266,14 +272,14 @@ static MHPagedResponse* s_suggestedUsers = nil;
                                next:nil];
 }
 
-- (PMKPromise*)fetchFollowers
+- (AnyPromise*)fetchFollowers
 {
     return [self fetchFollowersForced:NO
-                             priority:[AVENetworkPriority priorityWithLevel:AVENetworkPriorityLevelHigh]
+                             priority:nil
                          networkToken:nil];
 }
 
-- (PMKPromise*)fetchFollowersForced:(BOOL)forced
+- (AnyPromise*)fetchFollowersForced:(BOOL)forced
                            priority:(AVENetworkPriority*)priority
                        networkToken:(AVENetworkToken*)networkToken
 {
@@ -284,43 +290,37 @@ static MHPagedResponse* s_suggestedUsers = nil;
                                next:nil];
 }
 
-+ (PMKPromise*)fetchSuggestedUsers
++ (AnyPromise*)fetchSuggestedUsers
 {
-    
-    @synchronized (self) {
-        if (s_suggestedUsers) {
-            return [PMKPromise promiseWithValue:s_suggestedUsers];
-        }
-    }
-    
-    return [[MHFetcher sharedFetcher] fetchModel:MHPagedResponse.class
-                                            path:[self rootSubendpoint:@"suggested"]
-                                         keyPath:nil
-                                      parameters:@{
-                                                   MHFetchParameterView: MHFetchParameterViewFull
-                                                   }
-                                        priority:[AVENetworkPriority priorityWithLevel:AVENetworkPriorityLevelHigh]
-                                    networkToken:nil].thenInBackground(^(MHPagedResponse* response) {
-        @synchronized (self) {
-            s_suggestedUsers = response;
-        }
-        
-        return response;
-    });
+    return [self fetchSuggestedUsersForced:NO
+                                  priority:nil
+                              networkToken:nil];
 }
 
-- (PMKPromise*)fetchSuggested
++ (AnyPromise*)fetchSuggestedUsersForced:(BOOL)forced
+                                priority:(AVENetworkPriority*)priority
+                            networkToken:(AVENetworkToken*)networkToken
+{
+    return [self fetchRootPagedEndpoint:[self rootSubendpoint:kSuggestedRootSubendpoint]
+                                 forced:forced
+                             parameters:nil
+                               priority:priority
+                           networkToken:networkToken
+                                   next:nil];
+}
+
+- (AnyPromise*)fetchSuggested
 {
     return [self fetchSuggestedForced:NO
-                             priority:[AVENetworkPriority priorityWithLevel:AVENetworkPriorityLevelHigh]
+                             priority:nil
                          networkToken:nil];
 }
 
-- (PMKPromise*)fetchSuggestedForced:(BOOL)forced
+- (AnyPromise*)fetchSuggestedForced:(BOOL)forced
                            priority:(AVENetworkPriority*)priority
                        networkToken:(AVENetworkToken*)networkToken
 {
-    return [self fetchPagedEndpoint:[self subendpoint:@"suggested"]
+    return [self fetchPagedEndpoint:[self subendpoint:kSuggestedSubendpoint]
                              forced:forced
                            priority:priority
                        networkToken:networkToken
@@ -332,38 +332,35 @@ static MHPagedResponse* s_suggestedUsers = nil;
 
 @implementation MHUser (Forgetting)
 
-+ (PMKPromise*)forgotUsernameWithEmail:(NSString*)email
++ (AnyPromise*)forgotUsernameWithEmail:(NSString*)email
 {
-    return [[AVENetworkManager sharedManager] POST:[self rootSubendpoint:@"forgotusername"]
+    return [[AVENetworkManager sharedManager] POST:[self rootSubendpoint:kForgotUsernameRootSubendpoint]
                                         parameters:@{
                                                      @"email": email
                                                      }
-                                          priority:[AVENetworkPriority priorityWithLevel:AVENetworkPriorityLevelHigh
-                                                                            postponeable:NO]
+                                          priority:nil
                                       networkToken:nil
                                            builder:[MHFetcher sharedFetcher].builder];
 }
 
-+ (PMKPromise*)forgotPasswordWithEmail:(NSString*)email
++ (AnyPromise*)forgotPasswordWithEmail:(NSString*)email
 {
-    return [[AVENetworkManager sharedManager] POST:[self rootSubendpoint:@"forgotpassword"]
+    return [[AVENetworkManager sharedManager] POST:[self rootSubendpoint:kForgotPasswordRootSubendpoint]
                                         parameters:@{
                                                      @"email": email
                                                      }
-                                          priority:[AVENetworkPriority priorityWithLevel:AVENetworkPriorityLevelHigh
-                                                                            postponeable:NO]
+                                          priority:nil
                                       networkToken:nil
                                            builder:[MHFetcher sharedFetcher].builder];
 }
 
-+ (PMKPromise*)forgotPasswordWithUsername:(NSString*)username
++ (AnyPromise*)forgotPasswordWithUsername:(NSString*)username
 {
-    return [[AVENetworkManager sharedManager] POST:[self rootSubendpoint:@"forgotpassword"]
+    return [[AVENetworkManager sharedManager] POST:[self rootSubendpoint:kForgotPasswordRootSubendpoint]
                                         parameters:@{
                                                      @"username": username
                                                      }
-                                          priority:[AVENetworkPriority priorityWithLevel:AVENetworkPriorityLevelHigh
-                                                                            postponeable:NO]
+                                          priority:nil
                                       networkToken:nil
                                            builder:[MHFetcher sharedFetcher].builder];
 }

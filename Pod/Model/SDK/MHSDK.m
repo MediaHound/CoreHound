@@ -2,7 +2,7 @@
 //  MHSDK.m
 //  CoreHound
 //
-//  Created by Dustin Bachrach on 4/1/15.
+//  Copyright (c) 2015 MediaHound. All rights reserved.
 //
 //
 
@@ -26,7 +26,7 @@
 
 @singleton (sharedSDK)
 
-- (PMKPromise*)configureWithClientId:(NSString*)clientId
+- (AnyPromise*)configureWithClientId:(NSString*)clientId
                         clientSecret:(NSString*)clientSecret
 {
     self.clientId = clientId;
@@ -35,7 +35,7 @@
     return [self refreshOAuthToken];
 }
 
-- (PMKPromise*)refreshOAuthToken
+- (AnyPromise*)refreshOAuthToken
 {
     return [[AVENetworkManager sharedManager] GET:@"cas/oauth2.0/accessToken"
                                        parameters:@{
@@ -43,7 +43,7 @@
                                                     @"client_secret": self.clientSecret,
                                                     @"grant_type": @"client_credentials"
                                                     }
-                                         priority:[AVENetworkPriority priorityWithLevel:AVENetworkPriorityLevelHigh]
+                                         priority:nil
                                      networkToken:nil
                                           builder:[MHFetcher sharedFetcher].builder].then(^(NSDictionary* response) {
         self.accessToken = response[@"accessToken"];

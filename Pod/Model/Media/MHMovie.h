@@ -2,14 +2,14 @@
 //  MHMovie.h
 //  CoreHound
 //
-//  Copyright (c) 2015 Media Hound. All rights reserved.
+//  Copyright (c) 2015 MediaHound. All rights reserved.
 //
 
 #import "MHMedia.h"
 
 
 /**
- * A model that represents a Movie
+ * An MHMovie is a feature-length motion picture.
  */
 @interface MHMovie : MHMedia
 

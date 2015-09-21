@@ -2,10 +2,10 @@
 //  JSONValueTransformer+UIColor.h
 //  CoreHound
 //
-//  Copyright (c) 2015 Media Hound. All rights reserved.
+//  Copyright (c) 2015 MediaHound. All rights reserved.
 //
 
-#import "JSONValueTransformer.h"
+#import <JSONModel/JSONValueTransformer.h>
 
 
 @interface JSONValueTransformer (UIColor)

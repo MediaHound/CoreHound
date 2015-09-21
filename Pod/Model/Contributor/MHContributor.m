@@ -2,13 +2,12 @@
 //  MHContributor.m
 //  CoreHound
 //
-//  Copyright (c) 2015 Media Hound. All rights reserved.
+//  Copyright (c) 2015 MediaHound. All rights reserved.
 //
 
 #import "MHContributor.h"
 #import "MHObject+Internal.h"
 #import "MHFetcher.h"
-#import "MHPagedResponse.h"
 
 
 @interface MHContributor ()
@@ -19,6 +18,8 @@
 @implementation MHContributor
 
 @declare_class_property (rootEndpoint, @"graph/contributor")
+
+@dynamic metadata;
 
 - (BOOL)isGroup
 {
@@ -35,14 +36,14 @@
 
 @implementation MHContributor (Fetching)
 
-- (PMKPromise*)fetchMedia
+- (AnyPromise*)fetchMedia
 {
     return [self fetchMediaForced:NO
-                         priority:[AVENetworkPriority priorityWithLevel:AVENetworkPriorityLevelHigh]
+                         priority:nil
                      networkToken:nil];
 }
 
-- (PMKPromise*)fetchMediaForced:(BOOL)forced
+- (AnyPromise*)fetchMediaForced:(BOOL)forced
                        priority:(AVENetworkPriority*)priority
                    networkToken:(AVENetworkToken*)networkToken
 {

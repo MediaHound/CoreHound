@@ -2,7 +2,7 @@
 //  MHMetadata.m
 //  CoreHound
 //
-//  Copyright (c) 2015 Media Hound. All rights reserved.
+//  Copyright (c) 2015 MediaHound. All rights reserved.
 //
 
 #import "MHMetadata.h"
@@ -17,13 +17,23 @@
                                                        }];
 }
 
++ (BOOL)propertyIsOptional:(NSString*)propertyName
+{
+    if ([propertyName isEqualToString:NSStringFromSelector(@selector(name))]
+        || [propertyName isEqualToString:NSStringFromSelector(@selector(objectDescription))]
+        || [propertyName isEqualToString:NSStringFromSelector(@selector(createdDate))]) {
+        return YES;
+    }
+    return [super propertyIsOptional:propertyName];
+}
+
 - (BOOL)isEqual:(id)object
 {
     if (self == object) {
         return YES;
     }
     
-    if (![object isKindOfClass:[object class]]) {
+    if (![self isKindOfClass:[object class]]) {
         return NO;
     }
     
@@ -51,6 +61,14 @@
 
 @implementation MHMediaMetadata
 
++ (BOOL)propertyIsOptional:(NSString*)propertyName
+{
+    if ([propertyName isEqualToString:NSStringFromSelector(@selector(releaseDate))]) {
+        return YES;
+    }
+    return [super propertyIsOptional:propertyName];
+}
+
 - (BOOL)isEqualToMHMetadata:(MHMediaMetadata*)metadata
 {
     return [super isEqualToMHMetadata:metadata]
@@ -67,6 +85,14 @@
 
 
 @implementation MHUserMetadata
+
++ (BOOL)propertyIsOptional:(NSString*)propertyName
+{
+    if ([propertyName isEqualToString:NSStringFromSelector(@selector(email))]) {
+        return YES;
+    }
+    return [super propertyIsOptional:propertyName];
+}
 
 - (BOOL)isEqualToMHMetadata:(MHUserMetadata*)metadata
 {
@@ -87,6 +113,20 @@
 
 @implementation MHImageMetadata
 
++ (BOOL)propertyIsOptional:(NSString*)propertyName
+{
+    if ([propertyName isEqualToString:NSStringFromSelector(@selector(original))]
+        || [propertyName isEqualToString:NSStringFromSelector(@selector(thumbnail))]
+        || [propertyName isEqualToString:NSStringFromSelector(@selector(small))]
+        || [propertyName isEqualToString:NSStringFromSelector(@selector(medium))]
+        || [propertyName isEqualToString:NSStringFromSelector(@selector(large))]
+        || [propertyName isEqualToString:NSStringFromSelector(@selector(isDefault))]
+        || [propertyName isEqualToString:NSStringFromSelector(@selector(averageColor))]) {
+        return YES;
+    }
+    return [super propertyIsOptional:propertyName];
+}
+
 - (BOOL)isEqualToMHMetadata:(MHImageMetadata*)metadata
 {
     return [super isEqualToMHMetadata:metadata]
@@ -106,6 +146,14 @@
 
 @implementation MHActionMetadata
 
++ (BOOL)propertyIsOptional:(NSString*)propertyName
+{
+    if ([propertyName isEqualToString:NSStringFromSelector(@selector(message))]) {
+        return YES;
+    }
+    return [super propertyIsOptional:propertyName];
+}
+
 - (BOOL)isEqualToMHMetadata:(MHActionMetadata*)metadata
 {
     return [super isEqualToMHMetadata:metadata]
@@ -122,6 +170,15 @@
 
 
 @implementation MHCollectionMetadata
+
+// TODO: Remove this once search indexes the mixlist property
++ (BOOL)propertyIsOptional:(NSString*)propertyName
+{
+    if ([propertyName isEqualToString:NSStringFromSelector(@selector(mixlist))]) {
+        return YES;
+    }
+    return [super propertyIsOptional:propertyName];
+}
 
 - (void)setMixlistWithNSString:(NSString*)mixlistValue
 {
@@ -188,5 +245,20 @@
     return super.hash
     ^ self.connectable.hash;
 }
+
+@end
+
+
+@implementation MHContributorMetadata
+
+@end
+
+
+@implementation MHHashtagMetadata
+
+@end
+
+
+@implementation MHTraitMetadata
 
 @end

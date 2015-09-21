@@ -2,7 +2,7 @@
 //  MHPublish.m
 //  CoreHound
 //
-//  Created by Dustin Bachrach on 7/30/15.
+//  Copyright (c) 2015 MediaHound. All rights reserved.
 //
 //
 
