@@ -43,7 +43,7 @@ Every object in The Entertainment Graph is uniquely identified by an identifierâ
 
 Every object in The Entertainment Graph has a typeâ€”- Movie, Book, Contributor, etc. There is a well defined type hierarchy, so you can easily work with objects of varying types. 
 
-![](https://github.com/MediaHound/CoreHound/blob/doc-updates/Images/mh-object-types.png)
+![](https://github.com/MediaHound/CoreHound/blob/master/Images/mh-object-types.png)
 
 *Saving Private Ryan* is an `MHMovie`, and *Catch 22* is an `MHBook`. Both `MHMovie` and `MHBook` inherit from `MHMedia`. This lets us work with entertainment across different content types easily. We can view the content as an `MHMedia`. When we need to specifically work with books, we can treat them as an `MHBook`.
 
@@ -70,7 +70,7 @@ This gives you an array of `MHContributors` who are related to that movie.
 
 The Entertainment Graph is highly connected. Here is a small example of the types of connections between content:
 
-![](https://github.com/MediaHound/CoreHound/blob/doc-updates/Images/mh-graph-example.png)
+![](https://github.com/MediaHound/CoreHound/blob/master/Images/mh-graph-example.png)
 
 ## CoreHound is highly **asynchronous**
 Almost all interaction you have with the CoreHound SDK is through asynchronous APIs. CoreHound uses *promises* as its asynchronous pattern. As a simple example, to find the release date of *The Usual Suspects*, you would write:
