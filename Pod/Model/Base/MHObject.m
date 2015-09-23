@@ -532,11 +532,31 @@ static NSString* const kSocialSubendpoint = @"social";
     return s_cachedRootResponses;
 }
 
+/**
+ * Takes a dictionary that may contain NSSets,
+ * and returns a dictionary with those sets changed to NSArrays.
+ * Useful when turning a dictionary into a JSON string.
+ */
++ (NSDictionary*)jsonableParameters:(NSDictionary*)parameters
+{
+    NSMutableDictionary* p = [NSMutableDictionary dictionary];
+    for (NSString* key in parameters) {
+        id value = p[key];
+        if ([value isKindOfClass:NSSet.class]) {
+            p[key] = ((NSSet*)value).allObjects;
+        }
+        else {
+            p[key] = value;
+        }
+    }
+    return p;
+}
+
 + (NSString*)rootResponseCacheKeyForPath:(NSString*)path parameters:(NSDictionary*)parameters
 {
     NSString* parametersAsJson = @"";
     if (parameters) {
-        NSData* jsonData = [NSJSONSerialization dataWithJSONObject:parameters
+        NSData* jsonData = [NSJSONSerialization dataWithJSONObject:[self jsonableParameters:parameters]
                                                            options:0
                                                              error:nil];
         parametersAsJson = [[NSString alloc] initWithData:jsonData
