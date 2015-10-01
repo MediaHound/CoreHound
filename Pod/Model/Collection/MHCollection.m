@@ -141,7 +141,11 @@ static NSString* const kUpdateSubendpoint = @"update";
     NSMutableDictionary* parameters = [NSMutableDictionary dictionary];
     parameters[@"name"] = name;
     if (initialContent) {
-        parameters[@"content"] = initialContent;
+        NSMutableSet* mhids = [NSMutableSet set];
+        for (MHObject* content in initialContent) {
+            [mhids addObject:content.metadata.mhid];
+        }
+        parameters[@"content"] = mhids;
     }
     
     return [[MHFetcher sharedFetcher] postAndFetchModel:MHCollection.class
