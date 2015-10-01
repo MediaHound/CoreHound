@@ -141,7 +141,7 @@ static NSString* const kUpdateSubendpoint = @"update";
     NSMutableDictionary* parameters = [NSMutableDictionary dictionary];
     parameters[@"name"] = name;
     if (initialContent) {
-        NSMutableSet* mhids = [NSMutableSet set];
+        NSMutableArray* mhids = [NSMutableArray array];
         for (MHObject* content in initialContent) {
             [mhids addObject:content.metadata.mhid];
         }
