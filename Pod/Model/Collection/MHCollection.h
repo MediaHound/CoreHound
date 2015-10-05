@@ -57,17 +57,17 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  * Remove a single MHObject from this collection.
- * @param content The piece of content to remove from this collection
+ * @param index The index of the piece of content to remove from this collection
  * @return A promise which resolves when the content has succesfully been removed
  */
-- (AnyPromise*)removeContent:(MHObject*)content;
+- (AnyPromise*)removeContentAtIndex:(NSUInteger)index;
 
 /**
  * Remove multiple MHObjects from this collection.
- * @param contents The pieces of content to remove from this collection
+ * @param contents The indexes of the pieces of content to remove from this collection
  * @return A promise which resolves when the content has succesfully been removed
  */
-- (AnyPromise*)removeContents:(NSArray*)contents;
+- (AnyPromise*)removeContentAtIndexes:(NSIndexSet*)indexes;
 
 /**
  * Rename this collection to the given name.
@@ -108,7 +108,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  * Fetches the collection's primary owner.
  * You should never read the `primaryOwner` property directly from an MHCollection.
- * Instead, always access the owner via the `fetchPrimaryOwner` promise. 
+ * Instead, always access the owner via the `fetchPrimaryOwner` promise.
  * The `primaryOwner` property can be used for observing KVO changes.
  * @return A promise which resolves with an MHUser.
  */
@@ -182,23 +182,6 @@ NS_ASSUME_NONNULL_BEGIN
  * @return A promise which resolves with an MHPagedResponse.
  */
 - (AnyPromise*)fetchContentForced:(BOOL)forced
-                         priority:(nullable AVENetworkPriority*)priority
-                     networkToken:(nullable AVENetworkToken*)networkToken;
-
-/**
- * Fetches all mixlist content that is in the collection.
- * @return A promise which resolves with an MHPagedResponse.
- */
-- (AnyPromise*)fetchMixList;
-
-/**
- * Fetches all mixlist content that is in the collection.
- * @param forced Whether to use a cached response. If YES, a network request will occur. If NO, a cached result may be used.
- * @param priority The network request priority.
- * @param networkToken The token for the network request, allowing cancelation and re-prioritization.
- * @return A promise which resolves with an MHPagedResponse.
- */
-- (AnyPromise*)fetchMixListForced:(BOOL)forced
                          priority:(nullable AVENetworkPriority*)priority
                      networkToken:(nullable AVENetworkToken*)networkToken;
 

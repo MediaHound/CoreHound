@@ -19,7 +19,6 @@
 #import <Avenue/AVENetworkManager.h>
 
 static NSString* const kContentSubendpoint = @"content";
-static NSString* const kMixlistSubendpoint = @"mixlist";
 static NSString* const kOwnersSubendpoint = @"owners";
 static NSString* const kUpdateSubendpoint = @"update";
 
@@ -52,35 +51,51 @@ static NSString* const kUpdateSubendpoint = @"update";
 
 - (AnyPromise*)addContents:(NSArray*)contents
 {
-    return [self changeContents:contents modification:@"add"];
-}
-
-- (AnyPromise*)removeContent:(MHObject*)content
-{
-    return [self removeContents:@[content]];
-}
-
-- (AnyPromise*)removeContents:(NSArray*)contents
-{
-    return [self changeContents:contents modification:@"remove"];
-}
-
-- (AnyPromise*)changeContents:(NSArray*)contents modification:(NSString*)modification
-{
     NSMutableArray* mhids = [NSMutableArray array];
     for (MHObject* content in contents) {
         [mhids addObject:content.metadata.mhid];
     }
     
-    return [[AVENetworkManager sharedManager] PUT:[self subendpoint:modification]
-                                       parameters:@{
-                                                    @"content": mhids
-                                                    }
-                                         priority:nil
-                                     networkToken:nil
-                                          builder:[MHFetcher sharedFetcher].builder].thenInBackground(^(id responseObject) {
+    NSDictionary* operation = @{
+                                @"operation": @"append",
+                                @"order": @0,
+                                @"ids": mhids
+                                };
+    
+    return [self changeContents:contents operation:operation];
+}
+
+- (AnyPromise*)removeContentAtIndex:(NSUInteger)index
+{
+    return [self removeContentAtIndexes:[NSIndexSet indexSetWithIndex:index]];
+}
+
+- (AnyPromise*)removeContentAtIndexes:(NSIndexSet*)indexes
+{
+    NSMutableArray* indices = [NSMutableArray array];
+    [indexes enumerateIndexesUsingBlock:^(NSUInteger idx, BOOL * _Nonnull stop) {
+        [indices addObject:@(idx)];
+    }];
+    
+    NSDictionary* operation = @{
+                                @"operation": @"remove",
+                                @"order": @0,
+                                @"indices": indices
+                                };
+    return [self changeContents:nil operation:operation];
+}
+
+- (AnyPromise*)changeContents:(NSArray*)contents operation:(NSDictionary*)operation
+{
+    return [[AVENetworkManager sharedManager] POST:[self subendpoint:kUpdateSubendpoint]
+                                        parameters:@{
+                                                     @"operations": @[operation],
+                                                     @"allowDuplicates": @YES
+                                                     }
+                                          priority:nil
+                                      networkToken:nil
+                                           builder:[MHFetcher sharedFetcher].builder].thenInBackground(^(id responseObject) {
         [self invalidateContent];
-        [self invalidateMixlist];
         
         for (MHObject* content in contents) {
             [content fetchSocialForced:YES
@@ -95,31 +110,37 @@ static NSString* const kUpdateSubendpoint = @"update";
 
 - (AnyPromise*)setName:(NSString*)name
 {
-    return [[MHFetcher sharedFetcher] putAndFetchModel:MHCollectionMetadata.class
-                                                  path:[self subendpoint:kUpdateSubendpoint]
-                                               keyPath:@"metadata"
-                                            parameters:@{
-                                                         @"name": name
-                                                         }].thenInBackground(^(MHCollectionMetadata* metadata) {
-        if (![self.metadata isEqual:metadata]) {
-            self.metadata = metadata;
-        }
-        return self;
-    });
+    //    return [[MHFetcher sharedFetcher] putAndFetchModel:MHCollectionMetadata.class
+    //                                                  path:[self subendpoint:kUpdateSubendpoint]
+    //                                               keyPath:@"metadata"
+    //                                            parameters:@{
+    //                                                         @"name": name
+    //                                                         }].thenInBackground(^(MHCollectionMetadata* metadata) {
+    //        if (![self.metadata isEqual:metadata]) {
+    //            self.metadata = metadata;
+    //        }
+    //        return self;
+    //    });
+    NSDictionary* operation = @{
+                                @"operation": @"rename",
+                                @"order": @0,
+                                @"property": @"name",
+                                @"value": name
+                                };
+    return [[AVENetworkManager sharedManager] POST:[self subendpoint:kUpdateSubendpoint]
+                                        parameters:@{
+                                                     @"operations": @[operation],
+                                                     @"allowDuplicates": @YES
+                                                     }
+                                          priority:nil
+                                      networkToken:nil
+                                           builder:[MHFetcher sharedFetcher].builder];
 }
 
 - (void)invalidateContent
 {
     [self invalidateCacheForEndpoint:[self subendpoint:kContentSubendpoint]];
     [self fetchContentForced:YES
-                    priority:[AVENetworkPriority priorityWithLevel:AVENetworkPriorityLevelLow]
-                networkToken:nil];
-}
-
-- (void)invalidateMixlist
-{
-    [self invalidateCacheForEndpoint:[self subendpoint:kMixlistSubendpoint]];
-    [self fetchMixListForced:YES
                     priority:[AVENetworkPriority priorityWithLevel:AVENetworkPriorityLevelLow]
                 networkToken:nil];
 }
@@ -233,24 +254,6 @@ static NSString* const kUpdateSubendpoint = @"update";
                      networkToken:(AVENetworkToken*)networkToken
 {
     return [self fetchPagedEndpoint:[self subendpoint:kContentSubendpoint]
-                             forced:forced
-                           priority:priority
-                       networkToken:networkToken
-                               next:nil];
-}
-
-- (AnyPromise*)fetchMixList
-{
-    return [self fetchMixListForced:NO
-                           priority:nil
-                       networkToken:nil];
-}
-
-- (AnyPromise*)fetchMixListForced:(BOOL)forced
-                         priority:(AVENetworkPriority*)priority
-                     networkToken:(AVENetworkToken*)networkToken
-{
-    return [self fetchPagedEndpoint:[self subendpoint:kMixlistSubendpoint]
                              forced:forced
                            priority:priority
                        networkToken:networkToken
