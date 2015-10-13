@@ -172,12 +172,22 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  * Fetches content that is related to the given array of media.
  * @param medias An array of media to find related content to.
+ * @param filters A dictionary of filters to apply to the returned results.
+ * @return A promise which resolves with an MHPagedResponse.
+ */
++ (AnyPromise*)fetchRelatedTo:(NSArray*)medias
+                      filters:(nullable NSDictionary*)filters;
+
+/**
+ * Fetches content that is related to the given array of media.
+ * @param medias An array of media to find related content to.
  * @param forced Whether to use a cached response. If YES, a network request will occur. If NO, a cached result may be used.
  * @param priority The network request priority.
  * @param networkToken The token for the network request, allowing cancelation and re-prioritization.
  * @return A promise which resolves with an MHPagedResponse.
  */
 + (AnyPromise*)fetchRelatedTo:(NSArray*)medias
+                      filters:(nullable NSDictionary*)filters
                        forced:(BOOL)forced
                      priority:(nullable AVENetworkPriority*)priority
                  networkToken:(nullable AVENetworkToken*)networkToken;

@@ -173,12 +173,21 @@ static NSString* const kRelatedRootSubendpoint = @"related";
 + (AnyPromise*)fetchRelatedTo:(NSArray*)medias
 {
     return [self fetchRelatedTo:medias
+                        filters:nil];
+}
+
++ (AnyPromise*)fetchRelatedTo:(NSArray*)medias
+                      filters:(NSDictionary*)filters
+{
+    return [self fetchRelatedTo:medias
+                        filters:filters
                          forced:NO
                        priority:nil
                    networkToken:nil];
 }
 
 + (AnyPromise*)fetchRelatedTo:(NSArray*)medias
+                      filters:(nullable NSDictionary*)filters
                        forced:(BOOL)forced
                      priority:(AVENetworkPriority*)priority
                  networkToken:(AVENetworkToken*)networkToken
@@ -188,11 +197,18 @@ static NSString* const kRelatedRootSubendpoint = @"related";
         [mhids addObject:media.metadata.mhid];
     }
     
+    NSMutableDictionary* parameters = [NSMutableDictionary dictionary];
+    parameters[@"ids"] = mhids;
+    if (filters) {
+        NSData* data = [NSJSONSerialization dataWithJSONObject:filters
+                                                       options:0
+                                                         error:nil];
+        parameters[@"filters"] = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+    }
+    
     return [self fetchRootPagedEndpoint:[self rootSubendpoint:kRelatedRootSubendpoint]
                                  forced:forced
-                             parameters:@{
-                                          @"ids": mhids
-                                          }
+                             parameters:parameters
                                priority:priority
                            networkToken:networkToken
                                    next:nil];
