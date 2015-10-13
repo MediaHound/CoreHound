@@ -541,7 +541,7 @@ static NSString* const kSocialSubendpoint = @"social";
 {
     NSMutableDictionary* p = [NSMutableDictionary dictionary];
     for (NSString* key in parameters) {
-        id value = p[key];
+        id value = parameters[key];
         if ([value isKindOfClass:NSSet.class]) {
             p[key] = ((NSSet*)value).allObjects;
         }
