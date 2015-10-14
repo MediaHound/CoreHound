@@ -11,7 +11,7 @@
 
 @implementation MHStoryElement
 
-@declare_class_property (mhidPrefix, @"mhgstr")
+@declare_class_property (mhidPrefix, @"mhstr")
 
 + (void)load
 {
