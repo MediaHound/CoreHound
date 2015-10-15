@@ -34,6 +34,16 @@ pod try CoreHound
 
 The SearchLite project demonstrates many features like Application OAuth, Search, Images, and Contributor relationships.
 
+## Links
+
+| Link | Description |
+| ---- | ----------- |
+[MediaHound.com](https://mediahound.com/) | Homepage for MediaHound.
+[@MediaHound](https://twitter.com/MediaHound) | Follow MediaHound on Twitter.
+[Blog](https://blog.mediahound.com) | The MediaHound blog.
+[The Entertainment Graph](https://developer.mediahound.com) | Developer Portal
+[Changelog](https://github.com/MediaHound/CoreHound/blob/master/CHANGELOG.md) | View changes introduced in each CoreHound version.
+
 ## The world of media content
 The Entertainment Graph contains many types of objects — movies, books, people, traits, etc.
 
