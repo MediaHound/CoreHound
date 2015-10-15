@@ -1,3 +1,4 @@
+![](https://github.com/MediaHound/CoreHound/blob/master/Images/mh-entertainment-graph.png)
 
 # CoreHound: Getting Started
 
