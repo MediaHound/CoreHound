@@ -63,6 +63,7 @@ All objects in The Entertainment Graph inherit from the `MHObject` class. This c
 Property | Description
 -------- | -------------
 mhid | The globally unique identifier of the object
+altId | A slug-like globally unique alternate identifier of the object 
 name | A user-displayable name of the object
 objectDescription | A user-displayable description of the object
 createdDate | When the object was created in the graph
@@ -82,6 +83,8 @@ This gives you an array of `MHContributors` who are related to that movie.
 The Entertainment Graph is highly connected. Here is a small example of the types of connections between content:
 
 ![](https://github.com/MediaHound/CoreHound/blob/master/Images/mh-graph-example.png)
+
+For a complete list of types visit [Graph Objects](https://api-docs.mediahound.com/docs/graph-objects).
 
 ## CoreHound is highly **asynchronous**
 Almost all interaction you have with the CoreHound SDK is through asynchronous APIs. CoreHound uses *promises* as its asynchronous pattern. As a simple example, to find the release date of *The Usual Suspects*, you would write:
@@ -316,74 +319,6 @@ AVENetworkToken* token = [[AVENetworkToken alloc] init];
 }];
 [token cancel];
 ```
-
-## Media
-
-Here is a list of all media types in The Entertainment Graph. 
-
-#### Video
-
-Media          | Description
--------------- | -----------
-MHMovie        | A feature-length motion picture
-MHShowEpisode  | A single installment of video content within a sequence of serialized content
-MHShowSeason   | An ordered list of MHShowEpisode objects
-MHShowSeries   | An ordered list of MHShowSeason objects
-MHMusicVideo   | A video recording accompanying a song or of song performance
-MHSpecial      | A single installment of unserialized video content
-MHTrailer      | A short promotional video intended to preview the content
-
-#### Audio
-
-Media          | Description
--------------- | -----------
-MHTrack        | An individual piece of music or audio content 
-MHAlbum        | An ordered list of MHTracks
-
-#### Literature
-
-Media          | Description
--------------- | -----------
-MHBook         | A novel or nonfiction literary work
-MHComicBook    | A short, serialized work presented in comic-strip format
-MHGraphicNovel | A novel presented in comic-strip format
-MHNovella      | A work of fiction shorter than a novel but longer than a short story
-MHPeriodical   | A collection of news, information, and features published at regular intervals 
-
-#### Gaming
-
-Media          | Description
--------------- | -----------
-MHGame         | A piece of interactive content that provides structured playing
-
-#### Mixed
-
-Media          | Description
--------------- | -----------
-MHMediaGroup   | An unordered list of MHMediaObjects
-MHMediaSeries  | An ordered list of MHMedia Objects
-MHUniverse     | A special unordered list of MHMediaObjects
-
-## Traits
-
-Here is a list of all trait types in The Entertainment Graph. 
-
-Trait            | Description | Examples
----------------- | ----------- | --------
-MHGenre          | A category of content based on stylistic criteria | `Drama`, `Comedy`
-MHSubgenre       | A more specific category of content within a less specific Genre | `Romantic Comedy`, `Political Thriller`
-MHMood           | The tone or attitude of the content; or how the content is perceived by the audience/ makes it feel | `Absurd`, `Goofy`, `Campy`
-MHQuality        | An abstract or subjective attribute of the content | `Cult`, `Indie`, `Visually Striking`, `Epic Scope`, `Moving`, `Time-Sensitive Viewing`, `Avant Garde`
-MHStyleElement   | A specific attribute pertaining to how the content is composed | `Animated`, `Live Action`, `Hand Drawn`, `Narration`, `Segments`, `Episodic`, `Anime`, `Manga`
-MHStoryElement   | A key plot point, specific setting, item, or event that appears or happens within the content | `Current Events`, `War`, `Cops`
-MHMaterialSource | The source material for the content, or where the content's story originated | `Book`, `Graphic Novel`, `True Story`
-MHTheme          | The unifying subject or idea of the type of visual work | `Overcoming the Odds`, `Man Vs Nature`
-MHAchievement    | A notable accomplishment or award for the content | `Academy Awards`, `Tony`, `Emmy`, `Rolling Stone Top 100 Albums`
-MHEra            | The time period in which the content was released or set | `Post-War`
-MHAudience       | The consumer group for which the content is intended | `Kids`
-MHFlag           | An appropriateness warning for the content | `Nudity`, `Explicit`, `R Rated`
-MHGraphGenre     | A category of content made up of two or more different MHTraits | *WIP*
-
 
 ## License
 
