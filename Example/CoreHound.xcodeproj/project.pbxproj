@@ -25,8 +25,8 @@
 		6003F5B2195388D20070C39A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F591195388D20070C39A /* UIKit.framework */; };
 		6003F5BA195388D20070C39A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6003F5B8195388D20070C39A /* InfoPlist.strings */; };
 		6003F5BC195388D20070C39A /* Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6003F5BB195388D20070C39A /* Tests.m */; };
-		B5CCC8D108086E388BFAC09C /* Pods_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 050F23998C55021C827D0D67 /* Pods_Tests.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
-		C91E90630B1F2C4F169B9427 /* Pods_CoreHound.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99D3DDBA7CC60A98CB3B137A /* Pods_CoreHound.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		B5CCC8D108086E388BFAC09C /* Pods_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 050F23998C55021C827D0D67 /* Pods_Tests.framework */; };
+		C91E90630B1F2C4F169B9427 /* Pods_CoreHound.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99D3DDBA7CC60A98CB3B137A /* Pods_CoreHound.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */

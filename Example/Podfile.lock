@@ -47,20 +47,19 @@ PODS:
 DEPENDENCIES:
   - CoreHound (from `../`)
   - Expecta
-  - JSONModel (from `https://github.com/dbachrach/JSONModel.git`, branch `container-array-properties`)
+  - JSONModel (from `https://github.com/icanzilb/JSONModel.git`)
   - Specta
 
 EXTERNAL SOURCES:
   CoreHound:
     :path: "../"
   JSONModel:
-    :branch: container-array-properties
-    :git: https://github.com/dbachrach/JSONModel.git
+    :git: https://github.com/icanzilb/JSONModel.git
 
 CHECKOUT OPTIONS:
   JSONModel:
-    :commit: c18cfedaed4254f7c37828c834a8fa47a64a0aa6
-    :git: https://github.com/dbachrach/JSONModel.git
+    :commit: b0c78cd945dfaea2399341119f62dec92bfd5cdc
+    :git: https://github.com/icanzilb/JSONModel.git
 
 SPEC CHECKSUMS:
   AFNetworking: 8e4e60500beb8bec644cf575beee72990a76d399
