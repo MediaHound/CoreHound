@@ -108,6 +108,9 @@ NSString* const MHSourceMethodTypeBroker = @"broker";
         else if ([methodType isEqualToString:MHSourceMethodTypeAdSupported]) {
             return NSLocalizedString(@"Ad-Supported Streaming", nil);
         }
+        else if ([methodType isEqualToString:MHSourceMethodTypeBroker]) {
+            return NSLocalizedString(@"Streaming Subscription", nil);
+        }
     }
     if ([mediumType isEqualToString:MHSourceMediumTypeDownload]) {
         if ([methodType isEqualToString:MHSourceMethodTypePurchase]) {
