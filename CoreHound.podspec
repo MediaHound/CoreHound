@@ -19,7 +19,7 @@ Pod::Spec.new do |s|
   s.dependency 'AtSugar', '~> 0.1'
   s.dependency 'Avenue', '~> 0.4'
   s.dependency 'AvenueFetcher', '~> 0.4'
-  s.dependency 'JSONModel', '~> 1.1'
+  s.dependency 'JSONModel', '~> 1.1.2'
   s.dependency 'PromiseKit/CorePromise', '~> 3.0'
   s.dependency 'UICKeyChainStore', '~> 2.0'
 end

@@ -3,7 +3,6 @@ use_frameworks!
 
 target 'CoreHound', :exclusive => true do
   pod "CoreHound", :path => "../"
-  pod 'JSONModel', :git => 'https://github.com/icanzilb/JSONModel.git'
 end
 
 target 'Tests', :exclusive => true do

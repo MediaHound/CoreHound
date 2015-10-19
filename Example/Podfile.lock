@@ -34,44 +34,36 @@ PODS:
     - AtSugar (~> 0.1)
     - Avenue (~> 0.4)
     - AvenueFetcher (~> 0.4)
-    - JSONModel (~> 1.1)
+    - JSONModel (~> 1.1.2)
     - PromiseKit/CorePromise (~> 3.0)
     - UICKeyChainStore (~> 2.0)
   - Expecta (1.0.3)
-  - JSONModel (1.1)
+  - JSONModel (1.1.2)
   - KVOController (1.0.3)
   - PromiseKit/CorePromise (3.0.0)
   - Specta (1.0.4)
-  - UICKeyChainStore (2.0.6)
+  - UICKeyChainStore (2.0.7)
 
 DEPENDENCIES:
   - CoreHound (from `../`)
   - Expecta
-  - JSONModel (from `https://github.com/icanzilb/JSONModel.git`)
   - Specta
 
 EXTERNAL SOURCES:
   CoreHound:
     :path: "../"
-  JSONModel:
-    :git: https://github.com/icanzilb/JSONModel.git
-
-CHECKOUT OPTIONS:
-  JSONModel:
-    :commit: b0c78cd945dfaea2399341119f62dec92bfd5cdc
-    :git: https://github.com/icanzilb/JSONModel.git
 
 SPEC CHECKSUMS:
   AFNetworking: 8e4e60500beb8bec644cf575beee72990a76d399
   AtSugar: 25ddf068f42f2e35c6cc2ef0275e87d8395ac332
   Avenue: 62df91798a949758c82933a8a86b79cf1ee5391b
   AvenueFetcher: 0e8527699aa9f14f8bc560030f55357781c99caa
-  CoreHound: 43602d8e5ade7952c695eac7a272a175bc199d58
+  CoreHound: 521ebf75cea9b6438dec6989d5016e11e48ea49f
   Expecta: 9d1bff6c8b0eeee73a166a2ee898892478927a15
-  JSONModel: f7c057e3da7839e47e4174735ae5f38fdfb2a34d
+  JSONModel: 216584d0311b053ff714f1d6cb700dbf890847bc
   KVOController: 9fd8f0343670994e4b6f9f0b31f5a45663f3e1cf
   PromiseKit: 665540a1eb43156446872dcf49ed7dee6ebbe13b
   Specta: 69bb134672aae190a1379ff91df07dad8dd1f869
-  UICKeyChainStore: c5719c814e8bd69e74e4a0fc09daf8f4d6257a59
+  UICKeyChainStore: 696cd35083f7c8fb5e201d909b7e6aea6b478575
 
 COCOAPODS: 0.39.0

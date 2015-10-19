@@ -13,12 +13,6 @@ To get started with CoreHound, install it with [CocoaPods](http://cocoapods.org)
 pod 'CoreHound', :git => "https://github.com/MediaHound/CoreHound.git"
 ```
 
-*Temporary:* Add the following line to your Podfile as well:
-
-```
-pod 'JSONModel', :git => 'https://github.com/icanzilb/JSONModel.git'
-```
-
 Run `pod install`, and you can now use CoreHound by importing it:
 
 ```objc
