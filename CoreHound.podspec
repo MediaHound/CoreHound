@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = "CoreHound"
-  s.version          = "0.2.0"
+  s.version          = "0.2.1"
   s.summary          = "The MediaHound iOS SDK"
   s.homepage         = "https://github.com/MediaHound/CoreHound"
   s.license          = 'Apache'
