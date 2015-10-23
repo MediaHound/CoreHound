@@ -33,6 +33,7 @@ The SearchLite project demonstrates many features like Application OAuth, Search
 
 | Link | Description |
 | ---- | ----------- |
+[SDK Documentation](http://cocoadocs.org/docsets/CoreHound/) | Reference Documentation for CoreHound
 [MediaHound.com](https://mediahound.com/) | Homepage for MediaHound.
 [@MediaHound](https://twitter.com/MediaHound) | Follow MediaHound on Twitter.
 [Blog](https://blog.mediahound.com) | The MediaHound blog.

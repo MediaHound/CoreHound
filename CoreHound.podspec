@@ -4,7 +4,8 @@ Pod::Spec.new do |s|
   s.summary          = "The MediaHound iOS SDK"
   s.homepage         = "https://github.com/MediaHound/CoreHound"
   s.license          = 'Apache'
-  s.author           = { "Dustin Bachrach" => "dustin@mediahound.com" }
+  s.author           = "MediaHound"
+  s.social_media_url = 'https://twitter.com/mediahound'
   s.source           = { :git => "https://github.com/MediaHound/CoreHound.git", :tag => s.version.to_s }
 
   s.platform     = :ios, '8.0'
