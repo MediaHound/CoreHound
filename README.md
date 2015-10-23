@@ -10,7 +10,7 @@ CoreHound is the iOS SDK for accessing The Entertainment Graph through MediaHoun
 To get started with CoreHound, install it with [CocoaPods](http://cocoapods.org). Add the following line to your **Podfile**:
 
 ```
-pod 'CoreHound', :git => "https://github.com/MediaHound/CoreHound.git"
+pod 'CoreHound'
 ```
 
 Run `pod install`, and you can now use CoreHound by importing it:
