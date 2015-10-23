@@ -2,3 +2,4 @@ language: objective-c
 xcode_workspace: Example/CoreHound.xcworkspace
 xcode_scheme: CoreHound-Example
 podfile: Example/Podfile
+bundler_args: --binstubs
