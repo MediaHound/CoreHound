@@ -192,6 +192,12 @@ NS_ASSUME_NONNULL_BEGIN
                      priority:(nullable AVENetworkPriority*)priority
                  networkToken:(nullable AVENetworkToken*)networkToken;
 
+/**
+ * Fetches trailer for a movie via IVA.
+ * @return A promise which resolves with an NSArray.
+ */
+- (AnyPromise*)fetchIVATrailer;
+
 @end
 
 NS_ASSUME_NONNULL_END

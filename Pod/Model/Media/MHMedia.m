@@ -16,6 +16,7 @@
 #import "MHObject+Internal.h"
 #import "MHMetadata.h"
 #import "MHSourceMedium+Internal.h"
+#import "MHObject+Internal.h"
 
 #import <AtSugar/AtSugar.h>
 
@@ -168,6 +169,30 @@ static NSString* const kRelatedRootSubendpoint = @"related";
                            priority:priority
                        networkToken:networkToken
                                next:nil];
+}
+
+- (AnyPromise*)fetchIVATrailer
+{
+    // Hop off the main thread right away
+    return dispatch_promise(^id {
+        NSString* path = [self subendpoint:@"ivaTrailer"];
+        
+        id cachedResponse = [self cachedResponseForPath:path];
+        if (cachedResponse) {
+            return [AnyPromise promiseWithValue:cachedResponse];
+        }
+        
+        return [[AVENetworkManager sharedManager] GET:path
+                                           parameters:nil
+                                             priority:nil
+                                         networkToken:nil
+                                              builder:[MHFetcher sharedFetcher].builder].then(^(id response) {
+            if (response) {
+                [self setCachedResponse:response forPath:path];
+            }
+            return response;
+        });
+    });
 }
 
 + (AnyPromise*)fetchRelatedTo:(NSArray*)medias

@@ -92,4 +92,8 @@ extern NSString* const kCreateRootSubendpoint;
 
 + (NSString*)rootSubendpointByLookup:(NSString*)lookup;
 
+- (MHPagedResponse*)cachedResponseForPath:(NSString*)path;
+
+- (void)setCachedResponse:(MHPagedResponse*)response forPath:(NSString*)path;
+
 @end
