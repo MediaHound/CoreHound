@@ -198,6 +198,17 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (AnyPromise*)fetchIVATrailer;
 
+/**
+ * Fetches trailer for a movie via IVA.
+ * @param forced Whether to use a cached response. If YES, a network request will occur. If NO, a cached result may be used.
+ * @param priority The network request priority.
+ * @param networkToken The token for the network request, allowing cancelation and re-prioritization.
+ * @return A promise which resolves with an NSArray.
+ */
+- (AnyPromise*)fetchIVATrailerForced:(BOOL)forced
+                            priority:(nullable AVENetworkPriority*)priority
+                        networkToken:(nullable AVENetworkToken*)networkToken;
+
 @end
 
 NS_ASSUME_NONNULL_END

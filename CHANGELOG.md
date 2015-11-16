@@ -2,6 +2,10 @@
 
 * No updates in master.
 
+## 0.2.3 (2015-11-16)
+
+* Fetch IVA Trailer can take a priority and a network token
+
 ## 0.2.2 (2015-11-10)
 
 * Fetch IVA Trailer for a movie

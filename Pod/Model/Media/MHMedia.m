@@ -173,19 +173,28 @@ static NSString* const kRelatedRootSubendpoint = @"related";
 
 - (AnyPromise*)fetchIVATrailer
 {
+    return [self fetchIVATrailerForced:NO
+                              priority:nil
+                          networkToken:nil];
+}
+
+- (AnyPromise*)fetchIVATrailerForced:(BOOL)forced
+                            priority:(AVENetworkPriority*)priority
+                        networkToken:(AVENetworkToken*)networkToken
+{
     // Hop off the main thread right away
     return dispatch_promise(^id {
         NSString* path = [self subendpoint:@"ivaTrailer"];
         
         id cachedResponse = [self cachedResponseForPath:path];
-        if (cachedResponse) {
+        if (!forced && cachedResponse) {
             return [AnyPromise promiseWithValue:cachedResponse];
         }
         
         return [[AVENetworkManager sharedManager] GET:path
                                            parameters:nil
-                                             priority:nil
-                                         networkToken:nil
+                                             priority:priority
+                                         networkToken:networkToken
                                               builder:[MHFetcher sharedFetcher].builder].then(^(id response) {
             if (response) {
                 [self setCachedResponse:response forPath:path];
