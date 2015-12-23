@@ -2,6 +2,10 @@
 
 * No updates in master.
 
+## 0.2.4 (2015-12-23)
+
+* Fix metadata description parsing
+
 ## 0.2.3 (2015-11-16)
 
 * Fetch IVA Trailer can take a priority and a network token
