@@ -37,7 +37,8 @@ static NSString* const kRelatedRootSubendpoint = @"related";
 + (BOOL)propertyIsOptional:(NSString*)propertyName
 {
     if ([propertyName isEqualToString:NSStringFromSelector(@selector(keyContributors))]
-        || [propertyName isEqualToString:NSStringFromSelector(@selector(primaryGroup))]) {
+        || [propertyName isEqualToString:NSStringFromSelector(@selector(primaryGroup))]
+        || [propertyName isEqualToString:NSStringFromSelector(@selector(keySuitabilities))]) {
         return YES;
     }
     return [super propertyIsOptional:propertyName];
@@ -45,7 +46,8 @@ static NSString* const kRelatedRootSubendpoint = @"related";
 
 + (NSString*)protocolForArrayProperty:(NSString*)propertyName
 {
-    if ([propertyName isEqualToString:NSStringFromSelector(@selector(keyContributors))]) {
+    if ([propertyName isEqualToString:NSStringFromSelector(@selector(keyContributors))]
+        || [propertyName isEqualToString:NSStringFromSelector(@selector(keySuitabilities))]) {
         return NSStringFromClass(MHRelationalPair.class);
     }
     return [super protocolForArrayProperty:propertyName];
@@ -85,6 +87,23 @@ static NSString* const kRelatedRootSubendpoint = @"related";
                              networkToken:(AVENetworkToken*)networkToken
 {
     return [self fetchProperty:NSStringFromSelector(@selector(keyContributors))
+                        forced:forced
+                      priority:priority
+                  networkToken:networkToken];
+}
+
+- (AnyPromise*)fetchKeySuitabilities
+{
+    return [self fetchKeySuitabilitiesForced:NO
+                                    priority:nil
+                                networkToken:nil];
+}
+
+- (AnyPromise*)fetchKeySuitabilitiesForced:(BOOL)forced
+                                  priority:(AVENetworkPriority*)priority
+                              networkToken:(AVENetworkToken*)networkToken
+{
+    return [self fetchProperty:NSStringFromSelector(@selector(keySuitabilities))
                         forced:forced
                       priority:priority
                   networkToken:networkToken];

@@ -1,27 +1,27 @@
 PODS:
-  - AFNetworking (2.6.1):
-    - AFNetworking/NSURLConnection (= 2.6.1)
-    - AFNetworking/NSURLSession (= 2.6.1)
-    - AFNetworking/Reachability (= 2.6.1)
-    - AFNetworking/Security (= 2.6.1)
-    - AFNetworking/Serialization (= 2.6.1)
-    - AFNetworking/UIKit (= 2.6.1)
-  - AFNetworking/NSURLConnection (2.6.1):
+  - AFNetworking (2.6.3):
+    - AFNetworking/NSURLConnection (= 2.6.3)
+    - AFNetworking/NSURLSession (= 2.6.3)
+    - AFNetworking/Reachability (= 2.6.3)
+    - AFNetworking/Security (= 2.6.3)
+    - AFNetworking/Serialization (= 2.6.3)
+    - AFNetworking/UIKit (= 2.6.3)
+  - AFNetworking/NSURLConnection (2.6.3):
     - AFNetworking/Reachability
     - AFNetworking/Security
     - AFNetworking/Serialization
-  - AFNetworking/NSURLSession (2.6.1):
+  - AFNetworking/NSURLSession (2.6.3):
     - AFNetworking/Reachability
     - AFNetworking/Security
     - AFNetworking/Serialization
-  - AFNetworking/Reachability (2.6.1)
-  - AFNetworking/Security (2.6.1)
-  - AFNetworking/Serialization (2.6.1)
-  - AFNetworking/UIKit (2.6.1):
+  - AFNetworking/Reachability (2.6.3)
+  - AFNetworking/Security (2.6.3)
+  - AFNetworking/Serialization (2.6.3)
+  - AFNetworking/UIKit (2.6.3):
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
   - AtSugar (0.1.1)
-  - Avenue (0.4.0):
+  - Avenue (0.4.2):
     - AFNetworking (~> 2.6)
     - KVOController (~> 1.0)
     - PromiseKit/CorePromise (~> 3.0)
@@ -29,7 +29,7 @@ PODS:
     - Avenue (~> 0.4)
     - JSONModel (~> 1.1)
     - PromiseKit/CorePromise (~> 3.0)
-  - CoreHound (0.2.0):
+  - CoreHound (0.2.4):
     - AFNetworking (~> 2.6)
     - AtSugar (~> 0.1)
     - Avenue (~> 0.4)
@@ -42,7 +42,7 @@ PODS:
   - KVOController (1.0.3)
   - PromiseKit/CorePromise (3.0.0)
   - Specta (1.0.4)
-  - UICKeyChainStore (2.0.7)
+  - UICKeyChainStore (2.1.0)
 
 DEPENDENCIES:
   - CoreHound (from `../`)
@@ -54,16 +54,16 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  AFNetworking: 8e4e60500beb8bec644cf575beee72990a76d399
+  AFNetworking: cb8d14a848e831097108418f5d49217339d4eb60
   AtSugar: 25ddf068f42f2e35c6cc2ef0275e87d8395ac332
-  Avenue: 62df91798a949758c82933a8a86b79cf1ee5391b
+  Avenue: 427930674ecabb0b41d65ee3749fc36d3dd18d15
   AvenueFetcher: 0e8527699aa9f14f8bc560030f55357781c99caa
-  CoreHound: bd1cb706d0593489f1bc482399d7486217bc42c0
+  CoreHound: 0d065ff2180ae14a239bc549bbf986f86774252f
   Expecta: 9d1bff6c8b0eeee73a166a2ee898892478927a15
   JSONModel: 216584d0311b053ff714f1d6cb700dbf890847bc
   KVOController: 9fd8f0343670994e4b6f9f0b31f5a45663f3e1cf
   PromiseKit: 665540a1eb43156446872dcf49ed7dee6ebbe13b
   Specta: 69bb134672aae190a1379ff91df07dad8dd1f869
-  UICKeyChainStore: 696cd35083f7c8fb5e201d909b7e6aea6b478575
+  UICKeyChainStore: f1cbd42216a113f0165de1e733e62905b8823432
 
 COCOAPODS: 0.39.0

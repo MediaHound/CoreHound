@@ -241,6 +241,11 @@ typedef NS_ENUM(NSInteger, MHCollectionMixlistType)
  */
 @interface MHTraitMetadata : MHMetadata
 
+/**
+ * A sub type specifying a more detailed classification.
+ */
+@property (strong, nonatomic) NSString* subType;
+
 @end
 
 NS_ASSUME_NONNULL_END

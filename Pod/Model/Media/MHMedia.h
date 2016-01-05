@@ -41,6 +41,15 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @property (strong, nullable, atomic) MHRelationalPair* primaryGroup;
 
+/**
+ * An array of MHRelationalPairs to the key suitabilities for this media.
+ * For example, an MHMovie's `keySuitabilities` may include `PG-13`.
+ * This property may be unrealized. You should rarely access it directly.
+ * You need to call -fetchKeySuitabilities to ensure it has been loaded.
+ * This property is KVO compliant.
+ */
+@property (strong, nullable, atomic) NSArray* keySuitabilities;
+
 @end
 
 
@@ -91,6 +100,27 @@ NS_ASSUME_NONNULL_BEGIN
 - (AnyPromise*)fetchKeyContributorsForced:(BOOL)forced
                                  priority:(nullable AVENetworkPriority*)priority
                              networkToken:(nullable AVENetworkToken*)networkToken;
+
+/**
+ * Fetches the media's key suitabilities.
+ * You should never read the `keySuitabilities` property directly from an MHMedia. Instead, always access the suitabilities via
+ * the `fetchKeySuitabilities` promise. The `keySuitabilities` property can be used for observing KVO changes to key suitabilities.
+ * @return A promise which resolves with an NSArray of MHRelationalPairs.
+ */
+- (AnyPromise*)fetchKeySuitabilities;
+
+/**
+ * Fetches the media's key suitabilities.
+ * You should never read the `keySuitabilities` property directly from an MHMedia. Instead, always access the suitabilities via
+ * the `fetchKeySuitabilities` promise. The `keySuitabilities` property can be used for observing KVO changes to key suitabilities.
+ * @param forced Whether to use a cached response. If YES, a network request will occur. If NO, a cached result may be used.
+ * @param priority The network request priority.
+ * @param networkToken The token for the network request, allowing cancelation and re-prioritization.
+ * @return A promise which resolves with an NSArray of MHRelationalPairs.
+ */
+- (AnyPromise*)fetchKeySuitabilitiesForced:(BOOL)forced
+                                  priority:(nullable AVENetworkPriority*)priority
+                              networkToken:(nullable AVENetworkToken*)networkToken;
 
 /**
  * Fetches sources for this media.

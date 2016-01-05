@@ -261,4 +261,16 @@
 
 @implementation MHTraitMetadata
 
+- (BOOL)isEqualToMHMetadata:(MHTraitMetadata*)metadata
+{
+    return [super isEqualToMHMetadata:metadata]
+    && ((!self.subType && !metadata.subType) || ([self.subType isEqual:metadata.subType]));
+}
+
+- (NSUInteger)hash
+{
+    return super.hash
+    ^ self.subType.hash;
+}
+
 @end
