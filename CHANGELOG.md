@@ -1,6 +1,6 @@
 ## Master
 
-* No updates in master.
+* Suitabilities for MHMedias -- MPAA Ratings, ESRB Ratings, etc.
 
 ## 0.2.4 (2015-12-23)
 
