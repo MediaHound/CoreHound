@@ -8,11 +8,12 @@
 #import "MHFetcher.h"
 #import "MHJSONRequestSerializer.h"
 #import "MHJSONResponseSerializerWithData.h"
+#import "MHSDK.h"
 
 #import <AtSugar/AtSugar.h>
 
 
-static NSString* const MHProductionBaseURL = @"https://api-v11.mediahound.com/";
+static NSString* const MHProductionBaseURL = @"https://api.mediahound.com/";
 
 
 @implementation MHFetcher
@@ -22,7 +23,8 @@ static NSString* const MHProductionBaseURL = @"https://api-v11.mediahound.com/";
 - (instancetype)init
 {
     if (self = [super init]) {
-        AVEHTTPRequestOperationBuilder* builder = [[AVEHTTPRequestOperationBuilder alloc] initWithBaseURL:[NSURL URLWithString:MHProductionBaseURL]];
+        NSURL* baseURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@/", MHProductionBaseURL, [MHSDK sharedSDK].apiVersion]];
+        AVEHTTPRequestOperationBuilder* builder = [[AVEHTTPRequestOperationBuilder alloc] initWithBaseURL:baseURL];
         
         builder.requestSerializer = [MHJSONRequestSerializer serializer];
         builder.responseSerializer = [MHJSONResponseSerializerWithData serializer];

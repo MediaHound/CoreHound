@@ -8,6 +8,7 @@
 
 #import "MHSDK.h"
 #import "MHFetcher.h"
+#import "MHJSONResponseSerializerWithData.h"
 
 #import <AtSugar/AtSugar.h>
 #import <Avenue/Avenue.h>
@@ -37,17 +38,35 @@
 
 - (AnyPromise*)refreshOAuthToken
 {
-    return [[AVENetworkManager sharedManager] GET:@"cas/oauth2.0/accessToken"
+    AVEHTTPRequestOperationBuilder* mainBuilder = [MHFetcher sharedFetcher].builder;
+    
+    AVEHTTPRequestOperationBuilder* oauthBuilder = [[AVEHTTPRequestOperationBuilder alloc] initWithBaseURL:mainBuilder.baseURL];
+    
+    oauthBuilder.requestSerializer = [AFHTTPRequestSerializer serializer];
+    [oauthBuilder.requestSerializer setAuthorizationHeaderFieldWithUsername:self.clientId
+                                                                   password:self.clientSecret];
+    oauthBuilder.responseSerializer = [MHJSONResponseSerializerWithData serializer];
+    
+    oauthBuilder.securityPolicy = mainBuilder.securityPolicy;
+    
+    
+    return [[AVENetworkManager sharedManager] POST:@"security/oauth/token"
                                        parameters:@{
                                                     @"client_id": self.clientId,
                                                     @"client_secret": self.clientSecret,
-                                                    @"grant_type": @"client_credentials"
+                                                    @"grant_type": @"client_credentials",
+                                                    @"scope": @"public_profile"
                                                     }
                                          priority:nil
                                      networkToken:nil
-                                          builder:[MHFetcher sharedFetcher].builder].then(^(NSDictionary* response) {
-        self.accessToken = response[@"accessToken"];
+                                          builder:oauthBuilder].then(^(NSDictionary* response) {
+        self.accessToken = response[@"access_token"];
     });
+}
+
+- (NSString*)apiVersion
+{
+    return @"1.2";
 }
 
 @end

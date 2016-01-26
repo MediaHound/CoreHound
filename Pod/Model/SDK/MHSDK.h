@@ -32,6 +32,8 @@ NS_ASSUME_NONNULL_BEGIN
 - (AnyPromise*)configureWithClientId:(NSString*)clientId
                         clientSecret:(NSString*)clientSecret;
 
+@property (strong, nonatomic, readonly) NSString* apiVersion;
+
 @end
 
 NS_ASSUME_NONNULL_END

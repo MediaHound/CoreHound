@@ -2,6 +2,10 @@
 
 * No updates in master.
 
+## 0.3.0 (2016-01-26)
+
+* Api v12 support
+
 ## 0.2.4 (2015-12-23)
 
 * Fix metadata description parsing
