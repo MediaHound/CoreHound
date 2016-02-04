@@ -20,6 +20,8 @@
 @property (strong, nonatomic) NSString* clientId;
 @property (strong, nonatomic) NSString* clientSecret;
 
+@property (strong, nonatomic) NSString* userAccessToken;
+
 @end
 
 
@@ -67,6 +69,14 @@
 - (NSString*)apiVersion
 {
     return @"1.2";
+}
+
+- (NSString*)accessToken
+{
+    if (_userAccessToken) {
+        return _userAccessToken;
+    }
+    return _accessToken;
 }
 
 @end

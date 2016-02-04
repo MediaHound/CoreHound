@@ -45,7 +45,8 @@ static NSString* const MHProductionBaseURL = @"https://api.mediahound.com/";
 
 - (void)setBaseURL:(NSURL*)baseURL
 {
-    self.builder.baseURL = baseURL;
+    NSURL* finalURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@/", baseURL.absoluteString, [MHSDK sharedSDK].apiVersion]];
+    self.builder.baseURL = finalURL;
 }
 
 @end

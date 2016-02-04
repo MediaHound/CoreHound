@@ -56,6 +56,10 @@ extern NSString* const MHLoginSessionUserDidLogoutNotification;
 + (AnyPromise*)loginWithUsername:(NSString*)username
                         password:(NSString*)password;
 
++ (NSURL*)loginDialogURLWithRedirectURL:(NSURL*)redirect;
+
++ (AnyPromise*)loginWithAccessToken:(NSString*)accessToken;
+
 /**
  * Logs out the user from this session.
  * If the receiver is the current session, it will no longer 

@@ -10,6 +10,9 @@
 #import "MHFetcher.h"
 #import "MHObject+Internal.h"
 #import "MHError+Internal.h"
+#import "MHSDK+Internal.h"
+#import "MHFetcher.h"
+#import "MHJSONResponseSerializerWithData.h"
 
 #import <Avenue/AVENetworkManager.h>
 //#import <AgnosticLogger/AgnosticLogger.h>
@@ -21,6 +24,7 @@ NSString* const MHLoginSessionUserDidLogoutNotification = @"MHLoginSessionUserDi
 
 static NSString* const LoginKeychainKeyUsername = @"username";
 static NSString* const LoginKeychainKeyPassword = @"password";
+static NSString* const LoginKeychainKeyAccessToken = @"accessToken";
 
 static MHLoginSession* s_currentSession = nil;
 
@@ -51,8 +55,12 @@ static MHLoginSession* s_currentSession = nil;
 {
     NSString* username = [UICKeyChainStore stringForKey:LoginKeychainKeyUsername];
     NSString* password = [UICKeyChainStore stringForKey:LoginKeychainKeyPassword];
+    NSString* accessToken = [UICKeyChainStore stringForKey:LoginKeychainKeyAccessToken];
     if (username && password) {
         return [self loginWithUsername:username password:password];
+    }
+    else if (accessToken) {
+        return [self loginWithAccessToken:accessToken];
     }
     else {
         return [AnyPromise promiseWithValue:MHErrorMake(MHLoginSessionNoSavedCredentialsError, @{})];
@@ -69,6 +77,12 @@ static MHLoginSession* s_currentSession = nil;
 {
     [UICKeyChainStore removeItemForKey:LoginKeychainKeyUsername];
     [UICKeyChainStore removeItemForKey:LoginKeychainKeyPassword];
+    [UICKeyChainStore removeItemForKey:LoginKeychainKeyAccessToken];
+}
+
++ (void)saveAccessToken:(NSString*)accessToken
+{
+    [UICKeyChainStore setString:accessToken forKey:LoginKeychainKeyAccessToken];
 }
 
 + (AnyPromise*)loginWithUsername:(NSString*)username
@@ -117,6 +131,50 @@ static MHLoginSession* s_currentSession = nil;
     }).catch(^(NSError* error) {
 //        AGLLogError(@"[MHLoginSession] Failure to login: %@", error);
         return error;
+    });
+}
+
++ (NSURL*)loginDialogURLWithRedirectURL:(NSURL*)redirect
+{
+    return [NSURL URLWithString:[NSString stringWithFormat:@"%@security/oauth/authorize?client_id=%@&client_secret=%@&scope=public_profile+user_follows+user_collections&response_type=token&redirect_uri=%@", [MHFetcher sharedFetcher].builder.baseURL.absoluteString, [MHSDK sharedSDK].clientId, [MHSDK sharedSDK].clientSecret, redirect.absoluteString]];
+}
+
++ (AnyPromise*)loginWithAccessToken:(NSString*)accessToken
+{
+    AVEHTTPRequestOperationBuilder* mainBuilder = [MHFetcher sharedFetcher].builder;
+    
+    AVEHTTPRequestOperationBuilder* oauthBuilder = [[AVEHTTPRequestOperationBuilder alloc] initWithBaseURL:mainBuilder.baseURL];
+    
+    oauthBuilder.requestSerializer = [AFHTTPRequestSerializer serializer];
+    [oauthBuilder.requestSerializer setAuthorizationHeaderFieldWithUsername:[MHSDK sharedSDK].clientId
+                                                                   password:[MHSDK sharedSDK].clientSecret];
+    oauthBuilder.responseSerializer = [MHJSONResponseSerializerWithData serializer];
+    
+    oauthBuilder.securityPolicy = mainBuilder.securityPolicy;
+    
+    
+    return [[AVENetworkManager sharedManager] POST:@"security/oauth/check_token"
+                                        parameters:@{
+                                                     @"token": accessToken
+                                                     }
+                                          priority:nil
+                                      networkToken:nil
+                                           builder:oauthBuilder].then(^(NSDictionary* response) {
+        [MHSDK sharedSDK].userAccessToken = accessToken;
+        return [MHUser fetchByUsername:response[@"user_name"]];
+    }).then(^(MHUser* user) {
+        // Save AccessToken
+        [self saveAccessToken:accessToken];
+        
+        // Make logged in user
+        s_currentSession = [[MHLoginSession alloc] init];
+        s_currentSession.users = @[user];
+    
+        // Dispatch logged in notification
+        [[NSNotificationCenter defaultCenter] postNotificationName:MHLoginSessionUserDidLoginNotification
+                                                            object:self];
+        
+        return user;
     });
 }
 
