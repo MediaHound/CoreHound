@@ -136,7 +136,7 @@ static MHLoginSession* s_currentSession = nil;
 
 + (NSURL*)loginDialogURLWithRedirectURL:(NSURL*)redirect
 {
-    return [NSURL URLWithString:[NSString stringWithFormat:@"%@security/oauth/authorize?client_id=%@&client_secret=%@&scope=public_profile+user_follows+user_collections&response_type=token&redirect_uri=%@", [MHFetcher sharedFetcher].builder.baseURL.absoluteString, [MHSDK sharedSDK].clientId, [MHSDK sharedSDK].clientSecret, redirect.absoluteString]];
+    return [NSURL URLWithString:[NSString stringWithFormat:@"%@security/oauth/authorize?client_id=%@&client_secret=%@&scope=public_profile+user_follows+user_collections+user_actions.update_collection&response_type=token&redirect_uri=%@", [MHFetcher sharedFetcher].builder.baseURL.absoluteString, [MHSDK sharedSDK].clientId, [MHSDK sharedSDK].clientSecret, redirect.absoluteString]];
 }
 
 + (AnyPromise*)loginWithAccessToken:(NSString*)accessToken
