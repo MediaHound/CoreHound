@@ -88,48 +88,53 @@ static MHLoginSession* s_currentSession = nil;
 + (AnyPromise*)loginWithUsername:(NSString*)username
                      password:(NSString*)password
 {
-//    AGLLogVerbose(@"[MHLoginSession] Attempting Login");
+    AVEHTTPRequestOperationBuilder* mainBuilder = [MHFetcher sharedFetcher].builder;
     
-    return [[AVENetworkManager sharedManager] POST:[MHUser rootSubendpoint:@"login"]
+    AVEHTTPRequestOperationBuilder* oauthBuilder = [[AVEHTTPRequestOperationBuilder alloc] initWithBaseURL:mainBuilder.baseURL];
+    
+    oauthBuilder.requestSerializer = [AFHTTPRequestSerializer serializer];
+    [oauthBuilder.requestSerializer setAuthorizationHeaderFieldWithUsername:[MHSDK sharedSDK].clientId
+                                                                   password:[MHSDK sharedSDK].clientSecret];
+    oauthBuilder.responseSerializer = [MHJSONResponseSerializerWithData serializer];
+    
+    oauthBuilder.securityPolicy = mainBuilder.securityPolicy;
+    
+    
+    return [[AVENetworkManager sharedManager] POST:@"security/oauth/token"
                                         parameters:@{
                                                      @"username": username,
-                                                     @"password": password
+                                                     @"password": password,
+                                                     @"client_id": [MHSDK sharedSDK].clientId,
+                                                     @"client_secret": [MHSDK sharedSDK].clientSecret,
+                                                     @"grant_type": @"password",
+                                                     @"scope": @"public_profile+user_follows+user_likes+user_collections+user_actions.like+user_actions.follow+user_actions.post+user_actions.new_collection+user_actions.update_collection+user_feed+user_suggested"
                                                      }
                                           priority:nil
                                       networkToken:nil
-                                           builder:[MHFetcher sharedFetcher].builder].thenInBackground(^id(NSDictionary* responseObject) {
-        if ([responseObject[@"Error"] isEqualToString:@"Invalid Credentials"]) {
-//            AGLLogInfo(@"[MHLoginSession] Login had invalid credentials");
-            
-            return MHErrorMake(MHLoginSessionInvalidCredentialsError, @{});
-        }
-        else {
-//            AGLLogInfo(@"[MHLoginSession] Login request succesful. Now fetching user by mhid.");
-            return [[MHFetcher sharedFetcher] fetchModel:MHLoginSession.class
-                                                    path:[MHUser rootSubendpoint:@"validateSession"]
-                                                 keyPath:nil
-                                              parameters:@{
-                                                           MHFetchParameterView: MHFetchParameterViewFull
-                                                           }
-                                                priority:[AVENetworkPriority priorityWithLevel:AVENetworkPriorityLevelHigh
-                                                                                  postponeable:NO]
-                                            networkToken:nil].thenInBackground(^(MHLoginSession* session) {
-                s_currentSession = session;
-                
+                                           builder:oauthBuilder].then(^id(NSDictionary* response) {
+        NSString* accessToken = response[@"access_token"];
+        
+        if (accessToken) {
+            [MHSDK sharedSDK].userAccessToken = accessToken;
+            return [MHUser fetchByUsername:username].then(^(MHUser* user) {
+                // Save AccessToken
                 [self saveCredentialsWithUsername:username password:password];
                 
-//                AGLLogInfo(@"[MHLoginSession] Succesful login completed");
+                // Make logged in user
+                s_currentSession = [[MHLoginSession alloc] init];
+                s_currentSession.users = @[user];
                 
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    [[NSNotificationCenter defaultCenter] postNotificationName:MHLoginSessionUserDidLoginNotification
-                                                                        object:self];
-                });
+                // Dispatch logged in notification
+                [[NSNotificationCenter defaultCenter] postNotificationName:MHLoginSessionUserDidLoginNotification
+                                                                    object:self];
                 
-                return session;
+                return s_currentSession;
             });
         }
+        else {
+            return MHErrorMake(MHLoginSessionInvalidCredentialsError, @{});
+        }
     }).catch(^(NSError* error) {
-//        AGLLogError(@"[MHLoginSession] Failure to login: %@", error);
         return error;
     });
 }
@@ -174,7 +179,7 @@ static MHLoginSession* s_currentSession = nil;
         [[NSNotificationCenter defaultCenter] postNotificationName:MHLoginSessionUserDidLoginNotification
                                                             object:self];
         
-        return user;
+        return user; // TODO: This should return session
     });
 }
 
