@@ -332,17 +332,6 @@ static NSString* const kForgotPasswordRootSubendpoint = @"forgotpassword";
 
 @implementation MHUser (Forgetting)
 
-+ (AnyPromise*)forgotUsernameWithEmail:(NSString*)email
-{
-    return [[AVENetworkManager sharedManager] POST:[self rootSubendpoint:kForgotUsernameRootSubendpoint]
-                                        parameters:@{
-                                                     @"email": email
-                                                     }
-                                          priority:nil
-                                      networkToken:nil
-                                           builder:[MHFetcher sharedFetcher].builder];
-}
-
 + (AnyPromise*)forgotPasswordWithEmail:(NSString*)email
 {
     return [[AVENetworkManager sharedManager] POST:[self rootSubendpoint:kForgotPasswordRootSubendpoint]
