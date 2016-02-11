@@ -70,7 +70,7 @@ static MHUser* s_currentUser = nil;
 }
 
 + (AnyPromise*)loginWithUsername:(NSString*)username
-                     password:(NSString*)password
+                        password:(NSString*)password
 {
     AVEHTTPRequestOperationBuilder* mainBuilder = [MHFetcher sharedFetcher].builder;
     
@@ -99,19 +99,9 @@ static MHUser* s_currentUser = nil;
         NSString* accessToken = response[@"access_token"];
         
         if (accessToken) {
-            [MHSDK sharedSDK].userAccessToken = accessToken;
-            return [MHUser fetchByUsername:username].then(^(MHUser* user) {
-                // Save AccessToken
+            return [self loginWithAccessToken:accessToken].then(^(MHUser* user) {
                 [self saveCredentialsWithUsername:username password:password];
-                
-                // Make logged in user
-                s_currentUser = user;
-                
-                // Dispatch logged in notification
-                [[NSNotificationCenter defaultCenter] postNotificationName:MHLoginSessionUserDidLoginNotification
-                                                                    object:self];
-                
-                return s_currentUser;
+                return user;
             });
         }
         else {
