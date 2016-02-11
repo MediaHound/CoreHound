@@ -9,8 +9,6 @@
 #import "MHJSONRequestSerializer.h"
 #import "MHSDK+Internal.h"
 
-static NSString* kAccessTokenKey = @"access_token";
-
 
 @implementation MHJSONRequestSerializer
 
@@ -31,7 +29,7 @@ static NSString* kAccessTokenKey = @"access_token";
 {
     NSMutableURLRequest* req =  [super requestWithMethod:method
                                                URLString:URLString
-                                              parameters:[self accessTokenifiedParameters:parameters]
+                                              parameters:parameters
                                                    error:error];
     
     [self addAccesTokenHeaderToRequest:req];
@@ -47,7 +45,7 @@ static NSString* kAccessTokenKey = @"access_token";
 {
     NSMutableURLRequest* req = [super multipartFormRequestWithMethod:method
                                                            URLString:URLString
-                                                          parameters:[self accessTokenifiedParameters:parameters]
+                                                          parameters:parameters
                                            constructingBodyWithBlock:block
                                                                error:error];
     
@@ -61,27 +59,8 @@ static NSString* kAccessTokenKey = @"access_token";
     // Set the OAuth access token if the client has configured OAuth.
     NSString* accessToken = [MHSDK sharedSDK].accessToken;
     if (accessToken) {
-        [req setValue:[NSString stringWithFormat:@"Bearer %@", accessToken]
-   forHTTPHeaderField:@"Authorization"];
-    }
-}
-
-- (id)accessTokenifiedParameters:(id)parameters
-{
-    // Set the OAuth access token if the client has configured OAuth.
-    NSString* accessToken = [MHSDK sharedSDK].accessToken;
-    if (accessToken) {
-        if (parameters) {
-            NSMutableDictionary* newParameters = [parameters mutableCopy];
-            newParameters[kAccessTokenKey] = accessToken;
-            return newParameters;
-        }
-        else {
-            return @{ kAccessTokenKey: accessToken };
-        }
-    }
-    else {
-        return parameters;
+        NSString* auth = [NSString stringWithFormat:@"Bearer %@", accessToken];
+        [req setValue:auth forHTTPHeaderField:@"Authorization"];
     }
 }
 

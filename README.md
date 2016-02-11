@@ -179,8 +179,8 @@ Enterprise Auth allows you to directly log a user in using their username and pa
 
 ```objc
 [MHLoginSession loginWithUsername:usernameField.text
-                         password:passwordField.text].then(^{
-    // User sucesffuly logged in
+                         password:passwordField.text].then(^(MHUser* user){
+    // User succesfully logged in
 }).catch(^(NSError* error) {
     // Show the user an error
 });
@@ -192,7 +192,7 @@ Once a user has succesfully logged in once, on their next visit to your app, you
 
 ```objc
 [MHLoginSession loginUsingSavedCredentials].then(^{
-    // User sucesffuly logged in
+    // User succesfully logged in
 }).catch(^(NSError* error) {
     if ([error.domain isEqualToString:MHErrorDomain]) {
         if (error.code == MHLoginSessionNoSavedCredentialsError) {
@@ -210,7 +210,7 @@ Once a user has succesfully logged in once, on their next visit to your app, you
 Once a user is logged in, you can access the currently logged in user via the `MHLoginSession`:
 
 ```objc
-MHUser* currentUser = [MHLoginSession currentSession].user;
+MHUser* currentUser = [MHLoginSession currentUser];
 ```
 
 ### Creating users in Enterprise Auth

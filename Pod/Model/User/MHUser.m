@@ -54,7 +54,7 @@ static NSString* const kForgotPasswordRootSubendpoint = @"forgotpassword";
 
 - (BOOL)isCurrentUser
 {
-    return ([self isEqualToMHObject:[MHLoginSession currentSession].user]);
+    return ([self isEqualToMHObject:[MHLoginSession currentUser]]);
 }
 
 - (AnyPromise*)setProfileImage:(UIImage*)image

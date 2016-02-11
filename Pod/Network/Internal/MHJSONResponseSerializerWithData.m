@@ -19,11 +19,9 @@
 	if (*error != nil) {
 		NSMutableDictionary* userInfo = [(*error).userInfo mutableCopy];
 		if (data == nil) {
-            userInfo[MHJSONResponseSerializerWithDataKey] = [NSData data];
             userInfo[MHJSONResponseSerializerWithStringKey] = @"";
 		}
         else {
-            userInfo[MHJSONResponseSerializerWithDataKey] = data;
             userInfo[MHJSONResponseSerializerWithStringKey] = [[NSString alloc] initWithData:data
                                                                                 encoding:NSUTF8StringEncoding];
 		}

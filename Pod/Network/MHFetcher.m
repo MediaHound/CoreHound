@@ -23,7 +23,7 @@ static NSString* const MHProductionBaseURL = @"https://api.mediahound.com/";
 - (instancetype)init
 {
     if (self = [super init]) {
-        NSURL* baseURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@/", MHProductionBaseURL, [MHSDK sharedSDK].apiVersion]];
+        NSURL* baseURL = [self generateAPIBaseURLFromURL:[NSURL URLWithString:MHProductionBaseURL]];
         AVEHTTPRequestOperationBuilder* builder = [[AVEHTTPRequestOperationBuilder alloc] initWithBaseURL:baseURL];
         
         builder.requestSerializer = [MHJSONRequestSerializer serializer];
@@ -45,8 +45,12 @@ static NSString* const MHProductionBaseURL = @"https://api.mediahound.com/";
 
 - (void)setBaseURL:(NSURL*)baseURL
 {
-    NSURL* finalURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@/", baseURL.absoluteString, [MHSDK sharedSDK].apiVersion]];
-    self.builder.baseURL = finalURL;
+    self.builder.baseURL = [self generateAPIBaseURLFromURL:baseURL];
+}
+
+- (NSURL*)generateAPIBaseURLFromURL:(NSURL*)url
+{
+    return [NSURL URLWithString:[NSString stringWithFormat:@"%@%@/", url.absoluteString, [MHSDK sharedSDK].apiVersion]];
 }
 
 @end

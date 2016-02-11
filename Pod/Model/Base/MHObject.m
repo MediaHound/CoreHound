@@ -272,7 +272,7 @@ static NSString* const kSocialSubendpoint = @"social";
            newSocial.userFollows = @(YES);
            return newSocial;
        }].thenInBackground(^(MHSocial* social) {
-           [[MHLoginSession currentSession].user invalidateFollowing];
+           [[MHLoginSession currentUser] invalidateFollowing];
            return social;
        });
 }
@@ -287,7 +287,7 @@ static NSString* const kSocialSubendpoint = @"social";
            newSocial.userFollows = @(NO);
            return newSocial;
        }].thenInBackground(^(MHSocial* social) {
-           [[MHLoginSession currentSession].user invalidateFollowing];
+           [[MHLoginSession currentUser] invalidateFollowing];
            return social;
        });
 }

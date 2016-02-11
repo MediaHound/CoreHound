@@ -9,5 +9,4 @@
 
 NSString* const MHErrorDomain = @"CoreHound.MHErrorDomain";
 
-NSString* const MHJSONResponseSerializerWithDataKey = @"MHJSONResponseSerializerWithDataKey";
 NSString* const MHJSONResponseSerializerWithStringKey = @"MHJSONResponseSerializerWithStringKey";

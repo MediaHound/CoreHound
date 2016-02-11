@@ -173,7 +173,7 @@ static NSString* const kUpdateSubendpoint = @"update";
                                                    path:[self rootSubendpoint:kCreateRootSubendpoint]
                                                 keyPath:nil
                                              parameters:parameters].thenInBackground(^(MHCollection* collection) {
-        MHUser* currentUser = [MHLoginSession currentSession].user;
+        MHUser* currentUser = [MHLoginSession currentUser];
         
         [currentUser fetchSocialForced:YES
                               priority:nil

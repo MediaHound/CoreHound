@@ -15,7 +15,6 @@
 #import "MHJSONResponseSerializerWithData.h"
 
 #import <Avenue/AVENetworkManager.h>
-//#import <AgnosticLogger/AgnosticLogger.h>
 #import <UICKeyChainStore/UICKeyChainStore.h>
 #import <AtSugar/AtSugar.h>
 
@@ -26,29 +25,14 @@ static NSString* const LoginKeychainKeyUsername = @"username";
 static NSString* const LoginKeychainKeyPassword = @"password";
 static NSString* const LoginKeychainKeyAccessToken = @"accessToken";
 
-static MHLoginSession* s_currentSession = nil;
-
-
-@interface MHLoginSession ()
-
-@property (strong, nonatomic) NSArray* users;
-
-@end
+static MHUser* s_currentUser = nil;
 
 
 @implementation MHLoginSession
 
-+ (NSString*)protocolForArrayProperty:(NSString*)propertyName
++ (nullable MHUser*)currentUser
 {
-    if ([propertyName isEqualToString:NSStringFromSelector(@selector(users))]) {
-        return NSStringFromClass(MHUser.class);
-    }
-    return [super protocolForArrayProperty:propertyName];
-}
-
-+ (instancetype)currentSession
-{
-    return s_currentSession;
+    return s_currentUser;
 }
 
 + (AnyPromise*)loginUsingSavedCredentials
@@ -121,14 +105,13 @@ static MHLoginSession* s_currentSession = nil;
                 [self saveCredentialsWithUsername:username password:password];
                 
                 // Make logged in user
-                s_currentSession = [[MHLoginSession alloc] init];
-                s_currentSession.users = @[user];
+                s_currentUser = user;
                 
                 // Dispatch logged in notification
                 [[NSNotificationCenter defaultCenter] postNotificationName:MHLoginSessionUserDidLoginNotification
                                                                     object:self];
                 
-                return s_currentSession;
+                return s_currentUser;
             });
         }
         else {
@@ -172,26 +155,20 @@ static MHLoginSession* s_currentSession = nil;
         [self saveAccessToken:accessToken];
         
         // Make logged in user
-        s_currentSession = [[MHLoginSession alloc] init];
-        s_currentSession.users = @[user];
+        s_currentUser = user;
     
         // Dispatch logged in notification
         [[NSNotificationCenter defaultCenter] postNotificationName:MHLoginSessionUserDidLoginNotification
                                                             object:self];
         
-        return user; // TODO: This should return session
+        return s_currentUser;
     });
 }
 
-- (MHUser*)user
-{
-    return self.users.firstObject;
-}
-
-- (void)logout
++ (void)logout
 {
     [self.class removeCredentials];
-    s_currentSession = nil;
+    s_currentUser = nil;
     [[NSNotificationCenter defaultCenter] postNotificationName:MHLoginSessionUserDidLogoutNotification
                                                         object:self];
 }
