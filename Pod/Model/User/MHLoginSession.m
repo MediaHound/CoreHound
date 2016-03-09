@@ -91,7 +91,7 @@ static MHUser* s_currentUser = nil;
                                                      @"client_id": [MHSDK sharedSDK].clientId,
                                                      @"client_secret": [MHSDK sharedSDK].clientSecret,
                                                      @"grant_type": @"password",
-                                                     @"scope": @"public_profile+user_follows+user_likes+user_collections+user_actions.like+user_actions.follow+user_actions.post+user_actions.new_collection+user_actions.update_collection+user_feed+user_suggested"
+                                                     @"scope": @"public_profile+user_follows+user_likes+user_collections+user_actions.like+user_actions.follow+user_actions.post+user_actions.new_collection+user_actions.update_collection+user_feed+user_suggested+user_settings"
                                                      }
                                           priority:nil
                                       networkToken:nil
