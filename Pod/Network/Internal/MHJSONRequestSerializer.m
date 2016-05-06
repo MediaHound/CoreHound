@@ -9,8 +9,6 @@
 #import "MHJSONRequestSerializer.h"
 #import "MHSDK+Internal.h"
 
-static NSString* kAccessTokenKey = @"access_token";
-
 
 @implementation MHJSONRequestSerializer
 
@@ -29,10 +27,14 @@ static NSString* kAccessTokenKey = @"access_token";
                                parameters:(id)parameters
                                     error:(NSError* __autoreleasing *)error
 {
-    return [super requestWithMethod:method
-                          URLString:URLString
-                         parameters:[self accessTokenifiedParameters:parameters]
-                              error:error];
+    NSMutableURLRequest* req =  [super requestWithMethod:method
+                                               URLString:URLString
+                                              parameters:parameters
+                                                   error:error];
+    
+    [self addAccesTokenHeaderToRequest:req];
+    
+    return req;
 }
 
 - (NSMutableURLRequest*)multipartFormRequestWithMethod:(NSString*)method
@@ -41,29 +43,24 @@ static NSString* kAccessTokenKey = @"access_token";
                              constructingBodyWithBlock:(void (^)(id<AFMultipartFormData>))block
                                                  error:(NSError* __autoreleasing *)error
 {
-    return [super multipartFormRequestWithMethod:method
-                                       URLString:URLString
-                                      parameters:[self accessTokenifiedParameters:parameters]
-                       constructingBodyWithBlock:block
-                                           error:error];
+    NSMutableURLRequest* req = [super multipartFormRequestWithMethod:method
+                                                           URLString:URLString
+                                                          parameters:parameters
+                                           constructingBodyWithBlock:block
+                                                               error:error];
+    
+    [self addAccesTokenHeaderToRequest:req];
+    
+    return req;
 }
 
-- (id)accessTokenifiedParameters:(id)parameters
+- (void)addAccesTokenHeaderToRequest:(NSMutableURLRequest*)req
 {
     // Set the OAuth access token if the client has configured OAuth.
     NSString* accessToken = [MHSDK sharedSDK].accessToken;
     if (accessToken) {
-        if (parameters) {
-            NSMutableDictionary* newParameters = [parameters mutableCopy];
-            newParameters[kAccessTokenKey] = accessToken;
-            return newParameters;
-        }
-        else {
-            return @{ kAccessTokenKey: accessToken };
-        }
-    }
-    else {
-        return parameters;
+        NSString* auth = [NSString stringWithFormat:@"Bearer %@", accessToken];
+        [req setValue:auth forHTTPHeaderField:@"Authorization"];
     }
 }
 

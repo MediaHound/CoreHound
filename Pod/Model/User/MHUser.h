@@ -216,13 +216,6 @@ NS_ASSUME_NONNULL_BEGIN
 @interface MHUser (Forgetting)
 
 /**
- * Perform the forgot username flow for a user, given the user's email.
- * @param email The email of the user.
- * @return A promise which resolves when the action is finished.
- */
-+ (AnyPromise*)forgotUsernameWithEmail:(NSString*)email;
-
-/**
  * Perform the forgot password flow for a user, given the user's email.
  * @param email The email of the user.
  * @return A promise which resolves when the action is finished.

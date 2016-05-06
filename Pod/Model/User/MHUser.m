@@ -54,7 +54,7 @@ static NSString* const kForgotPasswordRootSubendpoint = @"forgotpassword";
 
 - (BOOL)isCurrentUser
 {
-    return ([self isEqualToMHObject:[MHLoginSession currentSession].user]);
+    return ([self isEqualToMHObject:[MHLoginSession currentUser]]);
 }
 
 - (AnyPromise*)setProfileImage:(UIImage*)image
@@ -331,17 +331,6 @@ static NSString* const kForgotPasswordRootSubendpoint = @"forgotpassword";
 
 
 @implementation MHUser (Forgetting)
-
-+ (AnyPromise*)forgotUsernameWithEmail:(NSString*)email
-{
-    return [[AVENetworkManager sharedManager] POST:[self rootSubendpoint:kForgotUsernameRootSubendpoint]
-                                        parameters:@{
-                                                     @"email": email
-                                                     }
-                                          priority:nil
-                                      networkToken:nil
-                                           builder:[MHFetcher sharedFetcher].builder];
-}
 
 + (AnyPromise*)forgotPasswordWithEmail:(NSString*)email
 {
