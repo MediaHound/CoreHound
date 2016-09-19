@@ -2,6 +2,10 @@
 
 * No updates in master.
 
+## 0.3.1 (2016-09-19)
+
+* Remove SSL Pinning
+
 ## 0.3.0 (2016-01-26)
 
 * Api v12 support
