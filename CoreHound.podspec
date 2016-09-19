@@ -14,8 +14,6 @@ Pod::Spec.new do |s|
   s.source_files = 'Pod/**/*.{h,m}'
   s.private_header_files = "Pod/Model/Internal/**/*.h", "Pod/**/*+Internal.h", "Pod/Network/Internal/**/*.h"
 
-  s.resources = ['Pod/Resources/*.cer']
-
   s.dependency 'AFNetworking', '~> 2.6'
   s.dependency 'AtSugar', '~> 0.1'
   s.dependency 'Avenue', '~> 0.4'
